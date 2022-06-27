@@ -1,2 +1,7 @@
 User-agent: *
-Sitemap: http://localhost:1313/sitemap.xml
+Sitemap: https://spirite12.github.io/sitemap.xml
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: baiduspider
+Disallow: /
