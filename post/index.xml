@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Wed, 22 Jun 2022 23:18:06 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jun 2022 21:43:13 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>游戏 Demo</title>
+      <link>https://spirite12.github.io/post/gamedemo/</link>
+      <pubDate>Tue, 28 Jun 2022 21:43:13 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/gamedemo/</guid>
+      <description>前言 记录个人目前所开发的游戏 Demo IcecreamBOOM 时间：2022 1.22 ~ 1.23 人员：策划x1 、美术x1 、动效x1 、程序x1 前言：同事邀请的48小时开发，那时的想法是工</description>
+    </item>
+    
     <item>
       <title>HelloWorld</title>
       <link>https://spirite12.github.io/post/helloworld/</link>
