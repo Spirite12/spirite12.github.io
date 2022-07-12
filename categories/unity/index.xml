@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unity on DC Blog</title>
+    <link>https://spirite12.github.io/categories/unity/</link>
+    <description>Recent content in Unity on DC Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>DC</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 21:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LuaCheck 代码检测工具</title>
+      <link>https://spirite12.github.io/post/luacheck/</link>
+      <pubDate>Tue, 12 Jul 2022 21:40:01 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/luacheck/</guid>
+      <description>概述 LuaCheck 是一款静态代码检测工具，类似于 VisualStudio IDE 中检测C#脚本语言错误； 可用于检测，不限于： 使用未定义的全局/局部变量； 定义却未使用的全局/局部变量</description>
+    </item>
+    
+  </channel>
+</rss>

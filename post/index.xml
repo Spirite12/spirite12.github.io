@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 28 Jun 2022 21:43:13 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Jul 2022 21:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LuaCheck 代码检测工具</title>
+      <link>https://spirite12.github.io/post/luacheck/</link>
+      <pubDate>Tue, 12 Jul 2022 21:40:01 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/luacheck/</guid>
+      <description>概述 LuaCheck 是一款静态代码检测工具，类似于 VisualStudio IDE 中检测C#脚本语言错误； 可用于检测，不限于： 使用未定义的全局/局部变量； 定义却未使用的全局/局部变量</description>
+    </item>
+    
     <item>
       <title>游戏 Demo</title>
       <link>https://spirite12.github.io/post/gamedemo/</link>
