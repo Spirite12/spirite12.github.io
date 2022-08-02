@@ -9,48 +9,55 @@
   
   <url>
     <loc>https://spirite12.github.io/categories/</loc>
-    <lastmod>2022-07-12T21:40:01+08:00</lastmod>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/</loc>
-    <lastmod>2022-07-12T21:40:01+08:00</lastmod>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/lua/</loc>
-    <lastmod>2022-07-12T21:40:01+08:00</lastmod>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://spirite12.github.io/post/luacheck/</loc>
-    <lastmod>2022-07-12T21:40:01+08:00</lastmod>
+    <loc>https://spirite12.github.io/post/luaformat/</loc>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/post/</loc>
-    <lastmod>2022-07-12T21:40:01+08:00</lastmod>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/</loc>
-    <lastmod>2022-07-12T21:40:01+08:00</lastmod>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/categories/unity/</loc>
+    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/luacheck/</loc>
     <lastmod>2022-07-12T21:40:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

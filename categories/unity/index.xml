@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 12 Jul 2022 21:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Aug 2022 21:40:02 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LuaFormat 代码格式化工具</title>
+      <link>https://spirite12.github.io/post/luaformat/</link>
+      <pubDate>Tue, 02 Aug 2022 21:40:02 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/luaformat/</guid>
+      <description>概述 LuaFormatter 是一款 Lua 脚本的代码格式化脚本工具，支持命令行执行，支持可配置项； 执行效果可参考本文中 Git 提交触发代码格式化 目录下的最后一张截图； 支持的I</description>
+    </item>
+    
     <item>
       <title>LuaCheck 代码检测工具</title>
       <link>https://spirite12.github.io/post/luacheck/</link>

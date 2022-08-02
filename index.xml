@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 12 Jul 2022 21:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Aug 2022 21:40:02 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
       <link>https://spirite12.github.io/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>https://spirite12.github.io/about/</guid>
       <description>游戏：Demo 职业：游戏开发 地点：福建 工作：2019.1 - 至今 邮箱：spirit12@qq.com 留言：欢迎来到我的个人记录博客</description>
+    </item>
+    
+    <item>
+      <title>LuaFormat 代码格式化工具</title>
+      <link>https://spirite12.github.io/post/luaformat/</link>
+      <pubDate>Tue, 02 Aug 2022 21:40:02 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/luaformat/</guid>
+      <description>概述 LuaFormatter 是一款 Lua 脚本的代码格式化脚本工具，支持命令行执行，支持可配置项； 执行效果可参考本文中 Git 提交触发代码格式化 目录下的最后一张截图； 支持的I</description>
     </item>
     
     <item>
