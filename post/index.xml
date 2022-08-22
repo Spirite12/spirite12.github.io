@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 02 Aug 2022 21:40:02 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 21:40:03 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cache 本地化存档</title>
+      <link>https://spirite12.github.io/post/cache/</link>
+      <pubDate>Mon, 22 Aug 2022 21:40:03 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/cache/</guid>
+      <description>前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类</description>
+    </item>
+    
     <item>
       <title>LuaFormat 代码格式化工具</title>
       <link>https://spirite12.github.io/post/luaformat/</link>
