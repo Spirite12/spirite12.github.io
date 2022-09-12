@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unity on DC Blog</title>
+    <link>https://spirite12.github.io/tags/unity/</link>
+    <description>Recent content in Unity on DC Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>DC</copyright>
+    <lastBuildDate>Mon, 12 Sep 2022 19:40:04 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Font 自定义字体</title>
+      <link>https://spirite12.github.io/post/fontcustom/</link>
+      <pubDate>Mon, 12 Sep 2022 19:40:04 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/fontcustom/</guid>
+      <description>前言 在游戏开发阶段，项目中难免会用到一些自定义的字体。这些字体大部分会用在数字，字母以及相关字符的显示上，而显示的样式则由美术决定的，对此则</description>
+    </item>
+    
+  </channel>
+</rss>
