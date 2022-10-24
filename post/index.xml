@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 04 Oct 2022 19:40:05 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Oct 2022 19:40:06 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Profiler 性能分析工具</title>
+      <link>https://spirite12.github.io/post/profiler/</link>
+      <pubDate>Mon, 24 Oct 2022 19:40:06 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/profiler/</guid>
+      <description>环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 自定义性能分析器 在默认的情况下，Profiler并无法直接的对开发人员的代码进行分析。比如遇到：在 Main.cs 的 Start 函数中，有音效管</description>
+    </item>
+    
     <item>
       <title>EmmyLua 插件</title>
       <link>https://spirite12.github.io/post/emmylua/</link>
