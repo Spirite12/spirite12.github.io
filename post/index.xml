@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Mon, 24 Oct 2022 19:40:06 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Nov 2022 19:40:06 +0900</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Animation 优化</title>
+      <link>https://spirite12.github.io/post/animation/</link>
+      <pubDate>Tue, 15 Nov 2022 19:40:06 +0900</pubDate>
+      
+      <guid>https://spirite12.github.io/post/animation/</guid>
+      <description>环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人</description>
+    </item>
+    
     <item>
       <title>Profiler 性能分析工具</title>
       <link>https://spirite12.github.io/post/profiler/</link>

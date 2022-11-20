@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Animation 优化 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/animation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Animation 优化" />
+<meta property="og:description" content="环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/animation/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-15T19:40:06+09:00" />
+<meta property="article:modified_time" content="2022-11-15T19:40:06+09:00" />
+
+<meta itemprop="name" content="Animation 优化">
+<meta itemprop="description" content="环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人"><meta itemprop="datePublished" content="2022-11-15T19:40:06+09:00" />
+<meta itemprop="dateModified" content="2022-11-15T19:40:06+09:00" />
+<meta itemprop="wordCount" content="953">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Animation 优化"/>
+<meta name="twitter:description" content="环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Animation 优化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-11-15 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#环境"><strong>环境</strong></a></li>
+            <li><a href="#animation优化方向"><strong>Animation优化方向</strong></a></li>
+            <li><a href="#animation优化"><strong>Animation优化</strong></a></li>
+            <li><a href="#参考链接"><strong>参考链接</strong></a></li>
+            <li><a href="#参考链接-1"><strong>参考链接</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="环境"><strong>环境</strong></h3>
+<ul>
+<li>Windows 10</li>
+<li>Unity 2019.4.16f1c1 (64-bit)</li>
+<li>Visual Studio 2019</li>
+</ul>
+<h3 id="animation优化方向"><strong>Animation优化方向</strong></h3>
+<p>目前从网络上已知以下几种对动画的优化</p>
+<ol>
+<li>精确动画中属性值小数点到2位；</li>
+<li>剔除掉Scale曲线，由于人物等动画不会用到此属性；</li>
+<li>由工具把动画生成一张表存在贴图内，由 Shader去读取贴图顶点坐标，减少人物在播放动画的时候不断计算位置的问题。做到由空间换时间，减少运行时计算开销；
+<ul>
+<li>本文不具体展开此优化，链接点： <a href="https://www.bilibili.com/video/BV1ma411M7Th">千人战斗场景优化</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="animation优化"><strong>Animation优化</strong></h3>
+<p>针对优化方向内1,2点序列，本文做了个工具处理，该工具支持的功能如下：</p>
+<ul>
+<li>工具支持内容：
+<ul>
+<li>支持模式：单个动画、文件夹下所有动画；</li>
+<li>支持优化：Scale、Float曲线优化；</li>
+<li>输出内容：在成功优化动画文件后，会输出一份数据内容，内容包括：
+<ul>
+<li>优化前后的：文件大小、内存大小、Inspector大小的对比
+<ul>
+<li>FileSize：文件大小、可以在操作系统的文件中看到该文件大小；</li>
+<li>MemorySize ：内存大小，在Profiler采集中可看到；</li>
+<li>InspectorSize : AnimationClip的Inspector面板上的值（不勾选Legacy可见）是从文件反序列化出来的对象的二进制大小，可以认为是真机上的内存大小；</li>
+</ul>
+</li>
+<li>剔除掉的Scale曲线的动画名称；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>打开工具方式：
+<ul>
+<li>在 Project 文件夹内右击选择 -&gt; Optimize -&gt; Animation，此刻选择的资源类型：
+<ul>
+<li>动画资源：则打开工具窗口，单独处理该动画；</li>
+<li>文件夹资源：则打开工具窗口，会处理该文件夹下所有的动画；</li>
+<li>其他类型资源：不可打开工具窗口，置灰状态；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>工具参数介绍：
+<ul>
+<li>Select Type ：可选择切换对单动画，还是文件夹下动画模式；</li>
+<li>Select Anim ：仅动画模式支持，选择所需处理的单个动画；</li>
+<li>Select FilePath : 仅文件夹模式支持，选择所需处理的文件夹；</li>
+<li>Optimize Option ： 优化选项（鼠标停留在以下文本上有注释说明）
+<ul>
+<li>Scale ：默认不勾选，是否直接剔除 Scale 曲线；</li>
+<li>Float F2：默认勾选，将浮点数的值精确到2位小数点；</li>
+</ul>
+</li>
+<li>Other Setting：其他设置（鼠标停留在以下文本上有注释说明）
+<ul>
+<li>Export Console : 默认勾选，将优化结果输出到 Console平台上，仅动画模式支持；</li>
+<li>Export File ：默认勾选，将优化结果输出到 Asset/Record/AnimationOp 文件夹下的以时间命名的文件中，仅文件夹模式支持；</li>
+</ul>
+</li>
+<li>Start：开始优化动画资源，并输出优化数据结果；</li>
+</ul>
+</li>
+<li>脚本链接点我</li>
+</ul>
+<p><img src="/Images/Animation/Animation1.png" alt=""></p>
+<h3 id="参考链接"><strong>参考链接</strong></h3>
+<h3 id="参考链接-1"><strong>参考链接</strong></h3>
+<ul>
+<li><a href="https://www.cnblogs.com/msxh/p/14090805.html">Unity动画优化</a></li>
+<li><a href="https://github.com/XINCGer/Unity3DTraining/blob/master/PerformanceOptimization/AnimOptimization.md">【Unity游戏开发】初探Unity动画优化</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/353402448">Unity动画文件的压缩和优化总结</a></li>
+<li><a href="https://blog.csdn.net/u013012420/article/details/106026082">Unity动画关键帧与曲线操作</a></li>
+<li><a href="https://www.bilibili.com/video/BV1ma411M7Th">千人战斗场景优化</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2022-11-15 19:40:06 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/animation/">https://spirite12.github.io/post/animation/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/profiler/">
+            <span class="next-text nav-default">Profiler 性能分析工具</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
