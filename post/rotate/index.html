@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Rotate 旋转知识 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/rotate/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Rotate 旋转知识" />
+<meta property="og:description" content="前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/rotate/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-13T19:40:06+10:00" />
+<meta property="article:modified_time" content="2022-12-13T19:40:06+10:00" />
+
+<meta itemprop="name" content="Rotate 旋转知识">
+<meta itemprop="description" content="前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后"><meta itemprop="datePublished" content="2022-12-13T19:40:06+10:00" />
+<meta itemprop="dateModified" content="2022-12-13T19:40:06+10:00" />
+<meta itemprop="wordCount" content="939">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rotate 旋转知识"/>
+<meta name="twitter:description" content="前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Rotate 旋转知识</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-12-13 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#前言"><strong>前言</strong></a></li>
+            <li><a href="#unity-api">Unity API</a></li>
+            <li><a href="#dotween-api">DoTween API</a></li>
+            <li><a href="#参考链接">参考链接</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="前言"><strong>前言</strong></h3>
+<p>前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后续忘记；（这篇算是2022年最后一篇文章了）</p>
+<h3 id="unity-api">Unity API</h3>
+<ul>
+<li>
+<p>指定转向到什么角度：gameObject.transform.rotation = Quaternion.Euler(x, y, z)</p>
+</li>
+<li>
+<p>以当前角度旋转角度：gameObject.transform:Rotate(Vector3.forward * x)</p>
+<ul>
+<li>Vector3.forward ：Vector3(0, 0, 1)，相当于是旋转Z轴 * x 度；</li>
+</ul>
+</li>
+<li>
+<p><strong>掉入一个坑</strong>：在 Inspector 面板的 Rotation 数值中，360°是一个循环；因此值的范围应该是 0 ~ 360，但是实际运行过程中，发现当运行时候数值超过180度的时候，面板数值则变为负数了；</p>
+<ul>
+<li>
+<p>例如：当实际运行为90°：Inspector 面板显示 90°</p>
+</li>
+<li>
+<p>例如：当实际运行为300°：Inspector 面板显示 -60°</p>
+<ul>
+<li>总结：在超出或等于180°的时候，面板则 显示度数 = 当前度数 - 360</li>
+<li>因此需要矫正负数的显示行为，使其得到依旧是 0 ° ~ 360 °</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="c1">--- 检视面板旋转角度转换实际角度</span>
+</span></span><span class="line"><span class="cl"><span class="kr">function</span> <span class="nc">main</span><span class="p">:</span><span class="nf">getAngleByInspectAngle</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">angle</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">return</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">angle</span> <span class="o">+</span> <span class="mi">360</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">--- 实际角度转换检视面板旋转角度</span>
+</span></span><span class="line"><span class="cl"><span class="kr">function</span> <span class="nc">main</span><span class="p">:</span><span class="nf">getInspectAngleByAngle</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">180</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">return</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span> <span class="n">angle</span> <span class="o">-</span> <span class="mi">360</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h3 id="dotween-api">DoTween API</h3>
+<p><img src="/Images/Rotate/Rotate1.png" alt=""></p>
+<ul>
+<li>
+<p>在 Doc 的 Transform Rotate 模块中 有个 DORotate 的函数，从截图中可得出，以下为注意点：</p>
+<ul>
+<li>
+<p>如果需要旋转超过360°则 RotateMode 需要选择：RotateMode.FastBeyond360，否则则是默认的RotateMode.Fast，无法超过360度；</p>
+</li>
+<li>
+<p>如果只是需要旋转很小的度数的话，则需要选择 DORotateQuaternion 代替这个函数；</p>
+</li>
+<li>
+<p>Requires a <code>Vector3</code> end value, not a <code>Quaternion</code></p>
+<ul>
+<li><strong>掉入另一个坑</strong>：这句话中 官方显示了标红，当初开发的时候没有仔细看，导致出现了无法理解的问题；这句话的意思是：需要给定一个 Vector3 类型的<strong>结束值</strong>；是的，这是一个结束值；当我用UnityAPI Rotate() 函数的时候，这个函数给的是旋转角度值，而 DORotate 是给个结束值，导致我惯性的以为DORotate也是旋转角度值，导致出现了一些误会；</li>
+<li>因此假设需要沿着物体当前角度选择180度，则  旋转角度 = 当前物体角度 +  需要旋转的角度；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">times</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">*</span> <span class="n">times</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">time</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">times</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">tween</span> <span class="o">=</span> <span class="n">self.logo</span><span class="p">.</span><span class="n">transform</span><span class="p">:</span><span class="n">DORotate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">angle</span><span class="p">),</span> <span class="n">time</span><span class="p">,</span> <span class="n">RotateMode.FastBeyond360</span><span class="p">,</span> <span class="n">Vector3.back</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TweenSettingsExtensions.OnComplete</span><span class="p">(</span><span class="n">tween</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">function</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">if</span> <span class="n">self.halted</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">return</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">:</span><span class="n">Warn</span><span class="p">(</span><span class="s2">&#34;结束了&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">end</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h3 id="参考链接">参考链接</h3>
+<ul>
+<li><a href="https://docs.unity3d.com/ScriptReference/Transform.Rotate.html">Transform.Rotate API</a></li>
+<li><a href="http://dotween.demigiant.com/documentation.php">DOTween Doc</a></li>
+<li><a href="https://blog.csdn.net/AndrewFan/article/details/62057519">四元数(Quaternion)与欧拉角</a></li>
+<li><a href="https://blog.csdn.net/andrewfan/article/details/60981437">欧拉角与万向节死锁</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2022-12-13 19:40:06 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/rotate/">https://spirite12.github.io/post/rotate/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/animation/">
+            <span class="next-text nav-default">Animation 优化</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

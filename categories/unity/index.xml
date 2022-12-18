@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 15 Nov 2022 19:40:06 +0900</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 19:40:06 +1000</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rotate 旋转知识</title>
+      <link>https://spirite12.github.io/post/rotate/</link>
+      <pubDate>Tue, 13 Dec 2022 19:40:06 +1000</pubDate>
+      
+      <guid>https://spirite12.github.io/post/rotate/</guid>
+      <description>前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后</description>
+    </item>
+    
     <item>
       <title>Animation 优化</title>
       <link>https://spirite12.github.io/post/animation/</link>
