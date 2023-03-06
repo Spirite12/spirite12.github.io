@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 13 Dec 2022 19:40:06 +1000</lastBuildDate><atom:link href="https://spirite12.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Jan 2023 19:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C Sharp</title>
+      <link>https://spirite12.github.io/tags/c-sharp/</link>
+      <pubDate>Mon, 30 Jan 2023 19:40:01 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/tags/c-sharp/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Unity</title>
       <link>https://spirite12.github.io/tags/unity/</link>
@@ -23,15 +32,6 @@
       <pubDate>Tue, 04 Oct 2022 19:40:05 +0800</pubDate>
       
       <guid>https://spirite12.github.io/tags/lua/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C#</title>
-      <link>https://spirite12.github.io/tags/c#/</link>
-      <pubDate>Mon, 22 Aug 2022 21:40:03 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/tags/c#/</guid>
       <description></description>
     </item>
     

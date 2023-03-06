@@ -7,14 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 13 Dec 2022 19:40:06 +1000</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Jan 2023 19:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
       <link>https://spirite12.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://spirite12.github.io/about/</guid>
-      <description>游戏：Demo 职业：游戏开发 地点：福建 工作：2019.1 - 至今 邮箱：spirit12@qq.com 留言：欢迎来到我的个人记录博客</description>
+      <description>游戏：Demo 地点：福建 职业：游戏开发 技能：Unity、C#、Lua 工作：2019.1 - 至今 邮箱：spirit12@qq.com 留言：欢迎来</description>
+    </item>
+    
+    <item>
+      <title>UI 框架</title>
+      <link>https://spirite12.github.io/post/uimgr/</link>
+      <pubDate>Mon, 30 Jan 2023 19:40:01 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/uimgr/</guid>
+      <description>前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上</description>
     </item>
     
     <item>
