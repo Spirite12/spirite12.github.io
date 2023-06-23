@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 28 Feb 2023 19:40:02 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Mar 2023 19:40:03 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Localization 本地化（下）</title>
+      <link>https://spirite12.github.io/post/localization2/</link>
+      <pubDate>Thu, 30 Mar 2023 19:40:03 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/localization2/</guid>
+      <description>前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插</description>
+    </item>
+    
     <item>
       <title>Localization 本地化（上）</title>
       <link>https://spirite12.github.io/post/localization1/</link>

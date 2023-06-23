@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Localization 本地化（下） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/localization2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Localization 本地化（下）" />
+<meta property="og:description" content="前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/localization2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-30T19:40:03+08:00" />
+<meta property="article:modified_time" content="2023-03-30T19:40:03+08:00" />
+
+<meta itemprop="name" content="Localization 本地化（下）">
+<meta itemprop="description" content="前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插"><meta itemprop="datePublished" content="2023-03-30T19:40:03+08:00" />
+<meta itemprop="dateModified" content="2023-03-30T19:40:03+08:00" />
+<meta itemprop="wordCount" content="2354">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Localization 本地化（下）"/>
+<meta name="twitter:description" content="前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Localization 本地化（下）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-03-30 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#模块流程图"><strong>模块流程图</strong></a></li>
+    <li><a href="#文件夹目录图"><strong>文件夹目录图</strong></a></li>
+    <li><a href="#设计思路"><strong>设计思路</strong></a>
+      <ul>
+        <li><a href="#文本">文本</a>
+          <ul>
+            <li><a href="#预制体上的文本">预制体上的文本</a></li>
+            <li><a href="#代码中的文本">代码中的文本</a></li>
+            <li><a href="#表格中的文本">表格中的文本</a></li>
+          </ul>
+        </li>
+        <li><a href="#资源">资源</a>
+          <ul>
+            <li><a href="#贴图资源">贴图资源</a></li>
+            <li><a href="#其他资源">其他资源</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#脚本介绍"><strong>脚本介绍</strong></a></li>
+    <li><a href="#使用案例"><strong>使用案例</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>本文主要介绍 Localization 接入项目的情况；</p>
+<h1 id="模块流程图"><strong>模块流程图</strong></h1>
+<p><img src="/Images/Localization2/Localization1.png" alt="Localization1">‘</p>
+<h1 id="文件夹目录图"><strong>文件夹目录图</strong></h1>
+<p><img src="/Images/Localization2/Localization2.png" alt="Localization2">‘</p>
+<h1 id="设计思路"><strong>设计思路</strong></h1>
+<p>概括：</p>
+<ol>
+<li>文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插件内，并由工具导出给翻译人员，再导回到插件内。因此插件的作用是收集全部翻译文本，无需开发人员添加，统一文本位置，方便查找，方便导入导出；</li>
+<li>资源内的多语言，则分为贴图资源和其他资源2个模块，这2个模块需要开发人员手动添加，因为只有用的额时候才能知道。且统一在这2个资源内，方便维护和查找；</li>
+</ol>
+<h2 id="文本">文本</h2>
+<ol>
+<li>
+<h3 id="预制体上的文本">预制体上的文本</h3>
+<ul>
+<li>
+<p>StringTablePrefab.asset：统一存放预制体文本的资源</p>
+</li>
+<li>
+<p>文本Key ：直接以当前文本作为 Key</p>
+<ul>
+<li>考虑的原因是：一开始想法是：预制体名 + 物体路径作为 key，但是考虑到不同预制体下会存在同文本的情况，这样会出现key不同，但Value一致的情况，导致重复翻译。因此改为文本作为key了；</li>
+</ul>
+</li>
+<li>
+<p>LocalizaPrefab.cs：需要文本翻译的则挂载该脚本，只是为了存放Key；</p>
+</li>
+<li>
+<p>LocalizationTools.cs：当前脚本中有个函数为，当打开预制件的时候，会往所需翻译的文本内添加该脚本；</p>
+<ul>
+<li>
+<p>目的在于：为了支持切换多语言的时候，不需要重启游戏，且在切换不同语言的时候，文本会被本地化 Value 替换，因此需要有个 Key 存放的地方； ’</p>
+</li>
+<li>
+<p>支持：前缀 ` 标识的文本，不作为翻译内容；</p>
+</li>
+<li>
+<p>支持：字体的多语言文本翻译</p>
+</li>
+<li>
+<p>代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// 对预制体的文本进行翻译</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// &lt;param name=&#34;go&#34;&gt;&lt;/param&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">LocalizationPrefabTxt</span><span class="p">(</span><span class="n">GameObject</span> <span class="n">go</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isModifyFont</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">txtArray</span> <span class="p">=</span> <span class="n">go</span><span class="p">.</span><span class="n">GetComponentsInChildren</span><span class="p">&lt;</span><span class="n">Text</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">text</span> <span class="k">in</span> <span class="n">txtArray</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">IsNeedLocalizeTxt</span><span class="p">(</span><span class="n">text</span><span class="p">.</span><span class="n">text</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">loPrefab</span> <span class="p">=</span> <span class="n">text</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">LocalizePrefab</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">loPrefab</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loPrefab</span> <span class="p">=</span> <span class="n">text</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">LocalizePrefab</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loPrefab</span><span class="p">.</span><span class="n">KeyId</span> <span class="p">=</span> <span class="n">text</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="n">loPrefab</span><span class="p">.</span><span class="n">KeyId</span><span class="p">,</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">EnumTable</span><span class="p">.</span><span class="n">StringPrefab</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isModifyFont</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">text</span><span class="p">.</span><span class="n">font</span> <span class="p">=</span> <span class="p">(</span><span class="n">Font</span><span class="p">)</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;Font_Text&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">txtMeshProArray</span> <span class="p">=</span> <span class="n">go</span><span class="p">.</span><span class="n">GetComponentsInChildren</span><span class="p">&lt;</span><span class="n">TextMeshProUGUI</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">txtMeshPro</span> <span class="k">in</span> <span class="n">txtMeshProArray</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">IsNeedLocalizeTxt</span><span class="p">(</span><span class="n">txtMeshPro</span><span class="p">.</span><span class="n">text</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">loPrefab</span> <span class="p">=</span> <span class="n">txtMeshPro</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">LocalizePrefab</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">loPrefab</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loPrefab</span> <span class="p">=</span> <span class="n">txtMeshPro</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">LocalizePrefab</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loPrefab</span><span class="p">.</span><span class="n">KeyId</span> <span class="p">=</span> <span class="n">txtMeshPro</span><span class="p">.</span><span class="n">text</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txtMeshPro</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="n">loPrefab</span><span class="p">.</span><span class="n">KeyId</span><span class="p">,</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">EnumTable</span><span class="p">.</span><span class="n">StringPrefab</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isModifyFont</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">txtMeshPro</span><span class="p">.</span><span class="n">font</span> <span class="p">=</span> <span class="p">(</span><span class="n">TMP_FontAsset</span><span class="p">)</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;Font_TextMeshPro&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="代码中的文本">代码中的文本</h3>
+<ul>
+<li>
+<p>StringTableScript.asset：统一存放代码中需要翻译文本的资源</p>
+</li>
+<li>
+<p>Key：开发人员自定义 string 类型的文本</p>
+<ul>
+<li>
+<p>对应脚本：LocalizeConstScript.cs</p>
+<ul>
+<li>设计思路：
+<ol>
+<li>防止相同Key；</li>
+<li>需要翻译的文本不存在各个脚本，统一在一个文件内；</li>
+<li>统一个插件 key 的思路一致，都设置为 string 类型；</li>
+<li>如果有机会，其他职能组改文本，也只需要到这个文件改；</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>代码（以下两个参数为举例）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Localization</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">LocalizeConstScript</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">DicLocalization</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="s">&#34;Hello&#34;</span> <span class="p">,</span> <span class="s">&#34;这是值&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="s">&#34;add&#34;</span> <span class="p">,</span> <span class="s">&#34;新增&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="表格中的文本">表格中的文本</h3>
+<ul>
+<li>方案1：
+<ul>
+<li>如果本地中文表是Txt内容，并且代码可读了这个文本，则可以在不同语言内，生成名称一致但存放不同语言文件夹下的本地表，从而在切换不同的语言的时候，读取对应语言下的表内容；</li>
+<li>这个方案就与Localization插件隔离开了；</li>
+</ul>
+</li>
+<li>方案2：
+<ul>
+<li>在获取本地表后，举例：1张表的内容，以中文文本为Key，其他语言为Value，写一个工具，直接导入到Localization的对应配置表资源下；以此达到所有表的翻译</li>
+<li>这个方案就直接嵌入在Localization插件工具内</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="资源">资源</h2>
+<ol>
+<li>
+<h3 id="贴图资源">贴图资源</h3>
+<ul>
+<li>AssetTableSprite.asset：统一存放贴图需要多语言的资源包；</li>
+</ul>
+</li>
+<li>
+<h3 id="其他资源">其他资源</h3>
+<ul>
+<li>AssetTableCommon.asset：统一存放贴图需要多语言的资源包；</li>
+<li>目的：考虑到其他资源需要翻译的情况不多，因此都统一这里；</li>
+</ul>
+</li>
+</ol>
+<h1 id="脚本介绍"><strong>脚本介绍</strong></h1>
+<ul>
+<li>
+<p>LocalizeConst：常量脚本</p>
+</li>
+<li>
+<p>LocalizeConstScript：需要翻译的文本脚本</p>
+</li>
+<li>
+<p>LocalizePrefab：需要翻译的预制体脚本（一般开发者无需关心）</p>
+</li>
+<li>
+<p>LocalizeMgr：管理类</p>
+<ul>
+<li>
+<p>文本、资源翻译、当前语言内容都往这里拿就行了；</p>
+</li>
+<li>
+<p>代码展示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">LocalizeMgr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 资源枚举</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">enum</span> <span class="n">EnumTable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StringScript</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StringPrefab</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 语言枚举表</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">enum</span> <span class="n">EnumLocale</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CN</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EN</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 获取语言格式文本，具体文本在 ProjectSettings -&gt; Localization -&gt; Available Locales</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetLocaleFormatter</span><span class="p">(</span><span class="n">EnumLocale</span> <span class="n">enumLocale</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="p">(</span><span class="n">enumLocale</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="n">EnumLocale</span><span class="p">.</span><span class="n">EN</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="s">&#34;en&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="s">&#34;zh-CN&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 获取多语言文本</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetText</span><span class="p">(</span><span class="kt">string</span> <span class="n">key</span><span class="p">,</span> <span class="n">EnumTable</span> <span class="n">enumTable</span> <span class="p">=</span> <span class="n">EnumTable</span><span class="p">.</span><span class="n">StringScript</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">locale</span> <span class="p">=</span> <span class="n">LocalizationSettings</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="n">GetSelectedLocale</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">isCn</span> <span class="p">=</span> <span class="n">locale</span><span class="p">.</span><span class="n">Formatter</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">==</span> <span class="n">GetLocaleFormatter</span><span class="p">(</span><span class="n">EnumLocale</span><span class="p">.</span><span class="n">CN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isCn</span> <span class="p">&amp;&amp;</span> <span class="n">enumTable</span> <span class="p">==</span> <span class="n">EnumTable</span><span class="p">.</span><span class="n">StringScript</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">LocalizeConstScript</span><span class="p">.</span><span class="n">DicLocalization</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">LocalizedStringTable</span> <span class="n">stringTable</span> <span class="p">=</span> <span class="n">GetStringTableByEnum</span><span class="p">(</span><span class="n">enumTable</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">entry</span> <span class="p">=</span> <span class="n">stringTable</span><span class="p">.</span><span class="n">GetTable</span><span class="p">().</span><span class="n">GetEntry</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">entry</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 此处为了 CN环境下无需从表中读取</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">isCn</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&#34;{stringTable.TableReference.TableCollectionName}:多语言包内没有Key：{key}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">entry</span><span class="p">.</span><span class="n">GetLocalizedString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&#34;{stringTable.TableReference.TableCollectionName}:多语言包内Key：{key}的当前语言内没值&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 获取多语言资源</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="n">Object</span> <span class="n">GetRes</span><span class="p">(</span><span class="kt">string</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">LocalizedAssetTable</span><span class="p">&gt;</span> <span class="n">assetList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">LocalizedAssetTable</span><span class="p">&gt;{</span> <span class="n">assetTableCommon</span> <span class="p">,</span> <span class="n">assetTableSprite</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AssetTableEntry</span> <span class="n">entry</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">assetList</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">entry</span> <span class="p">=</span> <span class="n">assetList</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">GetTable</span><span class="p">().</span><span class="n">GetEntry</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">entry</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">entry</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&#34;多语言包内没有Key：{key}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">path</span> <span class="p">=</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">GUIDToAssetPath</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Guid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">LoadAssetAtPath</span><span class="p">&lt;</span><span class="n">Object</span><span class="p">&gt;(</span><span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 获取字符串多语言包数据</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="n">LocalizedStringTable</span> <span class="n">GetStringTableByEnum</span><span class="p">(</span><span class="n">EnumTable</span> <span class="n">enumTable</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LocalizedStringTable</span> <span class="n">stringTable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="p">(</span><span class="n">enumTable</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="n">EnumTable</span><span class="p">.</span><span class="n">StringPrefab</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stringTable</span> <span class="p">=</span> <span class="n">stringTablePrefab</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stringTable</span> <span class="p">=</span> <span class="n">stringTableScript</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stringTable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">LocalizedStringTable</span> <span class="n">stringTableScript</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LocalizedStringTable</span> <span class="p">{</span> <span class="n">TableReference</span> <span class="p">=</span> <span class="n">LocalizeConst</span><span class="p">.</span><span class="n">StringTableScript</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">LocalizedStringTable</span> <span class="n">stringTablePrefab</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LocalizedStringTable</span> <span class="p">{</span> <span class="n">TableReference</span> <span class="p">=</span> <span class="n">LocalizeConst</span><span class="p">.</span><span class="n">StringTablePrefab</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">LocalizedAssetTable</span> <span class="n">assetTableCommon</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LocalizedAssetTable</span> <span class="p">{</span> <span class="n">TableReference</span> <span class="p">=</span> <span class="n">LocalizeConst</span><span class="p">.</span><span class="n">AssetTableCommon</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">LocalizedAssetTable</span> <span class="n">assetTableSprite</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LocalizedAssetTable</span> <span class="p">{</span> <span class="n">TableReference</span> <span class="p">=</span> <span class="n">LocalizeConst</span><span class="p">.</span><span class="n">AssetTableSprite</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>LocalizeTools：工具类</p>
+<ul>
+<li>脚本，预制体的文本导出到插件的函数支持</li>
+<li>预制件打开就翻译的函数</li>
+</ul>
+</li>
+<li>
+<p>LocalizateEditor：导入、到处文本翻译工具</p>
+<ul>
+<li>
+<p>导出Excel，方便翻译人员直接翻译</p>
+</li>
+<li>
+<p>导入插件，应用在翻译完成后导入插件内</p>
+</li>
+<li>
+<p>工具内容：</p>
+<p><img src="/Images/Localization2/Localization3.png" alt="Localization3">‘</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用案例"><strong>使用案例</strong></h1>
+<ol>
+<li>
+<p>代码文本赋值翻译：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Main</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Text</span> <span class="n">txt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Render</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Render</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Hello 为 LocalizeConstScript.DicLocalization 的 key</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txt</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>资源赋值翻译：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Main</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Image</span> <span class="n">img</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Render</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Render</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// img为 AssetTabelSprite 的 key</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">var</span> <span class="n">res</span> <span class="p">=</span> <span class="n">LocalizeMgr</span><span class="p">.</span><span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;img&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">img</span><span class="p">.</span><span class="n">sprite</span> <span class="p">=</span> <span class="n">Sprite</span><span class="p">.</span><span class="n">Create</span><span class="p">((</span><span class="n">Texture2D</span><span class="p">)</span><span class="n">res</span><span class="p">,</span> <span class="k">new</span> <span class="n">Rect</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">32</span><span class="p">),</span> <span class="n">Vector2</span><span class="p">.</span><span class="n">zero</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-03-30 19:40:03 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/localization2/">https://spirite12.github.io/post/localization2/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/localization1/">
+            <span class="next-text nav-default">Localization 本地化（上）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
