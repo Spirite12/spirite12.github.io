@@ -49,7 +49,7 @@
 <meta itemprop="name" content="LuaCheck 代码检测工具">
 <meta itemprop="description" content="概述 LuaCheck 是一款静态代码检测工具，类似于 VisualStudio IDE 中检测C#脚本语言错误； 可用于检测，不限于： 使用未定义的全局/局部变量； 定义却未使用的全局/局部变量"><meta itemprop="datePublished" content="2022-07-12T21:40:01+08:00" />
 <meta itemprop="dateModified" content="2022-07-12T21:40:01+08:00" />
-<meta itemprop="wordCount" content="1266">
+<meta itemprop="wordCount" content="1293">
 <meta itemprop="keywords" content="Lua," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="LuaCheck 代码检测工具"/>
 <meta name="twitter:description" content="概述 LuaCheck 是一款静态代码检测工具，类似于 VisualStudio IDE 中检测C#脚本语言错误； 可用于检测，不限于： 使用未定义的全局/局部变量； 定义却未使用的全局/局部变量"/>
@@ -248,6 +248,10 @@
 </li>
 </ul>
 <h3 id="gitlab-ci-执行-luacheck"><strong>Gitlab CI 执行 LuaCheck</strong></h3>
+<blockquote>
+<p>更新时间：2023-04-30</p>
+<p>Gitlab CI接入文章：<a href="https://spirite12.github.io/post/gitlabci/">请点击我</a></p>
+</blockquote>
 <p>本文讨论的是：在请求分支合并中，当每次提交Lua代码的时候，CI会自动使用 LuaCheck 检测提交的 Lua 脚本，并输出相对应的提示内容，让开发者根据提示内容进行相对应的脚本更改，以达到代码检测的作用；</p>
 <ol>
 <li>
