@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Thu, 30 Mar 2023 19:40:03 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Apr 2023 19:40:03 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
       <link>https://spirite12.github.io/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>https://spirite12.github.io/about/</guid>
       <description>游戏：Demo 地点：福建 职业：游戏开发 技能：Unity、C#、Lua 工作：2019.1 - 至今 邮箱：spirit12@qq.com 留言：欢迎来</description>
+    </item>
+    
+    <item>
+      <title>Gitlab CI 接入</title>
+      <link>https://spirite12.github.io/post/gitlabci/</link>
+      <pubDate>Sun, 30 Apr 2023 19:40:03 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/gitlabci/</guid>
+      <description>前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支</description>
     </item>
     
     <item>

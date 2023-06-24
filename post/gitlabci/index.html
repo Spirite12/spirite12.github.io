@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Gitlab CI 接入 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/gitlabci/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Gitlab CI 接入" />
+<meta property="og:description" content="前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/gitlabci/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-30T19:40:03+08:00" />
+<meta property="article:modified_time" content="2023-04-30T19:40:03+08:00" />
+
+<meta itemprop="name" content="Gitlab CI 接入">
+<meta itemprop="description" content="前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支"><meta itemprop="datePublished" content="2023-04-30T19:40:03+08:00" />
+<meta itemprop="dateModified" content="2023-04-30T19:40:03+08:00" />
+<meta itemprop="wordCount" content="971">
+<meta itemprop="keywords" content="Gitlab," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gitlab CI 接入"/>
+<meta name="twitter:description" content="前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Gitlab CI 接入</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-30 </span>
+        <div class="post-category">
+            <a href="/categories/gitlab/"> Gitlab </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#接入ci的缘由"><strong>接入CI的缘由</strong></a></li>
+    <li><a href="#接入流程"><strong>接入流程</strong></a>
+      <ul>
+        <li><a href="#gitlab位置">GitLab位置</a></li>
+        <li><a href="#创建并运行-runner">创建并运行 Runner</a></li>
+        <li><a href="#创建并使用流水线">创建并使用流水线</a></li>
+        <li><a href="#请求合并">请求合并</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接"><strong>参考链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>本文主要介绍 Gitlab CI 在项目中接入的流程</p>
+<h1 id="接入ci的缘由"><strong>接入CI的缘由</strong></h1>
+<ol>
+<li>项目使用的是 Gitlab 托管项目；</li>
+<li>开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支；
+<ul>
+<li>目的是：确保进入主分支的资源是完善且开发完成的；</li>
+</ul>
+</li>
+<li>想在进入主分支之前进行一些资源 or 代码 or 分支检测的操作；
+<ul>
+<li>Gitlab CI 便可做到这件事；
+<ul>
+<li>举例：<a href="https://spirite12.github.io/post/luacheck/">LuaCheck 代码检测工具</a> ：之前写的文本就是通过 CI 来触发检测的；</li>
+</ul>
+</li>
+<li>当然做Git钩子，在每次提交的时候，检查提交资源也是一种方案；</li>
+</ul>
+</li>
+</ol>
+<h1 id="接入流程"><strong>接入流程</strong></h1>
+<h2 id="gitlab位置">GitLab位置</h2>
+<ul>
+<li>点击 Gitlab -&gt; 设置 -&gt; CI/CD -&gt; 项目Runner</li>
+</ul>
+<h2 id="创建并运行-runner">创建并运行 Runner</h2>
+<ul>
+<li>
+<p>方案1：</p>
+<ul>
+<li>
+<p>点击新建项目 runner -&gt; 设置相关参数 -&gt; 点击 创建runner</p>
+<ul>
+<li>操作系统：在项目开发过程中，优先选择类似打包机（能保证在线）的操作平台。因本人为个人开发，则选择Windows；</li>
+<li>标签：为该Runner打上标签，以便后续知道该 runner 是需要执行在哪些项目中；</li>
+<li>界面截图：<img src="/Images/GitlabCI/GitlabCI1.png" alt="GitlabCI1">‘</li>
+</ul>
+</li>
+<li>
+<p>创建 runner 后会进入注册 runner 的界面</p>
+<ul>
+<li>
+<p>下载当前系统对应的文件，下载资源在 方案2 内寻找；</p>
+</li>
+<li>
+<p>在该文件的文件夹下，打开cmd ，并按照步骤1，注册 runner；</p>
+</li>
+<li>
+<p>注册过程中有个问题是：选择一个executor，我选择的是Shell，当然需要根据具体需求具体选择；</p>
+</li>
+<li>
+<p>注册成功后的提示截图：</p>
+<p><img src="/Images/GitlabCI/GitlabCI2.png" alt="GitlabCI2">‘</p>
+</li>
+<li>
+<p>之后会生成一个配置文件 config.toml ，即代表注册完成了；</p>
+</li>
+</ul>
+</li>
+<li>
+<p>按照步骤3，激活当前 runner 后，gitLab 会给出创建成功的提示（激活指令如下）；</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gitlab-runner.exe run
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>此时返回到 项目 runner 界面，即可看到 分配的项目 runner 下有个绿色的runner 了即可使用了；</p>
+<ul>
+<li><img src="/Images/GitlabCI/GitlabCI3.png" alt="GitlabCI3">‘</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>方案2：</p>
+<ul>
+<li>
+<p>设置 -&gt; CI/CD -&gt; 项目 runner -&gt; 新建项目 runner 右侧的 三个点点 -&gt; 显示 runner 安装和注册说明 中打开；</p>
+</li>
+<li>
+<p>点击 下载最新的二进制文件 到本机；</p>
+</li>
+<li>
+<p>这步是通过 Cmd 打开 Cmd 并 定位到当前 exe的文件夹下，输入命令（该命令在界面内也有显示）：</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gitlab-runner.exe register --url https://gitlab.com/ --registration-token xxxxxxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>并根据 Cmd 中后续指令完成相关注册；</p>
+<ul>
+<li>注册流程和方案1一致；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>直到看到 分配的项目 runner 下有个绿色的runner 了即可使用了；</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="创建并使用流水线">创建并使用流水线</h2>
+<ul>
+<li>选择 构建 -&gt; 流水线 - 点击 尝试测试模板；</li>
+<li>这时候 出现一个提交 yml 文件的请求；
+<ul>
+<li>编辑：这个是文件的内容；</li>
+<li>可视化：这个是该流水线需要跑的阶段有哪些，根据文件的内容决定；</li>
+<li>验证：是用来保证写的文件内容代码语法是否有误；</li>
+</ul>
+</li>
+<li>点击提交更改，并成功提交了 yml 文件；
+<ul>
+<li>这个文件则是后续需要写的所有的提交前的检测内容了；</li>
+</ul>
+</li>
+</ul>
+<h2 id="请求合并">请求合并</h2>
+<ul>
+<li>选择 代码 -&gt; 合并请求 -&gt; 新建合并请求；</li>
+<li>这时候就可以看到请求页面出现跑流水线的流程了；</li>
+<li>截图为流水线的模板流程图：
+<ul>
+<li><img src="/Images/GitlabCI/GitlabCI4.png" alt="GitlabCI4">‘</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考链接"><strong>参考链接</strong></h1>
+<ul>
+<li><a href="https://docs.gitlab.com/ee/ci/index.html">GitLab CI/CD</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-04-30 19:40:03 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/gitlabci/">https://spirite12.github.io/post/gitlabci/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/gitlab/">Gitlab</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/localization2/">
+            <span class="next-text nav-default">Localization 本地化（下）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
