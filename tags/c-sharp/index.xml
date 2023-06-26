@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Mon, 30 Jan 2023 19:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 May 2023 19:40:05 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatFilter 屏蔽字库</title>
+      <link>https://spirite12.github.io/post/chatfilter/</link>
+      <pubDate>Tue, 30 May 2023 19:40:05 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/chatfilter/</guid>
+      <description>前言 本文主要介绍屏蔽词过滤功能，主要应用在角色昵称命名和聊天内容上做提醒和过滤； 功能分析 需要有个屏蔽字库，里面存放着需要屏蔽的词汇； 代码需要</description>
+    </item>
+    
     <item>
       <title>UI 框架</title>
       <link>https://spirite12.github.io/post/uimgr/</link>
