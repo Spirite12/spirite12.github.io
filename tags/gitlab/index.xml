@@ -10,10 +10,10 @@
     <lastBuildDate>Sun, 30 Apr 2023 19:40:03 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gitlab CI 接入</title>
-      <link>https://spirite12.github.io/post/gitlabci/</link>
+      <link>https://spirite12.github.io/post/23.04_gitlabci/</link>
       <pubDate>Sun, 30 Apr 2023 19:40:03 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/gitlabci/</guid>
+      <guid>https://spirite12.github.io/post/23.04_gitlabci/</guid>
       <description>前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支</description>
     </item>
     

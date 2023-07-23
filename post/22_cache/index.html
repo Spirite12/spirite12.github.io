@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Cache 本地化存档 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/22_cache/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Cache 本地化存档" />
+<meta property="og:description" content="前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/22_cache/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-22T21:40:03+08:00" />
+<meta property="article:modified_time" content="2022-08-22T21:40:03+08:00" />
+
+<meta itemprop="name" content="Cache 本地化存档">
+<meta itemprop="description" content="前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类"><meta itemprop="datePublished" content="2022-08-22T21:40:03+08:00" />
+<meta itemprop="dateModified" content="2022-08-22T21:40:03+08:00" />
+<meta itemprop="wordCount" content="1469">
+<meta itemprop="keywords" content="C Sharp," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cache 本地化存档"/>
+<meta name="twitter:description" content="前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Cache 本地化存档</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-08-22 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#前言"><strong>前言</strong></a></li>
+            <li><a href="#cachemgr"><strong>CacheMgr</strong></a></li>
+            <li><a href="#cachebase"><strong>CacheBase</strong></a></li>
+            <li><a href="#加密解密"><strong>加密解密</strong></a></li>
+            <li><a href="#问题记录"><strong>问题记录</strong></a></li>
+            <li><a href="#参考链接"><strong>参考链接</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="前言"><strong>前言</strong></h3>
+<ul>
+<li>Unity提供了一套的本地化保存的类 <strong><a href="https://docs.unity3d.com/cn/2020.2/ScriptReference/PlayerPrefs.html">PlayerPrefs</a></strong>，提供了 Int，Float，String 类型的支持；
+<ul>
+<li>对于基础开发来说，这三个类型是足够支持的了；</li>
+<li>如果需要保存些复杂的数据，当然也可在 String 类型内保存 Json 的格式以达到目标；</li>
+<li>对于保存的数据都在同一份文件内；</li>
+</ul>
+</li>
+<li>希望有个本地管理类，里面实现的功能有：
+<ol>
+<li>存储方式： 以系统为命名文件方式，存储数据在该文件夹内。（也可根据所需保存数据在不同的文件内，如：跟账号、跟设备、跟大区；）</li>
+<li>开发方式：只需创建系统相对应的脚本类，写入需要保存的变量即可实现存储；</li>
+<li>更新方式：根据某字段增加对本地存档的不读取方式，以避免出现玩家存储了有问题的本地数据；</li>
+<li>加密方式：以防止玩家轻易打开文件找到变量，找到相对应的数据并做修改；</li>
+</ol>
+</li>
+<li>开发目的：
+<ol>
+<li>查看本地存储方便；</li>
+<li>开发只需写变量即可；</li>
+<li>统一方便管理数据；</li>
+</ol>
+</li>
+</ul>
+<h3 id="cachemgr"><strong>CacheMgr</strong></h3>
+<p>该脚本主要起到：1）保存数据调用；2）文件存储方式；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Cache</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">CacheMgr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 本地记录类型</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">enum</span> <span class="n">EnumSaveType</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 账号</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Account</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 区服</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Arena</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 玩家ID</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PlayerId</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取项目组本地记录类型值</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// todo : 这里根据项目内实际数据进行赋值</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">GetSaveTypeValue</span><span class="p">(</span><span class="n">EnumSaveType</span> <span class="n">enumSaveType</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">enumSaveType</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 保存所有的缓存本地数据</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 调用时机：退游、切换账号、或定时保存</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">SaveAllCacheBase</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">cacheBase</span> <span class="k">in</span> <span class="n">cacheBaseList</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cacheBase</span><span class="p">.</span><span class="n">SaveFileData</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 添加缓存数据</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;param name=&#34;cache&#34;&gt;&lt;/param&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddCacheBase</span><span class="p">(</span><span class="n">CacheBase</span> <span class="n">cache</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cacheBaseList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">cache</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">CacheBase</span><span class="p">&gt;</span> <span class="n">cacheBaseList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">CacheBase</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="cachebase"><strong>CacheBase</strong></h3>
+<p>该脚本主要起到：1）所有存储脚本基类；2）存储、读取函数调用；3）版本控制变量：version</p>
+<p>实际用法则继承该脚本，并写入相对应变量便可；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Utility</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Cache</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">CacheBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 版本值，若文件内版本小于当前版本则不读</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">int</span> <span class="n">version</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 本地记录类型</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">CacheMgr</span><span class="p">.</span><span class="n">EnumSaveType</span> <span class="n">saveType</span> <span class="p">=</span> <span class="n">CacheMgr</span><span class="p">.</span><span class="n">EnumSaveType</span><span class="p">.</span><span class="n">PlayerId</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">CacheBase</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">className</span> <span class="p">=</span> <span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">GetFileSave</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CacheMgr</span><span class="p">.</span><span class="n">AddCacheBase</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 设置保存的路径</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;returns&gt;&lt;/returns&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">SaveFileData</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">GetSavePath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">path</span> <span class="p">=</span> <span class="s">&#34;&#34;</span> <span class="p">+</span> <span class="n">path</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">strSave</span> <span class="p">=</span> <span class="n">JsonUtility</span><span class="p">.</span><span class="n">ToJson</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">FileUtil</span><span class="p">.</span><span class="n">WriteFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">strSave</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取文件数据</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">GetFileSave</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获取数据</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">GetSavePath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">FileUtil</span><span class="p">.</span><span class="n">ExistFile</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">content</span> <span class="p">=</span> <span class="n">FileUtil</span><span class="p">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 低类当前版本则不读取</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">versionValue</span> <span class="p">=</span> <span class="n">FileUtil</span><span class="p">.</span><span class="n">GetIntValueByJson</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">&#34;version&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">versionValue</span> <span class="p">&lt;</span> <span class="n">version</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">JsonUtility</span><span class="p">.</span><span class="n">FromJsonOverwrite</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取保存的路径</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;returns&gt;&lt;/returns&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="kt">string</span> <span class="n">GetSavePath</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">savePath</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">savePath</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">number</span> <span class="p">=</span> <span class="n">CacheMgr</span><span class="p">.</span><span class="n">GetSaveTypeValue</span><span class="p">(</span><span class="n">saveType</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="s">$&#34;\\Record\\{className}_{number}_cache_data.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 保存路径，不写有默认路径</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [NonSerialized]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="kt">string</span> <span class="n">savePath</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="kt">string</span> <span class="n">className</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="加密解密"><strong>加密解密</strong></h3>
+<ol>
+<li>目前做法：把需要存储的内容全部都转换成ASCII相对应的值，这时文件内便全是数字；
+<ul>
+<li>扩展1：在文件内多存储一个随机数字，文件内的ASCII值都随着这个值做算法混淆；</li>
+<li>扩展2：以玩家ID为值，依次且循环获取单个数值对文件夹内的ASCII值做算法混淆；</li>
+</ul>
+</li>
+<li><a href="https://assetstore.unity.com/packages/tools/utilities/anti-cheat-toolkit-2021-202695">Anti-Cheat Toolkit</a> ：一款U3D资源商店加密的插件；</li>
+</ol>
+<h3 id="问题记录"><strong>问题记录</strong></h3>
+<ol>
+<li>
+<p>Q：CacheBase 内有许多 FileUtil 文件内函数调用，并没有贴出来脚本？</p>
+<p>A：该脚本内容与函数名一致，只是加了些封装而已，为了减少文章长度故没有贴出；</p>
+</li>
+<li>
+<p>Q：CacheBase 内 FileUtil.GetIntValueByJson（自己写） 代替 JsonUtility.FromJson（API） 的原因是？</p>
+<p>A：在实例化 CacheBase 的时候会调用 GetFileSave 函数。FileUtil.GetIntValueByJson 该函数通过API介绍会实例化新该脚本类，会导致重复调用导致堆栈溢出。因此手动写了个解析Json某字段的函数；（没有想出更优解）</p>
+</li>
+<li>
+<p>Q：子类可做的事情有哪些？</p>
+<p>A：1）定义所需存储的变量；2）每个子类都继承 CacheBase 且都是单例；3）可重写存储路径；4）可更改父类 version 变量，达到废弃旧版本读取的操作；</p>
+</li>
+</ol>
+<h3 id="参考链接"><strong>参考链接</strong></h3>
+<ul>
+<li><a href="https://tool.oschina.net/commons?type=4">ASCII 对照表</a></li>
+<li><a href="https://docs.unity3d.com/cn/2020.2/ScriptReference/PlayerPrefs.html">PlayerPrefs</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2022-08-22 21:40:03 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/22_cache/">https://spirite12.github.io/post/22_cache/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c-sharp/">C Sharp</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/22_fontcustom/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Font 自定义字体</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/22_luaformat/">
+            <span class="next-text nav-default">LuaFormat 代码格式化工具</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

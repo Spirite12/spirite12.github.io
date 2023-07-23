@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>游戏 Demo - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 记录个人目前所开发的游戏 Demo IcecreamBOOM 时间：2022 1.22 ~ 1.23 人员：策划x1 、美术x1 、动效x1 、程序x1 前言：同事邀请的48小时开发，那时的想法是工" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/22.06_gamedemo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="游戏 Demo" />
+<meta property="og:description" content="前言 记录个人目前所开发的游戏 Demo IcecreamBOOM 时间：2022 1.22 ~ 1.23 人员：策划x1 、美术x1 、动效x1 、程序x1 前言：同事邀请的48小时开发，那时的想法是工" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/22.06_gamedemo/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-28T21:43:13+08:00" />
+<meta property="article:modified_time" content="2022-06-28T21:43:13+08:00" />
+
+<meta itemprop="name" content="游戏 Demo">
+<meta itemprop="description" content="前言 记录个人目前所开发的游戏 Demo IcecreamBOOM 时间：2022 1.22 ~ 1.23 人员：策划x1 、美术x1 、动效x1 、程序x1 前言：同事邀请的48小时开发，那时的想法是工"><meta itemprop="datePublished" content="2022-06-28T21:43:13+08:00" />
+<meta itemprop="dateModified" content="2022-06-28T21:43:13+08:00" />
+<meta itemprop="wordCount" content="363">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="游戏 Demo"/>
+<meta name="twitter:description" content="前言 记录个人目前所开发的游戏 Demo IcecreamBOOM 时间：2022 1.22 ~ 1.23 人员：策划x1 、美术x1 、动效x1 、程序x1 前言：同事邀请的48小时开发，那时的想法是工"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">游戏 Demo</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-06-28 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#前言"><strong>前言</strong></a></li>
+            <li><a href="#icecreamboom"><strong>IcecreamBOOM</strong></a></li>
+            <li><a href="#十二幻界"><strong>十二幻界</strong></a></li>
+            <li><a href="#无法触碰"><strong>无法触碰</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="前言"><strong>前言</strong></h3>
+<p>记录个人目前所开发的游戏 Demo</p>
+<h3 id="icecreamboom"><strong>IcecreamBOOM</strong></h3>
+<ul>
+<li>时间：2022 1.22 ~ 1.23</li>
+<li>人员：策划x1 、美术x1 、动效x1 、程序x1</li>
+<li>前言：同事邀请的48小时开发，那时的想法是工作刚满三年了，想给自己一个阶段总结吧；</li>
+<li>简介：一款双人同屏竞技的单机小游戏。在有限的时间内，发射自身冰淇淋使其占领色块面积最多的   一方将获得游戏胜利；</li>
+<li>外链：
+<ul>
+<li><a href="https://globalgamejam.org/2022/games/icecreamboom-6">GameJam2022</a></li>
+<li><a href="https://www.bilibili.com/video/BV1oa411m79Y?spm_id_from=333.999.0.0&amp;vd_source=02d0296d998f72015d7a7f6f5c1fcafc">B站视频</a></li>
+<li><a href="https://pan.baidu.com/s/14xqSi5P2ZY7eonMdZgUxXw?pwd=u3x5">APK试玩</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="十二幻界"><strong>十二幻界</strong></h3>
+<ul>
+<li>时间：2018年</li>
+<li>人员：美术x1、程序x1</li>
+<li>成就：预约、关注、下载量都过万</li>
+<li>前言：游戏是大三下学期开发，大四上学期发布并迭代了几个版本，大学时光挺好的；</li>
+<li>简介：一款玩法上结合了RPG和RogueLike元素于一身的事件探索、回合制对战单机小游戏</li>
+<li>外链：
+<ul>
+<li><a href="https://www.taptap.com/app/138941">TapTap</a></li>
+<li><a href="https://www.taptap.com/app/145463">APK试玩</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="无法触碰"><strong>无法触碰</strong></h3>
+<ul>
+<li>时间：2017年</li>
+<li>人员：程序x1</li>
+<li>前言：第一款发布在网上的demo；</li>
+<li>简介：一款考验玩家手指灵活度的休闲娱乐类的小游戏，游戏借鉴《蓝界》玩法；</li>
+<li>外链：
+<ul>
+<li><a href="https://www.taptap.com/app/73838">TapTap</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2022-06-28 21:43:13 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/22.06_gamedemo/">https://spirite12.github.io/post/22.06_gamedemo/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/22.07_luacheck/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">LuaCheck 代码检测工具</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/22.06_helloworld/">
+            <span class="next-text nav-default">HelloWorld</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
