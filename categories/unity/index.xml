@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Mon, 31 Jul 2023 19:40:07 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Aug 2023 19:40:07 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Addressables 学习</title>
+      <link>https://spirite12.github.io/post/23.08_addressable/</link>
+      <pubDate>Wed, 23 Aug 2023 19:40:07 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/23.08_addressable/</guid>
+      <description>前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使</description>
+    </item>
+    
     <item>
       <title>UIToolkit UI工具包</title>
       <link>https://spirite12.github.io/post/23.07_uitoolkit/</link>

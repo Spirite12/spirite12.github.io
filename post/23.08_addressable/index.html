@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Addressables 学习 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23.08_addressable/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Addressables 学习" />
+<meta property="og:description" content="前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23.08_addressable/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-23T19:40:07+08:00" />
+<meta property="article:modified_time" content="2023-08-23T19:40:07+08:00" />
+
+<meta itemprop="name" content="Addressables 学习">
+<meta itemprop="description" content="前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使"><meta itemprop="datePublished" content="2023-08-23T19:40:07+08:00" />
+<meta itemprop="dateModified" content="2023-08-23T19:40:07+08:00" />
+<meta itemprop="wordCount" content="3759">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Addressables 学习"/>
+<meta name="twitter:description" content="前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Addressables 学习</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-08-23 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言addressables-与-assetbundle">前言：Addressables 与 AssetBundle</a></li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#标记资源为-addressables">标记资源为 Addressables</a></li>
+    <li><a href="#加载标记为-addressables-的资源">加载标记为 Addressables 的资源</a></li>
+    <li><a href="#加载和释放asset">加载和释放Asset</a></li>
+    <li><a href="#addressables-event-viewer">Addressables Event Viewer</a></li>
+    <li><a href="#小内容记录">小内容记录</a></li>
+    <li><a href="#问题记录">问题记录</a></li>
+    <li><a href="#相关链接">相关链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言addressables-与-assetbundle">前言：Addressables 与 AssetBundle</h1>
+<p>Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使用 Addressables来达到效果；</p>
+<p>Addressables的相关优点：</p>
+<ol>
+<li><strong>灵活性</strong>：可寻址使您可以灵活地调整资产的托管位置。您可以随应用程序安装资产或按需下载它们。您可以在项目的任何阶段更改访问特定资产的位置，而无需重写任何游戏代码。</li>
+<li><strong>依赖管理</strong>：系统会自动加载您加载的任何资源的所有依赖关系，以便在系统将内容返回给您之前加载所有网格、着色器、动画和其他资源。</li>
+<li><strong>内存管理</strong>：系统卸载和加载资产，自动计算引用并提供强大的分析器来帮助您发现潜在的内存问题。</li>
+<li><strong>内容打包</strong>：由于系统映射并理解复杂的依赖链，因此即使您移动或重命名资产，它也能有效地打包 AssetBundles。您可以为本地和远程部署准备资产，以支持可下载内容并减少应用程序大小。</li>
+</ol>
+<h1 id="安装">安装</h1>
+<p><img src="/Images/Addressables/Addressables1.png" alt="Addressables1"></p>
+<ul>
+<li>
+<p>安装路径：Window → Package Manager → Addressables</p>
+</li>
+<li>
+<p>初始数据：Window → Asset Management → Addressables → Groups</p>
+<ul>
+<li>
+<p>如果没有 Addressables 组，则可以直接点击 Create Addressables Settings 进行初始化</p>
+<ul>
+<li>系统会在 Assets 文件夹下创建 AddressableAssetsData 文件夹以及相关数据</li>
+<li><img src="/Images/Addressables/Addressables2.png" alt="Addressables2"></li>
+</ul>
+</li>
+<li>
+<p>如果有 Addressables 组，则可以把该组直接拖进当前窗口进行初始化；</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="标记资源为-addressables">标记资源为 Addressables</h1>
+<p>前言：Resources 文件夹以及此子目录无法标识 Addressables。如果对 Resources 文件夹进行标识，Unity 则会弹窗提示并使其移除资源文件夹；</p>
+<ol>
+<li>Inspector 单个资源标识：
+<ul>
+<li><img src="/Images/Addressables/Addressables3.png" alt="Addressables3"></li>
+<li>点击任一资源，在 Inspector 面板最上方出现 Addressable 的勾选框，勾选即可标记；</li>
+<li>标记成功后：
+<ul>
+<li>当前的 Groups 中即可增加当前资源的相关信息；</li>
+<li>勾选框后方出现 String 类型的 Addressable 的唯一标识（也是加载地址）；
+<ol>
+<li>标识也可不唯一，Api提供了许多函数来引用这些资源，当然唯一性会让项目更容易保持组织性;
+<ul>
+<li>不唯一的例子：
+<ul>
+<li>如果您有 Asset 的变体，您可以为所有变体分配相同的地址，并使用标签来区分不同的变体：</li>
+<li>Asset1：地址：“plate_armor_rusty”，标签：“hd”</li>
+<li>Asset2：地址：“plate_armor_rusty”，标签：“sd”</li>
+<li>如果此时用：LoadAssetAsync 则置灰加载找到的第一个实例</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在脚本中可直接使用 String 标识来加载资源，而不必写路径代码，这样当路径发生变化时，无需重写代码；</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Inspector 文件夹资源标识：
+<ul>
+<li><img src="/Images/Addressables/Addressables4.png" alt="Addressables4"></li>
+<li>点击任一文件夹，在 Inspector 面板最上方出现 Addressable 的勾选框，勾选即可标记；</li>
+</ul>
+</li>
+<li>Addressables Group 标识：
+<ul>
+<li><img src="/Images/Addressables/Addressables5.png" alt="Addressables5"></li>
+<li>手动将资源或者文件夹拖进 Groups 窗口的 Default Local Group 栏目下即可标识</li>
+</ul>
+</li>
+<li>代码类型为 AssetReference 类型的引用标识：
+<ol>
+<li><img src="/Images/Addressables/Addressables6.png" alt="Addressables6"></li>
+<li>代码写 AssetReference 类型变量，并赋值后 Addressables 资源后，即可打上标识；</li>
+</ol>
+</li>
+</ol>
+<h1 id="加载标记为-addressables-的资源">加载标记为 Addressables 的资源</h1>
+<ol>
+<li>
+<p>使用 Addressables 资源地址加载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载资源地址</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">strAddress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载回调</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">strAddress</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">&#34;StrAddress is Null&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">LoadAssetAsync</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span><span class="n">strAddress</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">HandleCompleted</span><span class="p">(</span><span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;Asset for {strAddress} failed to load.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Instantiate</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Result</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>AssetReference 类型加载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载的资源引用</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">AssetReference</span> <span class="n">assetReference</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">assetReference</span><span class="p">.</span><span class="n">AssetGUID</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">&#34;AssetReference is Null&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AsyncOperationHandle</span> <span class="n">handle</span> <span class="p">=</span> <span class="n">assetReference</span><span class="p">.</span><span class="n">LoadAssetAsync</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">assetReference</span><span class="p">?.</span><span class="n">ReleaseAsset</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">HandleCompleted</span><span class="p">(</span><span class="n">AsyncOperationHandle</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;AssetReference {assetReference.RuntimeKey} failed to load.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Instantiate</span><span class="p">(</span><span class="n">assetReference</span><span class="p">.</span><span class="n">Asset</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>按照 Addressables 资源标签加载</p>
+<ul>
+<li>
+<p>打标签：Addressables Group 选择任一资源，在 Labels一栏中打入想打的标签名</p>
+</li>
+<li>
+<p>打资源包：执行 Build → New Build → Default Build Script  打出 Addressables 资源包</p>
+</li>
+<li>
+<p>运行代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载资源的Key列表</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">keys</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;()</span> <span class="p">{</span> <span class="s">&#34;Test&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载回调</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;&gt;</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="n">Count</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">&#34;StrAddress is Null&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">LoadAssetsAsync</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">keys</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">addressable</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">addressable</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Instantiate</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span><span class="n">addressable</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Addressables</span><span class="p">.</span><span class="n">MergeMode</span><span class="p">.</span><span class="n">Union</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="k">false</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">HandleCompleted</span><span class="p">(</span><span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;&gt;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;Asset key failed to load.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ol>
+<h1 id="加载和释放asset">加载和释放Asset</h1>
+<ul>
+<li>加载：
+<ol>
+<li>调用函数：<a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.19/api/UnityEngine.AddressableAssets.Addressables.LoadAsset.html">LoadAsset</a>（加载单个资源）、LoadAssetAsync（异步加载单个资源）、LoadAssets（加载多个资源）、LoadAssetsAsync（异步加载多个资源）</li>
+<li>调用说明：调用加载相关的函数，Addressables 会自动加载任何依赖资源。</li>
+</ol>
+</li>
+<li>释放：
+<ol>
+<li>调用函数：<a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.19/api/UnityEngine.AddressableAssets.Addressables.Release.html">Addressables.Release;</a></li>
+<li>调用说明：
+<ol>
+<li>当不再需要在运行时访问可寻址资源时，您必须需要释放它，否则会写在不干净；</li>
+<li>当系统卸载资产时，Addressables 会卸载其依赖项。除非资产仍在被其他资产使用。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>引用计数：
+<ol>
+<li>当加载一个Addressable时，系统会增加引用计数；当资产被释放时，系统会减少引用计数；</li>
+<li>当Addressable的引用计数返回到零时，它就可以被卸载了；</li>
+<li>为了避免“内存泄漏”，当您显式加载可寻址资源时，您还必须在使用完该资源后释放该资源；</li>
+</ol>
+</li>
+</ul>
+<h1 id="addressables-event-viewer">Addressables Event Viewer</h1>
+<ul>
+<li>
+<p>介绍：工具监视 Addressables 资源的内存管理。该窗口显示应用程序何时加载和卸载资源，并显示所有 Addressables 系统操作的引用计数；</p>
+</li>
+<li>
+<p>路径：Window → Asset Management → Addressables → Event Viewer</p>
+</li>
+<li>
+<p>开启：在使用工具前勾选：AddressableAssetSettings → Diagnostics → Send Profiler Events</p>
+<p><img src="/Images/Addressables/Addressables7.png" alt="Addressables7"></p>
+</li>
+<li>
+<p>条件：</p>
+<ul>
+<li>在 Groups 窗口内，不同的 Play Mode Script 选择，会对工具监视会有不同的生效；
+<ul>
+<li>Use Asset Database：对引用计数的监控不太准确；</li>
+<li>Simulate Groups：无法使用，不考虑资产之间的任何共享依赖关系；</li>
+<li>Use Existing Build：可在播放模式下的事件查看器中获取最准确的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<ol>
+<li>
+<p>使用 Event Viewer 查看界面中对资源的销毁、释放、加载的Addressables的分析情况，具体步骤：</p>
+<ol>
+<li>
+<p>初始UI界面上，仅有三个按钮，分别点击效果是：</p>
+<ol>
+<li>通过 Addressables 的标签加载预制体；</li>
+<li>使用 GameObject：Destroy：直接删除一个预制体</li>
+<li>使用  Addressables.Release : 释放全部资源</li>
+</ol>
+</li>
+<li>
+<p>根据三个按钮的操作分别查看 Event Viewer的显示面板；</p>
+</li>
+<li>
+<p>此次通过标签 “Test” 加载2个预制体，这2个预制体属于同一个Group 下；</p>
+<p><img src="/Images/Addressables/Addressables8.png" alt="Addressable8"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>C# 代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.AddressableAssets</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.ResourceManagement.AsyncOperations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">btnRelease</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">btnDestroy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">btnInstance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载资源的Key列表</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">keys</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;()</span> <span class="p">{</span> <span class="s">&#34;Test&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">goNewList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载回调</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;&gt;</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AddBtnListeners</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">go</span> <span class="k">in</span> <span class="n">goNewList</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">GameObject</span><span class="p">.</span><span class="n">Destroy</span><span class="p">(</span><span class="n">go</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">goNewList</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">handle</span><span class="p">.</span><span class="n">IsValid</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">AddBtnListeners</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 销毁资源</span>
+</span></span><span class="line"><span class="cl">        <span class="n">btnDestroy</span><span class="p">?.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">destroyIndex</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">GameObject</span><span class="p">.</span><span class="n">Destroy</span><span class="p">(</span><span class="n">goNewList</span><span class="p">[</span><span class="n">destroyIndex</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">goNewList</span><span class="p">.</span><span class="n">RemoveAt</span><span class="p">(</span><span class="n">destroyIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 释放资源</span>
+</span></span><span class="line"><span class="cl">        <span class="n">btnRelease</span><span class="p">?.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">-=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">OnDestroy</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载资源</span>
+</span></span><span class="line"><span class="cl">        <span class="n">btnInstance</span><span class="p">?.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="n">Count</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">&#34;StrAddress is Null&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">LoadAssetsAsync</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">keys</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">addressable</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">addressable</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="kt">var</span> <span class="n">goNew</span> <span class="p">=</span> <span class="n">Instantiate</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span><span class="n">addressable</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">goNewList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">goNew</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Addressables</span><span class="p">.</span><span class="n">MergeMode</span><span class="p">.</span><span class="n">Union</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="k">false</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">HandleCompleted</span><span class="p">(</span><span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;&gt;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;Asset key failed to load.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>演示开始：</p>
+<ol>
+<li>
+<p>因为模式使用的是：Use Existing Build，因此在运行游戏前，先 Build 脚本；</p>
+</li>
+<li>
+<p>运行前的UI界面 和 窗口</p>
+<p><img src="/Images/Addressables/Addressables9.png" alt="Addressable9"></p>
+</li>
+<li>
+<p>运行游戏查看窗口：</p>
+<ul>
+<li><img src="/Images/Addressables/Addressables10.png" alt="Addressable10"></li>
+<li>因为没有点击任何按钮，因此窗口只显示 FPS 和 Mono的数据</li>
+</ul>
+</li>
+<li>
+<p>点击加载资源按钮：</p>
+<ol>
+<li><img src="/Images/Addressables/Addressables11.png" alt="Addressable11"></li>
+<li>可以在界面上看到成功加载了2个预制体，并在Event Viewer 内看到2个预制体的加载信息和相关依赖信息；</li>
+</ol>
+</li>
+<li>
+<p>点击销毁资源1按钮：</p>
+<ol>
+<li><img src="/Images/Addressables/Addressables12.png" alt="Addressable12"></li>
+<li>因为执行了 Destroy 的函数，因此界面的有个预制体被删掉了，然而没有走 Addressables.Release 函数，因此 Event Viewer 中没有成功释放；</li>
+</ol>
+</li>
+<li>
+<p>点击释放资源按钮：</p>
+<ol>
+<li><img src="/Images/Addressables/Addressables13.png" alt="Addressable13"></li>
+<li>因为执行了 Addressables.Release 函数，可以看到 EventViewer窗口对这2个资产进行了释放，且因为同步执行了 Destroy 函数，因此界面上的预制体都销毁了；</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>结论：</p>
+<ol>
+<li>对于 Addressables 的资源管理，应在不需要使用的情况下，执行Addressables.Release 函数释放资源；</li>
+<li>对于 Event Viewer 窗口里，可以直观的看到哪些组的资源释放是否不干净的问题和相关组信息；</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="小内容记录">小内容记录</h1>
+<ol>
+<li>Asset address：标识可寻址资产的字符串 ID。您可以使用地址作为加载资产的密钥；</li>
+<li>addressables_content_state.bin：用于进行内容更新构建，该文件用来识别您更改了哪些资产。您必须为每个已发布的版本保留此文件的副本。如果没有该文件，您只能创建完整的内容版本，而不能创建更新（理解是：只能打整包，不能热更）</li>
+<li>Check for Content Update Restictions 内容更新构建
+<ol>
+<li>说明：
+<ul>
+<li>内容构建会生成内容目录、目录哈希和包含资产的 AssetBundles</li>
+<li>由于资产格式是特定于平台的，因此切换到每个平台前需要进行内容构建</li>
+</ul>
+</li>
+<li>操作：
+<ul>
+<li>Addressables Groups → Tools → Check for Content Update Restictions；</li>
+<li>会出现一个Win窗口，在这个创建下找到相对应平台文件夹下的 addressables_content_state.bin 文件；</li>
+<li>此时会出现更新预览窗口，会列出更新的变更记录，点击 Apply Changes 即可完成内容更新构建；</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Play Mode Script：
+<ol>
+<li>Use Asset Database：直接从资产数据库加载资产。如果您同时进行代码和资产更改，此选项通常会提供最快的迭代速度</li>
+<li>Simulate Groups：如果您正在组织和优化可寻址组本身，此选项会很有帮助。它提供了 Addressables 事件，无需在每次更改后重建完整的内容。</li>
+<li>Use Existing Build：从上次的内容构建中加载内容，如果您不更改/更新资产，则可以提供快速迭代周转；</li>
+</ol>
+</li>
+<li>Addressables 组的 Asser Bundle 里面的压缩方式对比
+<ol>
+<li>路径：Projecr → AddressableAssetsData → 相对应Group资产 → Content Packing &amp; Loading  → Asset Bundle Compress</li>
+<li>无压缩：加载速度很快、磁盘空间占用最大；</li>
+<li>LZ4压缩：加载速度适中、提供最中的包，通常用于本地内容。这是一种基于块的压缩，可以加载部分文件，而无需加载整个文件；</li>
+<li>LZMA压缩：加载速度很慢，提供最小的包，通常用于远程内容，但不适用于本地内容；</li>
+</ol>
+</li>
+</ol>
+<h1 id="问题记录">问题记录</h1>
+<ol>
+<li>在安装 Addressables 后运行游戏的时候，会出现如下截图的报错：
+<ul>
+<li><img src="/Images/Addressables/Addressables14.png" alt="Addressable14"></li>
+<li>原因是：
+<ol>
+<li>在 Addressables Groups → Play Mode Script → 使用的是 Use Existing Build模式</li>
+<li>处在这个模式下，需要先执行 Build 打出 Addressables 资源包，这样代码才能正确加载到资源</li>
+<li>Build方式：在 Addressables Groups → Build → New Build → Default Build Script</li>
+<li>打完后便可运行游戏了；</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>在更改资源后运行游戏的时候，发现游戏中的资源并没有发生改变：
+<ul>
+<li>原因是：
+<ol>
+<li>在 Addressables Groups → Play Mode Script → 使用的是 Use Existing Build模式</li>
+<li>处在这个模式，需要重新 Build 资源；（方式在问题1）</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="相关链接">相关链接</h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.19/manual/index.html">Addressables Doc</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.19/api/UnityEngine.AddressableAssets.Addressables.LoadAsset.html">Addressables API</a></li>
+<li><a href="https://learn.unity.com/course/get-started-with-addressables?uv=2022.3">Addressables Learn</a></li>
+<li><a href="https://www.codenong.com/cs106079732/">Addressables 本地模拟热更新</a></li>
+<li><a href="https://blog.csdn.net/linxinfa/article/details/122390621">【游戏开发探究】Addressables资源管理方式</a></li>
+<li><a href="https://www.cnblogs.com/thpGames/p/10348148.html">Addressables学习笔记1: 资源加载</a>
+<ul>
+<li>可点击下一篇，总共4篇</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-08-23 19:40:07 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23.08_addressable/">https://spirite12.github.io/post/23.08_addressable/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/23.07_uitoolkit/">
+            <span class="next-text nav-default">UIToolkit UI工具包</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
