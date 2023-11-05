@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Addressable CDN远程热更 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23.10_uos_cdn/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Addressable CDN远程热更" />
+<meta property="og:description" content="前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23.10_uos_cdn/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-10-05T19:40:08+08:00" />
+<meta property="article:modified_time" content="2023-10-05T19:40:08+08:00" />
+
+<meta itemprop="name" content="Addressable CDN远程热更">
+<meta itemprop="description" content="前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一"><meta itemprop="datePublished" content="2023-10-05T19:40:08+08:00" />
+<meta itemprop="dateModified" content="2023-10-05T19:40:08+08:00" />
+<meta itemprop="wordCount" content="1505">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Addressable CDN远程热更"/>
+<meta name="twitter:description" content="前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Addressable CDN远程热更</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-10-05 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#网站流程">网站流程</a></li>
+    <li><a href="#插件流程">插件流程</a></li>
+    <li><a href="#远程热更">远程热更</a></li>
+    <li><a href="#相关链接">相关链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）；</p>
+<p>UOS全称：Unity Online Services，是 Unity 提供的一站式游戏云服务工具；</p>
+<p>UOS CDN 是 Unity 官方推出的一个基于 CDN 的资源管理系统，并具备强大完善的版本管理功能；</p>
+<p>UOS CDN 目前对所有用户免费开放试用，试用期间享受500G免费额度；</p>
+<h1 id="网站流程">网站流程</h1>
+<ol>
+<li>
+<p>登陆网站：<a href="https://uos.u3dcloud.cn/">点我</a></p>
+</li>
+<li>
+<p>右上角登陆 Unity 账户</p>
+</li>
+<li>
+<p>创建项目并到 CDN 页面：</p>
+<ul>
+<li>
+<p>首次登陆会转跳到创建应用，或者点击我的应用</p>
+<ul>
+<li>文章内的流程为点击 我的应用</li>
+</ul>
+</li>
+<li>
+<p>点击 + 号，转跳到要启动 UOS 的项目</p>
+<p><img src="/Images/UOS_CDN/CDN1.png" alt="CDN1"></p>
+</li>
+<li>
+<p>点击 创建新的项目，输入项目名称后，点击创建并启用</p>
+<p><img src="/Images/UOS_CDN/CDN2.png" alt="CDN2"></p>
+</li>
+<li>
+<p>此时页面会转到到创建的这个项目内，点击 CDN 的免费试用按钮</p>
+<p><img src="/Images/UOS_CDN/CDN3.png" alt="CDN3"></p>
+</li>
+<li>
+<p>此时页面会跳转到创建的CDN的页面内</p>
+<p><img src="/Images/UOS_CDN/CDN4.png" alt="CDN4"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>此时，网站方面的操作可以暂停一段落，因为接下来可以用插件完成 Bucket 的相关创建，更新，版本发布等操作</p>
+</li>
+<li>
+<p>相关的 Buckets 的介绍：<a href="!%5BCDN3%5D(/Images/UOS_CDN/CDN3.png)">点我</a></p>
+</li>
+</ol>
+<h1 id="插件流程">插件流程</h1>
+<ol>
+<li>
+<p>打开 <a href="https://spirite12.github.io/post/23.09_Addressable/">Addressables 本地模拟热更</a> 内使用的工程；</p>
+<ul>
+<li>或者全新工程也可，如果用上篇文章用的工程，会减少一大堆的使用介绍；</li>
+</ul>
+</li>
+<li>
+<p>导入 Package 包：</p>
+<ul>
+<li>
+<p>下载 Package 包 <a href="https://uos-1314001764.cos.ap-shanghai.myqcloud.com/cdn/UnityPackage/cn.unity.uos.cdn-V1.0.3.unitypackage">点我</a>，<a href="https://uos.u3dcloud.cn/doc/cdn/package">使用手册</a></p>
+</li>
+<li>
+<p>点击下载好的 Package 包，并点击 Import 到 Unity 内</p>
+<p><img src="/Images/UOS_CDN/CDN5.png" alt="CDN5"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>打通 Unity 和 CDN 的连接：</p>
+<ul>
+<li>
+<p>点击菜单栏 Editor -&gt; Project Settings -&gt; Unity Online Service</p>
+<p><img src="/Images/UOS_CDN/CDN6.png" alt="CDN6"></p>
+</li>
+<li>
+<p>填入 AppId  和 AppSecret 值，获取方式则在 UOS 网站的设置里面</p>
+<p><img src="/Images/UOS_CDN/CDN7.png" alt="CDN7"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>查看插件界面，Window -&gt; Unity Online Service -&gt; CDN -&gt; Manager</p>
+<ul>
+<li>
+<p>当前界面的操作会在下方讲解</p>
+</li>
+<li>
+<p>如果在没有填写 AppId 和 AppSecret 之前进入当前界面，界面则会有提示，并无法使用</p>
+<p><img src="/Images/UOS_CDN/CDN8.png" alt="CDN8"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="远程热更">远程热更</h1>
+<ol>
+<li>
+<p>本次流程以 <a href="https://spirite12.github.io/post/23.09_Addressable/">Addressables 本地模拟热更</a> 文章内使用的工程为例</p>
+<ul>
+<li>前期准备（对上文的工程进行修改，新建工程则无需以下操作）：
+<ul>
+<li>Addressables Groups 窗口内，将 GoInstance 预制体从 ContentUpdate 组移动到 DefaultLocalGroup 组内，并删除 ContentUpdate 组</li>
+<li>点击 Project -&gt; DefaultLocalGroup，在 Content Update Restriction -&gt; Update Restriction 选择 -&gt; Can Change Post Release</li>
+<li>删除 Remote 的 BuildPath 文件夹路径下之前生成的热更文件；</li>
+<li>打开 Addressables Group -&gt; Build -&gt; New Build -&gt; Default Build Script 创建一个新的默认生成热更文件；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>创建 Bucket</p>
+<ul>
+<li>
+<p>打开 UOS CDN 插件窗口，点击 Bucket 的 New，输入名称和描述后，点击 Create</p>
+<ul>
+<li>此前在 CDN 网站上没有对 Bucket 进行了网站创建，所以此插件目录可以点击 New，如果在网站上有 Bucket 的话，则可以点击 Load 进行加载；</li>
+</ul>
+<p><img src="/Images/UOS_CDN/CDN9.png" alt="CDN9"></p>
+</li>
+<li>
+<p>此时打开网页上的 Bucket 目录下，则可以看到网站上创建了刚才输入的名称的 Bucket</p>
+<p><img src="/Images/UOS_CDN/CDN10.png" alt="CDN10"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>更改 Profiles 的 Remote 路径</p>
+<ul>
+<li>
+<p>在 UOS CDN 窗口点击 Set Addressable Profile按钮，这个按钮会帮助我们更改 Profiles 窗口中当前使用的 Remote 路径为 网站上相对应的路径</p>
+<p><img src="/Images/UOS_CDN/CDN11.png" alt="CDN11"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>上传远程资源</p>
+<ul>
+<li>
+<p>选择上传资源路径：</p>
+<ul>
+<li>
+<p>点击 Entry -&gt; Choose ，打开窗口后，选择相对应平台的文件夹（具体路径可以从设置文件内 Remote 的 Build Path里面查看）</p>
+<p><img src="/Images/UOS_CDN/CDN12.png" alt="CDN12"></p>
+</li>
+<li>
+<p>点击 Entry -&gt; Sync ，上传 Choose 选择文件夹内的资源，并等待上传成功；</p>
+<p><img src="/Images/UOS_CDN/CDN13.png" alt="CDN13"></p>
+</li>
+<li>
+<p>此时，打开 UOS 的 Bucket 页面，可以看到当前以及上传了资源了</p>
+<p><img src="/Images/UOS_CDN/CDN14.png" alt="CDN14"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>设置远程资源</p>
+<ul>
+<li>
+<p>目前远程服务端已经存在了我们的上传的热更资源，由于后续可能会上传多次需要更新的资源，接下来就是定义游戏启动的时候，应该更新的是哪个版本资源的内容了。</p>
+</li>
+<li>
+<p>生成资源版本管理：</p>
+<ul>
+<li>
+<p>点击 Release -&gt; New ,插件会帮忙生成一条 Release 版本资源，在网页上也会同步生成这条release的标识，此时游戏开启的时候，游戏则会以这条和游戏内的资源进行对比，来实现是否需要热更</p>
+<p><img src="/Images/UOS_CDN/CDN15.png" alt="CDN15"></p>
+<p><img src="/Images/UOS_CDN/CDN16.png" alt="CDN16"></p>
+</li>
+<li>
+<p>后续如果有新的热更资源的时候，再次点击 New，选择最新生成的序号，即可；</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>查看游戏是否接入</p>
+<ul>
+<li>
+<p>目前游戏已经接入远程服务端的连接了，又因为我们更改过 Addressable 的相关设置，因此重新打个 Pc 包查看游戏内的样式；</p>
+<p><img src="/Images/UOS_CDN/CDN17.png" alt="CDN17"></p>
+</li>
+<li>
+<p>正常显示与之前文章 <a href="https://spirite12.github.io/post/23.09_Addressable/">Addressables 本地模拟热更</a> 的最后截图内容一致；</p>
+</li>
+</ul>
+</li>
+<li>
+<p>远程热更预制件：</p>
+<ul>
+<li>
+<p>更改预制件：打开 GoInstance 预制体，并更改 Text 文本内容由原来：更新后文本， 改成：远程更新后文本。并保存预制件；</p>
+</li>
+<li>
+<p>更新热更资源：打开 Addressable Groups 窗口 -&gt; Build -&gt; Update a Previous Build -&gt; 打开窗口后，更新 Window 文件夹下的 addressables_content_state.bin 资源；</p>
+</li>
+<li>
+<p>上传更新资源：打开 UOS CDN 窗口 -&gt; Entry -&gt; Sync（上传当前更新的热更资源）-&gt; Release -&gt; New（发布一个新的release版本）</p>
+<p><img src="/Images/UOS_CDN/CDN18.png" alt="CDN18"></p>
+</li>
+<li>
+<p>查看页面是否出现新的release版本，成功出现，打开游戏查看游戏是否成功热更；</p>
+<p><img src="/Images/UOS_CDN/CDN19.png" alt="CDN19"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="相关链接">相关链接</h1>
+<ol>
+<li><a href="https://uos.u3dcloud.cn/">UOS</a></li>
+<li><a href="https://uos.u3dcloud.cn/product/cdn">UOS CDN</a></li>
+<li><a href="https://uos.u3dcloud.cn/doc/cdn">UOS CDN 文档</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-10-05 19:40:08 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23.10_uos_cdn/">https://spirite12.github.io/post/23.10_uos_cdn/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/23.09_addressable/">
+            <span class="next-text nav-default">Addressables 本地模拟热更</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

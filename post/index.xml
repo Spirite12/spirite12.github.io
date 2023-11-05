@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Wed, 23 Aug 2023 19:40:07 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Oct 2023 19:40:08 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Addressable CDN远程热更</title>
+      <link>https://spirite12.github.io/post/23.10_uos_cdn/</link>
+      <pubDate>Thu, 05 Oct 2023 19:40:08 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/23.10_uos_cdn/</guid>
+      <description>前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一</description>
+    </item>
+    
+    <item>
+      <title>Addressables 本地模拟热更</title>
+      <link>https://spirite12.github.io/post/23.09_addressable/</link>
+      <pubDate>Sat, 09 Sep 2023 19:40:08 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/23.09_addressable/</guid>
+      <description>前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 热更预制体</description>
+    </item>
+    
     <item>
       <title>Addressables 学习</title>
       <link>https://spirite12.github.io/post/23.08_addressable/</link>
