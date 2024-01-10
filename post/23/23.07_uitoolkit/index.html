@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>UIToolkit UI工具包 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Edi" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23/23.07_uitoolkit/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="UIToolkit UI工具包" />
+<meta property="og:description" content="前言 Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Edi" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23/23.07_uitoolkit/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-31T19:40:07+08:00" />
+<meta property="article:modified_time" content="2023-07-31T19:40:07+08:00" />
+
+<meta itemprop="name" content="UIToolkit UI工具包">
+<meta itemprop="description" content="前言 Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Edi"><meta itemprop="datePublished" content="2023-07-31T19:40:07+08:00" />
+<meta itemprop="dateModified" content="2023-07-31T19:40:07+08:00" />
+<meta itemprop="wordCount" content="2803">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="UIToolkit UI工具包"/>
+<meta name="twitter:description" content="前言 Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Edi"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">UIToolkit UI工具包</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-07-31 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#uibuilder"><strong>UIBuilder</strong></a></li>
+    <li><a href="#editorwindos"><strong>EditorWindos</strong></a></li>
+    <li><a href="#customcontrols"><strong>CustomControls</strong></a></li>
+    <li><a href="#stylesheets"><strong>StyleSheets</strong></a></li>
+    <li><a href="#debugger"><strong>Debugger</strong></a></li>
+    <li><a href="#inspectoreditor"><strong>InspectorEditor</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Editor窗口的UI界面开发中，原先开发脚本在UI美观上有一定的限制，或者说没有像UGUI那样的方便，而UI Toolkit则可以做到这一点，因此感觉在Editor环境下UIToolkit的使用度会更占据一些优势；<a href="https://docs.unity3d.com/cn/2020.2/Manual/UI-system-compare.html">官方对比文档</a></p>
+<h1 id="uibuilder"><strong>UIBuilder</strong></h1>
+<ol>
+<li>
+<p>路径：Window -&gt; UI Toolkit -&gt; UI Builder</p>
+</li>
+<li>
+<p>窗口介绍：</p>
+<ol>
+<li>StyleSheets：位置左上方，当前窗口是一个 uss 文件，文件的作用是存放多个样式，不同样式定义了不同的规则，当前样式会使与其匹配的元素进行统一的样式更改；</li>
+<li>Hierarchy：位置左方，当前窗口内的元素则是类似预制体内的Hierarchy窗口物体一样的结构；</li>
+<li>Library：位置左下方，组件库的意思，Standard 菜单栏下定义了官方的组件，而 Project 菜单栏下则是定义了开发者自定义的组件；</li>
+<li>Viewport：位置中间，UI可视窗口，类似预制体内的UI界面；</li>
+<li>Inspector：位置右方，当前物体的具体面板属性；</li>
+</ol>
+</li>
+<li>
+<p>小知识：</p>
+<ol>
+<li>双击 UIBuilder 菜单栏，会自动全屏当前窗口，再次双击便会还原；</li>
+<li>如果做 Editor开发，可以在 Library 窗口右上角三个点勾选Editor Extension Authoring，则会出现 Editor 专用的组件；</li>
+<li>#开头的物体名称，代表开发者对该物体进行改动过名称；</li>
+</ol>
+</li>
+<li>
+<p>拼凑一个界面：</p>
+<ol>
+<li>创建 uxml 文件，为了使得 UIBuilder 界面能够显示初始的样式（也就是创建个空预制体），在 Project 选择一个文件夹，右击 Create -&gt; UI Toolkit -&gt; UI Document ，则可以创建一个初始的 uxml 文件；</li>
+<li>双击当前新创建文件，则可以打开一个初始的界面；</li>
+<li>当前拼凑的方式和UGUI类似，易上手，因此直接给出截图，有些物体改过名称，可以根据前方图标来识别是用了什么组件；</li>
+</ol>
+<p><img src="/Images/UIToolkit/UIToolkit1.png" alt="UIToolkit1"></p>
+</li>
+</ol>
+<h1 id="editorwindos"><strong>EditorWindos</strong></h1>
+<ol>
+<li>
+<p>目的：使用Editor窗口打开 UIToolkit的窗口，并对当前内的一些属性进行 get/set 的操作；</p>
+</li>
+<li>
+<p>创建名为 UI Toolkit 的 Editor 窗口代码：</p>
+<p><img src="/Images/UIToolkit/UIToolkit2.png" alt="UIToolkit2"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">EditorWindows</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Tools/UIToolkit&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Open</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GetWindow</span><span class="p">&lt;</span><span class="n">EditorWindows</span><span class="p">&gt;(</span><span class="s">&#34;UIToolkit&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>当前 Editor 窗口加载 UIToolkit 内的窗口代码：</p>
+<p><img src="/Images/UIToolkit/UIToolkit3.png" alt="UIToolkit3"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UIElements</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">EditorWindows</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Tools/UIToolkit&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Open</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GetWindow</span><span class="p">&lt;</span><span class="n">EditorWindows</span><span class="p">&gt;(</span><span class="s">&#34;UIToolkit&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnEnable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">OnEnableInit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDisable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 向当前窗口移除图形视图</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rootVisualElement</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">visualElement</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnEnableInit</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载资源</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">assetVisual</span> <span class="p">=</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">LoadAssetAtPath</span><span class="p">&lt;</span><span class="n">VisualTreeAsset</span><span class="p">&gt;(</span><span class="s">&#34;Assets/UIDocument/Study.uxml&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建新的子节点</span>
+</span></span><span class="line"><span class="cl">        <span class="n">visualElement</span> <span class="p">=</span> <span class="n">assetVisual</span><span class="p">.</span><span class="n">CloneTree</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 向当前窗口添加图形视图</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rootVisualElement</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">visualElement</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">VisualElement</span> <span class="n">visualElement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>获取 UIToolkit 窗口内的属性并进行修改：<strong>（以下只显示新增代码）</strong></p>
+<p><img src="/Images/UIToolkit/UIToolkit4.png" alt="UIToolkit4"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">EditorWindows</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnEnable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RenderInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">RenderInfo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置文本</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">txtTitle</span> <span class="p">=</span> <span class="n">visualElement</span><span class="p">.</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Label</span><span class="p">&gt;(</span><span class="s">&#34;TxtTitle&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txtTitle</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;Toolkit&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txtTitle</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">unityTextAlign</span> <span class="p">=</span> <span class="n">TextAnchor</span><span class="p">.</span><span class="n">UpperCenter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置 toggle 勾选</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">toggle</span> <span class="p">=</span> <span class="n">visualElement</span><span class="p">.</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Toggle</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">toggle</span><span class="p">.</span><span class="k">value</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置按钮点击反馈</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">btnSelf</span> <span class="p">=</span> <span class="n">visualElement</span><span class="p">.</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="s">&#34;BtnSelf&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">btnSelf</span><span class="p">.</span><span class="n">clicked</span> <span class="p">+=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">&#34;你点击了按钮&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置 Slider 值变更</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">slider</span> <span class="p">=</span> <span class="n">visualElement</span><span class="p">.</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Slider</span><span class="p">&gt;(</span><span class="s">&#34;Slider&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slider</span><span class="p">.</span><span class="n">lowValue</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slider</span><span class="p">.</span><span class="n">highValue</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slider</span><span class="p">.</span><span class="k">value</span> <span class="p">=</span> <span class="m">0.5f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slider</span><span class="p">.</span><span class="n">label</span> <span class="p">=</span> <span class="s">&#34;Slider : &#34;</span> <span class="p">+</span> <span class="n">slider</span><span class="p">.</span><span class="k">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slider</span><span class="p">.</span><span class="n">RegisterValueChangedCallback</span><span class="p">((</span><span class="k">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">slider</span><span class="p">.</span><span class="n">label</span> <span class="p">=</span> <span class="s">&#34;Slider : &#34;</span> <span class="p">+</span> <span class="k">value</span><span class="p">.</span><span class="n">newValue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="customcontrols"><strong>CustomControls</strong></h1>
+<ol>
+<li>
+<p>简介：自定义组件，通俗的说类似于一些通用的预制体组件，减少开发人员在拼凑相似UI界面时的时间，可以从这个组件内直接拖拽到所需物体下便可使用；</p>
+</li>
+<li>
+<p>路径：UI Builder -&gt; Library -&gt; Project -&gt; Custom Controls</p>
+<p><img src="/Images/UIToolkit/UIToolkit5.png" alt="UIToolkit5"></p>
+</li>
+<li>
+<p>创建：</p>
+<ol>
+<li>
+<p>在 Hierarchy 面板上对想要创建成模板的物体，右击 Create Template ，此时打开一个 Win 窗口，并把当前文件命名后保存在 Resources 文件夹下（目的是为了能读取到当前资源）</p>
+</li>
+<li>
+<p>创建一个 C# 脚本，代码如下，当前脚本的作用则是加载这个新创的模板数据；（创建好后，在 CustomControls 目录下则会出现当前脚本）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UIElements</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TemplateUIDocument</span> <span class="p">:</span> <span class="n">VisualElement</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">TemplateContainer</span> <span class="n">tpContainer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义组件继承类</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">new</span> <span class="k">class</span> <span class="nc">UxmlFactory</span> <span class="p">:</span> <span class="n">UxmlFactory</span><span class="p">&lt;</span><span class="n">TemplateUIDocument</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">TemplateUIDocument</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载资源</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tpContainer</span> <span class="p">=</span> <span class="n">Resources</span><span class="p">.</span><span class="n">Load</span><span class="p">&lt;</span><span class="n">VisualTreeAsset</span><span class="p">&gt;(</span><span class="s">&#34;GoTemplate&#34;</span><span class="p">).</span><span class="n">Instantiate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 调整全撑开</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tpContainer</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">flexShrink</span> <span class="p">=</span> <span class="m">1.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hierarchy</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">tpContainer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>示例截图：</p>
+<p><img src="/Images/UIToolkit/UIToolkit6.png" alt="UIToolkit6"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>使用：直接按住当前自定义组件并拖进到 Hierarchy 目录的相对应文件夹下便可；</p>
+</li>
+</ol>
+<h1 id="stylesheets"><strong>StyleSheets</strong></h1>
+<ol>
+<li>
+<p>简介：样式表，定义了一系列的规则，使与其匹配的元素进行统一的样式更改；</p>
+</li>
+<li>
+<p>位置：UI Builder 的 左上角 Style Sheets，可新建 uss 文件或用已有 uss 文件；</p>
+</li>
+<li>
+<p>小知识：</p>
+<ul>
+<li>鼠标放在样式上， Viewport 中会高亮已经应用当前样式的区域；</li>
+</ul>
+</li>
+<li>
+<p>写法介绍：</p>
+<p><img src="/Images/UIToolkit/UIToolkit7.png" alt="UIToolkit7"></p>
+<ol>
+<li>ElementCSharpType：
+<ul>
+<li>可写范围： Library 下的所有控件名</li>
+<li>示例：Label ，调整参数 Text -&gt; SIze -&gt; 24 ，效果则是所有的Label的文本大小都变成24号；</li>
+</ul>
+</li>
+<li>#elementNameOrId：
+<ul>
+<li>可写范围：Hierarchy 下的所有物体 带 # 的物体名：</li>
+<li>示例：#TxtTitle，调整参数 Text -&gt; size -&gt; 24，效果则是名为#TxtTitle的文本大小都变成24号；</li>
+</ul>
+</li>
+<li>.styleClassName：
+<ul>
+<li>介绍：以“.”开头，后续跟上自定义字母，组成一个新的样式，并再该样式内定义需要更改的数据。当有元素应用了当前样式，则会采用当前样式的数据；</li>
+<li>可理解为：属性模板，引用当前模板的元素都使用当前模板类定义的数据；</li>
+<li>赠、删：在每个物体的 Style Sheet -&gt; Style Class List 中，可以手动新增当前 Uss 中定义了一系列的以 ”.“ 开头的样式；可在已添加样式的右边点击 X，达到删除当前样式的效果；</li>
+<li>实例：新建名为 .TextSize 样式，调整参数 Text -&gt; size -&gt; 24，然后将此样式直接拖进一个 Label内，效果则是可看到当前 Label 文本大小变成24号；</li>
+</ul>
+</li>
+<li>.parentClassName &gt; .directChildClassName
+<ul>
+<li>介绍：x &gt; y 格式，可理解为 x 为 一级选择项， y 为二级选择项，先查找可匹配的一级内容，再查看可匹配的二级内容；</li>
+<li>实例：.TextSize &gt; Button ，效果则是：使用了 .TextSize 样式的，Button 类型的文本大小变成24号；</li>
+</ul>
+</li>
+<li>.styleClassName : xxx
+<ul>
+<li>介绍：在 ：后面定义了一系列的用户行为，在用户触发这些行为的时候，则达到对应的效果</li>
+<li>API文档：<a href="https://docs.unity3d.com/2022.3/Documentation/Manual/UIE-USS-Selectors-Pseudo-Classes.html">pseudo-classes</a></li>
+<li>实例：写一个名为 Label：hover样式，调整参数 Text -&gt; size -&gt; 24，运行Editor窗口，效果是：当鼠标移动到 Label 样式标签上的时候，则会看到当前 Label 文本大小变成24号；</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="debugger"><strong>Debugger</strong></h1>
+<ol>
+<li>
+<p>简介：Debug 窗口，方便定位、查找问题所在，方便查看元素数据；</p>
+</li>
+<li>
+<p>打开路径：</p>
+<ol>
+<li>
+<p>菜单栏：Window -&gt; UI Toolkit -&gt; Debugger</p>
+</li>
+<li>
+<p>Editor窗口：右上角 三个点 -&gt; UI Toolkit Debugger</p>
+<p><img src="/Images/UIToolkit/UIToolkit8.png" alt="UIToolkit8"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>快捷键：Ctrl + F5</p>
+</li>
+<li>
+<p>功能介绍：</p>
+<ol>
+<li>
+<p>左下拉框：列出当前窗口的Item项；</p>
+</li>
+<li>
+<p>右参数框：列出当前所选项的详细参数，可对参数进行更改，达到本次有效的功能，方便查找并定位问题所在；</p>
+</li>
+<li>
+<p>Pick Element：显示当前的对应窗口的已激活节点的结构样式（灰色外框），当选中某个节点时候，则以绿色外框高亮；</p>
+<p><img src="/Images/UIToolkit/UIToolkit9.png" alt="UIToolkit9"></p>
+</li>
+<li>
+<p>Show Layout：在显示当前窗口中，鼠标移动到想查看的区域后，会自动显示当前区域的显示范围，Debuger窗口会自动选择当前节点，并列出对应参数；方便定位与查看相对应的数值；</p>
+<p><img src="/Images/UIToolkit/UIToolkit10.png" alt="UIToolkit10"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>对应文档：<a href="https://docs.unity3d.com/2022.3/Documentation/Manual/UIE-ui-debugger.html">API</a></p>
+</li>
+</ol>
+<h1 id="inspectoreditor"><strong>InspectorEditor</strong></h1>
+<ol>
+<li>
+<p>当前示例展示把UIToolKit绘制的UI显示在 Inspector面板上；</p>
+<p><img src="/Images/UIToolkit/UIToolkit11.png" alt="UIToolkit11"></p>
+</li>
+<li>
+<p>创建 C# 脚本；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>创建 当前脚本对应的 Editor 脚本；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UIElements</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">[CustomEditor(typeof(Test))]</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TestInspector</span> <span class="p">:</span> <span class="n">Editor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">override</span> <span class="n">VisualElement</span> <span class="n">CreateInspectorGUI</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">root</span> <span class="p">=</span> <span class="k">new</span> <span class="n">VisualElement</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载 uxml 资源并实例化到当前显示面板</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">visualTree</span> <span class="p">=</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">LoadAssetAtPath</span><span class="p">&lt;</span><span class="n">VisualTreeAsset</span><span class="p">&gt;(</span><span class="s">&#34;Assets/UIDocument/Study.uxml&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">visualTree</span><span class="p">.</span><span class="n">CloneTree</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>这时候在 Inspector 面板则可以看到当前的效果了；</p>
+</li>
+<li>
+<p>问题记录：Editor窗口上有代码的设置值的行为，当前 Inspector 面板上是没有的。原因是：设置代码写在了 EditorWindow下。更好的做法应该是写一个类，然后让这两个面板直接实例化此类，这样两边就都可以进行相对应的操作；</p>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li>Manual：<a href="https://docs.unity3d.com/2022.3/Documentation/Manual/UIElements.html">UI Tooltik</a></li>
+<li>Bilibili：<a href="https://www.bilibili.com/video/BV17b4y1W7mf">游戏开发加油站</a></li>
+<li>Bilibili：<a href="https://www.bilibili.com/video/BV1xe4y147Lg">阿严Gaming</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-07-31 19:40:07 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23/23.07_uitoolkit/">https://spirite12.github.io/post/23/23.07_uitoolkit/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/23/23.08_addressable/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Addressables 学习（一）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/23/23.06_graphview/">
+            <span class="next-text nav-default">GraphView 节点树</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -9,191 +9,191 @@
     <copyright>DC</copyright>
     <lastBuildDate>Sat, 25 Nov 2023 19:40:09 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Addressable 游戏在线热更</title>
-      <link>https://spirite12.github.io/post/23.11_addressable/</link>
+      <title>Addressable 游戏在线热更（四）</title>
+      <link>https://spirite12.github.io/post/23/23.11_addressable/</link>
       <pubDate>Sat, 25 Nov 2023 19:40:09 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.11_addressable/</guid>
+      <guid>https://spirite12.github.io/post/23/23.11_addressable/</guid>
       <description>工具准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 USO CDN 概述 本文实现的内容</description>
     </item>
     
     <item>
-      <title>Addressable CDN远程热更</title>
-      <link>https://spirite12.github.io/post/23.10_uos_cdn/</link>
+      <title>Addressable CDN远程热更（三）</title>
+      <link>https://spirite12.github.io/post/23/23.10_uos_cdn/</link>
       <pubDate>Thu, 05 Oct 2023 19:40:08 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.10_uos_cdn/</guid>
+      <guid>https://spirite12.github.io/post/23/23.10_uos_cdn/</guid>
       <description>前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一</description>
     </item>
     
     <item>
-      <title>Addressables 本地模拟热更</title>
-      <link>https://spirite12.github.io/post/23.09_addressable/</link>
+      <title>Addressables 本地模拟热更（二）</title>
+      <link>https://spirite12.github.io/post/23/23.09_addressable/</link>
       <pubDate>Sat, 09 Sep 2023 19:40:08 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.09_addressable/</guid>
-      <description>前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 热更预制体</description>
+      <guid>https://spirite12.github.io/post/23/23.09_addressable/</guid>
+      <description>前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 一、热更预</description>
     </item>
     
     <item>
-      <title>Addressables 学习</title>
-      <link>https://spirite12.github.io/post/23.08_addressable/</link>
+      <title>Addressables 学习（一）</title>
+      <link>https://spirite12.github.io/post/23/23.08_addressable/</link>
       <pubDate>Wed, 23 Aug 2023 19:40:07 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.08_addressable/</guid>
+      <guid>https://spirite12.github.io/post/23/23.08_addressable/</guid>
       <description>前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使</description>
     </item>
     
     <item>
       <title>UIToolkit UI工具包</title>
-      <link>https://spirite12.github.io/post/23.07_uitoolkit/</link>
+      <link>https://spirite12.github.io/post/23/23.07_uitoolkit/</link>
       <pubDate>Mon, 31 Jul 2023 19:40:07 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.07_uitoolkit/</guid>
+      <guid>https://spirite12.github.io/post/23/23.07_uitoolkit/</guid>
       <description>前言 Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Edi</description>
     </item>
     
     <item>
       <title>GraphView 节点树</title>
-      <link>https://spirite12.github.io/post/23.06_graphview/</link>
+      <link>https://spirite12.github.io/post/23/23.06_graphview/</link>
       <pubDate>Fri, 30 Jun 2023 19:40:06 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.06_graphview/</guid>
+      <guid>https://spirite12.github.io/post/23/23.06_graphview/</guid>
       <description>基础类 相关的API都在该命名空间下：UnityEditor.Experimental.GraphView GraphView：渲染显示图的主类</description>
     </item>
     
     <item>
       <title>ChatFilter 屏蔽字库</title>
-      <link>https://spirite12.github.io/post/23.05_chatfilter/</link>
+      <link>https://spirite12.github.io/post/23/23.05_chatfilter/</link>
       <pubDate>Tue, 30 May 2023 19:40:05 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.05_chatfilter/</guid>
+      <guid>https://spirite12.github.io/post/23/23.05_chatfilter/</guid>
       <description>前言 本文主要介绍屏蔽词过滤功能，主要应用在角色昵称命名和聊天内容上做提醒和过滤； 功能分析 需要有个屏蔽字库，里面存放着需要屏蔽的词汇； 代码需要</description>
     </item>
     
     <item>
       <title>Gitlab CI 接入</title>
-      <link>https://spirite12.github.io/post/23.04_gitlabci/</link>
+      <link>https://spirite12.github.io/post/23/23.04_gitlabci/</link>
       <pubDate>Sun, 30 Apr 2023 19:40:03 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.04_gitlabci/</guid>
+      <guid>https://spirite12.github.io/post/23/23.04_gitlabci/</guid>
       <description>前言 本文主要介绍 Gitlab CI 在项目中接入的流程 接入CI的缘由 项目使用的是 Gitlab 托管项目； 开发分支需要通过 Gitlab 的合并请求操作，并由上级领导审核才能进入主分支</description>
     </item>
     
     <item>
-      <title>Localization 本地化（下）</title>
-      <link>https://spirite12.github.io/post/23.03_localization2/</link>
+      <title>Localization 本地化（二）</title>
+      <link>https://spirite12.github.io/post/23/23.03_localization2/</link>
       <pubDate>Thu, 30 Mar 2023 19:40:03 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.03_localization2/</guid>
+      <guid>https://spirite12.github.io/post/23/23.03_localization2/</guid>
       <description>前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插</description>
     </item>
     
     <item>
-      <title>Localization 本地化（上）</title>
-      <link>https://spirite12.github.io/post/23.02_localization1/</link>
+      <title>Localization 本地化（一）</title>
+      <link>https://spirite12.github.io/post/23/23.02_localization1/</link>
       <pubDate>Tue, 28 Feb 2023 19:40:02 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.02_localization1/</guid>
-      <description>前言 本文主要介绍 Localization 、Lingguo 这两款插件对 Unity 多语言本地化的处理方式； 本地化模块方案 一、Localization 1.功能学习整理 Unity</description>
+      <guid>https://spirite12.github.io/post/23/23.02_localization1/</guid>
+      <description>前言 本文主要介绍 Localization 、Lingguo 这两款插件对 Unity 多语言本地化的处理方式； 本地化模块方案 一、Localization 功能学习整理 Unity所需</description>
     </item>
     
     <item>
       <title>UI 框架</title>
-      <link>https://spirite12.github.io/post/23.01_uimgr/</link>
+      <link>https://spirite12.github.io/post/23/23.01_uimgr/</link>
       <pubDate>Mon, 30 Jan 2023 19:40:01 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.01_uimgr/</guid>
+      <guid>https://spirite12.github.io/post/23/23.01_uimgr/</guid>
       <description>前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上</description>
     </item>
     
     <item>
       <title>Rotate 旋转知识</title>
-      <link>https://spirite12.github.io/post/22.12_rotate/</link>
+      <link>https://spirite12.github.io/post/22/22.12_rotate/</link>
       <pubDate>Tue, 13 Dec 2022 19:40:06 +1000</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.12_rotate/</guid>
+      <guid>https://spirite12.github.io/post/22/22.12_rotate/</guid>
       <description>前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后</description>
     </item>
     
     <item>
       <title>Animation 优化</title>
-      <link>https://spirite12.github.io/post/22.11_animation/</link>
+      <link>https://spirite12.github.io/post/22/22.11_animation/</link>
       <pubDate>Tue, 15 Nov 2022 19:40:06 +0900</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.11_animation/</guid>
+      <guid>https://spirite12.github.io/post/22/22.11_animation/</guid>
       <description>环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人</description>
     </item>
     
     <item>
       <title>Profiler 性能分析工具</title>
-      <link>https://spirite12.github.io/post/22.10_profiler/</link>
+      <link>https://spirite12.github.io/post/22/22.10_profiler/</link>
       <pubDate>Mon, 24 Oct 2022 19:40:06 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.10_profiler/</guid>
+      <guid>https://spirite12.github.io/post/22/22.10_profiler/</guid>
       <description>环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 自定义性能分析器 在默认的情况下，Profiler并无法直接的对开发人员的代码进行分析。比如遇到：在 Main.cs 的 Start 函数中，有音效管</description>
     </item>
     
     <item>
       <title>EmmyLua 插件</title>
-      <link>https://spirite12.github.io/post/22.10_emmylua/</link>
+      <link>https://spirite12.github.io/post/22/22.10_emmylua/</link>
       <pubDate>Tue, 04 Oct 2022 19:40:05 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.10_emmylua/</guid>
+      <guid>https://spirite12.github.io/post/22/22.10_emmylua/</guid>
       <description>前言 由于 Lua 是弱类型语言，在某个数据内所持有数据内容并不能像强类型语言（例：C#）在Idea中明示出来。导致在开发过程中，多成员在使用同一份数</description>
     </item>
     
     <item>
       <title>Font 自定义字体</title>
-      <link>https://spirite12.github.io/post/22.09_fontcustom/</link>
+      <link>https://spirite12.github.io/post/22/22.09_fontcustom/</link>
       <pubDate>Mon, 12 Sep 2022 19:40:04 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.09_fontcustom/</guid>
+      <guid>https://spirite12.github.io/post/22/22.09_fontcustom/</guid>
       <description>前言 在游戏开发阶段，项目中难免会用到一些自定义的字体。这些字体大部分会用在数字，字母以及相关字符的显示上，而显示的样式则由美术决定的，对此则</description>
     </item>
     
     <item>
       <title>Cache 本地化存档</title>
-      <link>https://spirite12.github.io/post/22.08_cache/</link>
+      <link>https://spirite12.github.io/post/22/22.08_cache/</link>
       <pubDate>Mon, 22 Aug 2022 21:40:03 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.08_cache/</guid>
+      <guid>https://spirite12.github.io/post/22/22.08_cache/</guid>
       <description>前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类</description>
     </item>
     
     <item>
       <title>LuaFormat 代码格式化工具</title>
-      <link>https://spirite12.github.io/post/22.08_luaformat/</link>
+      <link>https://spirite12.github.io/post/22/22.08_luaformat/</link>
       <pubDate>Tue, 02 Aug 2022 21:40:02 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.08_luaformat/</guid>
+      <guid>https://spirite12.github.io/post/22/22.08_luaformat/</guid>
       <description>概述 LuaFormatter 是一款 Lua 脚本的代码格式化脚本工具，支持命令行执行，支持可配置项； 执行效果可参考本文中 Git 提交触发代码格式化 目录下的最后一张截图； 支持的I</description>
     </item>
     
     <item>
       <title>LuaCheck 代码检测工具</title>
-      <link>https://spirite12.github.io/post/22.07_luacheck/</link>
+      <link>https://spirite12.github.io/post/22/22.07_luacheck/</link>
       <pubDate>Tue, 12 Jul 2022 21:40:01 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.07_luacheck/</guid>
+      <guid>https://spirite12.github.io/post/22/22.07_luacheck/</guid>
       <description>概述 LuaCheck 是一款静态代码检测工具，类似于 VisualStudio IDE 中检测C#脚本语言错误； 可用于检测，不限于： 使用未定义的全局/局部变量； 定义却未使用的全局/局部变量</description>
     </item>
     
     <item>
       <title>游戏 Demo</title>
-      <link>https://spirite12.github.io/post/22.06_gamedemo/</link>
+      <link>https://spirite12.github.io/post/22/22.06_gamedemo/</link>
       <pubDate>Tue, 28 Jun 2022 21:43:13 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.06_gamedemo/</guid>
+      <guid>https://spirite12.github.io/post/22/22.06_gamedemo/</guid>
       <description>前言 记录个人目前所开发的游戏 Demo IcecreamBOOM 时间：2022 1.22 ~ 1.23 人员：策划x1 、美术x1 、动效x1 、程序x1 前言：同事邀请的48小时开发，那时的想法是工</description>
     </item>
     
     <item>
       <title>HelloWorld</title>
-      <link>https://spirite12.github.io/post/22.06_helloworld/</link>
+      <link>https://spirite12.github.io/post/22/22.06_helloworld/</link>
       <pubDate>Wed, 22 Jun 2022 23:18:06 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.06_helloworld/</guid>
+      <guid>https://spirite12.github.io/post/22/22.06_helloworld/</guid>
       <description>HelloWorld</description>
     </item>
     

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Frame Work on DC Blog</title>
+    <link>https://spirite12.github.io/tags/frame-work/</link>
+    <description>Recent content in Frame Work on DC Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>DC</copyright>
+    <lastBuildDate>Mon, 30 Jan 2023 19:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/frame-work/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UI 框架</title>
+      <link>https://spirite12.github.io/post/23/23.01_uimgr/</link>
+      <pubDate>Mon, 30 Jan 2023 19:40:01 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/23/23.01_uimgr/</guid>
+      <description>前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上</description>
+    </item>
+    
+  </channel>
+</rss>

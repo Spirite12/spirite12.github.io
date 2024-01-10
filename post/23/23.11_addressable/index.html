@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Addressable 游戏在线热更（四） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="工具准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 USO CDN 概述 本文实现的内容" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23/23.11_addressable/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Addressable 游戏在线热更（四）" />
+<meta property="og:description" content="工具准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 USO CDN 概述 本文实现的内容" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23/23.11_addressable/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-11-25T19:40:09+08:00" />
+<meta property="article:modified_time" content="2023-11-25T19:40:09+08:00" />
+
+<meta itemprop="name" content="Addressable 游戏在线热更（四）">
+<meta itemprop="description" content="工具准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 USO CDN 概述 本文实现的内容"><meta itemprop="datePublished" content="2023-11-25T19:40:09+08:00" />
+<meta itemprop="dateModified" content="2023-11-25T19:40:09+08:00" />
+<meta itemprop="wordCount" content="1641">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Addressable 游戏在线热更（四）"/>
+<meta name="twitter:description" content="工具准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 USO CDN 概述 本文实现的内容"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Addressable 游戏在线热更（四）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-11-25 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#工具准备"><strong>工具准备</strong></a></li>
+    <li><a href="#概述"><strong>概述</strong></a></li>
+    <li><a href="#前期准备"><strong>前期准备</strong></a>
+      <ul>
+        <li><a href="#工程">工程</a></li>
+        <li><a href="#预制件">预制件</a></li>
+        <li><a href="#脚本">脚本</a></li>
+        <li><a href="#addressable">Addressable</a></li>
+        <li><a href="#调试">调试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="工具准备"><strong>工具准备</strong></h1>
+<p>使用的工具版本列表：</p>
+<ul>
+<li>Unity：Unity 2021.3.6f1c1</li>
+<li>IDE：Visual Studio Community 2019</li>
+<li>Addressables：1.19.19</li>
+<li>USO CDN</li>
+</ul>
+<h1 id="概述"><strong>概述</strong></h1>
+<p>本文实现的内容有：</p>
+<ol>
+<li>
+<p>游戏内使用 <a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.19/manual/index.html">Addressables</a> 作为AB资源管理；</p>
+</li>
+<li>
+<p>游戏内接入 <a href="https://uos.u3dcloud.cn/">UOS CDN</a> 作为远程服务资源热更；</p>
+</li>
+<li>
+<p>初始包内只有启动预制件，玩家在游戏内初次游玩不同的关卡，需向远端下载资源才可进入关卡游玩；</p>
+</li>
+<li>
+<p>远端下载的资源可下载、可使用、可删除；</p>
+</li>
+<li>
+<p>Gif 演示如下：</p>
+<p><img src="/Images/Adressable_23.11/Adressable1.gif" alt="Adressable1"></p>
+<ul>
+<li>演示顺序说明：
+<ul>
+<li>演示1：打开游戏，此时关卡1与关卡2的资源处在远端并未下载；</li>
+<li>演示2：点击关卡1，进行远端资源下载，并在下载成功后，打开关卡1的预制件；</li>
+<li>演示3：回退主界面，重复点击关卡1的，因之前关卡1资源已经下载，因此直接打开关卡1；</li>
+<li>演示4：回退主界面，点击关卡1旁边的X按钮，删除关卡1的本地资源。再次点击关卡1，此时需要重新下载远端资源后才能打开关卡1；</li>
+<li>演示5：回退主界面，点击关卡2，因为关卡1与关卡2并不是同一远端资源，因此需要远端资源后才能打开关卡2；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="前期准备"><strong>前期准备</strong></h1>
+<h2 id="工程">工程</h2>
+<ol>
+<li>
+<p>Project 目录结构：</p>
+<p><img src="/Images/Adressable_23.11/Adressable2.png" alt="Adressable2"></p>
+</li>
+<li>
+<p>Hierarchy 结构：</p>
+<p><img src="/Images/Adressable_23.11/Adressable5.png" alt="Adressable5"></p>
+</li>
+</ol>
+<h2 id="预制件">预制件</h2>
+<ol>
+<li>
+<p>Level1 与 Level2 预制件结构：</p>
+<ul>
+<li>2个预制件的区别只是 Text 组件上的文本不一致；</li>
+</ul>
+<p><img src="/Images/Adressable_23.11/Adressable3.png" alt="Adressable3"></p>
+</li>
+<li>
+<p>SelectLevel 预制件结构：</p>
+<p><img src="/Images/Adressable_23.11/Adressable4.png" alt="Adressable4"></p>
+</li>
+</ol>
+<h2 id="脚本">脚本</h2>
+<ol>
+<li>
+<p>Main.cs 直接挂在在 Hierarchy 面板的 canvas 上；并赋值 strAddressLevel 变量的值为 SelectLevel 的 Addressables 的组地址；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.AddressableAssets</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.ResourceManagement.AsyncOperations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Main</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 热更地址</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 选择关卡地址</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">strAddressLevel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载回调</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartLoad</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 开始加载游戏界面</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">StartLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">LoadAssetAsync</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span><span class="n">strAddressLevel</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">HandleCompleted</span><span class="p">(</span><span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Instantiate</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Result</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>ExitLevel.cs : 挂在 Level1 与 Level2 的根物体上，并赋值 BtnClose ；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">ExitLevel</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">BtnClose</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BtnClose</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(</span><span class="n">OnClickBtnClose</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnClickBtnClose</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GameObject</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="s">&#34;SelectLevel(Clone)&#34;</span><span class="p">).</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">SelectLevel</span><span class="p">&gt;().</span><span class="n">ReleaseHandleInStance</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Destroy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>SelectLevel.cs：挂在 SelectLevel 的根物体上，并赋值相对应变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.AddressableAssets</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.ResourceManagement.AsyncOperations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SelectLevel</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">enum</span> <span class="n">EnumLevel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Level1</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Level2</span> <span class="p">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">BtnLevel1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">BtnLevel2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">BtnDelete1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">BtnDelete2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">GameObject</span> <span class="n">GoProgressInfo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Text</span> <span class="n">TxtSize</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Text</span> <span class="n">TxtProgress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Slider</span> <span class="n">SldProgress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">handleInstance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AddListeners</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DownLoadProgressInfo</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">RenderBtnInfo</span><span class="p">(</span><span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">RenderBtnInfo</span><span class="p">(</span><span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">AddListeners</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BtnLevel1</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">OnClickBtnLevel</span><span class="p">(</span><span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level1</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BtnLevel2</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">OnClickBtnLevel</span><span class="p">(</span><span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level2</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BtnDelete1</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">OnClickBtnDelete</span><span class="p">(</span><span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level1</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BtnDelete2</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">OnClickBtnDelete</span><span class="p">(</span><span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level2</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp">#region Addressable 函数</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 释放实例化的资源</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">ReleaseHandleInStance</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handleInstance</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 点击了关卡按钮</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnClickBtnLevel</span><span class="p">(</span><span class="n">EnumLevel</span> <span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">DownloadLevelCache</span><span class="p">(</span><span class="n">enumLevel</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 清除下载缓存</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnClickBtnDelete</span><span class="p">(</span><span class="n">EnumLevel</span> <span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">key</span> <span class="p">=</span> <span class="n">GetKeyByEnumLevel</span><span class="p">(</span><span class="n">enumLevel</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">ClearDependencyCacheAsync</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">RenderBtnInfo</span><span class="p">(</span><span class="n">enumLevel</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 下载关卡缓存</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">IEnumerator</span> <span class="n">DownloadLevelCache</span><span class="p">(</span><span class="n">EnumLevel</span> <span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">key</span> <span class="p">=</span> <span class="n">GetKeyByEnumLevel</span><span class="p">(</span><span class="n">enumLevel</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">handleDown</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">GetDownloadSizeAsync</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="k">return</span> <span class="n">handleDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SetDownLoadSize</span><span class="p">(</span><span class="n">handleDown</span><span class="p">.</span><span class="n">Result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">handleDown</span><span class="p">.</span><span class="n">Result</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">DownLoadProgressInfo</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="n">WaitForSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">DownloadDependenciesAsync</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(!</span><span class="n">handle</span><span class="p">.</span><span class="n">IsDone</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="kt">var</span> <span class="n">status</span> <span class="p">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">GetDownloadStatus</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">           <span class="kt">float</span> <span class="n">progress</span> <span class="p">=</span> <span class="n">status</span><span class="p">.</span><span class="n">Percent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">           <span class="k">if</span> <span class="p">(</span><span class="n">progress</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">               <span class="n">DownLoadProgressInfo</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="n">progress</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">           <span class="p">}</span>
+</span></span><span class="line"><span class="cl">           <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="k">return</span> <span class="n">handle</span><span class="p">.</span><span class="n">IsDone</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DownLoadProgressInfo</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handleInstance</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">InstantiateAsync</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">parent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handleInstance</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">RenderBtnInfo</span><span class="p">(</span><span class="n">enumLevel</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">string</span> <span class="n">GetKeyByEnumLevel</span><span class="p">(</span><span class="n">EnumLevel</span> <span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">str</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="p">(</span><span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">str</span> <span class="p">=</span> <span class="s">&#34;Assets/Prefabs/Level/Level1.prefab&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">str</span> <span class="p">=</span> <span class="s">&#34;Assets/Prefabs/Level/Level2.prefab&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp">#region UI 函数</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 渲染按钮的下载状态</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">IEnumerator</span> <span class="n">RenderBtnInfo</span><span class="p">(</span><span class="n">EnumLevel</span> <span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">key</span> <span class="p">=</span> <span class="n">GetKeyByEnumLevel</span><span class="p">(</span><span class="n">enumLevel</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">handleDown</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">GetDownloadSizeAsync</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="k">return</span> <span class="n">handleDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">hasDown</span> <span class="p">=</span> <span class="n">handleDown</span><span class="p">.</span><span class="n">Result</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="p">(</span><span class="n">enumLevel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">BtnDelete1</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">SetActive</span><span class="p">(</span><span class="n">hasDown</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="n">EnumLevel</span><span class="p">.</span><span class="n">Level2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">BtnDelete2</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">SetActive</span><span class="p">(</span><span class="n">hasDown</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handleDown</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 渲染下载信息</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">DownLoadProgressInfo</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isShow</span><span class="p">,</span> <span class="kt">float</span> <span class="n">progress</span> <span class="p">=</span> <span class="m">0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GoProgressInfo</span><span class="p">.</span><span class="n">SetActive</span><span class="p">(</span><span class="n">isShow</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">isShow</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TxtProgress</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">progress</span> <span class="p">*</span> <span class="m">100</span> <span class="p">+</span> <span class="s">&#34;%&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SldProgress</span><span class="p">.</span><span class="k">value</span> <span class="p">=</span> <span class="n">progress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 设置下载大小</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">SetDownLoadSize</span><span class="p">(</span><span class="kt">long</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TxtSize</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;远程下载：&#34;</span> <span class="p">+</span> <span class="n">ByteConversion</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">string</span> <span class="n">ByteConversion</span><span class="p">(</span><span class="kt">double</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">k</span> <span class="p">=</span> <span class="m">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">m</span> <span class="p">=</span> <span class="n">k</span> <span class="p">*</span> <span class="m">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">g</span> <span class="p">=</span> <span class="n">m</span> <span class="p">*</span> <span class="m">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">Round</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="p">+</span> <span class="s">&#34;B&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">Round</span><span class="p">(</span><span class="n">length</span> <span class="p">/</span> <span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="m">0</span><span class="p">)</span> <span class="p">+</span> <span class="s">&#34;KB&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="p">&lt;</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">Round</span><span class="p">(</span><span class="n">length</span> <span class="p">/</span> <span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="s">&#34;MB&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">Round</span><span class="p">(</span><span class="n">length</span> <span class="p">/</span> <span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="s">&#34;GB&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="addressable">Addressable</h2>
+<ol>
+<li><a href="https://spirite12.github.io/post/23.09_addressable/">Addressables</a> 设置：
+<ul>
+<li>（可参考上面文章链接，以下为简化步骤）</li>
+<li>初始化创建：
+<ul>
+<li>清空创建：Addressables Groups -&gt; Build -&gt; Clean Build -&gt; All</li>
+<li>新增创角：Addressables Groups -&gt; Build -&gt; New Build -&gt; Default Build Script</li>
+</ul>
+</li>
+<li>划分远程与本地组：
+<ul>
+<li>将 Level 相关的预制件放在远程组，将 启动预制（SelectLevel） 相关的预制件放在本地组。这样做的目的是：只更新远程组，本地组为最小启动包；</li>
+<li><img src="/Images/Adressable_23.11/Adressable6.png" alt="Adressable6"></li>
+</ul>
+</li>
+<li>真实模拟远程包设置：
+<ul>
+<li>Addressables Groups -&gt; PlayModeScript -&gt; UseExistingBuild</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://spirite12.github.io/post/23.10_uos_cdn/">USO CDN</a> 设置：
+<ul>
+<li>按照上面文章链接操作一遍便可</li>
+</ul>
+</li>
+</ol>
+<h2 id="调试">调试</h2>
+<ol>
+<li>打开引擎运行游戏，即可看到效果；</li>
+<li>原理为：
+<ul>
+<li>点击关卡按钮的时候；</li>
+<li>Addressables.GetDownloadSizeAsync(）获取需要下载的大小；</li>
+<li>Addressables.DownloadDependenciesAsync() 判断是否下载成功，是则进入关卡，否则进入远端下载流程；</li>
+<li>下载成功后，会把远端的下载资源存在本地；</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-11-25 19:40:09 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23/23.11_addressable/">https://spirite12.github.io/post/23/23.11_addressable/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/23/23.10_uos_cdn/">
+            <span class="next-text nav-default">Addressable CDN远程热更（三）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

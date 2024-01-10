@@ -10,28 +10,28 @@
     <lastBuildDate>Tue, 30 May 2023 19:40:05 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ChatFilter 屏蔽字库</title>
-      <link>https://spirite12.github.io/post/23.05_chatfilter/</link>
+      <link>https://spirite12.github.io/post/23/23.05_chatfilter/</link>
       <pubDate>Tue, 30 May 2023 19:40:05 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.05_chatfilter/</guid>
+      <guid>https://spirite12.github.io/post/23/23.05_chatfilter/</guid>
       <description>前言 本文主要介绍屏蔽词过滤功能，主要应用在角色昵称命名和聊天内容上做提醒和过滤； 功能分析 需要有个屏蔽字库，里面存放着需要屏蔽的词汇； 代码需要</description>
     </item>
     
     <item>
       <title>UI 框架</title>
-      <link>https://spirite12.github.io/post/23.01_uimgr/</link>
+      <link>https://spirite12.github.io/post/23/23.01_uimgr/</link>
       <pubDate>Mon, 30 Jan 2023 19:40:01 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.01_uimgr/</guid>
+      <guid>https://spirite12.github.io/post/23/23.01_uimgr/</guid>
       <description>前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上</description>
     </item>
     
     <item>
       <title>Cache 本地化存档</title>
-      <link>https://spirite12.github.io/post/22.08_cache/</link>
+      <link>https://spirite12.github.io/post/22/22.08_cache/</link>
       <pubDate>Mon, 22 Aug 2022 21:40:03 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.08_cache/</guid>
+      <guid>https://spirite12.github.io/post/22/22.08_cache/</guid>
       <description>前言 Unity提供了一套的本地化保存的类 PlayerPrefs，提供了 Int，Float，String 类型的支持； 对于基础开发来说，这三个类</description>
     </item>
     

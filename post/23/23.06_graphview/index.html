@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GraphView 节点树 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="基础类 相关的API都在该命名空间下：UnityEditor.Experimental.GraphView GraphView：渲染显示图的主类" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23/23.06_graphview/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="GraphView 节点树" />
+<meta property="og:description" content="基础类 相关的API都在该命名空间下：UnityEditor.Experimental.GraphView GraphView：渲染显示图的主类" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23/23.06_graphview/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-30T19:40:06+08:00" />
+<meta property="article:modified_time" content="2023-06-30T19:40:06+08:00" />
+
+<meta itemprop="name" content="GraphView 节点树">
+<meta itemprop="description" content="基础类 相关的API都在该命名空间下：UnityEditor.Experimental.GraphView GraphView：渲染显示图的主类"><meta itemprop="datePublished" content="2023-06-30T19:40:06+08:00" />
+<meta itemprop="dateModified" content="2023-06-30T19:40:06+08:00" />
+<meta itemprop="wordCount" content="1668">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GraphView 节点树"/>
+<meta name="twitter:description" content="基础类 相关的API都在该命名空间下：UnityEditor.Experimental.GraphView GraphView：渲染显示图的主类"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">GraphView 节点树</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-06-30 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础类"><strong>基础类</strong></a></li>
+    <li><a href="#功能分析"><strong>功能分析</strong></a>
+      <ul>
+        <li><a href="#editorwindow">EditorWindow</a></li>
+        <li><a href="#graphview">GraphView</a></li>
+        <li><a href="#节点">节点</a></li>
+        <li><a href="#输入输出端口">输入、输出端口</a></li>
+        <li><a href="#端口连接线">端口连接线</a></li>
+        <li><a href="#小地图">小地图</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他功能"><strong>其他功能</strong></a></li>
+    <li><a href="#参考链接"><strong>参考链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="基础类"><strong>基础类</strong></h1>
+<p><img src="/Images/GraphView/GraphView1.png" alt="GraphView1"></p>
+<ul>
+<li>相关的API都在该命名空间下：<code>UnityEditor.Experimental.GraphView</code></li>
+<li>GraphView：渲染显示图的主类；</li>
+<li>Node：一个节点；</li>
+<li>Port：输入端口与输出端口；</li>
+<li>Edge：端口与端口之间连接的线；</li>
+<li>MiniMap：小地图，显示当前屏幕与整体节点位置信息；</li>
+</ul>
+<h1 id="功能分析"><strong>功能分析</strong></h1>
+<h2 id="editorwindow">EditorWindow</h2>
+<p>创建编辑器窗口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphEditorTest</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Tools/GraphView&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Open</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GetWindow</span><span class="p">&lt;</span><span class="n">GraphEditorTest</span><span class="p">&gt;(</span><span class="s">&#34;GraphView&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实现效果</p>
+<p><img src="/Images/GraphView/GraphView2.png" alt="GraphView2"></p>
+<h2 id="graphview">GraphView</h2>
+<p><strong>创建 GraphView</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphViewTest</span> <span class="p">:</span> <span class="n">GraphView</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在激活当前编辑器窗口（OnEnable）与隐藏当前编辑器窗口（OnDisable）的时候添加 GraphView 到编辑器窗口下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphEditorTest</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Tools/GraphView&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Open</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GetWindow</span><span class="p">&lt;</span><span class="n">GraphEditorTest</span><span class="p">&gt;(</span><span class="s">&#34;GraphView&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnEnable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">graphView</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GraphViewTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span> <span class="p">=</span> <span class="s">&#34;GraphViewClass&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 让graphView铺满整个Editor窗口</span>
+</span></span><span class="line"><span class="cl">        <span class="n">graphView</span><span class="p">.</span><span class="n">StretchToParentSize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 向当前窗口添加图形视图</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rootVisualElement</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">graphView</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDisable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 向当前窗口移除图形视图</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rootVisualElement</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">graphView</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">GraphView</span> <span class="n">graphView</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对 GraphView 添加一些通用的功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphViewTest</span> <span class="p">:</span> <span class="n">GraphView</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">GraphViewTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InitGraphViewInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 初始化信息</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">InitGraphViewInfo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 允许对Graph进行Zoom in/out（效果是：可放大放小视野）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SetupZoom</span><span class="p">(</span><span class="n">ContentZoomer</span><span class="p">.</span><span class="n">DefaultMinScale</span><span class="p">,</span> <span class="n">ContentZoomer</span><span class="p">.</span><span class="n">DefaultMaxScale</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 允许拖拽Content（效果是：可上下左右拖界面）</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">AddManipulator</span><span class="p">(</span><span class="k">new</span> <span class="n">ContentDragger</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 允许选择当前节点的内容（效果是：可选物体）</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">AddManipulator</span><span class="p">(</span><span class="k">new</span> <span class="n">SelectionDragger</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// GraphView允许进行框选（效果是：多选物体）</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">AddManipulator</span><span class="p">(</span><span class="k">new</span> <span class="n">RectangleSelector</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>显示框选的效果图</p>
+<p><img src="/Images/GraphView/GraphView3.png" alt="GraphView3"></p>
+<h2 id="节点">节点</h2>
+<p>创建一个节点类和所需数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">NodeTest</span> <span class="p">:</span> <span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 目前只输出当前节点值</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="k">value</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>让窗口内显示一个节点出来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphViewTest</span> <span class="p">:</span> <span class="n">GraphView</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">GraphViewTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InitGraphViewInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CreateNodeInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 创建一个节点</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">CreateNodeInfo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="k">value</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NodeTest</span> <span class="n">node</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NodeTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">value</span> <span class="p">=</span> <span class="k">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">title</span> <span class="p">=</span> <span class="s">&#34;Node&#34;</span> <span class="p">+</span> <span class="k">value</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="k">new</span> <span class="n">Rect</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="m">140</span><span class="p">,</span> <span class="m">100</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 使得当前节点添加到 GraphView</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AddElement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">InitGraphViewInfo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>节点显示效果图</p>
+<p><img src="/Images/GraphView/GraphView4.png" alt="GraphView4"></p>
+<p>按序显示多个节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphViewTest</span> <span class="p">:</span> <span class="n">GraphView</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">GraphViewTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InitGraphViewInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CreateNodeInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 创建多节点</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">CreateNodeInfo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="k">value</span> <span class="k">in</span> <span class="n">nodeValueList</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CreateOneNode</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 创建节点函数</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">NodeTest</span> <span class="n">CreateOneNode</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NodeTest</span> <span class="n">node</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NodeTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">value</span> <span class="p">=</span> <span class="k">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">title</span> <span class="p">=</span> <span class="s">&#34;Node&#34;</span> <span class="p">+</span> <span class="k">value</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ten</span> <span class="p">=</span> <span class="k">value</span> <span class="p">/</span> <span class="m">10</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">unit</span> <span class="p">=</span> <span class="k">value</span> <span class="p">%</span> <span class="m">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">xRect</span> <span class="p">=</span> <span class="n">vec2NodeXY</span><span class="p">.</span><span class="n">x</span> <span class="p">+</span> <span class="p">(</span><span class="n">vec2NodeSize</span><span class="p">.</span><span class="n">x</span> <span class="p">+</span> <span class="n">vec2NodePadding</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="p">*</span> <span class="p">(</span><span class="n">ten</span> <span class="p">-</span> <span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">yRect</span> <span class="p">=</span> <span class="n">vec2NodeXY</span><span class="p">.</span><span class="n">y</span> <span class="p">+</span> <span class="p">(</span><span class="n">vec2NodeSize</span><span class="p">.</span><span class="n">y</span> <span class="p">+</span> <span class="n">vec2NodePadding</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="p">*</span> <span class="p">(</span><span class="n">unit</span> <span class="p">-</span> <span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="k">new</span> <span class="n">Rect</span><span class="p">(</span><span class="n">xRect</span><span class="p">,</span> <span class="n">yRect</span><span class="p">,</span> <span class="n">vec2NodeSize</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vec2NodeSize</span><span class="p">.</span><span class="n">y</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AddElement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 定义的节点假数据</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">nodeValueList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="m">1</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">22</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 节点的宽高</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Vector2</span> <span class="n">vec2NodeSize</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector2</span><span class="p">(</span><span class="m">140</span><span class="p">,</span> <span class="m">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 节点初始 X、Y值</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Vector2</span> <span class="n">vec2NodeXY</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector2</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 节点之间的间隔</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Vector2</span> <span class="n">vec2NodePadding</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector2</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">50</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>多节点显示效果图</p>
+<p><img src="/Images/GraphView/GraphView5.png" alt="GraphView5"></p>
+<h2 id="输入输出端口">输入、输出端口</h2>
+<p>节点显示出来了后，我们需要显示所有节点的输入与输出端口了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">NodeTest</span> <span class="n">CreateOneNode</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ... 这里是创建节点</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">inputPort</span> <span class="p">=</span> <span class="n">Port</span><span class="p">.</span><span class="n">Create</span><span class="p">&lt;</span><span class="n">Edge</span><span class="p">&gt;(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">Direction</span><span class="p">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">Port</span><span class="p">.</span><span class="n">Capacity</span><span class="p">.</span><span class="n">Single</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Port</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inputPort</span><span class="p">.</span><span class="n">portName</span> <span class="p">=</span> <span class="s">&#34;In&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="p">.</span><span class="n">inputContainer</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">inputPort</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">outputPort</span> <span class="p">=</span> <span class="n">Port</span><span class="p">.</span><span class="n">Create</span><span class="p">&lt;</span><span class="n">Edge</span><span class="p">&gt;(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">Direction</span><span class="p">.</span><span class="n">Output</span><span class="p">,</span> <span class="n">Port</span><span class="p">.</span><span class="n">Capacity</span><span class="p">.</span><span class="n">Single</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Port</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputPort</span><span class="p">.</span><span class="n">portName</span> <span class="p">=</span> <span class="s">&#34;Out&#34;</span> <span class="p">+</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">GetOutPutCount</span><span class="p">()</span> <span class="p">+</span> <span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="p">.</span><span class="n">outputContainer</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">outputPort</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">AddElement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入、输出端口效果图</p>
+<p><img src="/Images/GraphView/GraphView6.png" alt="GraphView6"></p>
+<p>因为单个节点的输出可能会对应多个节点的输入，因此增加一个点击按钮就增加输出端口的操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">NodeTest</span> <span class="n">CreateOneNode</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// ... 这里是创建节点、输入、输出端口</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Button</span> <span class="n">btn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Button</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">btnOutPort</span> <span class="p">=</span> <span class="n">Port</span><span class="p">.</span><span class="n">Create</span><span class="p">&lt;</span><span class="n">Edge</span><span class="p">&gt;(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">Direction</span><span class="p">.</span><span class="n">Output</span><span class="p">,</span> <span class="n">Port</span><span class="p">.</span><span class="n">Capacity</span><span class="p">.</span><span class="n">Single</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="k">typeof</span><span class="p">(</span><span class="n">Port</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">btnOutPort</span><span class="p">.</span><span class="n">portName</span> <span class="p">=</span> <span class="s">&#34;Out&#34;</span> <span class="p">+</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">GetOutPutCount</span><span class="p">()</span> <span class="p">+</span> <span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span><span class="p">.</span><span class="n">outputContainer</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">btnOutPort</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span> <span class="p">{</span> <span class="n">text</span> <span class="p">=</span> <span class="s">&#34;AddOut&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="p">.</span><span class="n">titleContainer</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">btn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">AddElement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>效果图</p>
+<p><img src="/Images/GraphView/GraphView7.png" alt="GraphView7"></p>
+<h2 id="端口连接线">端口连接线</h2>
+<p>创建好输入、输出端口了，当我们想要手动连接端口的时候，发现并不可以连接，是因为需要重写函数，并定义哪些端口可以进行连接</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="cs">/// 判断哪些端口可以进行连接</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">override</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Port</span><span class="p">&gt;</span> <span class="n">GetCompatiblePorts</span><span class="p">(</span><span class="n">Port</span> <span class="n">startPort</span><span class="p">,</span> <span class="n">NodeAdapter</span> <span class="n">adapter</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">compatiblePorts</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Port</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">port</span> <span class="k">in</span> <span class="n">ports</span><span class="p">.</span><span class="n">ToList</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 输入只能输出、端口自己不能连接自己，</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">startPort</span><span class="p">.</span><span class="n">node</span> <span class="p">==</span> <span class="n">port</span><span class="p">.</span><span class="n">node</span> <span class="p">||</span>
+</span></span><span class="line"><span class="cl">                <span class="n">startPort</span><span class="p">.</span><span class="n">direction</span> <span class="p">==</span> <span class="n">port</span><span class="p">.</span><span class="n">direction</span> <span class="p">||</span>
+</span></span><span class="line"><span class="cl">                <span class="n">startPort</span><span class="p">.</span><span class="n">portType</span> <span class="p">!=</span> <span class="n">port</span><span class="p">.</span><span class="n">portType</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">compatiblePorts</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">port</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">compatiblePorts</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这时候是可以进行连接的，但是发现因为我用的是灰色背景，连接线也是灰色，导致会看不到线，因此需要更改下连接线的颜色，更改办法则是更改端口的颜色，代码会自动从输入端口过度颜色到输出端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">NodeTest</span> <span class="n">CreateOneNode</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 以上重复代码省略，这里写了输入与输出端口的颜色</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inputPort</span><span class="p">.</span><span class="n">portColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">yellow</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputPort</span><span class="p">.</span><span class="n">portColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">green</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>连接线与颜色效果图</p>
+<p><img src="/Images/GraphView/GraphView8.png" alt="GraphView8"></p>
+<h2 id="小地图">小地图</h2>
+<p>显示缩略小地图</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GraphEditorTest</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnEnable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 省略添加 GraphView 代码</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 添加小地图</span>
+</span></span><span class="line"><span class="cl">        <span class="n">minMap</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MiniMap</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">graphView</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">minMap</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDisable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">isInitMinMap</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rootVisualElement</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">graphView</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">isInitMinMap</span> <span class="p">&amp;&amp;</span> <span class="n">graphView</span><span class="p">.</span><span class="n">contentRect</span><span class="p">.</span><span class="n">width</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 为了设置小地图在右上角，需要等待一帧才能获取到宽度</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">width</span> <span class="p">=</span> <span class="m">300</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">minMap</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="k">new</span> <span class="n">Rect</span><span class="p">(</span><span class="n">graphView</span><span class="p">.</span><span class="n">contentRect</span><span class="p">.</span><span class="n">width</span> <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="m">200</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">isInitMinMap</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">bool</span> <span class="n">isInitMinMap</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">MiniMap</span> <span class="n">minMap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">GraphView</span> <span class="n">graphView</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>小地图效果图</p>
+<p><img src="/Images/GraphView/GraphView9.png" alt="GraphView9"></p>
+<h1 id="其他功能"><strong>其他功能</strong></h1>
+<ol>
+<li>
+<p>代码自动连接端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="cs">/// 两个端口的连接</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">AddEdgeByPorts</span><span class="p">(</span><span class="n">Port</span> <span class="n">outputPort</span><span class="p">,</span> <span class="n">Port</span> <span class="n">inputPort</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Edge</span> <span class="n">tempEdge</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Edge</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">output</span> <span class="p">=</span> <span class="n">outputPort</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">input</span> <span class="p">=</span> <span class="n">inputPort</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tempEdge</span><span class="p">.</span><span class="n">input</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">tempEdge</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tempEdge</span><span class="p">.</span><span class="n">output</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">tempEdge</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Add</span><span class="p">(</span><span class="n">tempEdge</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>获取输入、输出端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"> <span class="kt">var</span> <span class="n">outPort</span> <span class="p">=</span> <span class="n">node</span><span class="p">.</span><span class="n">outputContainer</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Port</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl"> <span class="kt">var</span> <span class="n">inPort</span> <span class="p">=</span> <span class="n">node</span><span class="p">.</span><span class="n">inputContainer</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Port</span><span class="p">&gt;();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>其他详情API哦</p>
+</li>
+</ol>
+<h1 id="参考链接"><strong>参考链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/ScriptReference/Experimental.GraphView.GraphView.html">API_GraphView</a></li>
+<li><a href="https://docs.unity3d.com/ScriptReference/Experimental.GraphView.Node.html">API_Node</a></li>
+<li><a href="https://blog.csdn.net/alexhu2010q/article/details/118053288">Unity的GraphView</a></li>
+<li><a href="https://blog.csdn.net/dmk17771552304/article/details/121499476">Unity Editor扩展 GraphView</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLF3U0rzFKlTGzz-AUFacf9_OKiW_hGYIR">YouTube_Node Graph Tutorials</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-06-30 19:40:06 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23/23.06_graphview/">https://spirite12.github.io/post/23/23.06_graphview/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/23/23.07_uitoolkit/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">UIToolkit UI工具包</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/23/23.05_chatfilter/">
+            <span class="next-text nav-default">ChatFilter 屏蔽字库</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>UI 框架 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23/23.01_uimgr/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="UI 框架" />
+<meta property="og:description" content="前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23/23.01_uimgr/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-30T19:40:01+08:00" />
+<meta property="article:modified_time" content="2023-01-30T19:40:01+08:00" />
+
+<meta itemprop="name" content="UI 框架">
+<meta itemprop="description" content="前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上"><meta itemprop="datePublished" content="2023-01-30T19:40:01+08:00" />
+<meta itemprop="dateModified" content="2023-01-30T19:40:01+08:00" />
+<meta itemprop="wordCount" content="2169">
+<meta itemprop="keywords" content="C Sharp,Frame Work,Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="UI 框架"/>
+<meta name="twitter:description" content="前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">UI 框架</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-01-30 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#前言"><strong>前言</strong></a></li>
+            <li><a href="#项目地址"><strong>项目地址</strong></a></li>
+            <li><a href="#框架目录"><strong>框架目录</strong></a></li>
+            <li><a href="#使用说明"><strong>使用说明</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="前言"><strong>前言</strong></h3>
+<p>从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。</p>
+<p>今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上传！</p>
+<h3 id="项目地址"><strong>项目地址</strong></h3>
+<ul>
+<li><a href="https://gitlab.com/Spirite12/dcFrame">https://gitlab.com/Spirite12/dcFrame</a></li>
+</ul>
+<h3 id="框架目录"><strong>框架目录</strong></h3>
+<p><img src="/Images/UIMgr/UIMgr1.png" alt=""></p>
+<ul>
+<li>Editor
+<ul>
+<li>ADF说明：因为根目录有 Adf.Unity.Frame，因此额外开个ADF，防止无法打包；</li>
+<li>UIManager：UI框架相关的Editor代码（略过不介绍）</li>
+</ul>
+</li>
+<li>Singleton：单例基类集合点
+<ul>
+<li>说明：目前有 Mono、Class 类单例基类；</li>
+</ul>
+</li>
+<li>Utility：工具类集合点
+<ul>
+<li>说明：目前有 StringUtil、 TimeUtil 供当前框架使用，后续有不断完善；</li>
+</ul>
+</li>
+<li>UIManager：UI框架脚本
+<ul>
+<li>
+<p>UI主体脚本：</p>
+<ul>
+<li>MainUI：主UI脚本，挂载在主场景，脚本会在运行游戏就执行该脚本；
+<ul>
+<li>提供GC回收、低内存事件通知、切换后台事件通知；</li>
+</ul>
+</li>
+<li>UIMgr：UI管理脚本，堆栈分配、层级设置、界面的显示隐藏处理；</li>
+<li>UIBase：界面的基类
+<ul>
+<li>提供：打开、关闭、加载、释放、层级设置等函数支持；</li>
+</ul>
+</li>
+<li>UIBaseSingleton：界面基类的单例脚本，所有界面子类需继承该脚本；</li>
+<li>IUIItem：子预制体的基类，一般不用手动创建，可通过 Ctrl Script 工具创建脚本；</li>
+</ul>
+</li>
+<li>
+<p>辅助脚本：</p>
+<ul>
+<li>UIAdaptive：安卓、IOS 适配脚本；</li>
+<li>UIConst：UI常量脚本；</li>
+<li>UIOrder：界面层级脚本，会获取当前界面层级值，并赋值给子节点下所需赋值的物体；</li>
+<li>UITool：工具类，目前提供了界面队列打开的函数支持；</li>
+</ul>
+</li>
+<li>
+<p>预制件编辑器脚本：</p>
+<ul>
+<li>
+<p>UIMono：预制体根节点脚本，一般是所需要的引用的变量脚本，也提供了相关定位工具；一般不用手动创建，可通过 Ctrl Script 工具创建脚本；</p>
+</li>
+<li>
+<p>UIAutoRef：预制件自动引用模板脚本，作用是在预制件上显示Icon来提示该物体代码有引用到；</p>
+<ul>
+<li><img src="/Images/UIMgr/UIMgr2.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>UICreateItem：子预制件脚本，需要挂载在父预制体需要实例化生成子预制件的物体上；</p>
+<ul>
+<li><img src="/Images/UIMgr/UIMgr3.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>UILockData：预制件上锁脚本。上锁预制件会留下机名，作用是：防止冲突，提示其他人此预制体有人在修改；</p>
+<ul>
+<li><strong>注意</strong>：目前请求和获取上锁数据均未写，这两处应由项目内内网与服务端接入，因此不同地方的地址是不同的；</li>
+<li><img src="/Images/UIMgr/UIMgr4.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用说明"><strong>使用说明</strong></h3>
+<ol>
+<li>
+<p><strong>创建预制体所需脚本：</strong></p>
+<ul>
+<li>
+<p>首先先准备一个预制件，在 Project 面板右击该预制件，选择 Create -&gt; Ctrl Script，并点击；</p>
+<ul>
+<li>若选择的不是预制件，则 Ctrl Script 选项则置灰不让点击；</li>
+</ul>
+</li>
+<li>
+<p>出现弹窗：</p>
+<ul>
+<li>自动填充的选项：以下不建议更改参数
+<ol>
+<li>Select Prefab ：当前所选择的预制体；</li>
+<li>Mono、Ctrl FilePath：Mono 脚本 与 Ctrl 脚本的路径：</li>
+<li>Create FileName：所创建的脚本名</li>
+</ol>
+</li>
+<li>可选项：
+<ol>
+<li>IsPanel：是否是父预制体
+<ul>
+<li>是：UIBase Type：设置弹窗类型</li>
+<li>否：IsAddListenerFunc：是否自动帮忙添加监听事件空函数；</li>
+</ul>
+</li>
+<li>IsFocusCtrl：创建Ctrl脚本后，是否选中Ctrl脚本根节点；</li>
+</ol>
+</li>
+<li>工具截图：
+<ul>
+<li><img src="/Images/UIMgr/UIMgr5.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>点击Create Script 后，该工具会执行以下操作：</p>
+<ol>
+<li>
+<p>在对应文件夹下会创建 Mono 脚本（继承UIMono），并挂载在当前预制体上；</p>
+</li>
+<li>
+<p>在对应文件夹下会创建 Ctrl 脚本（继承UIBaseSingleton），并根据模板会生成一套基础UIBase 所需代码；</p>
+</li>
+<li>
+<p>往该预制体上，添加 UIOrder 脚本，使其预制件有层级显示，UIOrder 脚本会绑定添加 Canvas 和 Graphic Raycaster 脚本；</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>自动引用、删除引用代码中所需操作的物体：</strong></p>
+<ul>
+<li>
+<p>继承至 UIMono 的脚本会显示精灵球；</p>
+</li>
+<li>
+<p>查看 UIAutoRef 所填写的参数模板，若在预制体中若前缀匹配 Prefix ，则在预制体中显示小蓝标；</p>
+<ul>
+<li><img src="/Images/UIMgr/UIMgr6.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>根据步骤1，在预制件根节点有个 UIMono脚本，该脚本显示如下：</p>
+<ul>
+<li><img src="/Images/UIMgr/UIMgr7.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>若点击自动引用，则工具会把小蓝标的物体全部添加到该脚本里</p>
+<ul>
+<li><strong>注意</strong>：该工具会自动屏蔽挂了 子预制体 UICreateItem 的脚本物体以及该子物体；</li>
+<li><strong>重点</strong>：工具会找到 当前对应的 Ctrl 脚本，查找当前引用有 btn（按钮）开头的，则往 Ctrl 脚本中添加相关监听函数；（同理 也会帮忙挂载了UICreateItem 脚本，新增相对应变量，和销毁函数）</li>
+<li><strong>方便</strong>：减少开发人员手动写变量、挂载实例引用的操作、手动写按钮监听函数、子预制件销毁函数；</li>
+<li><img src="/Images/UIMgr/UIMgr8.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>若点击删除引用，则该脚本则会删除小蓝标所标识物体名的变量，同时也会删除 Ctrl 脚本中 点击引用 所帮忙创建的相对应的脚本；</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>创建子预制体所需脚本：</strong></p>
+<ul>
+<li>
+<p>为了减少开发人员手动写子预制件创建代码和维护代码，才有了这个工具；</p>
+</li>
+<li>
+<p>在所需帮忙创建子预制体的物体上挂载 UICreateItem 脚本，并设置所需实例化的预制件：</p>
+<ul>
+<li>在游戏运行、将预制体拖到 Hierarchy 面板上，代码都会自动帮忙创建子预制件；</li>
+</ul>
+</li>
+<li>
+<p>因为 UICreateItem 继承至 UIMono，因此也可以自动引用和删除引用；</p>
+<ul>
+<li>与之不同的是：子预制件的基类是：IUIItem，自动引用会在相对应位置添加按钮监听和销毁代码</li>
+</ul>
+</li>
+<li>
+<p><img src="/Images/UIMgr/UIMgr9.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>UIMgr 所帮忙操作的事情：</strong></p>
+<ul>
+<li>
+<p>抽象介绍：</p>
+<ul>
+<li>全屏界面：类似是系统的主界面；</li>
+<li>非全屏界面：类似是覆盖在当前主界面上的弹窗；</li>
+<li>首先打开的主预制体则是全屏界面，只要接下来打开的界面是非全屏类型，则在该全屏界面上不断叠加并显示。当打开一个新全屏界面后，则关闭当前所有界面，再以全屏的界面的操作形式继续下去；当关闭一个全屏界面后，则会关闭当前全屏上打开的所有非全屏界面，并打开之前关闭的界面直至到全屏界面；</li>
+</ul>
+</li>
+<li>
+<p>预制件的层级管理，而预制体又会以当前层级管理自己子预制体；</p>
+</li>
+<li>
+<p>预制件的堆栈管理，在打开新的全屏界面，则隐藏之前的所有界面。当关闭当前界面后，又会自动打开之前的所展示的界面，无需手动写代码；</p>
+<ul>
+<li>因此预制体提供了 OnHide（监听移除函数）、OnRelease（数据销毁函数），需拆分清楚则可实现以上机制；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>其他的小功能就不介绍了</strong>；</p>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-01-30 19:40:01 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23/23.01_uimgr/">https://spirite12.github.io/post/23/23.01_uimgr/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c-sharp/">C Sharp</a>
+          <a href="/tags/frame-work/">Frame Work</a>
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/23/23.02_localization1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Localization 本地化（一）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/22/22.12_rotate/">
+            <span class="next-text nav-default">Rotate 旋转知识</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

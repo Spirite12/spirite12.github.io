@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Addressables 本地模拟热更（二） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 一、热更预" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/23/23.09_addressable/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Addressables 本地模拟热更（二）" />
+<meta property="og:description" content="前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 一、热更预" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/23/23.09_addressable/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-09T19:40:08+08:00" />
+<meta property="article:modified_time" content="2023-09-09T19:40:08+08:00" />
+
+<meta itemprop="name" content="Addressables 本地模拟热更（二）">
+<meta itemprop="description" content="前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 一、热更预"><meta itemprop="datePublished" content="2023-09-09T19:40:08+08:00" />
+<meta itemprop="dateModified" content="2023-09-09T19:40:08+08:00" />
+<meta itemprop="wordCount" content="1161">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Addressables 本地模拟热更（二）"/>
+<meta name="twitter:description" content="前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 一、热更预"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Addressables 本地模拟热更（二）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-09-09 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前期准备"><strong>前期准备</strong></a></li>
+    <li><a href="#本地模拟热更"><strong>本地模拟热更</strong></a>
+      <ul>
+        <li><a href="#一热更预制体">一、热更预制体</a>
+          <ul>
+            <li><a href="#项目准备">项目准备</a></li>
+            <li><a href="#addressable-设置">Addressable 设置</a></li>
+            <li><a href="#打包">打包</a></li>
+            <li><a href="#热更预制体">热更预制体</a></li>
+          </ul>
+        </li>
+        <li><a href="#二热更界面">二、热更界面</a></li>
+      </ul>
+    </li>
+    <li><a href="#远程热更"><strong>远程热更</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前期准备"><strong>前期准备</strong></h1>
+<p>使用的工具版本列表：</p>
+<ul>
+<li>Unity：Unity 2021.3.6f1c1</li>
+<li>IDE：Visual Studio Community 2019</li>
+<li>Addressables：1.19.19</li>
+</ul>
+<h1 id="本地模拟热更"><strong>本地模拟热更</strong></h1>
+<h2 id="一热更预制体">一、热更预制体</h2>
+<h3 id="项目准备">项目准备</h3>
+<ul>
+<li>
+<p>场景：新增一个场景，里面需包含 Canvas 物体</p>
+<p><img src="/Images/Addressables_23.09/Addressables1.png" alt="Addressables1"></p>
+</li>
+<li>
+<p>预制件：新增一个预制件，当前预制件内包含一个 Image 与 Text文本</p>
+<p><img src="/Images/Addressables_23.09/Addressables2.png" alt="Addressables2"></p>
+</li>
+<li>
+<p>C#脚本：新增一个脚本，把脚本挂载在 Canvas 上，脚本内容则是在开启游戏的时候加载预制件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.AddressableAssets</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.ResourceManagement.AsyncOperations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载资源地址</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">strAddress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加载回调</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">strAddress</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">&#34;StrAddress is Null&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">LoadAssetAsync</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span><span class="n">strAddress</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="n">HandleCompleted</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">HandleCompleted</span><span class="p">(</span><span class="n">AsyncOperationHandle</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;Asset for {strAddress} failed to load.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Instantiate</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">Result</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Project目录结构：</p>
+<p><img src="/Images/Addressables_23.09/Addressables3.png" alt="Addressables3"></p>
+</li>
+</ul>
+<h3 id="addressable-设置">Addressable 设置</h3>
+<ul>
+<li>
+<p>创建 Addressable</p>
+<ul>
+<li>菜单路径：Windows -&gt; Asset Management -&gt; Addressables -&gt; Groups</li>
+<li>Groups 窗口：点击 Create Addressables Settings 生成 Addressables 配置</li>
+</ul>
+</li>
+<li>
+<p>标记预制体为 Addressable</p>
+<ul>
+<li>
+<p>点击 GoInstance 预制件，在 Inspector 上方点击 Addressable 标记，并把标记成功后的地址填写到 Canvas 上挂载 Test 脚本的引用上</p>
+<p><img src="/Images/Addressables_23.09/Addressables4.png" alt="Addressable4"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>创建远程服务：</p>
+<ul>
+<li>菜单路径：Windows -&gt; Asset Management -&gt; Addressables -&gt; Hosting</li>
+<li>Hosting 窗口：Create -&gt; Local Hosting，生成成功后，点击右方的 Enable 开启服务；</li>
+</ul>
+</li>
+<li>
+<p>设置远程配置：</p>
+<ul>
+<li>
+<p>AddressableAssetSettings 设置：</p>
+<ul>
+<li>
+<p>Project路径：AddressableAssetSettings -&gt; Build Remote Catalog -&gt; Remote 开启远程</p>
+<p><img src="/Images/Addressables_23.09/Addressables5.png" alt="Addressable5"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>AddressableGroups 设置：</p>
+<ul>
+<li>
+<p>菜单路径：Windows -&gt; Asset Management -&gt; Addressables -&gt; Groups</p>
+</li>
+<li>
+<p>Groups 窗口：</p>
+<ul>
+<li>选择 Play Mode Script -&gt; Use Existing Build：从上次的内容构建中加载内容</li>
+<li>选择 Build -&gt; New Build -&gt; Default Build Script : 生成一个默认的更新脚本</li>
+</ul>
+</li>
+<li>
+<p>Inspector 操作：在 Groups 窗口内对准 Default Local Group（这个名称如果有设置的话，则点击设置的对应组） 双击，系统会自动选择 Project 上的相对应配置，并打开 Inspector后</p>
+<ul>
+<li>选择 Update Restriction 为 Cannot Change Post Release</li>
+<li>选择 Build &amp; Load Paths 为 Remote</li>
+</ul>
+<p><img src="/Images/Addressables_23.09/Addressables6.png" alt="Addressable6"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>运行游戏：此时能正常实例化预制体出来，则是正确的；</p>
+</li>
+</ul>
+<h3 id="打包">打包</h3>
+<ul>
+<li>
+<p>菜单路径：File -&gt; Build Settings -&gt; 对准 Windows 平台点击 Build，生成 PC 包</p>
+</li>
+<li>
+<p>验证：运行 PC 包，查看PC包内的展示的内容是否与 Unity 内展示是否一致；</p>
+<p><img src="/Images/Addressables_23.09/Addressables7.png" alt="Addressable7"></p>
+</li>
+</ul>
+<h3 id="热更预制体">热更预制体</h3>
+<ul>
+<li>
+<p>更改预制体：点击 GoInstance 预制件，更改 Image 颜色 与 Text 文本</p>
+<p><img src="/Images/Addressables_23.09/Addressables8.png" alt="Addressable8"></p>
+</li>
+<li>
+<p>运行游戏：发现还是旧的预制件，那是因为 Groups 窗口内我们选择的是：Play Mode Script -&gt; Use Existing Build</p>
+</li>
+<li>
+<p>更新预制体：</p>
+<ul>
+<li>打开 Groups 窗口，点击 Tools -&gt; Check for Content Update Restrictions  -&gt; 选择 Windows 文件夹 -&gt; addressables_content_state.bin 文件</li>
+<li>此时会打开 Content Update Preview 窗口，当前窗口会列出 热更的资源，当前只有 GoInstance 预制件，然后点击 Apply Changes</li>
+</ul>
+</li>
+<li>
+<p>更新生成文件：</p>
+<ul>
+<li>
+<p>打开 Addressable Groups 窗口，点击 Build -&gt; Update a Previous Build -&gt; 选择 Windows 文件夹 -&gt; addressables_content_state.bin 文件</p>
+</li>
+<li>
+<p>此时 Groups 窗口下的 GoInstance 的所处位置从 Default Local Group 转到了 Content Update 路径下，Content Update 路径下表示的是需要热更的资源</p>
+<p><img src="/Images/Addressables_23.09/Addressables9.png" alt="Addressable9"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>热更验证：</p>
+<ul>
+<li>此时运行游戏 或者 运行刚才已经打好的PC包（不需要重新打包）</li>
+</ul>
+<p><img src="/Images/Addressables_23.09/Addressables10.png" alt="Addressable10"></p>
+</li>
+</ul>
+<h2 id="二热更界面">二、热更界面</h2>
+<p>通常手游的热更流程是：启动游戏 -&gt; 判断是否有热更资源 -&gt; 没有则进入游戏 -&gt; 有则启动热更界面 -&gt; 告知玩家热更大小并开始从远程服务端下载资源 -&gt; 下载成功后则进入游戏</p>
+<ol>
+<li>
+<p>热更所需的函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// 检查是否有热更内容</span>
+</span></span><span class="line"><span class="cl"><span class="n">Addressables</span><span class="p">.</span><span class="n">CheckForCatalogUpdates</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取更新目录</span>
+</span></span><span class="line"><span class="cl"><span class="n">Addressables</span><span class="p">.</span><span class="n">UpdateCatalogs</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取下载的热更大小</span>
+</span></span><span class="line"><span class="cl"><span class="n">Addressables</span><span class="p">.</span><span class="n">GetDownloadSizeAsync</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 下载依赖资源</span>
+</span></span><span class="line"><span class="cl"><span class="n">Addressables</span><span class="p">.</span><span class="n">DownloadDependenciesAsync</span><span class="p">();</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>开启代码检测热更操作：</p>
+<p><img src="/Images/Addressables_23.09/Addressables11.png" alt="Addressable11"></p>
+</li>
+</ol>
+<h1 id="远程热更"><strong>远程热更</strong></h1>
+<p>远程热更准备放在下一文章内介绍；</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2023-09-09 19:40:08 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/23/23.09_addressable/">https://spirite12.github.io/post/23/23.09_addressable/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/23/23.10_uos_cdn/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Addressable CDN远程热更（三）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/23/23.08_addressable/">
+            <span class="next-text nav-default">Addressables 学习（一）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

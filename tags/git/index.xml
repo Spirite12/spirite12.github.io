@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on DC Blog</title>
+    <link>https://spirite12.github.io/tags/git/</link>
+    <description>Recent content in Git on DC Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>DC</copyright>
+    <lastBuildDate>Tue, 02 Aug 2022 21:40:02 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LuaFormat 代码格式化工具</title>
+      <link>https://spirite12.github.io/post/22/22.08_luaformat/</link>
+      <pubDate>Tue, 02 Aug 2022 21:40:02 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/22/22.08_luaformat/</guid>
+      <description>概述 LuaFormatter 是一款 Lua 脚本的代码格式化脚本工具，支持命令行执行，支持可配置项； 执行效果可参考本文中 Git 提交触发代码格式化 目录下的最后一张截图； 支持的I</description>
+    </item>
+    
+  </channel>
+</rss>

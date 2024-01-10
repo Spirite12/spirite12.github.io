@@ -7,112 +7,40 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Sat, 25 Nov 2023 19:40:09 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Jan 2023 19:40:01 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Addressable 游戏在线热更</title>
-      <link>https://spirite12.github.io/post/23.11_addressable/</link>
-      <pubDate>Sat, 25 Nov 2023 19:40:09 +0800</pubDate>
+      <title>UI 框架</title>
+      <link>https://spirite12.github.io/post/23/23.01_uimgr/</link>
+      <pubDate>Mon, 30 Jan 2023 19:40:01 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/23.11_addressable/</guid>
-      <description>工具准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 USO CDN 概述 本文实现的内容</description>
-    </item>
-    
-    <item>
-      <title>Addressable CDN远程热更</title>
-      <link>https://spirite12.github.io/post/23.10_uos_cdn/</link>
-      <pubDate>Thu, 05 Oct 2023 19:40:08 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.10_uos_cdn/</guid>
-      <description>前言 为了实现 Addressable 的远程服务资源热更，在 Unity 官网内找到了 UOS 提供的CDN（资源托管分发服务）； UOS全称：Unity Online Services，是 Unity 提供的一</description>
-    </item>
-    
-    <item>
-      <title>Addressables 本地模拟热更</title>
-      <link>https://spirite12.github.io/post/23.09_addressable/</link>
-      <pubDate>Sat, 09 Sep 2023 19:40:08 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.09_addressable/</guid>
-      <description>前期准备 使用的工具版本列表： Unity：Unity 2021.3.6f1c1 IDE：Visual Studio Community 2019 Addressables：1.19.19 本地模拟热更 热更预制体</description>
-    </item>
-    
-    <item>
-      <title>Addressables 学习</title>
-      <link>https://spirite12.github.io/post/23.08_addressable/</link>
-      <pubDate>Wed, 23 Aug 2023 19:40:07 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.08_addressable/</guid>
-      <description>前言：Addressables 与 AssetBundle Addressables 系统构建于 Unity AssetBundles 之上。如果在项目中使用AssetBundles且不想编写自己的详细管理代码，则这时候可以使</description>
-    </item>
-    
-    <item>
-      <title>UIToolkit UI工具包</title>
-      <link>https://spirite12.github.io/post/23.07_uitoolkit/</link>
-      <pubDate>Mon, 31 Jul 2023 19:40:07 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.07_uitoolkit/</guid>
-      <description>前言 Unity 打算让 UI Toolkit 成为新 UI 开发项目的推荐 UI 系统。不过个人感觉，鉴于目前UGUI的实际应用广泛度，会导致这项计划的推进程度并不快速。但是在Edi</description>
-    </item>
-    
-    <item>
-      <title>GraphView 节点树</title>
-      <link>https://spirite12.github.io/post/23.06_graphview/</link>
-      <pubDate>Fri, 30 Jun 2023 19:40:06 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.06_graphview/</guid>
-      <description>基础类 相关的API都在该命名空间下：UnityEditor.Experimental.GraphView GraphView：渲染显示图的主类</description>
-    </item>
-    
-    <item>
-      <title>Localization 本地化（下）</title>
-      <link>https://spirite12.github.io/post/23.03_localization2/</link>
-      <pubDate>Thu, 30 Mar 2023 19:40:03 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.03_localization2/</guid>
-      <description>前言 本文主要介绍 Localization 接入项目的情况； 模块流程图 ‘ 文件夹目录图 ‘ 设计思路 概括： 文本内容全在预制件、代码、配表中写。后续在翻译的时候用工具全导入插</description>
-    </item>
-    
-    <item>
-      <title>Localization 本地化（上）</title>
-      <link>https://spirite12.github.io/post/23.02_localization1/</link>
-      <pubDate>Tue, 28 Feb 2023 19:40:02 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/23.02_localization1/</guid>
-      <description>前言 本文主要介绍 Localization 、Lingguo 这两款插件对 Unity 多语言本地化的处理方式； 本地化模块方案 一、Localization 1.功能学习整理 Unity</description>
+      <guid>https://spirite12.github.io/post/23/23.01_uimgr/</guid>
+      <description>前言 从20年就开始写UI框架代码了，但是每次都是写几个月就中断了。 今年上半年狠心就给自己定了个S级的大目标，至少写个 0.1版本的框架代码并上</description>
     </item>
     
     <item>
       <title>Rotate 旋转知识</title>
-      <link>https://spirite12.github.io/post/22.12_rotate/</link>
+      <link>https://spirite12.github.io/post/22/22.12_rotate/</link>
       <pubDate>Tue, 13 Dec 2022 19:40:06 +1000</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.12_rotate/</guid>
+      <guid>https://spirite12.github.io/post/22/22.12_rotate/</guid>
       <description>前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后</description>
     </item>
     
     <item>
       <title>Animation 优化</title>
-      <link>https://spirite12.github.io/post/22.11_animation/</link>
+      <link>https://spirite12.github.io/post/22/22.11_animation/</link>
       <pubDate>Tue, 15 Nov 2022 19:40:06 +0900</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.11_animation/</guid>
+      <guid>https://spirite12.github.io/post/22/22.11_animation/</guid>
       <description>环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 Animation优化方向 目前从网络上已知以下几种对动画的优化 精确动画中属性值小数点到2位； 剔除掉Scale曲线，由于人</description>
     </item>
     
     <item>
-      <title>Profiler 性能分析工具</title>
-      <link>https://spirite12.github.io/post/22.10_profiler/</link>
-      <pubDate>Mon, 24 Oct 2022 19:40:06 +0800</pubDate>
-      
-      <guid>https://spirite12.github.io/post/22.10_profiler/</guid>
-      <description>环境 Windows 10 Unity 2019.4.16f1c1 (64-bit) Visual Studio 2019 自定义性能分析器 在默认的情况下，Profiler并无法直接的对开发人员的代码进行分析。比如遇到：在 Main.cs 的 Start 函数中，有音效管</description>
-    </item>
-    
-    <item>
       <title>Font 自定义字体</title>
-      <link>https://spirite12.github.io/post/22.09_fontcustom/</link>
+      <link>https://spirite12.github.io/post/22/22.09_fontcustom/</link>
       <pubDate>Mon, 12 Sep 2022 19:40:04 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/22.09_fontcustom/</guid>
+      <guid>https://spirite12.github.io/post/22/22.09_fontcustom/</guid>
       <description>前言 在游戏开发阶段，项目中难免会用到一些自定义的字体。这些字体大部分会用在数字，字母以及相关字符的显示上，而显示的样式则由美术决定的，对此则</description>
     </item>
     
