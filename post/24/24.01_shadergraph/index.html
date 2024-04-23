@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Shader Graph 学习（一） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="简介 Shader Graph 能够让您直观地构建着色器。您可以在图形框架中创建并连接节点，而不必手写代码。Shader Graph 提供了能反映所作更改的即时反馈，对于不熟悉" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.01_shadergraph/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Shader Graph 学习（一）" />
+<meta property="og:description" content="简介 Shader Graph 能够让您直观地构建着色器。您可以在图形框架中创建并连接节点，而不必手写代码。Shader Graph 提供了能反映所作更改的即时反馈，对于不熟悉" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.01_shadergraph/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-14T19:40:08+08:00" />
+<meta property="article:modified_time" content="2024-01-14T19:40:08+08:00" />
+
+<meta itemprop="name" content="Shader Graph 学习（一）">
+<meta itemprop="description" content="简介 Shader Graph 能够让您直观地构建着色器。您可以在图形框架中创建并连接节点，而不必手写代码。Shader Graph 提供了能反映所作更改的即时反馈，对于不熟悉"><meta itemprop="datePublished" content="2024-01-14T19:40:08+08:00" />
+<meta itemprop="dateModified" content="2024-01-14T19:40:08+08:00" />
+<meta itemprop="wordCount" content="3345">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Shader Graph 学习（一）"/>
+<meta name="twitter:description" content="简介 Shader Graph 能够让您直观地构建着色器。您可以在图形框架中创建并连接节点，而不必手写代码。Shader Graph 提供了能反映所作更改的即时反馈，对于不熟悉"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Shader Graph 学习（一）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-01-14 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介"><strong>简介</strong></a></li>
+    <li><a href="#前置准备"><strong>前置准备</strong></a>
+      <ul>
+        <li><a href="#一导入插件">一、导入插件</a></li>
+        <li><a href="#二导入后的设置">二、导入后的设置</a></li>
+      </ul>
+    </li>
+    <li><a href="#shader-graph"><strong>Shader Graph</strong></a>
+      <ul>
+        <li><a href="#一创建资源">一、创建资源</a></li>
+        <li><a href="#二窗口说明">二、窗口说明</a>
+          <ul>
+            <li><a href="#小知识">小知识</a></li>
+            <li><a href="#菜单栏">菜单栏①</a></li>
+            <li><a href="#黑板">黑板②</a></li>
+            <li><a href="#预览窗口">预览窗口③</a></li>
+            <li><a href="#inspector面板">Inspector面板④</a></li>
+            <li><a href="#主堆">主堆⑤⑥</a></li>
+            <li><a href="#即时贴">即时贴</a></li>
+            <li><a href="#创建节点">创建节点</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#理论知识"><strong>理论知识</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="简介"><strong>简介</strong></h1>
+<blockquote>
+<p>Shader Graph 能够让您直观地构建着色器。您可以在图形框架中创建并连接节点，而不必手写代码。Shader Graph 提供了能反映所作更改的即时反馈，对于不熟悉着色器创建的用户来说非常简单。</p>
+</blockquote>
+<p>以上来自官方的描述</p>
+<p>推荐版本：Unity 2019.1 +</p>
+<p>类似工具：<a href="https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570">Amplify Shader Editor</a>、<a href="https://wiki.amplify.pt/index.php?title=Unity_Products:Amplify_Shader_Editor/Manual">Doc</a></p>
+<p>体验总结：在不理解 Shader 的情况下，对读写 Shader 的代码并无帮助，但是对 Shader 会有一定的初步理解；</p>
+<ul>
+<li>优势
+<ol>
+<li><strong>官方支持</strong>：由 Unity 官方提供的工具，在与 Unity 的兼容性好的情况下，也保证了对该工具技术的及时支持；</li>
+<li><strong>易于入门</strong>：提供了类似于 UGUI 的可视化编辑窗口，通过节点之间的相连，便可在各个预览窗口中看到实现的结果。这一过程无需代码的参与；</li>
+<li><strong>教材众多</strong>：在网上搜索中可方便找到众多文章、视频的教学；</li>
+</ol>
+</li>
+<li>劣势：
+<ol>
+<li><strong>功能限制</strong>：虽然内置了许多节点，但某些高级效果可能需要用户自定义节点或自己编写着色器代码来实现；</li>
+<li><strong>性能限制</strong>：Shader Graph 生成的着色器可能不如手写的着色器效率高，尤其在处理复杂的效果时，可能会有性能损失。</li>
+</ol>
+</li>
+</ul>
+<h1 id="前置准备"><strong>前置准备</strong></h1>
+<h2 id="一导入插件">一、导入插件</h2>
+<ol>
+<li>
+<p>Package Manager</p>
+<ul>
+<li>
+<p>Shader Graph：菜单栏 -&gt; Package Manager -&gt; Packages 选择 Unity Registry -&gt; 找到 Shader Graph -&gt; Install</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph1.png" alt=""></p>
+</li>
+<li>
+<p>Universal RP：菜单栏 -&gt; Package Manager -&gt; Packages 选择 Unity Registry -&gt; 找到 Universal RP -&gt; Install</p>
+</li>
+</ul>
+</li>
+<li>
+<p>安装指定版本</p>
+<ul>
+<li>对于以上的操作，只能安装当前Unity版本内最新的 Shader Graph 版本，倘若需要安装一个指定版本则需按照以下操作：</li>
+<li>在工程文件夹目录：Packages -&gt; manifest.json -&gt; &ldquo;com.unity.shadergraph&rdquo;: &ldquo;12.1.7&rdquo;,
+<ul>
+<li>12.1.7：这里可以填写任意版本号</li>
+<li><img src="/Images/ShaderGraph_24.01/ShaderGraph2.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>新工程导入</p>
+<ul>
+<li>在新建工程里，选择模板以  HDR 或 UPR 方式创建的工程，功能会自动安装ShaderGraph 插件和相关插件，并设置好相关的配置。</li>
+<li><img src="/Images/ShaderGraph_24.01/ShaderGraph3.png" alt=""></li>
+</ul>
+</li>
+</ol>
+<h2 id="二导入后的设置">二、导入后的设置</h2>
+<blockquote>
+<p>如果以一、3新工程导入的方式，则无需进行下述配置</p>
+</blockquote>
+<ol>
+<li>
+<p>创建UPR渲染管线配置资源：Project -&gt; 右击 Create -&gt; Rendering -&gt; Universal Render Pipeline -&gt; Pipeline Asset。此时工程内会生成相对应的2个资源；</p>
+</li>
+<li>
+<p>添加脚本渲染管线设置：菜单栏 -&gt; Edit -&gt; Project Settings -&gt; Graphics -&gt; Scriptable Render PipeLine Settings -&gt; 选择刚才创建好的资源；</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph4.png" alt=""></p>
+</li>
+</ol>
+<h1 id="shader-graph"><strong>Shader Graph</strong></h1>
+<h2 id="一创建资源">一、创建资源</h2>
+<ul>
+<li>
+<p>创建资源：Project -&gt; 右击 Create -&gt; Shader Graph -&gt; URP -&gt; Lit Shader Graph</p>
+<ul>
+<li>选择 Lit or Unlit 请看理论知识问题2</li>
+</ul>
+</li>
+<li>
+<p>打开窗口：</p>
+<ul>
+<li>
+<p>双击当前资源打开 ShaderGraph 窗口</p>
+</li>
+<li>
+<p>点击当前资源，在 Inspector 面板里点击 Open Shader Editor</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph5.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二窗口说明">二、窗口说明</h2>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph6.png" alt=""></p>
+<h3 id="小知识">小知识</h3>
+<ol>
+<li>双击 New Shader Graph 标题可以实现窗口最大和复原操作；</li>
+<li>窗口内的所有面板都可以进行移动和放大缩小操作；</li>
+</ol>
+<h3 id="菜单栏">菜单栏①</h3>
+<p>英文名：Menu</p>
+<ol>
+<li>
+<p>Save Asset : 保存资源更改；</p>
+<ul>
+<li>*低版本 Ctrl + S 并不能快捷键保存，需手动按此按钮，或者关闭该弹窗的时候会给出保存提示；</li>
+</ul>
+</li>
+<li>
+<p>Save As：作为新资源保存在指定的文件内；</p>
+</li>
+<li>
+<p>Show In Project : 定位当前资源在 Project 的位置；</p>
+</li>
+<li>
+<p>Color Mode：节点（Node）显示颜色</p>
+<ul>
+<li>
+<p>None : 关闭颜色模式</p>
+</li>
+<li>
+<p>Category：根据节点的所处目录来区分不同的颜色</p>
+<ul>
+<li>
+<p>*Create Node 是创建节点，在下面会介绍到</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph7.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Precision：根据节点的精度来区分不同的颜色</p>
+<ul>
+<li>
+<p>资源整体设置：更改这里的设置后，所有的节点都会继承这个参数；</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph8.png" alt=""></p>
+</li>
+<li>
+<p>单个节点设置精度：在节点位置右击选择 Precision 可以更改当前节点的精度；</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph9.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>User Defined ：开发者可以自定义节点 （Node）的颜色</p>
+<ul>
+<li>
+<p>右击节点，选择 Color -&gt; Change -&gt; 开启颜色版来更改颜色</p>
+</li>
+<li>
+<p>右击节点，选择 Color -&gt; Reset -&gt; 重置当前节点为灰色；</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph11.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@12.1/manual/Color-Modes.html">Shader Graph Doc</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Blackboard：显隐黑板，即为截图内 ② 区域；</p>
+</li>
+<li>
+<p>Graph Inspector ：显隐检视面板，即为截图内 ④ 区域；</p>
+</li>
+<li>
+<p>Main Preview ：显示预览面板，即为截图内 ③ 区域；</p>
+</li>
+</ol>
+<h3 id="黑板">黑板②</h3>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph15.png" alt=""></p>
+<p>英文名：Blackboard</p>
+<ol>
+<li>
+<p>个人对此理解：</p>
+<ul>
+<li>此面板显示的属性类似于类的公开（Public）属性；</li>
+<li>当我们做好一个ShaderGraph 资源后，此 Shader 会应用在材质球上，材质球上显示的相关属性即为当前面板内与之对应的属性；</li>
+</ul>
+</li>
+<li>
+<p>当我们点击右上角的 + 号按钮后会出现一个可选款</p>
+<ul>
+<li>Category：创建一个目录，可以归纳或分类相关属性；</li>
+<li>其他：则是声明一个与之对应类型的属性；</li>
+<li><img src="/Images/ShaderGraph_24.01/ShaderGraph12.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>当我们选择好一个类型后，会需要对此进行命名，命名好后会出现左侧显示属性名称，右侧显示类型，且在 Graph Inspector 面板内可以显示相对于的参数；</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph13.png" alt=""></p>
+</li>
+<li>
+<p>创建好一个属性名后，进行 Save Asset 的操作，在Project面板中右键创建个 Material 材质球，并赋值当前 Shader Graph，即可看到刚才声明的属性名了；</p>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph14.png" alt=""></p>
+</li>
+</ol>
+<h3 id="预览窗口">预览窗口③</h3>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph16.png" alt=""></p>
+<p>英文名：Main Preview</p>
+<ol>
+<li>个人对此理解：当我们对 Shader Graph 内不断地操作，最后显示的效果出展示在这个窗口内，所见即所得；（不同的节点（Node）也都会在当前节点下有预览的效果）</li>
+<li>操作：
+<ul>
+<li>更改模型：右键窗口可更改模型显示；</li>
+<li>放大缩小：鼠标滚轮上下滑动；</li>
+<li>可视角度：鼠标左键上下左右滑动；</li>
+</ul>
+</li>
+</ol>
+<h3 id="inspector面板">Inspector面板④</h3>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph17.png" alt=""></p>
+<ol>
+<li>Node Settings ：这里显示了当前节点的相关设置参数，不同节点会显示不同的参数；</li>
+<li>Graph Settings：这里显示了当前 Shader Graph 资源的整体设置参数；
+<ul>
+<li>Precision 精度：分为 Half 和 Float 精度，区别看理论知识3；</li>
+<li>Active Targets ：分为 Universal 和 Built-In，可根据所需选择；</li>
+</ul>
+</li>
+</ol>
+<h3 id="主堆">主堆⑤⑥</h3>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph18.png" alt=""></p>
+<p>英文名：Master Stack，以下是官方的说明介绍：</p>
+<blockquote>
+<p>主栈是 Shader Graph 的终点，用于定义着色器的最终表面外观。Shader Graph 应始终包含一个且仅包含一个主栈。</p>
+<p>主栈包含两个上下文：Vertex 和 Fragment。分别代表着色器的两个阶段。连接到 Vertex Context 中的 Block 的任何节点都将成为最终着色器的顶点函数的一部分。连接到 Fragment Context 中的 Block 的任何节点都将成为最终着色器的片元（或像素）函数的一部分。如果您将任何节点连接到两个上下文，它们将被执行两次，一次在顶点函数中，然后在片元函数中再次执行。上下文不能剪切、复制或粘贴。</p>
+</blockquote>
+<h4 id="顶点函数vertex">顶点函数（Vertex）⑤</h4>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph19.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Position</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义每个顶点的绝对对象空间顶点位置</td>
+</tr>
+<tr>
+<td style="text-align:center">Normal</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义每个顶点的绝对对象空间顶点法线</td>
+</tr>
+<tr>
+<td style="text-align:center">Tangent</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义每个顶点的绝对对象空间顶点切线</td>
+</tr>
+</tbody>
+</table>
+<h4 id="片元函数fragment">片元函数（Fragment）⑥</h4>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph20.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Base Color</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义材质的基色值。期望范围 0 - 1</td>
+</tr>
+<tr>
+<td style="text-align:center">Normal (Tangent Space)</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义材质在切线空间中的法线值</td>
+</tr>
+<tr>
+<td style="text-align:center">Normal (Object Space)</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义材质在对象空间中的法线值</td>
+</tr>
+<tr>
+<td style="text-align:center">Normal (World Space)</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义材质在世界空间中的法线值</td>
+</tr>
+<tr>
+<td style="text-align:center">Metallic</td>
+<td style="text-align:center">Float</td>
+<td style="text-align:center">定义材料的金属度值，其中 0 表示非金属，1 表示金属</td>
+</tr>
+<tr>
+<td style="text-align:center">Smoothness</td>
+<td style="text-align:center">Float</td>
+<td style="text-align:center">定义材质的平滑度值。期望范围 0 - 1</td>
+</tr>
+<tr>
+<td style="text-align:center">Emission</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义材质的发光颜色值。期望正值</td>
+</tr>
+<tr>
+<td style="text-align:center">Ambient Occlusion</td>
+<td style="text-align:center">Float</td>
+<td style="text-align:center">定义材质的环境光遮挡值。期望范围 0 - 1</td>
+</tr>
+<tr>
+<td style="text-align:center">Specular</td>
+<td style="text-align:center">Vectory3</td>
+<td style="text-align:center">定义材质的镜面反射颜色值。期望范围 0 - 1</td>
+</tr>
+<tr>
+<td style="text-align:center">Alpha</td>
+<td style="text-align:center">Float</td>
+<td style="text-align:center">定义材质的 Alpha 值。用于透明度和/或 Alpha 裁剪。期望范围 0 - 1</td>
+</tr>
+<tr>
+<td style="text-align:center">Alpha Clip Threshold</td>
+<td style="text-align:center">Float</td>
+<td style="text-align:center">Alpha低于此值的片元将被丢弃，期望范围0 - 1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="即时贴">即时贴</h3>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph21.png" alt=""></p>
+<ol>
+<li>即时贴与win10的便签有着同样的功能，由标题和正文组成。开发者可以用此：1）描述某个部分的作用；2）为当前窗口做功能描述或者留言；3）作为代办事项列表；</li>
+<li>创建方式：右键视图内窗口 -&gt; 选择 Create Sticky Note；</li>
+<li>编辑操作：双击标题或者正文内容则可开始编辑写入操作；</li>
+<li>便贴属性：右键当前即时贴，可以选择相关的操作（更改主题、更改字体大小、复制、黏贴、删除）；</li>
+</ol>
+<h3 id="创建节点">创建节点</h3>
+<p><img src="/Images/ShaderGraph_24.01/ShaderGraph10.png" alt=""></p>
+<p>英文名：Node</p>
+<ol>
+<li>个人对此理解：每个节点都是相当于一个函数，节点的左边端口则是传入的参数，节点的右边端口则是返回的参数。开发者需要再不同的节点内不断地连连看（也就是入参与出参的操作），最后链接到定点或者片元函数。便可完成一个Shader了。</li>
+<li>创建节点的方式：1）在窗口内打空格，2）在窗口内右击选择 Create Node；</li>
+<li>各个节点说明：<a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Node-Library.html#top">链接</a></li>
+</ol>
+<h1 id="理论知识"><strong>理论知识</strong></h1>
+<ol>
+<li><strong>渲染方式：BRP、URP、HDRP三者的区别：</strong>
+<ul>
+<li>介绍：
+<ul>
+<li>BRP（Built-in Render Pipeline）：由项目内内置的最基础的渲染功能，适用于渲染质量要求不高的项目：</li>
+<li>URP（Universal Render Pipeline）：URP提供一些常用的渲染特效，适用于有些许渲染需求，可用在移动平台和性能有限的平台</li>
+<li>HDRP（High Definition Render Pipeline）：HDRP专注于渲染特效，适用于需要高度逼真的项目中；</li>
+</ul>
+</li>
+<li>对比：
+<ul>
+<li>性能需求：HDRP &gt; URP &gt; BRP</li>
+<li>渲染质量：HDRP &gt; URP &gt; BRP</li>
+</ul>
+</li>
+<li>BRP转换URP的项目变化：
+<ul>
+<li>材质球从原来的 标准（standard）更改为 （URR）</li>
+<li>Camera组件的可选参数也发生了变化</li>
+<li>等等&hellip;</li>
+</ul>
+</li>
+<li><a href="https://blog.csdn.net/weixin_46149667/article/details/132411734">参考文档</a></li>
+</ul>
+</li>
+<li><strong>Lit Shader Graph 与 Unlit Shader Graph 的区别：</strong>
+<ul>
+<li>Lit带有光照模型，并且是基于物理的光照模型（PBR），用法类似于表面着色器；</li>
+<li>Unlit 不带光照模型，需要自己写光照计算流程，这也给了它更大的灵活性，因为它不依赖于固定的光照模型，可以根据需要进行更定制化的处理。</li>
+</ul>
+</li>
+<li><strong>精度类型 Half 与 Float 的区别</strong>：
+<ul>
+<li>Half：中等精度浮点值；通常为 16 位（范围为 –60000 至 +60000，具有大约 3 位小数的精度）。可用于短矢量、方向、对象空间位置以及高动态范围颜色。</li>
+<li>Float：最高精度浮点值；一般为 32 位（也就是常规编程语言中的 <code>float</code>）。可用于世界空间位置、纹理坐标或涉及复杂函数（如三角函数、幂函数或指数函数）的标量计算。</li>
+</ul>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@12.1/manual/index.html">Shader Graph Doc</a></li>
+<li><a href="https://learn.unity.com/tutorial/get-started-with-shader-graph#">Shader Graph Learn</a></li>
+<li><a href="https://czhenya.blog.csdn.net/article/details/118378214">Shader 入门使用 CSDN</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-01-14 19:40:08 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.01_shadergraph/">https://spirite12.github.io/post/24/24.01_shadergraph/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/23/23.11_addressable/">
+            <span class="next-text nav-default">Addressable 游戏在线热更（四）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
