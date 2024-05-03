@@ -10,10 +10,10 @@
     <lastBuildDate>Thu, 01 Feb 2024 19:40:09 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Shader Graph 入门实践（二）</title>
-      <link>https://spirite12.github.io/post/24.02_shadergraph/</link>
+      <link>https://spirite12.github.io/post/24/24.02_shadergraph/</link>
       <pubDate>Thu, 01 Feb 2024 19:40:09 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/24.02_shadergraph/</guid>
+      <guid>https://spirite12.github.io/post/24/24.02_shadergraph/</guid>
       <description>概括 本文主要是做些基础的实践内容，以便快速入门； 实践 一、前期准备 新建一个名为 Sample 的场景，并保存资源在 Project 面板上； 在场景资源的同级，创建一个名为 SGSample</description>
     </item>
     
