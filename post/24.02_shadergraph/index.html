@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Shader Graph 入门实践（二） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="概括 本文主要是做些基础的实践内容，以便快速入门； 实践 一、前期准备 新建一个名为 Sample 的场景，并保存资源在 Project 面板上； 在场景资源的同级，创建一个名为 SGSample" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24.02_shadergraph/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Shader Graph 入门实践（二）" />
+<meta property="og:description" content="概括 本文主要是做些基础的实践内容，以便快速入门； 实践 一、前期准备 新建一个名为 Sample 的场景，并保存资源在 Project 面板上； 在场景资源的同级，创建一个名为 SGSample" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24.02_shadergraph/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-02-01T19:40:09+08:00" />
+<meta property="article:modified_time" content="2024-02-01T19:40:09+08:00" />
+
+<meta itemprop="name" content="Shader Graph 入门实践（二）">
+<meta itemprop="description" content="概括 本文主要是做些基础的实践内容，以便快速入门； 实践 一、前期准备 新建一个名为 Sample 的场景，并保存资源在 Project 面板上； 在场景资源的同级，创建一个名为 SGSample"><meta itemprop="datePublished" content="2024-02-01T19:40:09+08:00" />
+<meta itemprop="dateModified" content="2024-02-01T19:40:09+08:00" />
+<meta itemprop="wordCount" content="1898">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Shader Graph 入门实践（二）"/>
+<meta name="twitter:description" content="概括 本文主要是做些基础的实践内容，以便快速入门； 实践 一、前期准备 新建一个名为 Sample 的场景，并保存资源在 Project 面板上； 在场景资源的同级，创建一个名为 SGSample"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Shader Graph 入门实践（二）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-02-01 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概括"><strong>概括</strong></a></li>
+    <li><a href="#实践"><strong>实践</strong></a>
+      <ul>
+        <li><a href="#一前期准备"><strong>一、前期准备</strong></a></li>
+        <li><a href="#二外部调色"><strong>二、外部调色</strong></a></li>
+        <li><a href="#三纹理贴图"><strong>三、纹理贴图</strong></a></li>
+        <li><a href="#四逼真效果"><strong>四、逼真效果</strong></a>
+          <ul>
+            <li><a href="#法线normal">法线：Normal</a></li>
+            <li><a href="#金属metallic">金属：Metallic</a></li>
+            <li><a href="#外发光emission">外发光：Emission</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="概括"><strong>概括</strong></h1>
+<p>本文主要是做些基础的实践内容，以便快速入门；</p>
+<h1 id="实践"><strong>实践</strong></h1>
+<h2 id="一前期准备"><strong>一、前期准备</strong></h2>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph2.png" alt=""></p>
+<ol>
+<li>新建一个名为 Sample 的场景，并保存资源在 Project 面板上；</li>
+<li>在场景资源的同级，创建一个名为 SGSample 的 ShaderGraph 资源；</li>
+<li>在场景资源的同级，创建一个名为 MatSample 的 Material 资源，并为此赋值 SGSample 的 Shader；</li>
+<li>在 Hierarchy 面板上创建一个 Cube，此 Cube 使用的Material（材质球）为 MatSample；</li>
+</ol>
+<h2 id="二外部调色"><strong>二、外部调色</strong></h2>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph1.gif" alt=""></p>
+<ol>
+<li>
+<p>打开 SGSample 资源，在黑板（Blackboard），面板上点击 + 号添加名为 Color 的属性类型；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph3.png" alt=""></p>
+</li>
+<li>
+<p>点住 Color 属性并拖拽到窗口内，会出现新的小区域框，将此区域框右侧的端口链接到 Fragment 的 Base Color 的节点内；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph4.png" alt=""></p>
+</li>
+<li>
+<p>点击 Save Asset 保存当前操作，点击 Hierarchy 内的 Cube 物体，在 Inspector 内打开材质球属性，此时就可以看到刚才定义好的名为 Color 的变量，点击更改颜色，即可更改 Cube 的显示颜色；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph5.png" alt=""></p>
+</li>
+</ol>
+<h2 id="三纹理贴图"><strong>三、纹理贴图</strong></h2>
+<ol>
+<li>
+<p>由于单纯的实现颜色的赋值对于功能开发的实用性并不大，反而纹理贴图的赋值会更加通用些，因此删除 与 Color 有关的黑板和窗口内的区域框数据；</p>
+</li>
+<li>
+<p>在黑板内添加名为 Texture2D 的属性类型，并拖拽到窗口内；</p>
+</li>
+<li>
+<p>点击空格出现创建节点，添加 Sample Texture 2D 节点，将当前节点的输入端 Texture 链接公开属性 Texture2D，将当前节点的输出端 RGBA 链接 Base Color</p>
+<ul>
+<li>
+<p>说明：由于当前公开属性要的属性类型是 Texture 而 Base Color 需要的入参类型是 Vectory3，直接链接两端是无效的，因此需要 Sample Texture 2D 节点函数转换下；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph6.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>点击 Save Asset，点击 MatSample，则可以看到材质球上多了 Texture2D 公开属性，并为此赋值一张贴图查看效果；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph7.png" alt=""></p>
+</li>
+<li>
+<p><strong>额外知识</strong>：Main Preview 实现查看结果预览：</p>
+<ul>
+<li>说明：原本的 Texture 2D 是在外部赋值的，这是合理的操作，此额外知识只是为了实现所需的效果；</li>
+<li>操作：点击黑板上的 Texture2D 属性，在 Graph Inspector 面板内找到 Default，为此赋值当前外部赋值的贴图；</li>
+<li>效果：便可看到 Sample Texture2D 节点上出现预览效果，Main Preview 中也出现预览效果</li>
+<li>提示：做完这个操作记得取消下这个 Default 赋值操作</li>
+</ul>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph8.png" alt=""></p>
+</li>
+</ol>
+<h2 id="四逼真效果"><strong>四、逼真效果</strong></h2>
+<p>原本只是赋值了一张纹理贴图，为了让木质纹理效果更加的逼真，而作出了以下效果；</p>
+<h3 id="法线normal">法线：Normal</h3>
+<p>法线贴图 Doc：<a href="https://docs.unity3d.com/cn/2021.3/Manual/StandardShaderMaterialParameterNormalMap.html">链接</a></p>
+<ol>
+<li>
+<p>首先法线也是需要有贴图的，因此在 blackboard 里添加名为 NormalTexture 的 Texture2D，并链接上一个新建的 Sample Texture2D 的输入端；</p>
+</li>
+<li>
+<p>新建一个节点名为 Normal Strength ，将此节点的输入框 In 参数与 Sample Texture2D 的输出端的 RGBA 进行链接；将此节点的输出端 Out 则链接上 Fragment 的 Normal 节点上；</p>
+</li>
+<li>
+<p>回到 MatSample 材质球上进行法线贴图的赋值，并观察其效果；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph9.png" alt=""></p>
+</li>
+<li>
+<p>从尝试中能看到其实有无贴法线图是没有差别的，这是因为 Normal Strength 的输入端的 Strength 入参值为0导致的。对此，需要在 blackboad 新增名为 NormalStrength 的 float 类型变量；将此变量拖拽到窗口内，并与 Normal Strength 的输入端 Strength 进行链接，并 Save Asset 操作；</p>
+<ul>
+<li>可在 blackboard 内点击 NormalStrength 在 Graph Inspector 面板内对其修改 mode 为 Slider，并限制其最小（min）和最大（max）值；</li>
+</ul>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph10.png" alt=""></p>
+</li>
+<li>
+<p>回到 MatSample 材质球上，此时可以看到多了 NormalStrength 的变量，对其设置0、0.5、1这三个值，并观察其效果，可以看到当值在1的时候，其凹凸纹理的效果是比较理想且明显的；</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph11.png" alt=""></p>
+</li>
+<li>
+<p><strong>额外知识</strong>：Group Selection 实现给多节点打组：</p>
+<ul>
+<li>说明：在 C# 中会使用 <code>#region ... #endregion</code> 对多个函数进行分块整体描述，在 Lua 中配合 EmmyLua 也可以用 <code>--region ... --endregion</code> 达到相同的效果，那么在 Shader Group 中 Group Selecttion 也可以做到；</li>
+<li>操作：点击鼠标左键往右滑动会出现个矩形框，在矩形框内的多个节点在松开鼠标会同时被选中，此时右击鼠标出现弹窗，选择 Group Selection 便可出现分类打组；</li>
+<li>功能：可以对准标题对这些节点做个统一的描述，比如当前节点是处理法线，则可以标注 Normal，这样后续看到标题则可以知道这个区块是做什么的；</li>
+</ul>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph12.png" alt=""></p>
+</li>
+</ol>
+<h3 id="金属metallic">金属：Metallic</h3>
+<p>金属 Doc：<a href="https://docs.unity3d.com/cn/2021.3/Manual/StandardShaderMaterialParameterMetallic.html">链接</a></p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph13.png" alt=""></p>
+<ol>
+<li>首先金属也是需要有贴图的，因此在 blackboard 里添加名为 MetallicTexture 的 Texture2D，并链接上一个新建的 Sample Texture2D 的输入端；</li>
+<li>此时新增一个 Multiply 的节点，其输入端的一个参数链接 Sample Texture2D 的输出端 RGBA 内，其输出端链接到 Fragment 的 Metallic ；
+<ul>
+<li>Multiply 节点的作用是：对输入端的 AB 2端口进行乘法运算，并得出结果后在输出端 Out 输出；</li>
+<li>目的：为了有个外部变量控制金属的强弱值，因此需要在 blackboard 里添加名为MetallicStrength 的 Float 类型，并连接到 Multiply 的输入端的剩余一个参数内；</li>
+</ul>
+</li>
+<li>最后可以打个 Group Selection 组，并 Save Asset 资源查看效果；</li>
+<li>回到 MatSample 材质球上，对 Metallic Texture 进行赋值贴图，并可以看到多了 Metallic Strength 的变量，对其设置0、0.5、1这三个值，并观察其效果，可以看到当值在1的时候，其金属纹理的效果是比较理想且明显的；</li>
+</ol>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph14.png" alt=""></p>
+<h3 id="外发光emission">外发光：Emission</h3>
+<p>外发光 Doc：<a href="https://docs.unity3d.com/cn/2021.3/Manual/StandardShaderMaterialParameterEmission.html">链接</a></p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph15.png" alt=""></p>
+<ol>
+<li>
+<p>外发光和金属所需的节点类似，区别在于外发光是需要传入一个颜色，这个颜色作用于发光的颜色；</p>
+</li>
+<li>
+<p>因此简化步骤，列出所需的：</p>
+<ul>
+<li>Blackboard ：1）类型：Texture2D ，名：Emission；2）类型：Float ，名：EmissionStrength；3）类型：Color，名：EmissionColor</li>
+<li>节点：1）Sample Texture2D ；2）2个 Multiply；</li>
+</ul>
+</li>
+<li>
+<p>Save Asset 后，并在材质球内查看效果：</p>
+<p><img src="/Images/ShaderGraph_24.02/ShaderGraph16.png" alt=""></p>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@12.1/manual/index.html">Shader Graph Doc</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@12.1/manual/Node-Library.html">节点库</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-02-01 19:40:09 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24.02_shadergraph/">https://spirite12.github.io/post/24.02_shadergraph/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.01_shadergraph/">
+            <span class="next-text nav-default">Shader Graph 学习（一）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
