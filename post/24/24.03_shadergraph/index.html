@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Shader Graph 颜色消融效果（三） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="概括 本文主要实现物体消融的效果； 展示效果如下： Shader Graph 黑板属性和节点的总图： 实践 一、前期准备 在 Project 面板上新建 Sample 文件夹 在当前文件夹内，新建名为 MatSample 的材" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.03_shadergraph/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Shader Graph 颜色消融效果（三）" />
+<meta property="og:description" content="概括 本文主要实现物体消融的效果； 展示效果如下： Shader Graph 黑板属性和节点的总图： 实践 一、前期准备 在 Project 面板上新建 Sample 文件夹 在当前文件夹内，新建名为 MatSample 的材" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.03_shadergraph/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-03-18T19:40:10+08:00" />
+<meta property="article:modified_time" content="2024-03-18T19:40:10+08:00" />
+
+<meta itemprop="name" content="Shader Graph 颜色消融效果（三）">
+<meta itemprop="description" content="概括 本文主要实现物体消融的效果； 展示效果如下： Shader Graph 黑板属性和节点的总图： 实践 一、前期准备 在 Project 面板上新建 Sample 文件夹 在当前文件夹内，新建名为 MatSample 的材"><meta itemprop="datePublished" content="2024-03-18T19:40:10+08:00" />
+<meta itemprop="dateModified" content="2024-03-18T19:40:10+08:00" />
+<meta itemprop="wordCount" content="1789">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Shader Graph 颜色消融效果（三）"/>
+<meta name="twitter:description" content="概括 本文主要实现物体消融的效果； 展示效果如下： Shader Graph 黑板属性和节点的总图： 实践 一、前期准备 在 Project 面板上新建 Sample 文件夹 在当前文件夹内，新建名为 MatSample 的材"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Shader Graph 颜色消融效果（三）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-03-18 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概括"><strong>概括</strong></a></li>
+    <li><a href="#实践"><strong>实践</strong></a>
+      <ul>
+        <li><a href="#一前期准备">一、前期准备</a></li>
+        <li><a href="#二消融效果">二、消融效果</a></li>
+        <li><a href="#三颜色消融">三、颜色消融</a></li>
+        <li><a href="#四时间节点">四、时间节点</a></li>
+      </ul>
+    </li>
+    <li><a href="#资源下载"><strong>资源下载</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="概括"><strong>概括</strong></h1>
+<p>本文主要实现物体消融的效果；</p>
+<ol>
+<li>
+<p>展示效果如下：</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph1.gif" alt=""></p>
+</li>
+<li>
+<p>Shader Graph 黑板属性和节点的总图：</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph2.png" alt=""></p>
+</li>
+</ol>
+<h1 id="实践"><strong>实践</strong></h1>
+<h2 id="一前期准备">一、前期准备</h2>
+<ol>
+<li>
+<p>在 Project 面板上新建 Sample 文件夹</p>
+</li>
+<li>
+<p>在当前文件夹内，新建名为 MatSample 的材质球，新建名为 SGSample 的 ShaderGraph 资源；</p>
+<ul>
+<li>创建方式均为在 Project 内右击选择 Create -&gt; Material 或者 Shader Graph -&gt; URP -&gt; Lit Shader Graph；</li>
+</ul>
+</li>
+<li>
+<p>为当前 MatSample 材质球的 Shader 赋值 SGSample；</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph3.png" alt=""></p>
+</li>
+<li>
+<p>双击打开 SGSample 资源，并为 Fragment 的 Base Color 进行贴图的赋值操作：</p>
+<ul>
+<li>
+<p>在黑板（blackboard）中新建类型为 Texture2D 的名为 MainTex 的公开属性；</p>
+</li>
+<li>
+<p>拖拽 MainTex 属性到面板内，并新建个 Sample Texture 节点用来接收贴图；</p>
+</li>
+<li>
+<p>将 Sample Texture 的输入端 Texture 链接 MainTex，并将其输出端 RGBA 链接 Fragment 的 BaseColor；</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph4.png" alt=""></p>
+</li>
+<li>
+<p>点击 Save Asset 资源，并点击 Mat Sample 材质球，为其赋值一张贴图（任意一张都可）；</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="二消融效果">二、消融效果</h2>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph5.png" alt=""></p>
+<p>实现逻辑：利用噪声纹理图对贴图内各个网格单元赋值上一个 （0 - 1）的随机值，与此同时利用 Alpha Clip Threshold 节点的功能：对小于该值进行片元丢失的操作，来达到实现消融的效果；</p>
+<ol>
+<li>
+<p>实现片元丢失功能：</p>
+<ul>
+<li>
+<p>在黑板（Blackboard）面板上新建类型为 Float 名为 AlphaClipValue 的公开属性（Mode 可设置为滑动条 Slider ）；</p>
+</li>
+<li>
+<p>将此属性拖拽在窗口内并直连 Fragment 的 Alpha Clip Threshold 节点；</p>
+<ul>
+<li>
+<p>Alpha Clip Threshold 说明：Alpha 低于此值的片元将被丢弃，期望范围为 0 - 1；</p>
+<ul>
+<li>
+<p>此节点需要配合 Alpha 节点使用；</p>
+</li>
+<li>
+<p>根据节点描述则可以达到消融的效果；</p>
+<ul>
+<li>
+<p>测试效果：当 Alpha Clip Threshold 的值大于 Alpha 的时候，则在主视口无法看到预览，反之小于等于的时候则可以看到；</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph6.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>实现对贴图的单元赋值：</p>
+<ul>
+<li>新建 Simple Noise 节点，并让此节点的输出端链接 Fragment 的 Alpha 节点；
+<ul>
+<li><a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Simple-Noise-Node.html">Simple Noise</a>：这个节点为简单噪声，如果更改的输入端 Scale 属性的值，则称为值噪声；
+<ul>
+<li>简单噪声生成过程如下：在一个网格单元内（通常是正方形或立方体），在每个网格单元的顶点位置上随机生成一个随机值（通常在0到1之间）。对于每个空间点，计算它在网格单元内的位置，并根据顶点的随机值进行插值。得到该点的噪声值后便作为简单噪声纹理的一部分。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>查看效果：</p>
+<ul>
+<li>
+<p>点击 Save Asset，点击 MatSample 材质球，对 AlphaClipValue 属性值进行左右滑动，便可看到材质球简单的消融的效果；</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph7.gif" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="三颜色消融">三、颜色消融</h2>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph2.png" alt=""></p>
+<p>实现逻辑：在消融每帧展示的效果过程中，实现一个提前向外扩充区域的功能，对此对外扩充的区域实现发光颜色效果，与此同时配合片元丢失，则实现到颜色消融的效果；</p>
+<ol>
+<li>
+<p>实现提前向外扩充区域：</p>
+<ul>
+<li>思路：对当前需要剔除的 AlphaClipValue 公开属性值进行加值处理；</li>
+<li>步骤：
+<ol>
+<li>在黑板（blackboard）上新建类型为 Float 名为 AlphaClipAdd 的公开属性（Mode 可设置为滑动条 Slider ），用来表示需要提前扩容多少的值；</li>
+<li>添加 Add 节点，在输入端链接 AlphaClipAdd 和 AlphaClipValue 的两个公开值；
+<ul>
+<li><a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Add-Node.html">Add</a> 节点作用是：将输入端 A + B 后输出；</li>
+</ul>
+</li>
+<li>添加 Step 节点，在输入端的 Edge 链接 Simple Noise、In 链接 Add 节点的输出端；
+<ul>
+<li><a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Step-Node.html">Step</a> 节点作用是：输入 In 的值大于或等于输入 Edge 的值，则返回 1，否则返回 0
+<ul>
+<li><a href="https://docs.unity3d.com/cn/2019.3/ScriptReference/Color.html">额外知识</a>：在黑白贴图内，1代表的是白色，0代表的是黑色；</li>
+</ul>
+</li>
+<li>目的：白色区域表示的是提前扩容的全部区域，此时在这个区域内还有个消融区域。所以可得出：全部白色区域 - 消融区域 = 需要发光的区域；</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>实现外发光效果：</p>
+<ul>
+<li>思路：对当前 Step 节点输出后的白色区域做颜色叠加操作，达到外发光的作用；</li>
+<li>步骤：
+<ol>
+<li>在黑板（blackboard）上新建类型为 Color 名为 AlphaClipColor 的公开属性，用来表示需要外发光的是什么颜色；</li>
+<li>新增 Multiply 节点，将此节点的输入端链接 Step 的输出端，另一个输入端链接 AlphaClipColor，将此输出端链接 Fragment 的 Emission 节点；
+<ul>
+<li><a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Multiply-Node.html">Multiply</a> 节点作用是：对输入端的 AB 进行乘法运输，并在输出端输出；</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>查看最终效果：</p>
+<ul>
+<li>点击 Save Asset，点击 MatSample 材质球，对 AlphaClipColor 属性赋值相对应颜色，AlphaClipAdd 调整为0.05，对 AlphaClipValue 属性值进行左右滑动，便可看到材质球颜色消融的效果；</li>
+</ul>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph1.gif" alt=""></p>
+</li>
+</ol>
+<h2 id="四时间节点">四、时间节点</h2>
+<p>前提：前三步已经对消融的功能做出了介绍，此步骤只是个扩展知识点，不做也不会影响消融的效果；</p>
+<p>目的：AlphaClipValue 属性是由外部操作的，一般来说这也是合理的。这次步骤想的是需要时间来控制这个值的更改来达到自动消失和融合的功能；</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph10.png" alt=""></p>
+<p>步骤：</p>
+<ol>
+<li>
+<p>新建 Time 节点；</p>
+<ul>
+<li><a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Time-Node.html">Time</a> 节点介绍：节点内可访问到时间的相关参数；</li>
+</ul>
+</li>
+<li>
+<p>新建 Absolute 节点，将此节点的输入端链接 Time 节点的 SineTime 端口，将此节点的输出端链接之前 AlphaClipValue 所链接的节点（分别是 Add 、Alpha Clip Threshold 节点）</p>
+<ul>
+<li>
+<p><a href="https://docs.unity3d.com/cn/Packages/com.unity.shadergraph@10.5/manual/Absolute-Node.html">Absolute</a> 节点介绍：将输入框的值进行绝对值计算，使得最后得出的值肯定大于0、小于1，得出值后此时正好对应之前的取值范围；</p>
+</li>
+<li>
+<p>Time 内 Sine Time 为正弦图；其图为：</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph8.png" alt=""></p>
+</li>
+<li>
+<p>在经过 Absolute 节点后，其正弦图更改为：</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph9.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>此时查看效果，可以看到 MainPreview 预览内将自动的根据时间在不断地消融效果；</p>
+<p><img src="/Images/ShaderGraph_24.03/ShaderGraph1.gif" alt=""></p>
+</li>
+</ol>
+<h1 id="资源下载"><strong>资源下载</strong></h1>
+<p>下载资源地址：<a href="https://github.com/Spirite12/spirite12.github.io/blob/master/Assets/ShaderGraph_24.03.unitypackage">链接</a></p>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@12.1/manual/index.html">Shader Graph Doc</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@12.1/manual/Node-Library.html">节点库</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-03-18 19:40:10 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.03_shadergraph/">https://spirite12.github.io/post/24/24.03_shadergraph/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.02_shadergraph/">
+            <span class="next-text nav-default">Shader Graph 入门实践（二）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

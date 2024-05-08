@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Thu, 01 Feb 2024 19:40:09 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity-plugin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Mar 2024 19:40:10 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity-plugin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shader Graph 颜色消融效果（三）</title>
+      <link>https://spirite12.github.io/post/24/24.03_shadergraph/</link>
+      <pubDate>Mon, 18 Mar 2024 19:40:10 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.03_shadergraph/</guid>
+      <description>概括 本文主要实现物体消融的效果； 展示效果如下： Shader Graph 黑板属性和节点的总图： 实践 一、前期准备 在 Project 面板上新建 Sample 文件夹 在当前文件夹内，新建名为 MatSample 的材</description>
+    </item>
+    
     <item>
       <title>Shader Graph 入门实践（二）</title>
       <link>https://spirite12.github.io/post/24/24.02_shadergraph/</link>
