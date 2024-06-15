@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 30 May 2023 19:40:05 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Apr 2024 19:40:11 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>事件管理系统（C#版）</title>
+      <link>https://spirite12.github.io/post/24/24.04_eventmanager/</link>
+      <pubDate>Mon, 15 Apr 2024 19:40:11 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.04_eventmanager/</guid>
+      <description>前言 在游戏的实际开发内会包含许多的事件方法，比如：1：24/5点红点刷新；2：战斗胜利/失败触发；3：玩家数值变更；等等； 在游戏开发过程中，</description>
+    </item>
+    
     <item>
       <title>ChatFilter 屏蔽字库</title>
       <link>https://spirite12.github.io/post/23/23.05_chatfilter/</link>

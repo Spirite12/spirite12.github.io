@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>事件管理系统（C#版） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 在游戏的实际开发内会包含许多的事件方法，比如：1：24/5点红点刷新；2：战斗胜利/失败触发；3：玩家数值变更；等等； 在游戏开发过程中，" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.04_eventmanager/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="事件管理系统（C#版）" />
+<meta property="og:description" content="前言 在游戏的实际开发内会包含许多的事件方法，比如：1：24/5点红点刷新；2：战斗胜利/失败触发；3：玩家数值变更；等等； 在游戏开发过程中，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.04_eventmanager/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-04-15T19:40:11+08:00" />
+<meta property="article:modified_time" content="2024-04-15T19:40:11+08:00" />
+
+<meta itemprop="name" content="事件管理系统（C#版）">
+<meta itemprop="description" content="前言 在游戏的实际开发内会包含许多的事件方法，比如：1：24/5点红点刷新；2：战斗胜利/失败触发；3：玩家数值变更；等等； 在游戏开发过程中，"><meta itemprop="datePublished" content="2024-04-15T19:40:11+08:00" />
+<meta itemprop="dateModified" content="2024-04-15T19:40:11+08:00" />
+<meta itemprop="wordCount" content="2605">
+<meta itemprop="keywords" content="C-Sharp," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="事件管理系统（C#版）"/>
+<meta name="twitter:description" content="前言 在游戏的实际开发内会包含许多的事件方法，比如：1：24/5点红点刷新；2：战斗胜利/失败触发；3：玩家数值变更；等等； 在游戏开发过程中，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">事件管理系统（C#版）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-04-15 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#正文"><strong>正文</strong></a>
+      <ul>
+        <li><a href="#一事件常量类"><strong>一、事件常量类</strong></a></li>
+        <li><a href="#二事件管理类"><strong>二、事件管理类</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#示例"><strong>示例</strong></a></li>
+    <li><a href="#扩展"><strong>扩展</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<ul>
+<li>在游戏的实际开发内会包含许多的事件方法，比如：1：24/5点红点刷新；2：战斗胜利/失败触发；3：玩家数值变更；等等；</li>
+<li>在游戏开发过程中，由于事件是由类声明的，因此在开发过程中倘若其他类也需要监听，则需要知道当前事件是在哪个类内声明才可以注册并发放事件；而当工程量逐步扩大的情况下，事件散落在各个脚本，显示会比较杂乱无章，因此希望有个统一管理的事件脚本；</li>
+</ul>
+<h1 id="正文"><strong>正文</strong></h1>
+<h2 id="一事件常量类"><strong>一、事件常量类</strong></h2>
+<ol>
+<li>
+<p>事件常量类作用：统一需要声明的事件名称在一个脚本内，方便后续多个脚本需要共同一个事件的时候，无需在各个脚本内查找，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Module</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 事件名称常量类(框架事件)</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">EventConstBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 红点激活状态变化</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">RedTipNotifyActive</span> <span class="p">=</span> <span class="n">nameof</span><span class="p">(</span><span class="n">RedTipNotifyActive</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Module</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// 事件名称常量类(项目事件)</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">EventConst</span> <span class="p">:</span> <span class="n">EventConstBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">///5点刷新</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">FiveTime</span> <span class="p">=</span> <span class="n">nameof</span><span class="p">(</span><span class="n">FiveTime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>nameof </code>：让变量、类型或成员的名称作为字符串常量；</p>
+</li>
+<li>
+<p>Q1：正常只需要一个 EventConst 脚本便可实现事件常量类，此处使用到了2个脚本的原因是：</p>
+<p>A：<code>EventConstBase</code> 脚本处在框架的工程内，为了不让项目实际事件都写在框架脚本内，目的让框架工程和项目工程做到解耦，因此需要拆分2个脚本，一个供框架（EventConstBase）使用，一个供项目（EventConst）使用；并且 EventConst 作为 EventConstBase 的子类，使得项目内脚本也可以拿到框架事件；</p>
+</li>
+<li>
+<p>Q2：C# 提供 <code>partial</code> 关键词达到一个类可以拆分成多个脚本来写，此处不用这个关键词的原因是：</p>
+<p>A：当前框架工程和项目工程是处在不同的dll文件内，这2个地方已经用 Assembly Definition Reference 达到隔离；而partial 的使用说明中有一处如下说到，因此不能使用此关键词；</p>
+<blockquote>
+<p>要成为同一类型的各个部分的所有分部类型定义都必须在同一程序集和同一模块（.exe 或.dll 文件）中进行定义。分部定义不能跨越多个模块；</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="二事件管理类"><strong>二、事件管理类</strong></h2>
+<ol>
+<li>
+<p>事件管理类作用：统一管理并存储所有事件的数据，提供事件监听、移除、发放与清空的功能；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Module</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">EventManager</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 监听不需要参数传递的事件</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListener</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AddListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 添加事件监听（1个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListener</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AddListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 添加事件监听（2个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListener</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AddListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 添加事件监听（3个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListener</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AddListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 添加事件监听（4个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListener</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AddListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 移除不需要参数的事件</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RemoveListener</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RemoveListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 移除对应的事件监听（1个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RemoveListener</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RemoveListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 移除对应的事件监听（2个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RemoveListener</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RemoveListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 移除对应的事件监听（3个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RemoveListener</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RemoveListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 移除对应的事件监听（4个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RemoveListener</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RemoveListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 事件触发（不需要参数的）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">eventName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="n">eventDic</span><span class="p">[</span><span class="n">eventName</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">)?.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 事件触发（1个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">T</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">eventName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="n">eventDic</span><span class="p">[</span><span class="n">eventName</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;)?.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 事件触发（2个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">T1</span> <span class="n">info1</span><span class="p">,</span> <span class="n">T2</span> <span class="n">info2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">eventName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="n">eventDic</span><span class="p">[</span><span class="n">eventName</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;)?.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">info1</span><span class="p">,</span> <span class="n">info2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 事件触发（3个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">T1</span> <span class="n">info1</span><span class="p">,</span> <span class="n">T2</span> <span class="n">info2</span><span class="p">,</span> <span class="n">T3</span> <span class="n">info3</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">eventName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="n">eventDic</span><span class="p">[</span><span class="n">eventName</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">&gt;)?.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">info1</span><span class="p">,</span> <span class="n">info2</span><span class="p">,</span> <span class="n">info3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 事件触发（4个参数）</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">T1</span> <span class="n">info1</span><span class="p">,</span> <span class="n">T2</span> <span class="n">info2</span><span class="p">,</span> <span class="n">T3</span> <span class="n">info3</span><span class="p">,</span> <span class="n">T4</span> <span class="n">info4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">eventName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="n">eventDic</span><span class="p">[</span><span class="n">eventName</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">&gt;)?.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">info1</span><span class="p">,</span> <span class="n">info2</span><span class="p">,</span> <span class="n">info3</span><span class="p">,</span> <span class="n">info4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 添加事件</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListenerBase</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Delegate</span> <span class="n">callBack</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">eventName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">eventDic</span><span class="p">[</span><span class="n">eventName</span><span class="p">].</span><span class="n">Add</span><span class="p">(</span><span class="n">callBack</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">eventDic</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;(){</span> <span class="n">callBack</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 移除事件</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RemoveListenerBase</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Delegate</span> <span class="n">callBack</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="k">out</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">eventList</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">eventList</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">callBack</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">eventList</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">eventDic</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">eventName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 清空事件</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Clear</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">eventDic</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;&gt;</span> <span class="n">eventDic</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>T</code>：利用泛型来达到不同的数据类型传参；</p>
+</li>
+<li>
+<p>目前提供能够匹配最多 4 个参数的无返回值方法，倘若需要更多，则需要对当前代码进行补充；</p>
+</li>
+<li>
+<p>Q：是否可以用枚举作为 Key 来达到字典的存储（需要在 EventConst 更改为枚举做法）：</p>
+<p>A：可以做，但不建议的理由如下：</p>
+<ul>
+<li>由于框架和项目是分开的，因此枚举没办法在2个脚本内定义，倘若只有1个脚本的是可以的；</li>
+<li>枚举作为字典 Key 的时候会在查询时产生装箱的问题，在性能上可能会有一点点损耗；
+<ul>
+<li><a href="https://blog.csdn.net/zhaogenzi/article/details/9361349">文章1</a>、<a href="https://ayende.com/blog/3885/dictionary-enum-t-puzzler">文章2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="示例"><strong>示例</strong></h1>
+<ol>
+<li>
+<p>示例脚本如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Module</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span> <span class="k">class</span> <span class="nc">MainUI</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainUI</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">private</span> <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">EventManager</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="n">EventMethods</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventManager</span><span class="p">.</span><span class="n">AddListener</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="n">EventMethods1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventManager</span><span class="p">.</span><span class="n">AddListener</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="n">EventMethods2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">EventManager</span><span class="p">.</span><span class="n">RemoveListener</span><span class="p">(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="n">EventMethods</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventManager</span><span class="p">.</span><span class="n">RemoveListener</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="n">EventMethods1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventManager</span><span class="p">.</span><span class="n">RemoveListener</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="n">EventMethods2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventManager</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventManager</span><span class="p">.</span><span class="n">DispatchEvent</span><span class="p">(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">S</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventManager</span><span class="p">.</span><span class="n">DispatchEvent</span><span class="p">(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">D</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventManager</span><span class="p">.</span><span class="n">DispatchEvent</span><span class="p">(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">,</span> <span class="s">&#34;文本1&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(){</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">EventMethods</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">&#34;收到事件发放&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">EventMethods1</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">&#34;收到事件发放,数值为&#34;</span> <span class="p">+</span> <span class="n">number</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">EventMethods2</span><span class="p">(</span><span class="kt">string</span> <span class="n">str1</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">intList</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="k">value</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">intValue</span> <span class="k">in</span> <span class="n">intList</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">value</span> <span class="p">+=</span> <span class="n">intValue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">&#34;收到事件发放, 文本为：&#34;</span> <span class="p">+</span> <span class="n">str1</span> <span class="p">+</span> <span class="s">&#34;\n总和为：&#34;</span> <span class="p">+</span> <span class="k">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>把当前代码直接挂载在场景内，并运行游戏，分别按下按键 A、S、D 三个按钮，并查看输出结果；</p>
+</li>
+<li>
+<p>Console 控制台输出如下：</p>
+<p><img src="/Images/24.04_EventManager/EventManager1.jpg" alt=""></p>
+</li>
+<li>
+<p>由控制台输出结果可知：</p>
+<ol>
+<li>当触发同一个事件的时候，当前事件绑定了多重不同的参数，而发放事件的时候，只有相同参数的所匹配的方法才能被响应；</li>
+<li>在写 <code>EventManager.AddListener</code> 的时候需要在销毁的时候写 <code>EventManager.RemoveListener</code>来达到移除事件，否则会出现切换场景或者实例销毁了，但是事件还存在的情况，导致内存泄漏；</li>
+</ol>
+</li>
+</ol>
+<h1 id="扩展"><strong>扩展</strong></h1>
+<ol>
+<li>
+<p>使用扩展方法 this 作为第一个传参类型，当前类作为静态的，并跟上 object 类型，因为 Object 类是所有类的父类，使得任何一个类（但是除了静态类）都会拥有这个方法；</p>
+<ul>
+<li>
+<p>EventManager 代码举例一个函数改法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Module</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">EventManager</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 监听不需要参数传递的事件</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddListener</span><span class="p">(</span><span class="k">this</span> <span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="kt">string</span> <span class="n">eventName</span><span class="p">,</span> <span class="n">Action</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AddListenerBase</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>而此时 MainUI 的 Update 其中一个改法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">MainUI</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainUI</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">DispatchEvent</span><span class="p">(</span><span class="n">EventConst</span><span class="p">.</span><span class="n">FiveTime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>利：简化了事件函数的相关调用方式；</p>
+</li>
+<li>
+<p>弊：弱化了 EventManager 的存在，占用了当前类的函数命名；</p>
+</li>
+</ul>
+</li>
+<li>
+<p>本文代码使用的是手写的多个泛型的传参做法，是否有其他办法达到：</p>
+<p>A：可以查看本文：<a href="https://blog.csdn.net/qq_46044366/article/details/126810076">Unity 事件番外篇：事件管理中心</a></p>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://blog.csdn.net/qq_46044366/article/details/122722948">Unity 事件管理中心</a></li>
+<li><a href="https://blog.csdn.net/qq_46044366/article/details/122728869">C# 事件（结合 Unity）</a></li>
+<li><a href="https://blog.csdn.net/qq_46044366/article/details/122550088">C# 委托 （结合Unity）</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-04-15 19:40:11 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.04_eventmanager/">https://spirite12.github.io/post/24/24.04_eventmanager/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c-sharp/">C-Sharp</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.03_shadergraph/">
+            <span class="next-text nav-default">Shader Graph 颜色消融效果（三）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
