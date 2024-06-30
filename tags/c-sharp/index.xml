@@ -7,7 +7,34 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Mon, 15 Apr 2024 19:40:11 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Jun 2024 19:40:14 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/c-sharp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RedTip 红点树编辑器（三）</title>
+      <link>https://spirite12.github.io/post/24/24.0629_redtip/</link>
+      <pubDate>Sat, 29 Jun 2024 19:40:14 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.0629_redtip/</guid>
+      <description>前言 在开发过程中，红点的的数据问题排查一般可以通过 IDE 的断点完成，但是这样也需要定位到所需的代码才可。那是否可以有个编辑器的扩展界面，以UI界</description>
+    </item>
+    
+    <item>
+      <title>RedTip 红点使用示例（二）</title>
+      <link>https://spirite12.github.io/post/24/24.0607_redtip/</link>
+      <pubDate>Fri, 07 Jun 2024 19:40:13 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.0607_redtip/</guid>
+      <description>使用示例 一、红点初始化 RedTipMgr ：初始化函数为： Init 和 Destroy 的函数； RedTipConst：初始化函数为：Initialization，此函数的目的是往 RedTipTree</description>
+    </item>
+    
+    <item>
+      <title>RedTip 红点树（一）</title>
+      <link>https://spirite12.github.io/post/24/24.05_redtip/</link>
+      <pubDate>Sat, 18 May 2024 19:40:12 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.05_redtip/</guid>
+      <description>前言 红点在游戏中可以说是一个比较常见的UI，其表现为一个红色UI图，更详细的则为在UI图中带上数值，其代表子系统下有多个红点； 红点的作用则是</description>
+    </item>
+    
     <item>
       <title>事件管理系统（C#版）</title>
       <link>https://spirite12.github.io/post/24/24.04_eventmanager/</link>
