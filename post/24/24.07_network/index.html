@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ProtoBuf 与网络相关知识 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.07_network/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="ProtoBuf 与网络相关知识" />
+<meta property="og:description" content="Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.07_network/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-07-17T19:40:15+08:00" />
+<meta property="article:modified_time" content="2024-07-17T19:40:15+08:00" />
+
+<meta itemprop="name" content="ProtoBuf 与网络相关知识">
+<meta itemprop="description" content="Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、"><meta itemprop="datePublished" content="2024-07-17T19:40:15+08:00" />
+<meta itemprop="dateModified" content="2024-07-17T19:40:15+08:00" />
+<meta itemprop="wordCount" content="4898">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ProtoBuf 与网络相关知识"/>
+<meta name="twitter:description" content="Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ProtoBuf 与网络相关知识</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-07-17 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#protobuf"><strong>Protobuf</strong></a>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#protobufdll">Protobuf.dll</a></li>
+        <li><a href="#protocexe">Protoc.exe</a></li>
+        <li><a href="#代码测试">代码测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#网络同步"><strong>网络同步</strong></a>
+      <ul>
+        <li><a href="#对比">对比</a></li>
+        <li><a href="#帧同步">帧同步</a></li>
+        <li><a href="#状态同步">状态同步</a></li>
+      </ul>
+    </li>
+    <li><a href="#连接34次握手"><strong>连接3、4次握手</strong></a>
+      <ul>
+        <li><a href="#连接建立3次握手">连接建立（3次握手）</a></li>
+        <li><a href="#连接释放4次握手">连接释放（4次握手）</a></li>
+      </ul>
+    </li>
+    <li><a href="#长短连接"><strong>长、短连接</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="protobuf"><strong>Protobuf</strong></h1>
+<h2 id="前言">前言</h2>
+<ul>
+<li>
+<p>Github：<a href="https://github.com/protocolbuffers/protobuf">链接</a></p>
+</li>
+<li>
+<p>官方的概述：</p>
+<blockquote>
+<p>协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。</p>
+<p>它类似于 JSON，但体积更小、速度更快，并且会生成本机语言绑定。您只需定义一次数据的结构，然后就可以使用专门生成的源代码轻松地将结构化数据写入各种数据流并使用各种语言读取这些结构化数据。</p>
+</blockquote>
+</li>
+<li>
+<p>使用 Protobuf 的好处如下：</p>
+<ol>
+<li><strong>支持多种不同的编程语言</strong>：包括但不限于 <a href="https://protobuf.dev/reference/cpp/cpp-generated#invocation">C++</a>、<a href="https://protobuf.dev/reference/csharp/csharp-generated#invocation">C#</a>、<a href="https://protobuf.dev/reference/java/java-generated#invocation">Java</a>、<a href="https://protobuf.dev/reference/kotlin/kotlin-generated#invocation">Kotlin</a>、<a href="https://protobuf.dev/reference/objective-c/objective-c-generated#invocation">Objective-C</a>、<a href="https://protobuf.dev/reference/php/php-generated#invocation">PHP</a>、<a href="https://protobuf.dev/reference/python/python-generated#invocation">Python</a>、<a href="https://protobuf.dev/reference/ruby/ruby-generated#invocation">Ruby</a>；</li>
+<li><strong>跨项目支持</strong>：通过在特定项目代码库之外的文件<code>message</code>中定义类型 ，您可以在项目间使用协议缓冲区。如果您定义的类型或枚举预计会在您的直接团队之外广泛使用，则可以将它们放在自己的文件中，而不需要依赖任何文件。<code>.proto``message</code></li>
+<li><strong>更新 Proto 定义而不更新代码</strong>：可向后兼容，也可向前兼容；只要您在更新定义时遵循一些<a href="https://protobuf.dev/programming-guides/proto3/#updating">简单的做法</a><code>.proto</code>，旧代码就会无问题地读取新消息，忽略任何新添加的字段。对于旧代码，已删除的字段将具有其默认值，而已删除的重复字段将为空。新代码也将透明地读取旧消息。新字段将不会出现在旧消息中；在这些情况下，协议缓冲区会提供合理的默认值。</li>
+</ol>
+</li>
+</ul>
+<h2 id="protobufdll">Protobuf.dll</h2>
+<p>首先需要生成 Protobuf.dll 的文件，并导入到 Unity 的 Plugins 文件夹内；</p>
+<ol>
+<li>
+<p>进入 Github 的 <a href="https://github.com/protocolbuffers/protobuf/releases">releases</a> 页面，选择一个版本下载并解压，本文选择的版本是 Protocol Buffers v27.2</p>
+<p><img src="/Images/24.07_Network/Network_3.png" alt=""></p>
+</li>
+<li>
+<p>解压成功后，进入 protobuf-27.2\csharp\src 文件夹内，使用 Visual Studio 打开 Google.Protobuf.sln 文件；</p>
+</li>
+<li>
+<p>将 VS 的模式切换成 Release 版本，并在解决方案资源管理器内对着 Google.Protobuf 文件夹右键点击 “生成”；此时左下角会出现 “生成成功” 的提示文本；</p>
+<p><img src="/Images/24.07_Network/Network_4.png" alt=""></p>
+</li>
+<li>
+<p>假如生成的时候产生了报错，报错是如下的话；则表明 VS 使用的 dotnet core sdk 的版本与当前 protobuf 内的 global.json 的 sdk 版本不一致导致的，处理方式如下：</p>
+<ul>
+<li>
+<p>点击 VS 菜单栏 -&gt; 视图 -&gt; 终端；</p>
+</li>
+<li>
+<p>在终端内输入 ：<code>dotnet --version</code>，查看并记下当前安装的SDK版本；</p>
+<ul>
+<li>安装信息文本在 ： <code>Installed SDKs：</code>下方；</li>
+</ul>
+</li>
+<li>
+<p>打开刚才解压的 Protobuf 文件夹，双击打开 global.json文件， 路径是：解压根目录 -&gt; global.json；</p>
+</li>
+<li>
+<p>找到文件内 sdk 对应的 version 版本的值，并对其修改成刚才终端内输出的已安装的版本值，保存文件；</p>
+</li>
+<li>
+<p>重新右键生成一次，便可；</p>
+</li>
+</ul>
+<p><img src="/Images/24.07_Network/Network_6.png" alt=""></p>
+</li>
+<li>
+<p>进入 protobuf-27.2\csharp\src\Google.Protobuf\bin\Release\net45 的文件夹内，可以看到生成的文件，并把当前的文件拷贝自 Unity 的 Plugins 文件夹内；</p>
+<p><img src="/Images/24.07_Network/Network_5.png" alt=""></p>
+</li>
+<li>
+<p>此时便完成对 protobuf.dll 的编译，并导入到 unity 的操作了；</p>
+</li>
+</ol>
+<h2 id="protocexe">Protoc.exe</h2>
+<p>此步骤的作用是利用 protoc.exe 文件对 .proto 文件转换成 C# 文件；</p>
+<ol>
+<li>
+<p>进入 Github 的 <a href="https://github.com/protocolbuffers/protobuf/releases">releases</a> 页面，选择一个版本内的对应平台下载并解压，本文选择的版本是 Protocol Buffers v27.2 ；</p>
+<p><img src="/Images/24.07_Network/Network_7.png" alt=""></p>
+</li>
+<li>
+<p>进入 根目录 -&gt; bin 文件夹内，可以看到 protoc.exe 文件，在当前文件夹内新建 Test.proto 文件，并在其内容内写入，以下内容为参考内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 指定版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">syntax</span> <span class="p">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// C#中的namespace
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kn">package</span> <span class="nx">msg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">option</span> <span class="nx">java_package</span> <span class="p">=</span> <span class="s">&#34;game.msg&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 消息结果。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">message</span> <span class="nx">MessageResult</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 结果码。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int32</span> <span class="nx">code</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 消息内容。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">string</span> <span class="nx">msg</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对当前 Test.proto 进行编译成 相对应的 .cs 操作：新建个 compile_CS.bat 文件，并对其编辑写入：</p>
+<ul>
+<li><code>@call protoc.exe --proto_path=./   --csharp_out=./ Test.proto</code>
+<ul>
+<li><code>--proto_path=</code>：设置.proto文件目录</li>
+<li><code>--csharp_out=</code>：设置c#输出目录</li>
+<li><code>Test.proto</code>：填写需要转换的 .proto 到 .cs 的文件列表，多个文件中间以空格隔开</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>双击 compile_CS.bat 文件，此时会生成 Test.cs ，将此文件拷贝到 Unity 的工程内；</p>
+<p><img src="/Images/24.07_Network/Network_8.png" alt=""></p>
+</li>
+</ol>
+<h2 id="代码测试">代码测试</h2>
+<p>此步骤的作用是使用导入的 Test 文件，并对其 Log 输出；</p>
+<ol>
+<li>
+<p>新建一个名为 NewTest 的 Mono 脚本，并把此脚本挂载在 hierarchy 的物体上，并在当前文本内写入如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Google.Protobuf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Msg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">NewTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MessageResult</span> <span class="n">messageResult</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MessageResult</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Code</span> <span class="p">=</span> <span class="m">100</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Msg</span> <span class="p">=</span> <span class="s">&#34;成功&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// proto消息对象，转换成字节数组</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">byte</span><span class="p">[]</span> <span class="n">dataBytes</span> <span class="p">=</span> <span class="n">messageResult</span><span class="p">.</span><span class="n">ToByteArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// proto消息字节数组，转换成对象</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 第一种方式：实例调用</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// IMessage message = new MessageResult();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// MessageResult newMessageResult = (MessageResult)message.Descriptor.Parser.ParseFrom(dataBytes);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 第二种方式：静态直接调用</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MessageResult</span> <span class="n">newMessageResult</span> <span class="p">=</span> <span class="p">(</span><span class="n">MessageResult</span><span class="p">)</span><span class="n">MessageResult</span><span class="p">.</span><span class="n">Descriptor</span><span class="p">.</span><span class="n">Parser</span><span class="p">.</span><span class="n">ParseFrom</span><span class="p">(</span><span class="n">dataBytes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">newMessageResult</span><span class="p">.</span><span class="n">Code</span><span class="p">);</span> <span class="c1">// 100</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">newMessageResult</span><span class="p">.</span><span class="n">Msg</span><span class="p">);</span> <span class="c1">// &#34;成功&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行 Unity，并查看 Console 窗口内的输出内容；输出结果和 <code>Debug.Log</code> 的代码一致</p>
+<p><img src="/Images/24.07_Network/Network_9.png" alt=""></p>
+</li>
+</ol>
+<h1 id="网络同步"><strong>网络同步</strong></h1>
+<ul>
+<li>前提：网络同步只适用于网络游戏，单击游戏不需要同步；</li>
+</ul>
+<h2 id="对比">对比</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">同步方式</th>
+<th style="text-align:center">帧同步</th>
+<th style="text-align:center">状态同步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">适合类型</td>
+<td style="text-align:center">实时类型游戏</td>
+<td style="text-align:center">非实时类型游戏</td>
+</tr>
+<tr>
+<td style="text-align:center">网络延迟要求</td>
+<td style="text-align:center">较高</td>
+<td style="text-align:center">较低</td>
+</tr>
+<tr>
+<td style="text-align:center">逻辑运算</td>
+<td style="text-align:center">客户端</td>
+<td style="text-align:center">服务端</td>
+</tr>
+<tr>
+<td style="text-align:center">服务端压力</td>
+<td style="text-align:center">较小</td>
+<td style="text-align:center">较大</td>
+</tr>
+<tr>
+<td style="text-align:center">安全性</td>
+<td style="text-align:center">较低</td>
+<td style="text-align:center">较高</td>
+</tr>
+<tr>
+<td style="text-align:center">流量消耗</td>
+<td style="text-align:center">较低</td>
+<td style="text-align:center">较大</td>
+</tr>
+<tr>
+<td style="text-align:center">回放系统</td>
+<td style="text-align:center">难度低</td>
+<td style="text-align:center">难度高</td>
+</tr>
+<tr>
+<td style="text-align:center">断线重连</td>
+<td style="text-align:center">难度高</td>
+<td style="text-align:center">难度低</td>
+</tr>
+</tbody>
+</table>
+<h2 id="帧同步">帧同步</h2>
+<ol>
+<li>适合类型：实时、及时类型游戏；（如：王者荣耀）
+<ul>
+<li>得出：
+<ul>
+<li>网络延迟要求：由游戏类型可以得出对网络延迟要求较高；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>逻辑运算：当玩家执行某一个操作并发给服务端时（例如移动、攻击操作），服务端不会做运算，而直接把这个消息广播给所有客户端；由客户端做逻辑处理并执行相关操作；
+<ul>
+<li>得出：
+<ul>
+<li>服务端压力：因为服务端只负责消息转发，因此运算压力相对状态同步较小；</li>
+<li>游戏安全性：由于逻辑运算都在客户端，服务端不做校验，因此反外挂压力大；</li>
+<li>流量消耗：由于服务端只需要转发，因此流量消耗低；</li>
+<li>回放系统：只需要服务端保存本局内的所有人的序列帧行为并做转发给客户端，则可做到回放操作，因此难度较低；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>断线重连：需要从服务器逐帧来读取游戏进度，直到与当前游戏进度一致。如果直接从当前游戏进度开始进行同步，很容易会出现数据错误；
+<ul>
+<li>可优化为：将一局时间分为N个部分，每个部分内的数据都是选取帧同步完成，在每个部分的初期记录当前的数据状态；因此当需要断线重连的时候，则获取当前时间段靠近的部分初期数据，并发放当前部分内的序列帧数据进行同步便可；这样无需重头逐帧读取游戏了；</li>
+</ul>
+</li>
+</ol>
+<h2 id="状态同步">状态同步</h2>
+<ol>
+<li>适合类型：非实时、及时类型游戏；
+<ul>
+<li>得出：
+<ul>
+<li>网络延迟要求：由游戏类型可以得出对网络延迟要求较低；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>逻辑运算：当玩家执行某一个操作并发给服务端时（例如购买物品操作），服务端会校验当前操作是否符合购买条件（是否金额足够、背包是否已满等等），校验后并做出一系列的结果转发给客户端；（状态码、添加物品、扣除道具等等）
+<ul>
+<li>得出：
+<ul>
+<li>服务端压力：因为服务端参与运算，因此运算压力相对帧同步较大；</li>
+<li>游戏安全性：由于逻辑运算都在服务端，客户端只对结果做展示处理，因此安全性高；</li>
+<li>流量消耗：由于每次同步需要通知所有的数据变化，因此流量消耗大；</li>
+<li>回放系统：
+<ul>
+<li>倘若服务端在每局战斗服里发放消息的时候，同步往观战服里存储当前发放的数据，等客户端请求获取观战数据的时候，则按时间消息转发给客户端；因此难点在于服务端的存储与客户端的逻辑处理；因此整体难度中等；</li>
+<li>倘若服务端与客户端跑的是同一份代码的话，服务端则只需在协议下发初期发放完成的初始属性协议与随机种子，客户端拿着这份协议数据，进行同一份代码执行，此时的难点在于代码的统一性；此时整体难度较高；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>断线重连：由于实时记录了各个对象的状态信息，所以重连的时候，直接创建这些对象，并同步信息即可；</li>
+</ol>
+<h1 id="连接34次握手"><strong>连接3、4次握手</strong></h1>
+<blockquote>
+<p>*本标题内的内容直接CV来自： <a href="https://blog.csdn.net/Tong89_xi/article/details/105581779">三次握手和四次挥手</a>、<a href="https://zhuanlan.zhihu.com/p/627487621">长短连接的区别</a></p>
+</blockquote>
+<h2 id="连接建立3次握手">连接建立（3次握手）</h2>
+<p><img src="/Images/24.07_Network/Network_1.png" alt=""></p>
+<ol>
+<li>
+<p><strong>三次握手的过程：</strong></p>
+<ul>
+<li>
+<p>服务端执行被动打开操作，在某个IP地址和端口上监听TCP连接请求，服务端的TCP连接状态从CLOSED变为LISTEN。</p>
+</li>
+<li>
+<p>客户端执行主动打开操作，向服务端发送一个带有SYN标志位的TCP报文段，客户端的TCP连接状态从CLOSED变为SYN_SENT。</p>
+</li>
+<li>
+<p>第一次握手：服务端接收到带有SYN标志位的TCP报文段后，回复一个带有SYN和ACK标志位的TCP报文段给客户端，服务端的TCP连接状态从LISTEN变为SYN_RCVD。</p>
+</li>
+<li>
+<p>第二次握手：客户端接收到带有SYN和ACK标志位的TCP报文段后，向服务端回复一个带有ACK标志位的TCP报文段，客户端的TCP连接状态从SYN_SENT变为ESTABLISHED。</p>
+</li>
+<li>
+<p>第三次握手：服务端接收到带有ACK标志位的TCP报文段后，服务端的TCP连接状态从SYN_RCVD变为ESTABLISHED。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>需要三次握手的原因是：</strong></p>
+<ul>
+<li>第一次握手：客户端发送网络包，服务端收到了。
+<ul>
+<li>这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</li>
+</ul>
+</li>
+<li>第二次握手：服务端发包，客户端收到了。
+<ul>
+<li>这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时服务器并不能确认自身的发送能力与客户端的接收能力是否正常。</li>
+</ul>
+</li>
+<li>第三次握手：客户端发包，服务端收到了。
+<ul>
+<li>这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>三次握手过程中是否可以携带数据：</strong></p>
+<ul>
+<li>其实第三次握手的时候，是可以携带数据的。但是第一次、第二次握手不可以携带数据。</li>
+<li>为什么这样呢？大家可以想一个问题，假如第一次握手可以携带数据的话，如果有人要恶意攻击服务器，那他每次都在第一次握手中的 SYN 报文中放入大量的数据。因为攻击者根本就不理服务器的接收、发送能力是否正常，然后疯狂着重复发 SYN 报文的话，这会让服务器花费很多时间、内存空间来接收这些报文。</li>
+<li>也就是说，第一次握手不可以放数据，其中一个简单的原因就是会让服务器更加容易受到攻击了。而对于第三次的话，此时客户端已经处于 ESTABLISHED 状态。对于客户端来说，他已经建立起连接了，并且也已经知道服务器的接收、发送能力是正常的了，所以能携带数据也没啥毛病。</li>
+</ul>
+</li>
+</ol>
+<h2 id="连接释放4次握手">连接释放（4次握手）</h2>
+<p><img src="/Images/24.07_Network/Network_2.png" alt=""></p>
+<ol>
+<li>
+<p><strong>四次握手的过程：</strong></p>
+<ul>
+<li>
+<p>客户端和服务端正常进行双向数据传输，客户端请求结束后，主动关闭连接。此时，客户端和服务端的TCP连接状态都为ESTABLISHED。</p>
+</li>
+<li>
+<p>第一次挥手：客户端主动调用close函数关闭连接，发送一个带FIN标志位的TCP报文段给服务端。客户端的TCP连接状态从ESTABLISHED进入FIN_WAIT_1。</p>
+</li>
+<li>
+<p>第二次挥手：服务端在接收到带FIN标志位的TCP报文段后，回复一个带ACK标志位的TCP报文段给客户端。服务端的TCP连接状态从ESTABLISHED进入CLOSE_WAIT，而客户端接收到带ACK标志位的TCP报文段后，TCP连接状态从FIN_WAIT_1进入FIN_WAIT_2。</p>
+</li>
+<li>
+<p>第三次挥手：服务端被动调用close函数关闭连接，向客户端发送一个带FIN标志位的TCP报文段。服务端的TCP连接状态从CLOSE_WAIT进入LAST_ACK。</p>
+</li>
+<li>
+<p>第四次挥手：客户端接收到带FIN标志位的TCP报文段后，TCP连接状态从FIN_WAIT_2进入TIME_WAIT，并向服务端回复一个带ACK标志位的TCP报文段。服务端接收到带ACK标志位的TCP报文段后，TCP连接状态从LAST_ACK进入CLOSED。</p>
+</li>
+<li>
+<p>客户端等待2MSL（Maximum Segment Lifetime，在网络中TCP报文段最大的生存时间）的时间后，TCP连接状态从TIME_WAIT进入CLOSED。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>连接释放需要4次的原因是：</strong></p>
+<ul>
+<li>因为当服务端收到客户端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中<strong>ACK报文是用来应答的，SYN报文是用来同步的</strong>。但是关闭连接时，当服务端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉客户端，”你发的FIN报文我收到了”。只有等到我服务端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四次挥手。</li>
+</ul>
+</li>
+<li>
+<p><strong>四次挥手释放连接时，等待2MSL的意义?</strong></p>
+<ul>
+<li>为了保证客户端发送的最后一个ACK报文段能够到达服务器。因为这个ACK有可能丢失，从而导致处在LAST-ACK状态的服务器收不到对FIN-ACK的确认报文。服务器会超时重传这个FIN-ACK，接着客户端再重传一次确认，重新启动时间等待计时器。最后客户端和服务器都能正常的关闭</li>
+</ul>
+</li>
+</ol>
+<h1 id="长短连接"><strong>长、短连接</strong></h1>
+<ul>
+<li><strong>长连接</strong>：连接维持时间长；可以复用当前连接；在连接保活的情况下，无需每次发起请求都需要重新建立连接；</li>
+<li><strong>短连接</strong>：连接维持时间短；无法复用当前连接；每次发起请求都要建立新连接，且连接在请求结束后便被释放了；</li>
+<li><strong>连接耗时</strong>：
+<ul>
+<li>无论是长连接还是短连接，都需要经过一个完整的连接建立到连接释放的过程，假设这个过程称为1次连接耗时 = t；</li>
+<li>前提条件：假设在同一的时间内，长连接一直处在保活的状态下，短连接发起了 n 次的连接请求；且长连接和短连接的连接请求消耗时间一致；</li>
+<li>结果分析：长连接耗时 = t * 1，短连接耗时 = t * n</li>
+<li>一次耗时时间至少需要成本为 1个RTT时间。RTT时间是计算机网络中两台计算机之间TCP报文的往返时间，而这是由物理距离来决定的，距离越远，RTT时间越长；</li>
+</ul>
+</li>
+</ul>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://blog.csdn.net/LKR0325/article/details/135752670">帧同步和状态同步1</a></li>
+<li><a href="https://blog.csdn.net/jkkk_/article/details/127776112">帧同步和状态同步2</a></li>
+<li><a href="https://blog.csdn.net/Tong89_xi/article/details/105581779">三次握手和四次挥手</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/627487621">长短连接的区别</a></li>
+<li><a href="https://www.jianshu.com/p/5c8afbd6a85c">Unity之C#中使用protobuf</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-07-17 19:40:15 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.07_network/">https://spirite12.github.io/post/24/24.07_network/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.0629_redtip/">
+            <span class="next-text nav-default">RedTip 红点树编辑器（三）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

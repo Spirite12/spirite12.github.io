@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Sat, 29 Jun 2024 19:40:14 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Jul 2024 19:40:15 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
       <link>https://spirite12.github.io/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>https://spirite12.github.io/about/</guid>
       <description>地点：福建 职业：游戏开发 游戏：Demo 工程：DC、DCFrame 技能：Unity、C#、Lua 工作：2019.1 - 至今 邮箱：spirit12</description>
+    </item>
+    
+    <item>
+      <title>ProtoBuf 与网络相关知识</title>
+      <link>https://spirite12.github.io/post/24/24.07_network/</link>
+      <pubDate>Wed, 17 Jul 2024 19:40:15 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.07_network/</guid>
+      <description>Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、</description>
     </item>
     
     <item>
