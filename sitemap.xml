@@ -9,48 +9,55 @@
   
   <url>
     <loc>https://spirite12.github.io/categories/</loc>
-    <lastmod>2024-07-17T19:40:15+08:00</lastmod>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/</loc>
-    <lastmod>2024-07-17T19:40:15+08:00</lastmod>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/post/</loc>
-    <lastmod>2024-07-17T19:40:15+08:00</lastmod>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://spirite12.github.io/post/24/24.07_network/</loc>
-    <lastmod>2024-07-17T19:40:15+08:00</lastmod>
+    <loc>https://spirite12.github.io/post/24/24.08_spriteatlas/</loc>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/</loc>
-    <lastmod>2024-07-17T19:40:15+08:00</lastmod>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/unity/</loc>
-    <lastmod>2024-07-17T19:40:15+08:00</lastmod>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/categories/unity/</loc>
+    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/24/24.07_network/</loc>
     <lastmod>2024-07-17T19:40:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -64,14 +71,14 @@
   </url>
   
   <url>
-    <loc>https://spirite12.github.io/post/24/24.0629_redtip/</loc>
+    <loc>https://spirite12.github.io/post/24/24.06.29_redtip/</loc>
     <lastmod>2024-06-29T19:40:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://spirite12.github.io/post/24/24.0607_redtip/</loc>
+    <loc>https://spirite12.github.io/post/24/24.06.07_redtip/</loc>
     <lastmod>2024-06-07T19:40:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

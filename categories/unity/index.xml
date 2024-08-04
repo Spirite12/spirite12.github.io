@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Wed, 17 Jul 2024 19:40:15 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Aug 2024 19:40:16 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpriteAtlas 图集</title>
+      <link>https://spirite12.github.io/post/24/24.08_spriteatlas/</link>
+      <pubDate>Sun, 04 Aug 2024 19:40:16 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.08_spriteatlas/</guid>
+      <description>前言 以下来自官方的说明： 精灵图集 (Sprite Atlas) 是一种将多个纹理合并为一个组合纹理的资源。Unity 可以调用此单个纹理来发出单个绘制调用而不是发出多个绘</description>
+    </item>
+    
     <item>
       <title>ProtoBuf 与网络相关知识</title>
       <link>https://spirite12.github.io/post/24/24.07_network/</link>
@@ -19,19 +28,19 @@
     
     <item>
       <title>RedTip 红点树编辑器（三）</title>
-      <link>https://spirite12.github.io/post/24/24.0629_redtip/</link>
+      <link>https://spirite12.github.io/post/24/24.06.29_redtip/</link>
       <pubDate>Sat, 29 Jun 2024 19:40:14 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/24/24.0629_redtip/</guid>
+      <guid>https://spirite12.github.io/post/24/24.06.29_redtip/</guid>
       <description>前言 在开发过程中，红点的的数据问题排查一般可以通过 IDE 的断点完成，但是这样也需要定位到所需的代码才可。那是否可以有个编辑器的扩展界面，以UI界</description>
     </item>
     
     <item>
       <title>RedTip 红点使用示例（二）</title>
-      <link>https://spirite12.github.io/post/24/24.0607_redtip/</link>
+      <link>https://spirite12.github.io/post/24/24.06.07_redtip/</link>
       <pubDate>Fri, 07 Jun 2024 19:40:13 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/24/24.0607_redtip/</guid>
+      <guid>https://spirite12.github.io/post/24/24.06.07_redtip/</guid>
       <description>使用示例 一、红点初始化 RedTipMgr ：初始化函数为： Init 和 Destroy 的函数； RedTipConst：初始化函数为：Initialization，此函数的目的是往 RedTipTree</description>
     </item>
     

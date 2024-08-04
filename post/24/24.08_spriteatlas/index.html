@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SpriteAtlas 图集 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 以下来自官方的说明： 精灵图集 (Sprite Atlas) 是一种将多个纹理合并为一个组合纹理的资源。Unity 可以调用此单个纹理来发出单个绘制调用而不是发出多个绘" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.08_spriteatlas/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="SpriteAtlas 图集" />
+<meta property="og:description" content="前言 以下来自官方的说明： 精灵图集 (Sprite Atlas) 是一种将多个纹理合并为一个组合纹理的资源。Unity 可以调用此单个纹理来发出单个绘制调用而不是发出多个绘" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.08_spriteatlas/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-08-04T19:40:16+08:00" />
+<meta property="article:modified_time" content="2024-08-04T19:40:16+08:00" />
+
+<meta itemprop="name" content="SpriteAtlas 图集">
+<meta itemprop="description" content="前言 以下来自官方的说明： 精灵图集 (Sprite Atlas) 是一种将多个纹理合并为一个组合纹理的资源。Unity 可以调用此单个纹理来发出单个绘制调用而不是发出多个绘"><meta itemprop="datePublished" content="2024-08-04T19:40:16+08:00" />
+<meta itemprop="dateModified" content="2024-08-04T19:40:16+08:00" />
+<meta itemprop="wordCount" content="3862">
+<meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SpriteAtlas 图集"/>
+<meta name="twitter:description" content="前言 以下来自官方的说明： 精灵图集 (Sprite Atlas) 是一种将多个纹理合并为一个组合纹理的资源。Unity 可以调用此单个纹理来发出单个绘制调用而不是发出多个绘"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">SpriteAtlas 图集</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-08-04 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#导入图集"><strong>导入图集</strong></a>
+      <ul>
+        <li><a href="#安装-2d-sprite">安装 2D Sprite</a></li>
+        <li><a href="#开启-sprite-packer">开启 Sprite Packer</a></li>
+        <li><a href="#新建图集">新建图集</a></li>
+      </ul>
+    </li>
+    <li><a href="#参数说明"><strong>参数说明</strong></a></li>
+    <li><a href="#draw-call"><strong>Draw Call</strong></a></li>
+    <li><a href="#动态图集"><strong>动态图集</strong></a></li>
+    <li><a href="#工具"><strong>工具</strong></a>
+      <ul>
+        <li><a href="#图集更新">图集更新</a></li>
+        <li><a href="#图集生成">图集生成</a></li>
+      </ul>
+    </li>
+    <li><a href="#项目可行性"><strong>项目可行性</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>以下来自官方的说明：</p>
+<blockquote>
+<p><strong>精灵图集 (Sprite Atlas)</strong> 是一种将多个纹理合并为一个组合纹理的资源。Unity 可以调用此单个纹理来发出单个绘制调用而不是发出多个绘制调用，能够以较小的性能开销一次性访问压缩的纹理；</p>
+</blockquote>
+<p>本文 Unity 版本：2021.3.6f1c1</p>
+<p>使用 SpriteAtlas 的好处有：</p>
+<ul>
+<li>减少 Draw Call ：通过将多张图片合并到一个大的 atlas 中，渲染时只需一个 draw call，这可以显著提升性能；</li>
+<li>减少 GPU 负担 ：将多张不同规格的图片，使用图集打包成一个2的幂次方的图集，可减少 GPU 处理负担，方便渲染合批；</li>
+<li>减少包体大小 ：将多张不同规格的图片，使用图集打包成一个2的幂次方的图集，有利于Unity压缩图片，更能节省空间；</li>
+</ul>
+<h1 id="导入图集"><strong>导入图集</strong></h1>
+<h2 id="安装-2d-sprite">安装 2D Sprite</h2>
+<ul>
+<li>
+<p>点击菜单栏 Window -&gt; Package Manager ；</p>
+</li>
+<li>
+<p>在窗口内查找 2D Sprite 或者 2D （这里面包含了 2D Sprite），并点击 Install 进行安装；</p>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_1.png" alt=""></p>
+</li>
+</ul>
+<h2 id="开启-sprite-packer">开启 Sprite Packer</h2>
+<ul>
+<li>
+<p>点击菜单栏 Edit -&gt; Project Settings；</p>
+</li>
+<li>
+<p>点击左侧栏名为 Editor 的栏目，并再右侧找到 Sprite Packer ，在 Mode 不要选择 Disabled 便可；</p>
+<ul>
+<li>Mode 选择说明请点击 <a href="https://docs.unity3d.com/Manual/SpritePackerModes.html">22.3文档</a> 、<a href="https://docs.unity3d.com/cn/2021.3/Manual/SpritePackerModes.html">21.3文档</a></li>
+</ul>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_2.png" alt=""></p>
+</li>
+</ul>
+<h2 id="新建图集">新建图集</h2>
+<ul>
+<li>右击 Project 面板，选择 Create -&gt; 2D -&gt; Sprite Atlas</li>
+<li>此时 Unity 会新建一个名为 New Sprite Atlas 的图集资源；</li>
+</ul>
+<h1 id="参数说明"><strong>参数说明</strong></h1>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_3.png" alt=""></p>
+<ul>
+<li>
+<p>文档说明：<a href="https://docs.unity3d.com/2021.3/Documentation/Manual/class-SpriteAtlas.html">链接</a></p>
+</li>
+<li>
+<p>Type：默认 Master ：主图集；</p>
+<ul>
+<li>可选 <a href="https://docs.unity3d.com/2021.3/Documentation/Manual/VariantSpriteAtlas.html">Variant</a> ：变体图集，需要指定主图集；作用是：针对不同的硬件设备（高、中、低等性能设备），可以对其进行 Scale 属性缩放分辨率显示已达到性能适配需求；</li>
+</ul>
+</li>
+<li>
+<p>Include in Build ：勾选此框可将 <strong>Sprite Atlas</strong> Asset 包含在当前构建中。此选项默认启用；</p>
+</li>
+<li>
+<p>Allow Rotation ：勾选则允许 Sprite 在图集中进行旋转；</p>
+<ul>
+<li>勾选的情况：可最大化利用图集的空间；</li>
+<li>不选的情况：如果图集内存在精灵贴图在 UI 面板内显示，则无需勾选此项，因为图集内的旋转会同样导致在 UI 面板上渲染的时候进行旋转；</li>
+</ul>
+</li>
+<li>
+<p>Tight Packing ：勾选则根据 Sprite 轮廓（而非默认的矩形轮廓）打包 Sprite；</p>
+<ul>
+<li>勾选的情况：可最大化利用图集的空间；</li>
+<li>不选的情况：由于勾选会根据 Sprite 轮廓进行图集打包，而 Sprite 贴图在 UI 面板渲染的是一张矩形贴图，因此会导致在 UI 面板的矩形区域内会渲染到图集内挨近的贴图；</li>
+</ul>
+</li>
+<li>
+<p>Alpha Dilation ：勾选会提高 Sprite 的渲染质量，例如：在 Sprite 放大时防止出现锯齿边缘；</p>
+</li>
+<li>
+<p>Padding ：每个 Sprite 贴图之间的像素值，防止贴图重贴；默认为4像素；</p>
+</li>
+<li>
+<p>Read/Write ：是否开启可访问纹理数据；若开启次属性，Unity 将创建纹理数据的副本。这会使纹理资源所需的内存量翻倍，并会对性能产生负面影响；</p>
+</li>
+<li>
+<p>Generate Mip Maps ：勾选此框可启用<a href="https://docs.unity3d.com/2021.3/Documentation/Manual/texture-mipmaps-introduction.html">mipmap</a>生成；</p>
+<ul>
+<li>开启 MipMaps ： 会包含4张不同精度的纹理贴图；在游戏场景内，当摄像头离当前贴图越近，则会使用精度越高的贴图。反之亦然；弊处是：开启会在磁盘和内存中的大小增加 33% ；</li>
+</ul>
+</li>
+<li>
+<p>sRGB ：如果勾选该选项，则使用 sRGB 格式；否则，将使用线性格式，默认勾选；</p>
+</li>
+<li>
+<p>Filter Mode ：选择纹理在被 3D 变换拉伸时如何进行纹理过滤模式。默认选项为 Bilinear；</p>
+<ul>
+<li>Point ：从近处看，纹理显得块状；</li>
+<li>Bilinear ：近看纹理显得模糊；</li>
+<li>Trilinear ：与 Bilinear  类似，但纹理在不同的 MIP 级别之间也会变得模糊。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.unity3d.com/2021.3/Documentation/Manual/class-TextureImporter.html#platform">Show Platform Settings For</a>：可以设置各个平台支持的参数</p>
+<ul>
+<li>
+<p>MaxTextureSize ：设置最大导入纹理尺寸像素，此参数根据实际项目需求进行设置；</p>
+<ul>
+<li>若设置过大：则会造成图集的内存浪费；</li>
+<li>若设置像素小于实际图集内的像素，图集则会拆分多个子图集；即是：假设当前图集内可以存放16张贴图；当出现有17张贴图的时候，图集则会划分为2页，第一页存放16张，第二页存放1张贴图；以此类推；</li>
+</ul>
+</li>
+<li>
+<p>Format ：Automatic是默认选项，此选项会自动选择最适合的像素格式。其他可用格式列表取决于平台和纹理类型。平台特定覆盖的纹理格式<a href="https://docs.unity3d.com/2021.3/Documentation/Manual/class-TextureImporterOverride.html">参考</a>。</p>
+</li>
+<li>
+<p>Compression ：可以选择不同质量的压缩方式；None即为不压缩；不同的压缩选择会带来图集内的 Sprite 显示精度，也会带来图集的内存不一致；</p>
+<ul>
+<li>内存占用从大到小为：None -&gt; High Quality -&gt; Normal Quality -&gt; Low Quality；</li>
+<li>精度显示从精到糊为：None -&gt; High Quality -&gt; Normal Quality -&gt; Low Quality；</li>
+</ul>
+</li>
+<li>
+<p>Use Crunch Compress ：勾选 Crunch 压缩可帮助纹理在磁盘上和下载时使用尽可能少的空间。Crunch 纹理可能需要很长时间才能压缩，但运行时解压缩速度非常快。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Objects for Packing ：可放入Texture2D、Sprite、文件夹。放入文件夹时会将文件夹下的所有Texture2D、Sprite放入图集；（推荐拖入文件夹，因为文件夹内新增可以直接更新，而拖入具体资源只能更新当前拖入的资源）</p>
+</li>
+<li>
+<p>Pack Preview 按钮 ：会将 Objects for Packing 内存放的所有的纹理贴图都打包到一张图集内；</p>
+</li>
+</ul>
+<h1 id="draw-call"><strong>Draw Call</strong></h1>
+<ol>
+<li>
+<p>打开一个新场景，并运行游戏，并记入此时 Statistics 面板的数据；</p>
+<ul>
+<li>Batches 默认为 2 ，是因为一个是天空盒一个是默认背景；</li>
+</ul>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_4.png" alt=""></p>
+</li>
+<li>
+<p>在 Project 栏目内新建 SpriteAtlas 文件夹，从网络上下载一些贴图素材并导入到当前文件夹内；<a href="https://game-icons.net/">素材链接</a></p>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_5.png" alt=""></p>
+</li>
+<li>
+<p>把这6张素材在 UI 场景内，并运行游戏，查看此时 Statistics 面板的数据；</p>
+<ul>
+<li>发现 Batches 由原来的 2 上涨到了 8 ，原因是添加了这 6 张贴图；</li>
+</ul>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_6.png" alt=""></p>
+</li>
+<li>
+<p>SpriteAtlas 文件夹下新建 Sprite Atlas 图集，并对此设置基础参数；使得当前 6 张贴图打成一张图集；</p>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_7.png" alt=""></p>
+</li>
+<li>
+<p>重新运行游戏，查看 Statistics 面板数据；</p>
+<ul>
+<li>发现 Batches 由原来的 8 下降到了 3 ，原因是 6 张贴图进行了打图集的操作；因此 3 = 2 （空场景） + 1（图集）</li>
+</ul>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_8.png" alt=""></p>
+</li>
+</ol>
+<h1 id="动态图集"><strong>动态图集</strong></h1>
+<ol>
+<li><strong>动态图集演示</strong>：<a href="https://davikingcode.com/blog/wp-content/uploads/2017/01/RuntimeSpriteSheetsGenerator/">链接</a></li>
+<li><strong>原理分析</strong>：
+<ul>
+<li>动态图集的处理方式为先申请一张图集贴图，以这张图集去处理新增的纹理贴图、以及不定期的从图集内移除不使用的纹理贴图；当当前的图集不足以容纳新贴图的时候，则需新生成一张图集去处理新纹理贴图；以动态的方式去最大化的减少多张图集的使用；</li>
+<li>动态图集的核心算法为新纹理贴图当被需要生成的时候，此纹理贴图应该放在当前图集的哪个区域内，使得当前图集的使用率最大化；也便是模拟 Unity 上图集生成的规则；</li>
+</ul>
+</li>
+<li><strong>功能说明</strong>：
+<ol>
+<li>动态图集的核心算法如下说明：<a href="https://villekoskela.org/2012/08/12/rectangle-packing/">链接</a></li>
+<li>Github项目中使用此算法的是：<a href="https://github.com/DaVikingCode/UnityRuntimeSpriteSheetsGenerator">链接</a>
+<ul>
+<li>对此项目下载并尝试，可以得出同一图集内的 DrawCall 是会有变少；</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>优劣势</strong>：
+<ul>
+<li>优势：
+<ul>
+<li>动态图集自动生成，减少人为生成和管理图集的时间成本；</li>
+<li>动态图集按需加载，减少不确定通用贴图在多个图集内被加载导致所需内存上升；</li>
+</ul>
+</li>
+<li>劣势：
+<ul>
+<li>动态图集的生成和管理需要一定的代码计算量；可能会导致游戏卡顿；</li>
+<li>若项目内有提前打包的图集和动态图集一起使用，则需要合理划分规则；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="工具"><strong>工具</strong></h1>
+<h2 id="图集更新">图集更新</h2>
+<ul>
+<li>
+<p><strong>需求</strong>：当贴图内的 Objects for packing 指定的是文件夹，此时当这个文件夹内的贴图进行中变化的时候，需要开发者手动点击 Pack Preview 按钮，才可以更新图集内的贴图显示；对此当项目内图集的量开始多了起来的时候，将会是比较费事费力的行为；</p>
+</li>
+<li>
+<p><strong>解决</strong>：需要一个按钮来达到所有图集的更新工具；</p>
+</li>
+<li>
+<p><strong>代码</strong>：新建一个 Editor 文件夹，并在此文件夹内新建名为 SpriteAtlasEditor.cs 的脚本，添加如下代码；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor.U2D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SpriteAtlasEditor</span> <span class="p">:</span> <span class="n">Editor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Tools/SpriteAtlas/生成图集&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">PackAllAtlases</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 清除 Sprite Atlas 缓存</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">pathAtlasCache</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="n">dataPath</span><span class="p">,</span> <span class="s">&#34;../Library/AtlasCache&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Directory</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">pathAtlasCache</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">FileUtil</span><span class="p">.</span><span class="n">DeleteFileOrDirectory</span><span class="p">(</span><span class="n">pathAtlasCache</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 重新打包图集</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SpriteAtlasUtility</span><span class="p">.</span><span class="n">PackAllAtlases</span><span class="p">(</span><span class="n">BuildTarget</span><span class="p">.</span><span class="n">Android</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;图集生成成功&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>效果</strong></p>
+<ul>
+<li>
+<p>先截图一张现在图集的截图；</p>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_9.png" alt=""></p>
+</li>
+<li>
+<p>选择其中一张贴图，将此贴图从文件夹内移除便可；</p>
+</li>
+<li>
+<p>点击菜单栏 Tools -&gt; SpriteAtlas -&gt; 生成图集，并截图生成后的效果图；</p>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_10.png" alt=""></p>
+</li>
+<li>
+<p>即可看到图集进行了更新的效果；</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="图集生成">图集生成</h2>
+<ul>
+<li>
+<p><strong>需求</strong>：当 UI 人员新增贴图不在图集范围内的时候，需要 UI 人员手动创建新图集，并且对其设置参数；然而在项目人员变更和手动操作的过程中，难免会出现参数设置错误；</p>
+</li>
+<li>
+<p><strong>解决</strong>：增加对其需要新增图集的文件夹（因为单个贴图的图集作用不大，因此不实现这个功能）右键一键生成操作：生成操作会进行：1）生成图集到指定文件夹；2）对其进行一些基础的操作；</p>
+</li>
+<li>
+<p><strong>代码：</strong></p>
+<ul>
+<li>当右键为文件夹的时候，当前右键才可生效，否则置灰失效；</li>
+<li>当判断已存在图集、当前文件夹内并没有贴图时，则会给于错误提示；</li>
+<li>生成图集，并赋值基础设置属性；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor.U2D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.U2D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SpriteAtlasEditor</span> <span class="p">:</span> <span class="n">Editor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Assets/Tools/Create SpriteAtlas&#34;, false)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">CreateCtrlWin</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">theSelection</span> <span class="p">=</span> <span class="n">Selection</span><span class="p">.</span><span class="n">activeObject</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">GetAssetPath</span><span class="p">(</span><span class="n">theSelection</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 判断所选的文件夹下没有贴图</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span><span class="p">[]</span> <span class="n">guids</span> <span class="p">=</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">FindAssets</span><span class="p">(</span><span class="s">&#34;t:Texture2D&#34;</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">path</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">guids</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EditorUtility</span><span class="p">.</span><span class="n">DisplayDialog</span><span class="p">(</span><span class="s">&#34;Error info Win&#34;</span><span class="p">,</span> <span class="s">$&#34;当前所选文件夹下暂无纹理贴图&#34;</span><span class="p">,</span> <span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">pathTarget</span> <span class="p">=</span> <span class="n">path</span> <span class="p">+</span> <span class="s">&#34;/&#34;</span> <span class="p">+</span> <span class="n">Path</span><span class="p">.</span><span class="n">GetFileName</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">+</span> <span class="s">&#34;.spriteatlas&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 判断目标 Sprite Atlas 是否存在</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">pathTarget</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EditorUtility</span><span class="p">.</span><span class="n">DisplayDialog</span><span class="p">(</span><span class="s">&#34;Error info Win&#34;</span><span class="p">,</span> <span class="s">$&#34;当前目标路径已经存在 SpriteAtlas\n\n路径为：{pathTarget}&#34;</span><span class="p">,</span> <span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SpriteAtlas</span> <span class="n">spriteAtlas</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SpriteAtlas</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">theSelection</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">SpriteAtlasPackingSettings</span> <span class="n">packingSettings</span> <span class="p">=</span> <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">GetPackingSettings</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">packingSettings</span><span class="p">.</span><span class="n">enableRotation</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">packingSettings</span><span class="p">.</span><span class="n">enableTightPacking</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">packingSettings</span><span class="p">.</span><span class="n">enableAlphaDilation</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">packingSettings</span><span class="p">.</span><span class="n">padding</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">SetPackingSettings</span><span class="p">(</span><span class="n">packingSettings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">SpriteAtlasTextureSettings</span> <span class="n">textureSettings</span> <span class="p">=</span> <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">GetTextureSettings</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">textureSettings</span><span class="p">.</span><span class="n">readable</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">textureSettings</span><span class="p">.</span><span class="n">generateMipMaps</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">textureSettings</span><span class="p">.</span><span class="n">sRGB</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">textureSettings</span><span class="p">.</span><span class="n">filterMode</span> <span class="p">=</span> <span class="n">FilterMode</span><span class="p">.</span><span class="n">Bilinear</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">SetTextureSettings</span><span class="p">(</span><span class="n">textureSettings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 针对平台设置参数</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TextureImporterPlatformSettings</span> <span class="n">atlasSetting</span> <span class="p">=</span> <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">GetPlatformSettings</span><span class="p">(</span><span class="s">&#34;DefaultTexturePlatform&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">atlasSetting</span><span class="p">.</span><span class="n">maxTextureSize</span> <span class="p">=</span> <span class="m">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">atlasSetting</span><span class="p">.</span><span class="n">textureCompression</span> <span class="p">=</span> <span class="n">TextureImporterCompression</span><span class="p">.</span><span class="n">CompressedHQ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">atlasSetting</span><span class="p">.</span><span class="n">format</span> <span class="p">=</span> <span class="n">TextureImporterFormat</span><span class="p">.</span><span class="n">Automatic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">spriteAtlas</span><span class="p">.</span><span class="n">SetPlatformSettings</span><span class="p">(</span><span class="n">atlasSetting</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">CreateAsset</span><span class="p">(</span><span class="n">spriteAtlas</span><span class="p">,</span> <span class="n">pathTarget</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">Refresh</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Assets/Tools/Create SptAtlas&#34;, true)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="n">CreateCtrlWinValidate</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">theSelection</span> <span class="p">=</span> <span class="n">Selection</span><span class="p">.</span><span class="n">activeObject</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">GetAssetPath</span><span class="p">(</span><span class="n">theSelection</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">AssetDatabase</span><span class="p">.</span><span class="n">IsValidFolder</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>效果：</strong></p>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_11.gif" alt=""></p>
+</li>
+</ul>
+<h1 id="项目可行性"><strong>项目可行性</strong></h1>
+<p><img src="/Images/24.08_SpriteAtlas/SpriteAtlas_12.png" alt=""></p>
+<ol>
+<li><strong>文件夹划分规则</strong>：
+<ul>
+<li>Common ：通用的、需要穿梭在各个模块内的纹理贴图存储；</li>
+<li>Icon ：需要程序代码加载的一系列的纹理贴图为单位存储；</li>
+<li>Language ：以各个语言为单位存储；</li>
+<li>Module ：以各个功能模块为单位存储；</li>
+</ul>
+</li>
+<li><strong>参数设置</strong>：
+<ul>
+<li>Max Texture Size ：
+<ul>
+<li>该参数需要人工按照实际整体纹理贴图大小情况维护；</li>
+<li>参考值：该参数值默认为 1024，若遇到图整体大或小，则可相应更改为 2048 与 512；</li>
+<li>参考划分：
+<ul>
+<li>对于 Common 文件夹：需要人工按照实际情况维护；</li>
+<li>对于 Icon 文件夹：建议采取 1024 。后续无需更改；</li>
+<li>对于 Language 文件夹：建议采取 1024 。后续无需更改；</li>
+<li>对于 Module 文件夹：建议采取 1024 。由于模块功能会存在多次迭代，每次迭代都会产生不同大小的纹理贴图；出于人工操作会忘记、且存在多次迭代，因此固定1024便可；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>资源管辖</strong>：因背景图像素过大，因此背景图无需打图集。在这些文件夹的范围内不能存在背景图；</li>
+<li><strong>动态图集</strong>：
+<ul>
+<li>如果项目内采用动态图集：
+<ul>
+<li>则推荐取消 Common 文件夹的图集处理，因为通用的资源其实并没有有效的办法处理在同一图集内出现。因此当 Common 图集内资源过多，则会出现图集的页数也会变多，而加载到同一页数内的图集概率则并不高，此时图集所占用的内存会变高，因此推荐使用动态图集；</li>
+<li>按实际需求对 Language 文件夹作出处理，若多语言的资源在较少的地方出现且在同一时刻界面上出现的张数并不多的情况下，则推荐做动态图集处理；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/cn/2021.3/Manual/class-SpriteAtlas.html">Unity SpriteAtlas Doc</a></li>
+<li><a href="https://blog.csdn.net/qq_41084756/article/details/130979262">使用图集（Sprite Atlas）优化项目</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-08-04 19:40:16 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.08_spriteatlas/">https://spirite12.github.io/post/24/24.08_spriteatlas/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">Unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.07_network/">
+            <span class="next-text nav-default">ProtoBuf 与网络相关知识</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
