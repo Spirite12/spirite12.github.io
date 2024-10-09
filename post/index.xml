@@ -10,10 +10,10 @@
     <lastBuildDate>Sun, 22 Sep 2024 19:40:17 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cinemachine 虚拟相机</title>
-      <link>https://spirite12.github.io/post/24.09_cinemachine/</link>
+      <link>https://spirite12.github.io/post/24/24.09_cinemachine/</link>
       <pubDate>Sun, 22 Sep 2024 19:40:17 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/24.09_cinemachine/</guid>
+      <guid>https://spirite12.github.io/post/24/24.09_cinemachine/</guid>
       <description>前言 Cinemachine 是 Unity 提供的一个强大的摄像机控制插件，专门用于管理和优化摄像机在游戏或动画中的移动和跟踪。它能够极大地简化摄像机的管理与控制，使得开发人</description>
     </item>
     
