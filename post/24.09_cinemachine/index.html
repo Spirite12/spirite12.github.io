@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Cinemachine 虚拟相机 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 Cinemachine 是 Unity 提供的一个强大的摄像机控制插件，专门用于管理和优化摄像机在游戏或动画中的移动和跟踪。它能够极大地简化摄像机的管理与控制，使得开发人" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24.09_cinemachine/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Cinemachine 虚拟相机" />
+<meta property="og:description" content="前言 Cinemachine 是 Unity 提供的一个强大的摄像机控制插件，专门用于管理和优化摄像机在游戏或动画中的移动和跟踪。它能够极大地简化摄像机的管理与控制，使得开发人" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24.09_cinemachine/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-09-22T19:40:17+08:00" />
+<meta property="article:modified_time" content="2024-09-22T19:40:17+08:00" />
+
+<meta itemprop="name" content="Cinemachine 虚拟相机">
+<meta itemprop="description" content="前言 Cinemachine 是 Unity 提供的一个强大的摄像机控制插件，专门用于管理和优化摄像机在游戏或动画中的移动和跟踪。它能够极大地简化摄像机的管理与控制，使得开发人"><meta itemprop="datePublished" content="2024-09-22T19:40:17+08:00" />
+<meta itemprop="dateModified" content="2024-09-22T19:40:17+08:00" />
+<meta itemprop="wordCount" content="2362">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cinemachine 虚拟相机"/>
+<meta name="twitter:description" content="前言 Cinemachine 是 Unity 提供的一个强大的摄像机控制插件，专门用于管理和优化摄像机在游戏或动画中的移动和跟踪。它能够极大地简化摄像机的管理与控制，使得开发人"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Cinemachine 虚拟相机</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-09-22 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#环境安装"><strong>环境安装</strong></a></li>
+    <li><a href="#精要介绍"><strong>精要介绍</strong></a>
+      <ul>
+        <li><a href="#一移动路径">一、移动路径</a></li>
+        <li><a href="#二摄像机组件">二、摄像机组件</a></li>
+        <li><a href="#三辅助组件">三、辅助组件</a></li>
+      </ul>
+    </li>
+    <li><a href="#工程说明"><strong>工程说明</strong></a>
+      <ul>
+        <li><a href="#trigger-volume">Trigger volume</a></li>
+        <li><a href="#free-look-character">Free Look character</a></li>
+        <li><a href="#statedrivencamera">StateDrivenCamera</a></li>
+        <li><a href="#clearshot">ClearShot</a></li>
+        <li><a href="#blendlistcamera">BlendListCamera</a></li>
+        <li><a href="#mixingcamera">MixingCamera</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>Cinemachine 是 Unity 提供的一个强大的摄像机控制插件，专门用于管理和优化摄像机在游戏或动画中的移动和跟踪。它能够极大地简化摄像机的管理与控制，使得开发人员可以更专注于游戏或动画的其他重要部分；</p>
+<h1 id="环境安装"><strong>环境安装</strong></h1>
+<ul>
+<li>
+<p>路径：菜单栏 -&gt; Window -&gt; Package Manager</p>
+</li>
+<li>
+<p>窗口：右上角搜索 Cinemachine -&gt; 右下角点击安装 Install</p>
+<p><img src="/Images/24.09_Cinemachine/Cinemachine_1.png" alt=""></p>
+</li>
+<li>
+<p>示例：安装成功后，可以在窗口内看到示例 Samples，可以点击安装查看官方示例；</p>
+</li>
+</ul>
+<h1 id="精要介绍"><strong>精要介绍</strong></h1>
+<h2 id="一移动路径">一、移动路径</h2>
+<ul>
+<li>设定路径
+<ul>
+<li>基类
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/api/Cinemachine.CinemachinePathBase.html">CinemachinePathBase</a>：世界空间路径的抽象基类，适用于摄影机移动轨道；</li>
+</ul>
+</li>
+<li>子类
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/api/Cinemachine.CinemachinePath.html">CinemachinePath</a> ：由一组点组成一个移动轨道路径，每个点都有位置、切线和滚动设置。点与点之间执行贝塞尔插值，以获得平滑连续的路径；</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/api/Cinemachine.CinemachineSmoothPath.html">CinemachineSmoothPath</a> ：具备 CinemachinePath 功能的同时保证一阶和二阶连续性，这意味着使得整个路径会更加平滑和连续性，<strong>推荐使用这个</strong>；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行路径
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/api/Cinemachine.CinemachineDollyCart.html?q=CinemachineDollyCart">CinemachineDollyCart</a> ：执行播放设定好的路径；</li>
+</ul>
+</li>
+</ul>
+<h2 id="二摄像机组件">二、摄像机组件</h2>
+<ul>
+<li>主相机
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineBrainProperties.html">Cinemachine Brain</a> ：虚拟相机的管理类。监控场景中所有活动的虚拟相机，并选择其中一个虚拟相机来控制 Unity 相机；</li>
+</ul>
+</li>
+<li>虚拟相机
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineVirtualCamera.html">CinemachineVirtualCamera</a>：基础虚拟相机。控制位置、旋转等属性设置跟随目标；</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineFreeLook.html">CinemachineFreeLook</a> ：自由视角相机。组件管理三个水平环形轨道以围绕目标；</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineStateDrivenCamera.html">CinemachineStateDrivenCamera</a>：状态驱动相机。控制一个 Animator 组件；将拥有的子虚拟相机都分配给动画状态；作用为切动画来达到切换虚拟相机的激活；</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineClearShot.html">CinemachineClearShot</a> : 分镜摄像机。在拥有的子虚拟相机内，以选取规则选择最佳质量的目标相机并加以激活，以确保能清晰地看到目标；
+<ul>
+<li>选取规则：先选取距离靠近相机的，若有多台则为查找高优先级更高的相机；</li>
+</ul>
+</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineBlendListCamera.html">CinemachineBlendListCamera</a>：混合列表相机。按序播放子虚拟相机列表；适合剧情播放；</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineMixingCamera.html">CinemachineMixingCamera</a>：混合相机。使用子虚拟相机的加权平均值来计算最终相机的位置和其属性；</li>
+</ul>
+</li>
+</ul>
+<h2 id="三辅助组件">三、辅助组件</h2>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineTargetGroup.html">CinemachineTargetGroup</a>：目标组。将多个 GameObjects 视为单个 Look At 目标，使得虚拟相机可以看向此单个目标；</li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/api/Cinemachine.CinemachineTriggerAction.html?q=CinemachineTriggerAction">CinemachineTriggerAction</a>：触发器。监听目标进入和退出区域的函数调用，代码实现为碰撞盒的触发器函数<code>OnTriggerXXX</code>，条件为：需要设置 Collider 的 IsTrigger 为 True；</li>
+</ul>
+<h1 id="工程说明"><strong>工程说明</strong></h1>
+<p>以下二级菜单为打开的场景名</p>
+<h2 id="trigger-volume">Trigger volume</h2>
+<ul>
+<li>
+<p>可接触知识点</p>
+<ul>
+<li>移动路径：CinemachinePath、CinemachineDollyCart；</li>
+<li>摄像机组件：CinemachineBrain、CinemachineVirtualCamera；</li>
+<li>辅助组件：CinemachineTargetGroup、CinemachineTriggerAction；</li>
+</ul>
+</li>
+<li>
+<p>场景说明</p>
+<ol>
+<li>
+<p><strong>CinamachineBrain</strong> ：主虚拟相机</p>
+<ul>
+<li>路径：MainCamera</li>
+<li>说明：监控场景内所有的虚拟相机，一般与主 Camera 组件挂载在一起</li>
+</ul>
+</li>
+<li>
+<p><strong>CinemachineTriggerAction</strong> ：触发器</p>
+<ul>
+<li>
+<p>路径：Environment -&gt; DollyTrackTrigger</p>
+</li>
+<li>
+<p>说明：当进入当前物体的触发器区域的时候，会响应 OnObjectEnter，而离开当前区域的时候，会响应 OnObjectExit；需要2个当前脚本的原因是需要控制到2个物体；</p>
+<ul>
+<li>
+<p>Action</p>
+<ul>
+<li>Activate 和 Deactivate 是 Target 物体的显隐；</li>
+<li>Enable 和 Disable 是 Target 组件上的脚本显隐；</li>
+</ul>
+<p><img src="/Images/24.09_Cinemachine/Cinemachine_3.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>代码：脚本继承 Monobehaviour，从脚本内可查看到 OnObjectEnter 和 OnObjectExit 的实现方式是由碰撞盒或触发器的 Enter 和 Exit 响应的；</p>
+<p><img src="/Images/24.09_Cinemachine/Cinemachine_2.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Cinemachine Dolly Cart</strong> ：路径执行</p>
+<p><img src="/Images/24.09_Cinemachine/Cinemachine_4.gif" alt=""></p>
+<ul>
+<li>缘由：点击 Cinemachine Trigger Action 脚本上的 OnObjectEnter 上的 Target 实例 DollyCart 引用，并点击场景内的物体，可以发现 CineMachine Dolly Cart 的组件；</li>
+<li>路径：Environment -&gt; DollyTrackWithCart -&gt; DollyCart</li>
+<li>说明：根据 Path 提供的一系列位置路径，按更新方式赋值当前物体的位置；</li>
+<li>参数：
+<ul>
+<li>Path：指定路径（在下一点内说明）；</li>
+<li>Update Method ：更新方式
+<ul>
+<li>Update ：每帧更新；</li>
+<li>Fixed Update ：固定时间更新；</li>
+<li>Late Update ：Update后更新，适合摄像机位置推进；</li>
+</ul>
+</li>
+<li>Position Units：位置计量单位
+<ul>
+<li>Path Units：使用路径上的航点，0为第一个航点，1为第二个，以此类推；</li>
+<li>Distance：使用路径全距离处理；</li>
+<li>Normalized：归一化处理，0为开始，1为结束；</li>
+</ul>
+</li>
+<li>Speed ：移动速度</li>
+<li>Position ：初始在哪个位置上；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>CinemachinePath</strong>：绘制路径</p>
+<p><img src="/Images/24.09_Cinemachine/Cinemachine_5.png" alt=""></p>
+<ul>
+<li>缘由：点击 Cinemachine Dolly Cart 脚本上的 Path DollyTrack 实例；便可查看到 CinemachinePath 脚本；</li>
+<li>路径：Environment -&gt; DollyTrackWithCart -&gt; DollyTrack</li>
+<li>说明：绘制一系列的移动路径轨道；</li>
+<li>参数：<a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachinePath.html">链接</a></li>
+</ul>
+</li>
+<li>
+<p><strong>CinemachineVirtualCamera</strong>：虚拟相机</p>
+<ul>
+<li>说明：继承 CinemachineVirtualCameraBase，虚拟相机内的基础相机；</li>
+<li>缘由：点击 Cinemachine Trigger Action 脚本上的 OnObjectEnter 上的 Target 实例 CM vcam DollyTrack 引用，并点击场景内的物体，可以发现 CinemachineVirtualCamera 的组件；</li>
+<li>路径以及说明：
+<ul>
+<li>CM vcam DollyTrack：跟随DollyCart的虚拟相机，当进入中心蓝色触发区域后，会激活并使用当前虚拟相机；</li>
+<li>CM vcam Overview：跟随玩家的虚拟相机；当离开中心蓝色触发区域后，会使用当前虚拟相机；</li>
+</ul>
+</li>
+<li>参数：
+<ul>
+<li>Priority：优先级</li>
+<li>Follow ：虚拟相机跟随的物体；</li>
+<li>LookAt：虚拟相机朝向的物体；</li>
+<li>Body：更改位置  <a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineVirtualCameraBody.html">链接</a>
+<ul>
+<li>Transposer：可以点击 Transposer 场景查看其效果， <a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineBodyTransposer.html">链接</a></li>
+</ul>
+</li>
+<li>Anim：旋转相机 <a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineVirtualCameraAim.html">链接</a></li>
+<li>其他：<a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineVirtualCamera.html">链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>CinemachineTargetGroup</strong>：虚拟相机目标组</p>
+<ul>
+<li>缘由：点击 CM vcam DollyTrack -&gt; CinemachineVirtualCamera -&gt; Look At -&gt; TargetGroup1 引用，并点击场景内的物体，可以发现 CinemachineTargetGroup 的组件；</li>
+<li>说明：由于虚拟摄像机的 Look At 只能看向一个目标，为了能同时看向多个目标，则需要当前组件提供支持；</li>
+<li>参数：
+<ul>
+<li>Target：可以添加多个目标；
+<ul>
+<li>Weight：计算当前物体的权重，不能为负数；</li>
+<li>Radius：计算当前物体的半径，不能为负数；</li>
+</ul>
+</li>
+<li>其他：<a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineTargetGroup.html">链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="free-look-character">Free Look character</h2>
+<p>运用组件：CinemachineFreeLook</p>
+<h2 id="statedrivencamera">StateDrivenCamera</h2>
+<p>运用组件：CinemachineStateDrivenCamera</p>
+<h2 id="clearshot">ClearShot</h2>
+<p>运用组件：CinemachineClearShot</p>
+<h2 id="blendlistcamera">BlendListCamera</h2>
+<p>运用组件：CinemachineBlendListCamera</p>
+<h2 id="mixingcamera">MixingCamera</h2>
+<p>运用组件：CinemachineMixingCamera</p>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/index.html">Unity Cinemachine Doc</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/api/Cinemachine.html">Unity Cinemachine API</a></li>
+<li><a href="https://linxinfa.blog.csdn.net/article/details/124537415?spm=1001.2014.3001.5502">Unity Cinemachine快速上手</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-09-22 19:40:17 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24.09_cinemachine/">https://spirite12.github.io/post/24.09_cinemachine/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.08_spriteatlas/">
+            <span class="next-text nav-default">SpriteAtlas 图集</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
