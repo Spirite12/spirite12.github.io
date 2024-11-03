@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CherryPick 遴选工具 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 项目工程内以 develop 分支为开发分支；线上分支则是从 develop 切出一条分支； 当修复一端分支Bug的时候，则分别需要提交至两个分支内。此操作流程为： 从一端" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24.10_cherrypick/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CherryPick 遴选工具" />
+<meta property="og:description" content="前言 项目工程内以 develop 分支为开发分支；线上分支则是从 develop 切出一条分支； 当修复一端分支Bug的时候，则分别需要提交至两个分支内。此操作流程为： 从一端" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24.10_cherrypick/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-10-30T19:40:18+08:00" />
+<meta property="article:modified_time" content="2024-10-30T19:40:18+08:00" />
+
+<meta itemprop="name" content="CherryPick 遴选工具">
+<meta itemprop="description" content="前言 项目工程内以 develop 分支为开发分支；线上分支则是从 develop 切出一条分支； 当修复一端分支Bug的时候，则分别需要提交至两个分支内。此操作流程为： 从一端"><meta itemprop="datePublished" content="2024-10-30T19:40:18+08:00" />
+<meta itemprop="dateModified" content="2024-10-30T19:40:18+08:00" />
+<meta itemprop="wordCount" content="3393">
+<meta itemprop="keywords" content="git,unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CherryPick 遴选工具"/>
+<meta name="twitter:description" content="前言 项目工程内以 develop 分支为开发分支；线上分支则是从 develop 切出一条分支； 当修复一端分支Bug的时候，则分别需要提交至两个分支内。此操作流程为： 从一端"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CherryPick 遴选工具</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-10-30 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#效果演示"><strong>效果演示</strong></a></li>
+    <li><a href="#制作流程"><strong>制作流程</strong></a>
+      <ul>
+        <li><a href="#sh工具">sh工具</a></li>
+        <li><a href="#unity工具">Unity工具</a></li>
+        <li><a href="#工具定制化">工具定制化</a></li>
+      </ul>
+    </li>
+    <li><a href="#测试用例"><strong>测试用例</strong></a>
+      <ul>
+        <li><a href="#正常遴选">正常遴选</a></li>
+        <li><a href="#冲突遴选">冲突遴选</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<ul>
+<li>项目工程内以 develop 分支为开发分支；线上分支则是从 develop 切出一条分支；</li>
+<li>当修复一端分支Bug的时候，则分别需要提交至两个分支内。此操作流程为：
+<ul>
+<li>从一端切出新分支 -&gt; 推送修复节点到当前分支 -&gt; 推送当前分支到远端；</li>
+<li>从另一端分支切出新分支 -&gt; 切换到新分支 -&gt; 遴选修复节点到当前分支 -&gt; 推送当前分支到远端；</li>
+</ul>
+</li>
+<li>偶尔出现会单独针对某个环境从线上分支切出新分支开发，此时当修复Bug的时候，则会出现需要提交至三端分支；</li>
+<li>此时问题便暴露出来：每多一条需提交的分支，则需要重复执行遴选操作。</li>
+<li>那么需求来了：当提交好一个分支后，后续的每个分支操作是否可以有个工具帮忙执行操作，这便是本文的缘由；</li>
+</ul>
+<h1 id="效果演示"><strong>效果演示</strong></h1>
+<ul>
+<li>
+<p>文本工程使用的是：<a href="https://gitlab.com/Spirite12/dc">DC</a></p>
+</li>
+<li>
+<p>前期准备流程：</p>
+<ol>
+<li>使用 Fork 打开当前工程，并找到 develop 分支，切出一条基底分支名为：feature/dev_cherry_pick@spirit</li>
+<li>在这个分支上上传文件并推送到远端：
+<ul>
+<li>sh文件：\Tools\Git\git_cherry_pick.sh</li>
+<li>C#代码：\Assets\DCFrame\Editor\Git\CherryPick.cs</li>
+</ul>
+</li>
+<li>在这个分支上，再切出一条分支：hotfix/debug@spirit</li>
+<li>在 hotfix/debug@spirit 上传2条任意提交到远端；</li>
+</ol>
+<p><img src="/Images/24.10_CherryPick/CherryPick1.png" alt=""></p>
+</li>
+<li>
+<p>效果演示：</p>
+<ol>
+<li>
+<p>打开 Unity -&gt; Tools -&gt; Git -&gt; 分支遴选工具；</p>
+</li>
+<li>
+<p>填写当前分支基底和目标分支基底，都填写 develop，并点击开始执行；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick2.png" alt=""></p>
+</li>
+<li>
+<p>等待 bash 窗口执行完毕，并打印出新分支名称；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick3.png" alt=""></p>
+</li>
+<li>
+<p>打开 Gitlab 网页，点击合并请求 - &gt; 新建合并请求 -&gt; 填写源分支为新生成分支，目标分支为 develop -&gt; 查看对比；</p>
+</li>
+<li>
+<p>则发现刚才手动上传的内容，都成功遴选到新分支了；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick4.png" alt=""></p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="制作流程"><strong>制作流程</strong></h1>
+<h2 id="sh工具">sh工具</h2>
+<ol>
+<li>从需求出发，可以得知 Git 指令是可以满足需求，其中重点所需：
+<ul>
+<li><code>git checkout</code> ：切换分支</li>
+<li><code>git checkout -b</code> ：创建分支</li>
+<li><code>git cherry-pick</code> ：遴选提交</li>
+<li><code>git push origin</code> ：推送远端</li>
+</ul>
+</li>
+<li>当我们得知 Git 可以完成这些操作的时候，则需要代码去运行它，此时则需要 sh 文件的代码；
+<ul>
+<li>代码内容内已标注好注释；</li>
+</ul>
+</li>
+<li>按照 <strong>效果演示</strong> -&gt; 前期准备流程，切换好分支；</li>
+<li>打开 Fork 工具，点击 Console 控制台：输入指令；</li>
+<li>输入的指令为： sh文件的路径 基底分支 目标分支 目标切出分支名
+<ul>
+<li>xxx/Tools/Git/git_cherry_pick.sh develop develop hotfix/cherry_dev_debug@spirit</li>
+<li>提示：最开始的xxx，需要工程的完整路径；</li>
+</ul>
+</li>
+<li>并可查看到 <strong>效果演示</strong> bash 窗口的执行内容；</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1">#基底分支</span>
+</span></span><span class="line"><span class="cl"><span class="nv">base_branch</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#目标分支</span>
+</span></span><span class="line"><span class="cl"><span class="nv">target_branch</span><span class="o">=</span><span class="nv">$2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#目标切出分支</span>
+</span></span><span class="line"><span class="cl"><span class="nv">create_branch</span><span class="o">=</span><span class="nv">$3</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#黄色</span>
+</span></span><span class="line"><span class="cl"><span class="nv">green_color</span><span class="o">=</span><span class="s2">&#34;\033[33m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#红色</span>
+</span></span><span class="line"><span class="cl"><span class="nv">red_color</span><span class="o">=</span><span class="s2">&#34;\033[31m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#重置颜色</span>
+</span></span><span class="line"><span class="cl"><span class="nv">default_color</span><span class="o">=</span><span class="s2">&#34;\033[0m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取当前分支名称</span>
+</span></span><span class="line"><span class="cl"><span class="nv">current_branch</span><span class="o">=</span><span class="k">$(</span>git branch --show-current<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取当前分支的最新提交</span>
+</span></span><span class="line"><span class="cl"><span class="nv">commits</span><span class="o">=</span><span class="k">$(</span>git log <span class="s2">&#34;</span><span class="nv">$current_branch</span><span class="s2">&#34;</span> --reverse --pretty<span class="o">=</span>format:<span class="s2">&#34;%H&#34;</span> <span class="s2">&#34;</span><span class="nv">$base_branch</span><span class="s2">..</span><span class="nv">$current_branch</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算 commits 的数量</span>
+</span></span><span class="line"><span class="cl"><span class="nv">commit_count</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$commits</span><span class="s2">&#34;</span> <span class="p">|</span> wc -l<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$green_color</span><span class="s2"> 开始执行切分支操作 </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#切分支</span>
+</span></span><span class="line"><span class="cl">git checkout <span class="nv">$target_branch</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 从远端获取当前分支消息</span>
+</span></span><span class="line"><span class="cl">git fetch origin <span class="nv">$target_branch</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 拉取</span>
+</span></span><span class="line"><span class="cl">git pull
+</span></span><span class="line"><span class="cl"><span class="c1">#创建分支</span>
+</span></span><span class="line"><span class="cl">git checkout -b <span class="nv">$create_branch</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$green_color</span><span class="s2"> 创建分支成功 </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#切分支</span>
+</span></span><span class="line"><span class="cl">git checkout <span class="nv">$create_branch</span>
+</span></span><span class="line"><span class="cl"><span class="nv">addCount</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#逐个应用这些提交到 new-branch</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> commit in <span class="nv">$commits</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$green_color</span><span class="s2"> (</span><span class="nv">$addCount</span><span class="s2">/</span><span class="nv">$commit_count</span><span class="s2">)正在提交节点： </span><span class="nv">$commit</span><span class="s2"> </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    git cherry-pick <span class="nv">$commit</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 检查是否有冲突发生</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$red_color</span><span class="s2"> 发现冲突！请查看以下状态：</span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        git status
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$red_color</span><span class="s2"> 请手动解决冲突，然后按下任意键继续... </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">read</span> -n <span class="m">1</span> -s
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">addCount</span><span class="o">=</span><span class="k">$((</span>addCount <span class="o">+</span> <span class="m">1</span><span class="k">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$green_color</span><span class="s2"> 正在推送当前分支到远程 </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">git push origin <span class="nv">$create_branch</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#切分支</span>
+</span></span><span class="line"><span class="cl">git checkout <span class="nv">$current_branch</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;\n</span><span class="nv">$green_color</span><span class="s2"> ============= 切分支完成 ============= </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;</span><span class="nv">$green_color</span><span class="s2"> 分支名：</span><span class="nv">$create_branch</span><span class="s2"> ，成功遴选 </span><span class="nv">$commit_count</span><span class="s2"> 条 </span><span class="nv">$default_color</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 成功退出</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="unity工具">Unity工具</h2>
+<ol>
+<li>由于需要每次都手动的输入命令行指令会有点繁琐，因此使用 Unity 的编辑器扩展工具来代替这个手动的写入；</li>
+<li>使用者只需填写当前分支基底，目标分支基底，代码便可打开 Bash窗口并把自动生成的指令发送到这个窗口内，并开始执行遴选操作；</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Diagnostics</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Text.RegularExpressions</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Debug</span> <span class="p">=</span> <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Debug</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">GitCherryPick</span> <span class="p">:</span> <span class="n">EditorWindow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cp">#region 定制内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// sh脚本的文件路径</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">ShCherryPickPath</span> <span class="p">=</span> <span class="s">&#34;/Tools/Git/git_cherry_pick.sh&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 打开界面识别规则</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">RefreshWinInfo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 根据当前分支名，识别一些规则并自动帮忙填写到窗口内</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 提示内容</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">void</span> <span class="n">OnClickTips</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">EditorUtility</span><span class="p">.</span><span class="n">DisplayDialog</span><span class="p">(</span><span class="s">&#34;分支遴选工具说明&#34;</span><span class="p">,</span> <span class="s">&#34;提示内容&#34;</span><span class="p">,</span> <span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 分析分支</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AnalysisBranch</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 需要根据开发实际需求来写，这里只是示例</span>
+</span></span><span class="line"><span class="cl">		<span class="n">targetBranchName</span> <span class="p">=</span> <span class="s">&#34;hotfix/cherry_dev_debug@spirit&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl"><span class="na">	
+</span></span></span><span class="line"><span class="cl"><span class="na">    [MenuItem(&#34;Tools/Git/分支遴选工具&#34;)]</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">CreateCtrlWin</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">Rect</span> <span class="n">rect</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Rect</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">350</span><span class="p">,</span><span class="m">145</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GitCherryPick</span> <span class="n">window</span> <span class="p">=</span> <span class="p">(</span><span class="n">GitCherryPick</span><span class="p">)</span><span class="n">GetWindowWithRect</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">GitCherryPick</span><span class="p">),</span> <span class="n">rect</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="s">&#34;分支遴选&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">window</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GetBranchName</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 绘制窗口</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">void</span> <span class="n">OnGUI</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GUILayout</span><span class="p">.</span><span class="n">Space</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">EditorGUILayout</span><span class="p">.</span><span class="n">LabelField</span><span class="p">(</span><span class="s">&#34;当前分支名称：&#34;</span> <span class="p">+</span> <span class="n">curBranchName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GUILayout</span><span class="p">.</span><span class="n">Space</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">EditorGUILayout</span><span class="p">.</span><span class="n">LabelField</span><span class="p">(</span><span class="s">&#34;以下需手动填写&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GUILayout</span><span class="p">.</span><span class="n">Space</span><span class="p">(</span><span class="m">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">curBaseBranchName</span> <span class="p">=</span> <span class="n">EditorGUILayout</span><span class="p">.</span><span class="n">TextField</span><span class="p">(</span><span class="s">&#34;当前分支基底：&#34;</span><span class="p">,</span> <span class="n">curBaseBranchName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">targetBaseBranchName</span> <span class="p">=</span> <span class="n">EditorGUILayout</span><span class="p">.</span><span class="n">TextField</span><span class="p">(</span><span class="s">&#34;目标分支基底:&#34;</span><span class="p">,</span> <span class="n">targetBaseBranchName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GUILayout</span><span class="p">.</span><span class="n">Space</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GUILayout</span><span class="p">.</span><span class="n">BeginHorizontal</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">var</span> <span class="n">isTips</span> <span class="p">=</span> <span class="n">GUILayout</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;提示&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">isTips</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">OnClickTips</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">var</span> <span class="n">isClick</span> <span class="p">=</span> <span class="n">GUILayout</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;开始执行&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">isClick</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">GetCherryPickCommend</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GUILayout</span><span class="p">.</span><span class="n">EndHorizontal</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 点击创建脚本</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">void</span> <span class="n">GetCherryPickCommend</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">AnalysisBranch</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(!</span><span class="n">JudgeCreate</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">string</span> <span class="n">assetsPath</span> <span class="p">=</span> <span class="n">Application</span><span class="p">.</span><span class="n">dataPath</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">string</span> <span class="n">projectRootPath</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">GetDirectoryName</span><span class="p">(</span><span class="n">assetsPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">string</span> <span class="n">scriptPath</span> <span class="p">=</span> <span class="n">projectRootPath</span> <span class="p">+</span> <span class="n">ShCherryPickPath</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">scriptPath</span> <span class="p">=</span> <span class="n">scriptPath</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;\\&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">string</span> <span class="n">strWrite</span> <span class="p">=</span> <span class="n">scriptPath</span> <span class="p">+</span> <span class="s">&#34; &#34;</span> <span class="p">+</span> <span class="n">curBaseBranchName</span> <span class="p">+</span> <span class="s">&#34; &#34;</span> <span class="p">+</span> <span class="n">targetBaseBranchName</span> <span class="p">+</span> <span class="s">&#34; &#34;</span> <span class="p">+</span> <span class="n">targetBranchName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">var</span> <span class="n">bashProcess</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Process</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">StartInfo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ProcessStartInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">FileName</span> <span class="p">=</span> <span class="s">&#34;cmd.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="n">Arguments</span> <span class="p">=</span> <span class="s">$&#34;/c start bash -c \&#34;</span><span class="p">{</span><span class="n">strWrite</span><span class="p">};</span> <span class="n">exec</span> <span class="n">bash</span><span class="err">\</span><span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="n">RedirectStandardOutput</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="n">RedirectStandardError</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="n">RedirectStandardInput</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="n">UseShellExecute</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="n">CreateNoWindow</span> <span class="p">=</span> <span class="k">false</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">};</span>
+</span></span><span class="line"><span class="cl">		<span class="n">bashProcess</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="n">Close</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 获取分支名称</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;returns&gt;&lt;/returns&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">GetBranchName</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">Process</span> <span class="n">gitProcess</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Process</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="n">gitProcess</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">FileName</span> <span class="p">=</span> <span class="s">&#34;git&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">gitProcess</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">Arguments</span> <span class="p">=</span> <span class="s">&#34;rev-parse --abbrev-ref HEAD&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">gitProcess</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardOutput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">gitProcess</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">UseShellExecute</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">gitProcess</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">CreateNoWindow</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">gitProcess</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="n">curBranchName</span> <span class="p">=</span> <span class="n">gitProcess</span><span class="p">.</span><span class="n">StandardOutput</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">().</span><span class="n">Trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="n">gitProcess</span><span class="p">.</span><span class="n">WaitForExit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="n">RefreshWinInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;获取分支名称时发生错误: &#34;</span> <span class="p">+</span> <span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 判断是否可以点击创建</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;returns&gt;&lt;/returns&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="kt">bool</span> <span class="n">JudgeCreate</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">curBaseBranchName</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">EditorUtility</span><span class="p">.</span><span class="n">DisplayDialog</span><span class="p">(</span><span class="s">&#34;提示弹窗&#34;</span><span class="p">,</span> <span class="s">&#34;当前分支基底暂未填写&#34;</span><span class="p">,</span> <span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">targetBaseBranchName</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">EditorUtility</span><span class="p">.</span><span class="n">DisplayDialog</span><span class="p">(</span><span class="s">&#34;提示弹窗&#34;</span><span class="p">,</span> <span class="s">&#34;当前目标基底暂未填写&#34;</span><span class="p">,</span> <span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">targetBranchName</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">EditorUtility</span><span class="p">.</span><span class="n">DisplayDialog</span><span class="p">(</span><span class="s">&#34;提示弹窗&#34;</span><span class="p">,</span> <span class="s">&#34;目标分支名称无法生成，请检查分支名&#34;</span><span class="p">,</span> <span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 当前分支名称</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">curBranchName</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 目标分支名称</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">targetBranchName</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 当前分支基底</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">curBaseBranchName</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// 目标分支基底</span>
+</span></span><span class="line"><span class="cl">	<span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">targetBaseBranchName</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="工具定制化">工具定制化</h2>
+<p>为了方便使用者的工具填写，因此开辟出了三个函数供开发者根据自己的工程所需进行实际的代码开发；</p>
+<ol>
+<li><code>ShCherryPickPath</code> : sh文件的路径；</li>
+<li><code>RefreshWinInfo()</code> ：在成功获取当前分支名后，会调用此函数，目的分析当前分支名，并根据一些规则，自动的帮忙填写 当前分支基底 or 目标分支基底；</li>
+<li><code>AnalysisBranch()</code>：1）生成目标分支名，2）对当前分支基底 or 目标分支基底的分支名可以填写简称，由代码自动识别；</li>
+<li><code>OnClickTips()</code> ：对以上定制化的内容，作出文本提示说明；</li>
+</ol>
+<h1 id="测试用例"><strong>测试用例</strong></h1>
+<h2 id="正常遴选">正常遴选</h2>
+<p>在效果演示中已展示；</p>
+<h2 id="冲突遴选">冲突遴选</h2>
+<ul>
+<li>
+<p>前期准备：<strong>效果演示</strong>中<strong>前期准备流程</strong>执行完；</p>
+</li>
+<li>
+<p>此时从 feature/dev_cherry_pick@spirit 再切出一条分支名为 ：hotfix/conflict@spirit</p>
+</li>
+<li>
+<p>在这个新分支上，提交2条与 hotfix/debug@spirit 分支相同的上传内容；但是需要文件内容改动不一致，来模拟冲突的情况；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick5.png" alt=""></p>
+</li>
+<li>
+<p>此时切换当前分支到 hotfix/debug@spirit，并打开 Unity的遴选工具界面，填写内容</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick6.png" alt=""></p>
+</li>
+<li>
+<p>根据以上准备，可以猜想出从 hotfix/debug@spirit 遴选2条节点到新分支，都会产生冲突需要解决，此时点击开始执行，查看窗口显示；</p>
+<ul>
+<li>2个冲突，一个使用 hotfix/debug@spirit 的分支提交，一个使用 hotfix/conflict@spirit 的分支提交</li>
+</ul>
+</li>
+<li>
+<p>窗口显示冲突，并告知是 ToDo 文件冲突了；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick7.png" alt=""></p>
+</li>
+<li>
+<p>此时打开 Fork 进行冲突解决，选择 hotfix/debug@spirit 分支的提交；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick8.png" alt=""></p>
+</li>
+<li>
+<p>解决好了后，返回窗口内，按下任意键，继续执行 sh代码；</p>
+</li>
+<li>
+<p>此时会显示第二个冲突，并告知是 Version 文件冲突，那么回到 Fork 冲突解决，选择 hotfix/conflict@spirit 分支的提交；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick9.png" alt=""></p>
+</li>
+<li>
+<p>解决好了后，返回窗口内，按下任意键，继续执行 sh代码；</p>
+</li>
+<li>
+<p>此时窗口会显示切分支完成，并显示分支名；</p>
+</li>
+<li>
+<p>打开 Gitlab 网页，点击合并请求 - &gt; 新建合并请求 -&gt; 填写源分支为新生成分支，目标分支为 develop -&gt; 查看对比；</p>
+</li>
+<li>
+<p>可以看到的是当前的提交记录由 hotfix/conflict@spirit 本身的2条提交 + 冲突解决选择 hotfix/debug@spirit 的一条提交；</p>
+<p><img src="/Images/24.10_CherryPick/CherryPick10.png" alt=""></p>
+</li>
+<li>
+<p>此时显示成功，代表此工具也可以支持冲突的处理；</p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-10-30 19:40:18 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24.10_cherrypick/">https://spirite12.github.io/post/24.10_cherrypick/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">git</a>
+          <a href="/tags/unity/">unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.09_cinemachine/">
+            <span class="next-text nav-default">Cinemachine 虚拟相机</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -9,41 +9,62 @@
   
   <url>
     <loc>https://spirite12.github.io/categories/</loc>
-    <lastmod>2024-09-22T19:40:17+08:00</lastmod>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://spirite12.github.io/post/24/24.09_cinemachine/</loc>
-    <lastmod>2024-09-22T19:40:17+08:00</lastmod>
+    <loc>https://spirite12.github.io/post/24.10_cherrypick/</loc>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/</loc>
-    <lastmod>2024-09-22T19:40:17+08:00</lastmod>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/tags/git/</loc>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/post/</loc>
-    <lastmod>2024-09-22T19:40:17+08:00</lastmod>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/</loc>
-    <lastmod>2024-09-22T19:40:17+08:00</lastmod>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/tags/unity/</loc>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/categories/unity/</loc>
+    <lastmod>2024-10-30T19:40:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/24/24.09_cinemachine/</loc>
     <lastmod>2024-09-22T19:40:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -58,13 +79,6 @@
   
   <url>
     <loc>https://spirite12.github.io/post/24/24.08_spriteatlas/</loc>
-    <lastmod>2024-08-04T19:40:16+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://spirite12.github.io/tags/unity/</loc>
     <lastmod>2024-08-04T19:40:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -290,13 +304,6 @@
   <url>
     <loc>https://spirite12.github.io/post/22/22.08_cache/</loc>
     <lastmod>2024-05-27T16:25:03+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://spirite12.github.io/tags/git/</loc>
-    <lastmod>2022-08-02T21:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

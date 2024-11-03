@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Sun, 22 Sep 2024 19:40:17 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Oct 2024 19:40:18 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CherryPick 遴选工具</title>
+      <link>https://spirite12.github.io/post/24.10_cherrypick/</link>
+      <pubDate>Wed, 30 Oct 2024 19:40:18 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24.10_cherrypick/</guid>
+      <description>前言 项目工程内以 develop 分支为开发分支；线上分支则是从 develop 切出一条分支； 当修复一端分支Bug的时候，则分别需要提交至两个分支内。此操作流程为： 从一端</description>
+    </item>
+    
     <item>
       <title>Cinemachine 虚拟相机</title>
       <link>https://spirite12.github.io/post/24/24.09_cinemachine/</link>
