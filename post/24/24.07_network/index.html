@@ -49,7 +49,7 @@
 <meta itemprop="name" content="ProtoBuf 与网络相关知识">
 <meta itemprop="description" content="Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、"><meta itemprop="datePublished" content="2024-07-17T19:40:15+08:00" />
 <meta itemprop="dateModified" content="2024-07-17T19:40:15+08:00" />
-<meta itemprop="wordCount" content="4898">
+<meta itemprop="wordCount" content="5307">
 <meta itemprop="keywords" content="Unity," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ProtoBuf 与网络相关知识"/>
 <meta name="twitter:description" content="Protobuf 前言 Github：链接 官方的概述： 协议缓冲区是一种与语言无关、与平台无关的可扩展机制，用于序列化结构化数据。 它类似于 JSON，但体积更小、"/>
@@ -163,6 +163,12 @@
       </ul>
     </li>
     <li><a href="#长短连接"><strong>长、短连接</strong></a></li>
+    <li><a href="#rpc"><strong>RPC</strong></a>
+      <ul>
+        <li><a href="#rpc场合">RPC场合</a></li>
+        <li><a href="#一次rpc过程">一次RPC过程</a></li>
+      </ul>
+    </li>
     <li><a href="#相关链接"><strong>相关链接</strong></a></li>
   </ul>
 </nav>
@@ -590,6 +596,21 @@
 </ul>
 </li>
 </ul>
+<h1 id="rpc"><strong>RPC</strong></h1>
+<blockquote>
+<p>RPC全称为：远程过程调用（Remote Procedure Call），该技术是允许一台计算机上的程序调用另一台计算机的程序；就是要像调用本地的函数一样去调远程函数，屏蔽远程调用的复杂性；</p>
+<p>RPC 一般默认采用 TCP 来传输，因为其可靠性；</p>
+</blockquote>
+<h2 id="rpc场合">RPC场合</h2>
+<p>由于线上游戏需要24小时全天开机状态，且需要不同配置的服务端，在这些条件下，使得越来越多的开发者选择服务器架在远端。如架在：阿里云，腾讯云；</p>
+<h2 id="一次rpc过程">一次RPC过程</h2>
+<ol>
+<li><strong>序列化</strong>：RPC是一个远程调用，所以必须要通过网络来传输数据。调用方的请求出入参数都是对象，就需要序列化对象为可传输的二进制；</li>
+<li><strong>传输数据</strong>：调用方将二进制数据传输给服务提供方；</li>
+<li><strong>反序列化</strong>：服务提供方从二进制数据中解析数据，并逆向还原成请求对象；</li>
+<li><strong>方法调用</strong>：根据反序列化得到的请求对象，找到对应的类，完成方法调用；</li>
+<li><strong>返回请求</strong>：将执行结果序列化后，回写到对应的 TCP 通道里。调用方获取到应答的数据包后，再反序列化成对象，这样调用方就完成了一次 RPC 调用；</li>
+</ol>
 <h1 id="相关链接"><strong>相关链接</strong></h1>
 <ul>
 <li><a href="https://blog.csdn.net/LKR0325/article/details/135752670">帧同步和状态同步1</a></li>
@@ -597,6 +618,7 @@
 <li><a href="https://blog.csdn.net/Tong89_xi/article/details/105581779">三次握手和四次挥手</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/627487621">长短连接的区别</a></li>
 <li><a href="https://www.jianshu.com/p/5c8afbd6a85c">Unity之C#中使用protobuf</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2112766">RPC学习笔记</a></li>
 </ul>
 
     </div>
