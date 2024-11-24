@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Timeline 时间线 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 三种动画播放的理解： Animation：此组件可以让挂载的物体，进行动画播放；适合物体只需要播放单个动画； Animator：则是拥有多个" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.11_timeline/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Timeline 时间线" />
+<meta property="og:description" content="前言 三种动画播放的理解： Animation：此组件可以让挂载的物体，进行动画播放；适合物体只需要播放单个动画； Animator：则是拥有多个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.11_timeline/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-11-24T13:40:18+09:00" />
+<meta property="article:modified_time" content="2024-11-24T13:40:18+09:00" />
+
+<meta itemprop="name" content="Timeline 时间线">
+<meta itemprop="description" content="前言 三种动画播放的理解： Animation：此组件可以让挂载的物体，进行动画播放；适合物体只需要播放单个动画； Animator：则是拥有多个"><meta itemprop="datePublished" content="2024-11-24T13:40:18+09:00" />
+<meta itemprop="dateModified" content="2024-11-24T13:40:18+09:00" />
+<meta itemprop="wordCount" content="1749">
+<meta itemprop="keywords" content="unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Timeline 时间线"/>
+<meta name="twitter:description" content="前言 三种动画播放的理解： Animation：此组件可以让挂载的物体，进行动画播放；适合物体只需要播放单个动画； Animator：则是拥有多个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Timeline 时间线</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-11-24 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#环境安装"><strong>环境安装</strong></a></li>
+    <li><a href="#基础说明"><strong>基础说明</strong></a>
+      <ul>
+        <li><a href="#创建-timeline-资源">创建 Timeline 资源</a></li>
+        <li><a href="#添加-timeline-组件">添加 Timeline 组件</a></li>
+        <li><a href="#打开-timeline-窗口">打开 Timeline 窗口</a></li>
+      </ul>
+    </li>
+    <li><a href="#示例介绍"><strong>示例介绍</strong></a>
+      <ul>
+        <li><a href="#timeline_customtracks">Timeline_CustomTracks</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<ul>
+<li>三种动画播放的理解：
+<ul>
+<li><strong>Animation</strong>：此组件可以让挂载的物体，进行动画播放；适合物体只需要播放单个动画；</li>
+<li><strong>Animator</strong>：则是拥有多个 Animation 组件，并可以设计在某条件下播放指定 Animation；适合角色的动画状态切换；</li>
+<li><strong>Timeline</strong>：控制多个物体，并按照时间线依次播放所有物体的动画；适合用来剧情播放；</li>
+<li><strong>总结</strong>：从 Animation -&gt; Animator -&gt; Timeline ，使得动画的操作范围更广，更加方便了开发者的使用；当然的在不同的场合下，选择适合的动画组件才是更优的解决思路；</li>
+</ul>
+</li>
+<li>如果你有用过 “会声会影”  此类的视频剪辑软件，你就会发现此类软件的编辑界面与操作习惯都与Timeline 的使用大同小异；</li>
+</ul>
+<h1 id="环境安装"><strong>环境安装</strong></h1>
+<ul>
+<li>
+<p>Unity 版本： 2021.3.6f1c1</p>
+</li>
+<li>
+<p>安装：</p>
+<ul>
+<li>
+<p>路径：菜单栏 -&gt; Window -&gt; Package Manager</p>
+</li>
+<li>
+<p>窗口：右上角搜索 Timeline -&gt; 右下角点击安装 Install</p>
+<p><img src="/Images/24.11_Timeline/Timeline1.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p>导入实例：</p>
+<ul>
+<li>
+<p>安装完成后，在此页面导入相关实例查看教程</p>
+<p><img src="/Images/24.11_Timeline/Timeline2.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="基础说明"><strong>基础说明</strong></h1>
+<h2 id="创建-timeline-资源">创建 Timeline 资源</h2>
+<ol>
+<li>创建资源：
+<ul>
+<li>在 Project 区域点击右键 -&gt; Create -&gt; Timeline ；</li>
+<li>将创建好的实力命名为 Timeline；</li>
+</ul>
+</li>
+<li>查看属性：点击当前 Timeline，在 Inspector 查看属性；
+<ul>
+<li><strong>Frame Rat</strong>e ：帧速率，此参数的修改对播放速度、关键帧、轨道或剪辑没有影响；</li>
+<li><strong>Duration Mode</strong>：持续时间模式
+<ul>
+<li><strong>Based On Clips</strong>：根据 Timeline 内最后一帧的时间设置为当前资源的最长时间；</li>
+<li><strong>Fixed Length</strong>：手动填写想要的时长；</li>
+</ul>
+</li>
+<li><strong>Duration</strong>： 1）s ：时间（Second），以秒为单位 ；2）f：帧率（Frame）=  Frame Rate 填写的帧数 * s</li>
+<li><strong>Scene Preview</strong>：场景预览，建议勾选；</li>
+</ul>
+</li>
+</ol>
+<p><img src="/Images/24.11_Timeline/Timeline3.png" alt=""></p>
+<h2 id="添加-timeline-组件">添加 Timeline 组件</h2>
+<ol>
+<li>在 Hierarchy 面板上创建物体，并命名为 Timeline，添加组件 Playable Director；</li>
+<li>查看组件，并在参数 Playable 赋值刚才创建好的 Timeline 资源；</li>
+<li>参数说明：<a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/playable-director.html">链接</a></li>
+</ol>
+<p><img src="/Images/24.11_Timeline/Timeline4.png" alt=""></p>
+<h2 id="打开-timeline-窗口">打开 Timeline 窗口</h2>
+<p><img src="/Images/24.11_Timeline/Timeline5.png" alt=""></p>
+<ol>
+<li>
+<p>①：播放控件，<a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/tl-play-ctrls.html">链接</a></p>
+</li>
+<li>
+<p>②：曲目列表：</p>
+<p><img src="/Images/24.11_Timeline/Timeline6.png" alt=""></p>
+<ul>
+<li>
+<p><strong>添加轨道</strong>：<a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/trk-add.html">XXX Track</a></p>
+<p><img src="/Images/24.11_Timeline/Timeline7.png" alt=""></p>
+<ul>
+<li><strong>Activation Track</strong>：激活轨道，在绿色所划分的时间区域内，当前物体的激活状态为设置为 Ture；</li>
+<li><strong>Animation Track</strong>：动画轨道，面板上需要赋值需要控制的Animator，右边则是按照时间线赋值 Animation 给 Animator 并进行播放；
+<ul>
+<li>Staff_vs_Staff_OneFight_MaleA 是示例中的预制件；</li>
+</ul>
+</li>
+<li><strong>Audio Track</strong>：音频轨道，在黄色区域内会播放 AudioClip ，需要在面板上指定 Audio Source 组件，以便接受音频；
+<ul>
+<li>hey 是示例中的音频；</li>
+</ul>
+</li>
+<li><strong>Control Track</strong>：控制轨道；
+<ul>
+<li>Video Track ：把 M09-1317 视频拖入窗口内，并可按照时间线播放；</li>
+<li>也可在 Hierarchy 面板内拖入 DustMotesEffect ，来达到粒子的播放；
+<ul>
+<li>DustMotesEffect  是示例中的预制件</li>
+</ul>
+</li>
+<li>当然可控制的不止这样；</li>
+</ul>
+</li>
+<li><strong>Signal Track</strong>：信号轨道，在右侧时间线内接收到信号后，则会去执行信号轨道组件内的操作；当前操作则是 SetActive 组件的显隐操作；左边赋值需要赋值带有 Signal Receive 组件的物体；</li>
+<li><strong>Playable Track</strong>：播放组件，使用此轨道添加可播放剪辑。每个可播放剪辑都绑定到一个脚本，该脚本使用<a href="https://docs.unity3d.com/Manual/Playables.html">可播放 API</a>创建自定义动画工具、效果或游戏机制。请注意，脚本必须继承自<code>PlayableAsset</code>才能自动检测并创建可播放轨道。</li>
+<li>当然你也可以再嵌套一个子 Timeline 进行播放；
+<ul>
+<li>示例可以参考名为：GameplaySequence  的Timeline；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>添加轨道组</strong>：<a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/trk-groups.html">Track Group</a></p>
+<ul>
+<li>轨道组可以将多个 Track 归纳到一个组下面，作用是：
+<ol>
+<li>轨道分组、分类便于开发查看视图；</li>
+<li>统一管理当前轨道组下的 Track 的上锁、是否播放；</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>③：编辑模式， <a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/clip-overview.html">链接</a></p>
+</li>
+<li>
+<p>④：是否显示标注；</p>
+<ul>
+<li>
+<p>类似代码说明一样的标识；点击则可以查看注释，取消则无法选中；</p>
+<p><img src="/Images/24.11_Timeline/Timeline8.png" alt=""></p>
+</li>
+<li>
+<p>标注右边的2个图标说明：<a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/trk-lock-mute.html">链接</a></p>
+<ul>
+<li><strong>钥匙图标</strong>：是否需要上锁，上锁则无法对当前轨道进行操作；</li>
+<li><strong>眼睛图标</strong>：是否需要显示，勾选为不显示，则播放Timeline的时候会不播放当前轨道的内容；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>⑤：时间线，<a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/tl-selector-instance.html">链接</a></p>
+<ul>
+<li>显示当前时间线内播放的物体是啥；</li>
+</ul>
+</li>
+</ol>
+<h1 id="示例介绍"><strong>示例介绍</strong></h1>
+<h2 id="timeline_customtracks">Timeline_CustomTracks</h2>
+<ol>
+<li>
+<p>打开示例中命名为：Timeline_CustomTracks 的场景；</p>
+</li>
+<li>
+<p>点击 Hierarchy 面板上名为 Timeline 的物体，双击打开当前物体 Playable Director 组件上的 TimeLine 实例窗口；</p>
+<p><img src="/Images/24.11_Timeline/Timeline9.png" alt=""></p>
+</li>
+<li>
+<p>面板内轨道说明：</p>
+<ul>
+<li><strong>Time Dilation Track</strong> ：控制组件，当进入 TimeWarp 的时候，则会进行 TimeScale 的变化；影响游戏的快慢进度；</li>
+<li><strong>Video Track</strong>：控制轨道，按照时间线播放视频；</li>
+<li><strong>Text（TMP）</strong>：播放轨道，按照时间线内更改 Tmp 组件的文本；</li>
+<li><strong>Tween Track</strong>：轨道组
+<ul>
+<li><strong>Arrow</strong>：激活轨道，按照时间线激活物体；</li>
+<li><strong>Arrow</strong>：控制轨道，按照时间线控制当前物体的 Transform 组件位移；</li>
+</ul>
+</li>
+<li><strong>Character Tracks</strong>：轨道组
+<ul>
+<li><strong>Staff_vs_Staff_OneFight_MaleA</strong>：动画轨道，按照时间线播放动画；</li>
+<li><strong>Staff_vs_Staff_OneFight_MaleB</strong>：同上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>其他说明：</p>
+<ul>
+<li>
+<p>Timeline 组件会列出当前资源下的动画资源；</p>
+<p><img src="/Images/24.11_Timeline/Timeline10.png" alt=""></p>
+</li>
+<li>
+<p>Playable Director 组件内也会列出当前绑定的轨道；</p>
+<p><img src="/Images/24.11_Timeline/Timeline11.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/index.html">Unity Timeline Doc</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.timeline@1.8/api/index.html">Unity Timeline Api</a></li>
+<li><a href="https://docs.unity3d.com/cn/2017.1/Manual/TimelineOverview.html">Unity Time 手册</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-11-24 13:40:18 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.11_timeline/">https://spirite12.github.io/post/24/24.11_timeline/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.10_cherrypick/">
+            <span class="next-text nav-default">CherryPick 遴选工具</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
