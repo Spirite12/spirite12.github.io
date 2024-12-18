@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>UniTask 异步、等待集成 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 在处理异步编程代码时，可以用到：C# 提供的 Task 类、Unity 使用 MonoBehaviour 提供的协程 Coroutine、Unity 社区提供的一个高性能 UniTask 库 ； Uni" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/24/24.12_unitask/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="UniTask 异步、等待集成" />
+<meta property="og:description" content="前言 在处理异步编程代码时，可以用到：C# 提供的 Task 类、Unity 使用 MonoBehaviour 提供的协程 Coroutine、Unity 社区提供的一个高性能 UniTask 库 ； Uni" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/24/24.12_unitask/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-12-18T19:40:16+08:00" />
+<meta property="article:modified_time" content="2024-12-18T19:40:16+08:00" />
+
+<meta itemprop="name" content="UniTask 异步、等待集成">
+<meta itemprop="description" content="前言 在处理异步编程代码时，可以用到：C# 提供的 Task 类、Unity 使用 MonoBehaviour 提供的协程 Coroutine、Unity 社区提供的一个高性能 UniTask 库 ； Uni"><meta itemprop="datePublished" content="2024-12-18T19:40:16+08:00" />
+<meta itemprop="dateModified" content="2024-12-18T19:40:16+08:00" />
+<meta itemprop="wordCount" content="2379">
+<meta itemprop="keywords" content="Unity Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="UniTask 异步、等待集成"/>
+<meta name="twitter:description" content="前言 在处理异步编程代码时，可以用到：C# 提供的 Task 类、Unity 使用 MonoBehaviour 提供的协程 Coroutine、Unity 社区提供的一个高性能 UniTask 库 ； Uni"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">UniTask 异步、等待集成</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-12-18 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#安装"><strong>安装</strong></a></li>
+    <li><a href="#说明"><strong>说明</strong></a>
+      <ul>
+        <li><a href="#协程转换">协程转换</a></li>
+        <li><a href="#延迟处理">延迟处理</a></li>
+        <li><a href="#资源加载">资源加载</a></li>
+        <li><a href="#任务取消">任务取消</a></li>
+        <li><a href="#ugui-等待">UGUI 等待</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<p>在处理异步编程代码时，可以用到：C# 提供的 <code>Task</code> 类、Unity 使用 MonoBehaviour 提供的协程 <code>Coroutine</code>、Unity 社区提供的一个高性能 <code>UniTask</code> 库 ；</p>
+<ul>
+<li>UniTask的说明：</li>
+</ul>
+<blockquote>
+<p>为Unity提供一个高性能，0GC的async/await异步方案。</p>
+<ol>
+<li>基于值类型的<code>UniTask&lt;T&gt;</code>和自定义的 AsyncMethodBuilder 来实现0GC</li>
+<li>使所有 Unity 的 AsyncOperations 和 Coroutines 可等待</li>
+<li>基于 PlayerLoop 的任务( <code>UniTask.Yield</code>, <code>UniTask.Delay</code>, <code>UniTask.DelayFrame</code>, etc…) 可以替换所有协程操作</li>
+<li>对MonoBehaviour 消息事件和 uGUI 事件进行 可等待/异步枚举 拓展</li>
+<li>完全在 Unity 的 PlayerLoop 上运行，因此不使用Thread，并且同样能在 WebGL、wasm 等平台上运行。</li>
+<li>带有 Channel 和 AsyncReactiveProperty的异步 LINQ</li>
+<li>提供一个 TaskTracker EditorWindow 以追踪所有UniTask分配来预防内存泄漏</li>
+<li>与原生 Task/ValueTask/IValueTaskSource 高度兼容的行为</li>
+</ol>
+<p>UniTask 功能依赖于 C# 7.0( <a href="https://github.com/dotnet/roslyn/blob/master/docs/features/task-types.md">task-like custom async method builder feature</a> ) 所以需要的 Unity 最低版本是<code>Unity 2018.3</code> ，官方支持的最低版本是<code>Unity 2018.4.13f1</code>.</p>
+</blockquote>
+<ul>
+<li>这三者的区别是：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">特性</th>
+<th style="text-align:center">Unity协程</th>
+<th style="text-align:center">C# Task</th>
+<th style="text-align:center">UniTask</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">限制</td>
+<td style="text-align:center">Unity MonoBehaviour</td>
+<td style="text-align:center">.NET 通用</td>
+<td style="text-align:center">Unity 专用</td>
+</tr>
+<tr>
+<td style="text-align:center">返回类型</td>
+<td style="text-align:center">IEnumerator</td>
+<td style="text-align:center">Task</td>
+<td style="text-align:center">UniTask</td>
+</tr>
+<tr>
+<td style="text-align:center">性能</td>
+<td style="text-align:center">轻量</td>
+<td style="text-align:center">中等</td>
+<td style="text-align:center">高效</td>
+</tr>
+<tr>
+<td style="text-align:center">多线程支持</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">异步语法支持</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持（<code>async/await</code>）</td>
+<td style="text-align:center">支持（<code>async/await</code>）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="安装"><strong>安装</strong></h1>
+<ul>
+<li>
+<p><a href="https://github.com/Cysharp/UniTask/releases">Release</a> 版本下载</p>
+<ul>
+<li>本文下载的是 <a href="https://github.com/Cysharp/UniTask/releases/tag/2.5.10">UniTask.2.5.10.unitypackage</a></li>
+</ul>
+</li>
+<li>
+<p>打开 Unity 工程，双击当前 package 导入当前资源包；</p>
+<p><img src="/Images/24.12_UniTask/UniTask_1.png" alt=""></p>
+</li>
+</ul>
+<h1 id="说明"><strong>说明</strong></h1>
+<h2 id="协程转换">协程转换</h2>
+<ol>
+<li>
+<p>说明：协程内可以用 UniTask 处理；</p>
+</li>
+<li>
+<p>代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">StudyUniTask</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Unity 协程的写法</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">Coroutine</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// UniTask 也可对协程进行处理，等同以上写法</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//await Coroutine();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">IEnumerator</span> <span class="n">Coroutine</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Start Coroutine ：&#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Unity 协程等待 1 秒</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//yield return new WaitForSeconds(1);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待对应的毫秒时间, 1000 毫秒 = 1 秒</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="k">return</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="m">1000</span><span class="p">).</span><span class="n">ToCoroutine</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Wait Coroutine ：&#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>限制：引用文档</p>
+<blockquote>
+<p>您可以将协程（IEnumerator）转换为 UniTask（或直接等待），但它有一些限制。</p>
+<ul>
+<li>不支持<code>WaitForEndOfFrame</code>，<code>WaitForFixedUpdate</code>，<code>Coroutine</code></li>
+<li>Loop生命周期与<code>StartCoroutine</code>不一样，它使用指定<code>PlayerLoopTiming</code>的并且默认情况下，<code>PlayerLoopTiming.Update</code>在 MonoBehaviour<code>Update</code>和<code>StartCoroutine</code>的循环之前运行。</li>
+</ul>
+<p>如果您想要从协程到异步的完全兼容转换，请使用<code>IEnumerator.ToUniTask(MonoBehaviour coroutineRunner)</code>重载。它在参数 MonoBehaviour 的实例上执行 StartCoroutine 并等待它在 UniTask 中完成。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="延迟处理">延迟处理</h2>
+<ol>
+<li>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">StudyUniTask</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 因为此处不需要等待，因此调用 Forget 函数是为了消除 IDE 的警告提示</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WaitTest</span><span class="p">().</span><span class="n">Forget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="n">UniTask</span> <span class="n">WaitTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待 Unity 渲染完每个摄像机和GUI后执行</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 与 Unity WaitForEndOfFrame 用法相似，视版本需要添加参数 this</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitForEndOfFrame</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitForEndOfFrame&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待 FixedUpdate 函数结束后执行</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 与 Unity WaitForFixedUpdate 用法一致</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitForFixedUpdate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitForFixedUpdate&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;当前帧数：&#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">frameCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待到下一帧处理</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">NextFrame</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;NextFrame 帧数: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">frameCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待到下一帧处理</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 与 Unity yield return null 功能一致</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">Yield</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Yield 帧数: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">frameCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待对应的 Frame 数量</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">DelayFrame</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;DelayFrame 帧数：&#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">frameCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待对应的毫秒时间, 1000 毫秒 = 1 秒</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 知识点：参数内可用 TimeSpan 类转换成毫秒，如：TimeSpan.FromSeconds() 秒转换毫秒</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Delay&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待几秒后执行</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 与 Unity WaitForSeconds 用法一致</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitForSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitForSeconds&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 指定某个值改变时触发</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitUntilValueChanged</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">isActive</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitUntilValueChanged&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待直到所提供的委托计算为 true</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 与 Unity WaitUntil 用法一致</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitUntil</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">isActive</span> <span class="p">==</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitUntil&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待待直到所提供的委托计算为 false</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 与 Unity WaitWhile 用法一致</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitWhile</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">isActive</span> <span class="p">==</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitWhile&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待直到某个 Token 被取消后</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WaitUntilCanceled</span><span class="p">(</span><span class="n">cts</span><span class="p">.</span><span class="n">Token</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WaitUntilCanceled&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">Q</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 按下后，按序触发 WaitUntilValueChanged 和 WaitUntil 和 WaitWhile</span>
+</span></span><span class="line"><span class="cl">            <span class="n">isActive</span> <span class="p">=</span> <span class="p">!</span><span class="n">isActive</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">W</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 按下后，执行触发 WaitUntilCanceled</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cts</span><span class="p">.</span><span class="n">Cancel</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 是否激活</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">bool</span> <span class="n">isActive</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 取消任务源</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">CancellationTokenSource</span> <span class="n">cts</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CancellationTokenSource</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>截图</p>
+<p><img src="/Images/24.12_UniTask/UniTask_2.png" alt=""></p>
+</li>
+<li>
+<p>API</p>
+<ul>
+<li><a href="https://docs.unity3d.com/ScriptReference/WaitForEndOfFrame.html">WaitForEndOfFrame</a></li>
+<li><a href="https://docs.unity3d.com/ScriptReference/WaitForFixedUpdate.html">WaitForFixedUpdate</a></li>
+<li><a href="https://docs.unity3d.com/ScriptReference/WaitForSeconds.html">WaitForSeconds</a></li>
+<li><a href="https://docs.unity3d.com/ScriptReference/WaitUntil.html">WaitUntil</a></li>
+<li><a href="https://docs.unity3d.com/ScriptReference/WaitWhile.html">WaitWhile</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="资源加载">资源加载</h2>
+<ol>
+<li>
+<p>前提：</p>
+<ul>
+<li>Resources 文件夹下，需要存在名为：Res_1、Res_2、Res_3 的资源；</li>
+<li>本次代码是加载贴图资源；</li>
+</ul>
+</li>
+<li>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">StudyUniTask</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 调用 Forget 函数是为了消除 IDE 的警告提示</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LoadResTest</span><span class="p">().</span><span class="n">Forget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="n">UniTask</span> <span class="n">LoadResTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Time : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 从 Resources 文件夹下加载名为 Res_1 的贴图</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">Resources</span><span class="p">.</span><span class="n">LoadAsync</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;(</span><span class="s">&#34;Res_1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Resources : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待直到其中某个任务完成</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WhenAny</span><span class="p">(</span><span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;Res_2&#34;</span><span class="p">),</span> <span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;Res_3&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WhenAny ：&#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待直到任务全完成</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待加载这2个资源后： Res_2 、 Res_3</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">WhenAll</span><span class="p">(</span><span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;Res_2&#34;</span><span class="p">),</span> <span class="n">GetRes</span><span class="p">(</span><span class="s">&#34;Res_3&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;WhenAll ：&#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Void Start : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 开启一个任务执行</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 类似 .Net 的 += async () =&gt; { }</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UniTask</span><span class="p">.</span><span class="n">Void</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Void : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">Resources</span><span class="p">.</span><span class="n">LoadAsync</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;(</span><span class="s">&#34;Res_1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Void Await : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Defer Start : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 开启一个任务执行，与上面用法一致，区别是不需要写 await</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">UniTask</span><span class="p">.</span><span class="n">Defer</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Defer : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">Resources</span><span class="p">.</span><span class="n">LoadAsync</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;(</span><span class="s">&#34;Res_1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;Defer Await : &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="n">UniTask</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;</span> <span class="n">GetRes</span><span class="p">(</span><span class="kt">string</span> <span class="n">iconName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="n">Resources</span><span class="p">.</span><span class="n">LoadAsync</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;(</span><span class="n">iconName</span><span class="p">)</span> <span class="k">as</span> <span class="n">Sprite</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>截图</p>
+<p><img src="/Images/24.12_UniTask/UniTask_3.png" alt=""></p>
+</li>
+</ol>
+<h2 id="任务取消">任务取消</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Object</span> <span class="p">=</span> <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">StudyUniTask</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Image</span> <span class="n">imgIcon</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// cts.Token 也可以写成 this.GetCancellationTokenOnDestroy()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CancelTest</span><span class="p">(</span><span class="n">cts</span><span class="p">.</span><span class="n">Token</span><span class="p">).</span><span class="n">Forget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 此代码会导致任务马上取消，因此会使图片加载失败</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cts</span><span class="p">.</span><span class="n">Cancel</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置多久以后导致任务取消</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 目的是：当超时未完成任务后，主动取消任务，并做一些表现，可用于网络请求</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cts</span><span class="p">.</span><span class="n">CancelAfter</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="n">UniTask</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">CancelTest</span><span class="p">(</span><span class="n">CancellationToken</span> <span class="n">token</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// WithCancellation 绑定了一个取消toke，SuppressCancellationThrow为了获取异常</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="kt">bool</span> <span class="n">isCanceled</span><span class="p">,</span> <span class="n">Object</span> <span class="n">result</span><span class="p">)</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Resources</span><span class="p">.</span><span class="n">LoadAsync</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;(</span><span class="s">&#34;Res_1&#34;</span><span class="p">).</span><span class="n">WithCancellation</span><span class="p">(</span><span class="n">token</span><span class="p">).</span><span class="n">SuppressCancellationThrow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">isCanceled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//imgIcon.sprite = result as Sprite;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;图片加载成功&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;图片加载失败&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 取消任务源</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">CancellationTokenSource</span> <span class="n">cts</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CancellationTokenSource</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ugui-等待">UGUI 等待</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">StudyUniTask</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Button</span> <span class="n">btn</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Study</span><span class="p">().</span><span class="n">Forget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="n">UniTask</span> <span class="n">Study</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 可以获取到 MonoBehaviour 的相关等待</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// this.GetAsync </span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// UGUI 上的也可以直接搜索 Async, 如下方 Button</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 等待点击2次按钮</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">btn</span><span class="p">.</span><span class="n">OnClickAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">btn</span><span class="p">.</span><span class="n">OnClickAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;点击了2次&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 或者更高效的办法</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">handler</span> <span class="p">=</span> <span class="n">btn</span><span class="p">.</span><span class="n">GetAsyncClickEventHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">handler</span><span class="p">.</span><span class="n">OnClickAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">handler</span><span class="p">.</span><span class="n">OnClickAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;点击了2次&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 每个 Update 都会执行</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// await foreach (var _ in UniTaskAsyncEnumerable.EveryUpdate()) {</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//     Debug.Log(&#34;Update() &#34; + Time.frameCount);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// }</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://github.com/Cysharp/UniTask">Github</a></li>
+<li><a href="https://www.lfzxb.top/unitask_reademe_cn/">UniTask 中文文档</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2024-12-18 19:40:16 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/24/24.12_unitask/">https://spirite12.github.io/post/24/24.12_unitask/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/24/24.11_timeline/">
+            <span class="next-text nav-default">Timeline 时间线</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

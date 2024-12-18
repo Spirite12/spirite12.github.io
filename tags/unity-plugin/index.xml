@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Sun, 22 Sep 2024 19:40:17 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity-plugin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Dec 2024 19:40:16 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity-plugin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UniTask 异步、等待集成</title>
+      <link>https://spirite12.github.io/post/24/24.12_unitask/</link>
+      <pubDate>Wed, 18 Dec 2024 19:40:16 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/24/24.12_unitask/</guid>
+      <description>前言 在处理异步编程代码时，可以用到：C# 提供的 Task 类、Unity 使用 MonoBehaviour 提供的协程 Coroutine、Unity 社区提供的一个高性能 UniTask 库 ； Uni</description>
+    </item>
+    
     <item>
       <title>Cinemachine 虚拟相机</title>
       <link>https://spirite12.github.io/post/24/24.09_cinemachine/</link>
