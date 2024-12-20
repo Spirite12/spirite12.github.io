@@ -1,2 +1,2 @@
 欢迎来到我的记录博客！  
-链接 : spirite12.github.io
+链接: [spirite12.github.io](https://spirite12.github.io/)
