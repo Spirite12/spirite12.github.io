@@ -9,28 +9,56 @@
   
   <url>
     <loc>https://spirite12.github.io/categories/</loc>
-    <lastmod>2024-12-18T19:40:16+08:00</lastmod>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/</loc>
-    <lastmod>2024-12-18T19:40:16+08:00</lastmod>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/categories/dc-frame/</loc>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/frame/25.0115_addressable/</loc>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/tags/frame-work/</loc>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/post/</loc>
-    <lastmod>2024-12-18T19:40:16+08:00</lastmod>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/</loc>
-    <lastmod>2024-12-18T19:40:16+08:00</lastmod>
+    <lastmod>2025-01-15T19:40:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/frame/25.0114_dcframe/</loc>
+    <lastmod>2025-01-14T19:40:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -241,13 +269,6 @@
   <url>
     <loc>https://spirite12.github.io/post/23/23.02_localization1/</loc>
     <lastmod>2023-02-28T19:40:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://spirite12.github.io/tags/frame-work/</loc>
-    <lastmod>2023-01-30T19:40:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
