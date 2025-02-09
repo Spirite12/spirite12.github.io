@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Frame Addressable - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="文档记录 *在查看本文档之前，需了解 Addressable 相关的知识； 若想了解相关知识，可查看如下文档： Addressables 学习（一） Addressables 本地模拟热更（二） Addressable CDN远程热更（三） Addressable 游" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.0115_addressable/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Frame Addressable" />
+<meta property="og:description" content="文档记录 *在查看本文档之前，需了解 Addressable 相关的知识； 若想了解相关知识，可查看如下文档： Addressables 学习（一） Addressables 本地模拟热更（二） Addressable CDN远程热更（三） Addressable 游" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.0115_addressable/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-01-15T19:40:17+08:00" />
+<meta property="article:modified_time" content="2025-02-09T22:25:00+08:00" />
+
+<meta itemprop="name" content="Frame Addressable">
+<meta itemprop="description" content="文档记录 *在查看本文档之前，需了解 Addressable 相关的知识； 若想了解相关知识，可查看如下文档： Addressables 学习（一） Addressables 本地模拟热更（二） Addressable CDN远程热更（三） Addressable 游"><meta itemprop="datePublished" content="2025-01-15T19:40:17+08:00" />
+<meta itemprop="dateModified" content="2025-02-09T22:25:00+08:00" />
+<meta itemprop="wordCount" content="1258">
+<meta itemprop="keywords" content="Frame-Work," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Frame Addressable"/>
+<meta name="twitter:description" content="文档记录 *在查看本文档之前，需了解 Addressable 相关的知识； 若想了解相关知识，可查看如下文档： Addressables 学习（一） Addressables 本地模拟热更（二） Addressable CDN远程热更（三） Addressable 游"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Frame Addressable</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-01-15 </span>
+        <div class="post-category">
+            <a href="/categories/dc-frame/"> DC-Frame </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#文档记录"><strong>文档记录</strong></a></li>
+    <li><a href="#工程记录"><strong>工程记录</strong></a>
+      <ul>
+        <li><a href="#package-包">Package 包</a></li>
+        <li><a href="#资源配置">资源配置</a></li>
+        <li><a href="#资源加载">资源加载</a></li>
+        <li><a href="#资源标记">资源标记</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="文档记录"><strong>文档记录</strong></h1>
+<p>*在查看本文档之前，需了解 Addressable 相关的知识；</p>
+<p>若想了解相关知识，可查看如下文档：</p>
+<ul>
+<li><a href="https://spirite12.github.io/post/23/23.08_addressable/">Addressables 学习（一）</a></li>
+<li><a href="https://spirite12.github.io/post/23/23.09_addressable/">Addressables 本地模拟热更（二）</a></li>
+<li><a href="https://spirite12.github.io/post/23/23.10_uos_cdn/">Addressable CDN远程热更（三）</a></li>
+<li><a href="https://spirite12.github.io/post/23/23.11_addressable/">Addressable 游戏在线热更（四）</a></li>
+</ul>
+<h1 id="工程记录"><strong>工程记录</strong></h1>
+<h2 id="package-包">Package 包</h2>
+<ul>
+<li>
+<p>示例工程 Package 包：<a href="https://github.com/Spirite12/spirite12.github.io/blob/master/Assets/Addressable_25.01.unitypackage">下载链接</a></p>
+<p><img src="/Images/25.01_Addressable/Addressable_1.png" alt="Addressable"></p>
+</li>
+</ul>
+<h2 id="资源配置">资源配置</h2>
+<ul>
+<li>
+<p><strong>功能介绍</strong>：通过 AARules 配置文件规则，进行设置不同的 Addressable 组，解决项目的AB划分规则，减少手动操作；</p>
+<ul>
+<li>
+<p><strong>AARules：</strong></p>
+<ul>
+<li>
+<p><strong>SingleList</strong>：此列表内每个文件都单独进行打AB包；</p>
+<ul>
+<li>适合大图</li>
+</ul>
+</li>
+<li>
+<p><strong>LabelList</strong>：此列表内根据标签分类进行打AB包；</p>
+<ul>
+<li>适合跨文件夹打AB包；</li>
+</ul>
+</li>
+<li>
+<p><strong>FolderList</strong>：此列表内根据文件夹分类进行打AB包；</p>
+<ul>
+<li>适合按模块划分打AB包</li>
+</ul>
+</li>
+<li>
+<p>参数说明：</p>
+<ul>
+<li>
+<p>Number：第几层文件夹，0则是当前文件夹下查找，1则是第一层文件夹下查找；</p>
+</li>
+<li>
+<p>Search Pattern：搜索规则，搜索什么资源文件；</p>
+</li>
+<li>
+<p>Option：匹配模式，仅当前目录 or 搜索当前目录包括子目录；</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">Directory</span><span class="p">.</span><span class="n">GetFiles</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">,</span> <span class="kt">string</span> <span class="n">searchPattern</span><span class="p">,</span> <span class="n">SearchOption</span> <span class="n">searchOption</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Addressable Group：</strong></p>
+<ul>
+<li><strong>AAGroupSingle</strong>：由 SingleList 列表产生的组；</li>
+<li><strong>AAGroupLabel</strong>：由 LabelList 列表产生的组；</li>
+<li><strong>AAGroupFolder</strong>：由 FolderList 列表产生的组；</li>
+<li><strong>Default Local Group</strong>：默认本地组，标记 Addressable 资源中转站组；在 资源标记 栏目内会介绍；（打包实际内用不到）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>前期准备：</strong></p>
+<ul>
+<li>导入工程 Package 包，并查看 01_ResRules 文件夹；</li>
+<li>将导入的 AARules 配置文件覆盖工程内 AARules 配置；
+<ul>
+<li>AARules 路径：Game -&gt; Settings -&gt; Addressables -&gt; AARules；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>打 AA 包：</strong></p>
+<ul>
+<li>点击菜单栏 -&gt; Tools -&gt; 资源项 -&gt; 打 AA 包；
+<ul>
+<li>等待运行结果；</li>
+</ul>
+</li>
+<li>点击菜单栏 -&gt; Window -&gt; Asset Management -&gt; Addressables -&gt; Groups</li>
+<li>即可查看到组内已经打好 AA 包了；</li>
+</ul>
+</li>
+<li>
+<p><strong>验证结果：</strong></p>
+<ul>
+<li>
+<p>结果：根据 AARules 规则成功打出对应的 AB 包；</p>
+</li>
+<li>
+<p>查看 AARules 规则配置；</p>
+<p><img src="/Images/25.01_Addressable/Addressable_21.png" alt="Addressable"></p>
+</li>
+<li>
+<p>查看 Addressable Group 结果；</p>
+<p><img src="/Images/25.01_Addressable/Addressable_3.png" alt="Addressable"></p>
+</li>
+<li>
+<p>查看导出的 AB 包结果；</p>
+<ul>
+<li>点击 Build -&gt; New Build -&gt; Default Build Script</li>
+</ul>
+<p><img src="/Images/25.01_Addressable/Addressable_4.png" alt="Addressable"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="资源加载">资源加载</h2>
+<ul>
+<li>在 Addressable -&gt; 02_ResLoad -&gt; AddressableAssetLoad.cs ，示例加载加载的写法；</li>
+<li>主要通过 DCFrame 内的 Asset.cs 来封装资源加载函数；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">AddressableAssetLoad</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">async</span> <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载贴图</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">address</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetSpritePath</span><span class="p">(</span><span class="s">&#34;Addressables/01_ResRules/Folder/Label/animal-skull&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Sprite</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Asset</span><span class="p">.</span><span class="n">LoadAsset</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="k">as</span> <span class="n">Sprite</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载预制件</span>
+</span></span><span class="line"><span class="cl">        <span class="n">address</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetPrefabPath</span><span class="p">(</span><span class="s">&#34;Addressables/01_ResRules/Single/Res/Prefab/Prefab&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GameObject</span> <span class="n">go</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Asset</span><span class="p">.</span><span class="n">LoadAsset</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="k">as</span> <span class="n">GameObject</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Instantiate</span><span class="p">(</span><span class="n">go</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 加载文本</span>
+</span></span><span class="line"><span class="cl">        <span class="n">address</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetTxtPath</span><span class="p">(</span><span class="s">&#34;Addressables/01_ResRules/Single/Res/Txt/Txt&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TextAsset</span> <span class="n">txt</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Asset</span><span class="p">.</span><span class="n">LoadAsset</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="k">as</span> <span class="n">TextAsset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="n">txt</span><span class="p">.</span><span class="n">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="资源标记">资源标记</h2>
+<ul>
+<li>
+<p><strong>功能介绍</strong>：在 Addressable Group 内标记为文件夹地址的，当在此文件夹内导入的时候，会自动标记为 Addressable，而在 AARules 内 SingleList 内配置文件夹下时，虽然导出是单资源，但是是以文件夹栏目导出的单资源；因此在标记文件夹的单资源时候，继续导入资源无法标记 Addressable 需要手动标记或者点击 打 AA 包才可实现；</p>
+<blockquote>
+<p><strong>25.02.09</strong> ：新增支持 LabelList 与 FolderList 的文件夹的 number 深度层级在大于1的情况下，在导入的时候也需要标记 Addressable；</p>
+</blockquote>
+</li>
+<li>
+<p><strong>解决问题</strong>：解决在导入资源的时候，需要手动按需标记 Addressable 的问题；</p>
+</li>
+<li>
+<p><strong>主要代码实现：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">OnPostprocessAllAssets</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">importedAssets</span><span class="p">,</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">deletedAssets</span><span class="p">,</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">movedAssets</span><span class="p">,</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">movedFromAssetPaths</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InitData</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 资源导入回调</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">string</span> <span class="n">assetPath</span> <span class="k">in</span> <span class="n">importedAssets</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CheckAsset</span><span class="p">(</span><span class="n">assetPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 检测移动的资源</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">assetPath</span> <span class="k">in</span> <span class="n">movedAssets</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CheckAsset</span><span class="p">(</span><span class="n">assetPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>演示步骤：</strong></p>
+<ul>
+<li>
+<p>以资源为示例：Simple\Addressables\01_ResRules\Single\Pet\ammonite-fossil.png</p>
+</li>
+<li>
+<p>对此资源  Ctrl +D 下，会产生 ammonite-fossil 1 文件，并可查看到标记了 Addressable；</p>
+<p><img src="/Images/25.01_Addressable/Addressable_5.png" alt="Addressable"></p>
+</li>
+<li>
+<p>而标记的内容在 Default Local Group 默认组下；这么做的目的是区分是代码设置进去的；</p>
+<p><img src="/Images/25.01_Addressable/Addressable_6.png" alt="Addressable"></p>
+</li>
+<li>
+<p>若点击了 打 AA 包 ，则当前资源会回到正常的组内；</p>
+<p><img src="/Images/25.01_Addressable/Addressable_7.png" alt="Addressable"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://www.cnblogs.com/AlanDu/p/17253320.html">SpriteAtlas与AssetBundle应用</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-01-15 19:40:17 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2025-02-09 22:25:00 &#43;0800
+        
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.0115_addressable/">https://spirite12.github.io/post/25/25.0115_addressable/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.0114_dcframe/">
+            <span class="next-text nav-default">Frame 搬运说明</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

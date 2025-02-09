@@ -10,19 +10,19 @@
     <lastBuildDate>Wed, 15 Jan 2025 19:40:17 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Frame Addressable</title>
-      <link>https://spirite12.github.io/post/frame/25.0115_addressable/</link>
+      <link>https://spirite12.github.io/post/25/25.0115_addressable/</link>
       <pubDate>Wed, 15 Jan 2025 19:40:17 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/frame/25.0115_addressable/</guid>
+      <guid>https://spirite12.github.io/post/25/25.0115_addressable/</guid>
       <description>文档记录 *在查看本文档之前，需了解 Addressable 相关的知识； 若想了解相关知识，可查看如下文档： Addressables 学习（一） Addressables 本地模拟热更（二） Addressable CDN远程热更（三） Addressable 游</description>
     </item>
     
     <item>
       <title>Frame 搬运说明</title>
-      <link>https://spirite12.github.io/post/frame/25.0114_dcframe/</link>
+      <link>https://spirite12.github.io/post/25/25.0114_dcframe/</link>
       <pubDate>Tue, 14 Jan 2025 19:40:17 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/frame/25.0114_dcframe/</guid>
+      <guid>https://spirite12.github.io/post/25/25.0114_dcframe/</guid>
       <description>说明 在 Gitlab 上的 DC、DCFrame 工程，准备在一步一步的搬运到 Github 上了； 搬运的原因如下： 统一路径：由于当前博客是在 Github 仓库上；而 DC 框架在 Gitlab 上。两端</description>
     </item>
     
