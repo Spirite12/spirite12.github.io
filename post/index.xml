@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Wed, 15 Jan 2025 19:40:17 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Feb 2025 19:40:18 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Audio Toolkit 音效插件</title>
+      <link>https://spirite12.github.io/post/25/25.02_audiotoolkit/</link>
+      <pubDate>Thu, 20 Feb 2025 19:40:18 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/25/25.02_audiotoolkit/</guid>
+      <description>前言 在音效领域内，常用的音效插件有：FMOD Studio、Criware、Wwise、Audio Toolkit； 使用 ChatGPT 对这几款音效插件进行了</description>
+    </item>
+    
     <item>
       <title>Frame Addressable</title>
       <link>https://spirite12.github.io/post/25/25.0115_addressable/</link>

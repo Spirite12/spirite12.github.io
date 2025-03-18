@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Audio Toolkit 音效插件 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="前言 在音效领域内，常用的音效插件有：FMOD Studio、Criware、Wwise、Audio Toolkit； 使用 ChatGPT 对这几款音效插件进行了" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.02_audiotoolkit/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Audio Toolkit 音效插件" />
+<meta property="og:description" content="前言 在音效领域内，常用的音效插件有：FMOD Studio、Criware、Wwise、Audio Toolkit； 使用 ChatGPT 对这几款音效插件进行了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.02_audiotoolkit/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-02-20T19:40:18+08:00" />
+<meta property="article:modified_time" content="2025-02-20T19:40:18+08:00" />
+
+<meta itemprop="name" content="Audio Toolkit 音效插件">
+<meta itemprop="description" content="前言 在音效领域内，常用的音效插件有：FMOD Studio、Criware、Wwise、Audio Toolkit； 使用 ChatGPT 对这几款音效插件进行了"><meta itemprop="datePublished" content="2025-02-20T19:40:18+08:00" />
+<meta itemprop="dateModified" content="2025-02-20T19:40:18+08:00" />
+<meta itemprop="wordCount" content="1838">
+<meta itemprop="keywords" content="Frame-Work,Unity-Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Audio Toolkit 音效插件"/>
+<meta name="twitter:description" content="前言 在音效领域内，常用的音效插件有：FMOD Studio、Criware、Wwise、Audio Toolkit； 使用 ChatGPT 对这几款音效插件进行了"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Audio Toolkit 音效插件</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-02-20 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> Unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#使用教程"><strong>使用教程</strong></a>
+      <ul>
+        <li><a href="#下载">下载</a></li>
+        <li><a href="#知识梳理">知识梳理</a></li>
+      </ul>
+    </li>
+    <li><a href="#项目接入"><strong>项目接入</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="前言"><strong>前言</strong></h1>
+<ul>
+<li>在音效领域内，常用的音效插件有：<a href="https://www.fmod.com/">FMOD Studio</a>、<a href="https://www.criware.cn/web/#/">Criware</a>、<a href="https://www.audiokinetic.com/zh/">Wwise</a>、<a href="https://unity.clockstone.com/assetStore-audioToolkit.html">Audio Toolkit</a>；</li>
+<li>使用 ChatGPT 对这几款音效插件进行了对比方案输出：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>特性 / 插件</strong></th>
+<th style="text-align:center"><strong>CRIWARE (AtomCraft)</strong></th>
+<th style="text-align:center"><strong>FMOD Studio</strong></th>
+<th style="text-align:center"><strong>Wwise</strong></th>
+<th style="text-align:center"><strong>Audio Toolkit</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>适用游戏规模</strong></td>
+<td style="text-align:center">中大型</td>
+<td style="text-align:center">中大型</td>
+<td style="text-align:center">中大型</td>
+<td style="text-align:center">小型 / 中型</td>
+</tr>
+<tr>
+<td><strong>播放方式</strong></td>
+<td style="text-align:center">事件驱动</td>
+<td style="text-align:center">事件驱动</td>
+<td style="text-align:center">事件驱动</td>
+<td style="text-align:center">AudioSource</td>
+</tr>
+<tr>
+<td><strong>音频存储方式</strong></td>
+<td style="text-align:center">Bank（ACB 文件）</td>
+<td style="text-align:center">Bank（.bank 文件）</td>
+<td style="text-align:center">Bank（.bnk 文件）</td>
+<td style="text-align:center">Unity AudioClip</td>
+</tr>
+<tr>
+<td><strong>3D 音效支持</strong></td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">最强</td>
+<td style="text-align:center">基础 3D 支持</td>
+</tr>
+<tr>
+<td><strong>动态混音 &amp; DSP</strong></td>
+<td style="text-align:center">高级</td>
+<td style="text-align:center">强</td>
+<td style="text-align:center">最强（行业标杆）</td>
+<td style="text-align:center">基础淡入淡出</td>
+</tr>
+<tr>
+<td><strong>音频对象池优化</strong></td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td><strong>CPU / 内存优化</strong></td>
+<td style="text-align:center">低 CPU &amp; 低内存占用</td>
+<td style="text-align:center">可能需要手动优化</td>
+<td style="text-align:center">强优化</td>
+<td style="text-align:center">适中</td>
+</tr>
+<tr>
+<td><strong>支持平台</strong></td>
+<td style="text-align:center">全平台</td>
+<td style="text-align:center">全平台</td>
+<td style="text-align:center">全平台</td>
+<td style="text-align:center">PC &amp; 移动端</td>
+</tr>
+<tr>
+<td><strong>学习成本</strong></td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">中等</td>
+<td style="text-align:center">最高</td>
+<td style="text-align:center">最低</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>从以上的对比方案来看，出于以下几点考虑，来选取：<strong>Audio Toolkit</strong> 作为本文的音效插件推荐：
+<ul>
+<li>出于项目做独游的想法，那么上手快，费用低，成了首要的选取标准；</li>
+<li>其次 <strong>Audio Toolkit</strong> 的音效存储方式使用的是 Unity AudioClip；</li>
+<li>最后 <strong>Audio Toolkit</strong> 支持基础所需的音效需求；</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用教程"><strong>使用教程</strong></h1>
+<h2 id="下载">下载</h2>
+<ul>
+<li>
+<p><strong>Audio Toolkit</strong> 提供 <a href="https://assetstore.unity.com/packages/tools/audio/audio-toolkit-free-version-2679">免费</a> 和 <a href="https://assetstore.unity.com/packages/tools/audio/audio-toolkit-2647">付费</a> 版本，其中的区别在于免费版不支持：对象池管理类 与 限于12个音频项目；</p>
+<ul>
+<li>本文使用免费版本进行下载；</li>
+</ul>
+</li>
+<li>
+<p>首先打开免费版网址，登陆 Unity 账号后，点击在 Unity 中打开按钮；</p>
+</li>
+<li>
+<p>项目内出现 Package Manager 窗口，对着 Audio Toolkit Free Version 点击 Import 导入插件；</p>
+<p><img src="/Images/25.02_AudioToolkit/AudioToolkit_1.png" alt="AudioToolkit"></p>
+</li>
+<li>
+<p>导入到项目功能内，截图如下：</p>
+<p><img src="/Images/25.02_AudioToolkit/AudioToolkit_2.png" alt="AudioToolkit"></p>
+</li>
+<li>
+<p>项目提供 Demo 场景，路径：Assets\AudioToolkit\Demo\AudioToolkitDemo</p>
+</li>
+</ul>
+<h2 id="知识梳理">知识梳理</h2>
+<ol>
+<li>
+<p><strong>QA：Global Audio Settings ：全局参数</strong></p>
+<ul>
+<li><strong>Additional Audio Controller</strong>：若勾选，则代表当前 Controller 是作为附加脚本到主脚本上的，此刻是可以拥有多个 Controller；但请确保主 Controller 只能存在一个。
+<ul>
+<li>相当于全局主 Controller 只可以有一个，但是针对不同的场景、UI、系统可以分别有附加脚本；而这些附加脚本只存在以这些情况的生命周期里；</li>
+</ul>
+</li>
+<li><strong>Persist Scene Loading</strong>：若勾选，则切换到下一个场景的时候，此脚本不会被销毁；即存在场景的 DontDestroyOnLoad 下；需确保此脚本在场景内唯一；</li>
+<li><strong>Unload Audio On Destroy</strong>：若勾选，则当当前脚本被销毁的时候，会从内存内卸载所有的 AudioClips；</li>
+</ul>
+</li>
+<li>
+<p><strong>QA：Category Settings</strong></p>
+<ul>
+<li>
+<p>Audio Controller 类 Category Settings 目录配置介绍：</p>
+<ul>
+<li>
+<p>功能介绍：用以音效配置，此配置分为三大层级；</p>
+</li>
+<li>
+<p>第一层 Category：申明有哪些目录的音效；</p>
+<ul>
+<li>如：背景音、音效等等类别；</li>
+</ul>
+</li>
+<li>
+<p>第二层 Audio Item Settings ：这个目录下申明一系列音效配置；</p>
+<ul>
+<li>如：播放模式、循环模式、延迟和音调等等；</li>
+<li>此配置不包含具体 AudioClip 音效；</li>
+</ul>
+</li>
+<li>
+<p>第三层 Audio Sub-Item Settings : 对指定的某个音效配置赋值 AudioClip 源和当前音效配置；</p>
+<ul>
+<li>音效配置内可按序设置多个 AudioClip；</li>
+</ul>
+<p><img src="/Images/25.02_AudioToolkit/AudioToolkit_3.png" alt="AudioToolkit"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>播放 Category Settings 内申明的音效配置：</p>
+<ul>
+<li>
+<p>播放的函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// 播放音效，如果有多个同时播放，则一起播放音效；</span>
+</span></span><span class="line"><span class="cl"><span class="n">AudioController</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="s">&#34;flute&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 播放背景音，只能存在一个，以最后调用此函数的背景音为主；</span>
+</span></span><span class="line"><span class="cl"><span class="n">AudioController</span><span class="p">.</span><span class="n">PlayMusic</span><span class="p">(</span><span class="s">&#34;flute&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>获取 audioID 值，以上图为例，则是 Audio Item Settings -&gt; Name -&gt; flute；</p>
+<ul>
+<li>audioID需全局唯一；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>QA：Playlist Settings</strong></p>
+<ul>
+<li>
+<p>Audio Controller 类 Playlist Settings 播放列表介绍：</p>
+<ul>
+<li>
+<p>功能介绍：按序播放音效列表配置，此配置分为二大层级；</p>
+</li>
+<li>
+<p>第一层：定义有哪些播放列表；</p>
+</li>
+<li>
+<p>第二层：在某个播放列表下，有哪些音效需要播放；</p>
+<ul>
+<li>音效需要在 Category Settings 中定义才可使用；</li>
+</ul>
+<p><img src="/Images/25.02_AudioToolkit/AudioToolkit_4.png" alt="AudioToolkit"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>播放 Playlisy Settings 内申明的音效配置：</p>
+<ul>
+<li>
+<p>播放的函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">AudioController</span><span class="p">.</span><span class="n">PlayPlaylist</span><span class="p">(</span><span class="s">&#34;Playlisy1&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>获取 PlaylistName 参数值，以上图为例，则是 Playlisy Settings -&gt; Playlist Name；</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>QA：Channel Settings</strong></p>
+<ul>
+<li>Audio Controller 类 Channel Settings 通道设置介绍：
+<ul>
+<li>功能介绍：处理当前播放的音效衔接下一段音效的配置；</li>
+<li>参数介绍：
+<ul>
+<li>Crossfade-in Time：淡入，播放音频几秒内，音量从0到1；</li>
+<li>Crossfade-out Time：淡出，音频结束后几秒内，音量从1到0；</li>
+<li>针对 Playlist 配置：
+<ul>
+<li>Loop Playlist：循环播放列表；</li>
+<li>Shuffle Playlist：随机播放列表；</li>
+<li>Crossfade Playlist：淡入淡出播放列表；</li>
+<li>Delay Betw. Playlist Tracks：当前音频延迟几秒播放下个音频；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="项目接入"><strong>项目接入</strong></h1>
+<ul>
+<li>
+<p>项目工程：<a href="https://github.com/Spirite12/unity.dcFrame">链接</a></p>
+</li>
+<li>
+<p>导入包到工程 Assets\Plugins 文件夹下；</p>
+<ul>
+<li>删除 Demo 文件夹，减少包体；</li>
+</ul>
+</li>
+<li>
+<p>新增音效预制件；</p>
+<ul>
+<li>路径在：Assets\Game\Settings
+<ul>
+<li>AudionController 脚本与配置文件功能一致，因此放在此目录下；</li>
+</ul>
+</li>
+<li>AudioObject ：用于音乐播放的预制件；</li>
+<li>AudioControllerMain ：音乐管理预制件；
+<ul>
+<li>定义：Music（背景音）、Sound（音效）、System（游戏系统内音效）
+<ul>
+<li>当然后续可根据实际情况再次增删改；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>MainGame.cs 新增加载音效管理代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">async</span> <span class="n">UniTask</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetPrefabPath</span><span class="p">(</span><span class="s">&#34;AudioToolkit/AudioControllerMain&#34;</span><span class="p">,</span> <span class="n">Asset</span><span class="p">.</span><span class="n">EnumPrefixPath</span><span class="p">.</span><span class="n">Settings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GameObject</span> <span class="n">prefab</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Asset</span><span class="p">.</span><span class="n">LoadAsset</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">GameObject</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Instantiate</span><span class="p">(</span><span class="n">prefab</span><span class="p">,</span> <span class="n">transform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>实际开发过程中，会进行以下操作：</p>
+<ul>
+<li>资源路径：Assets\Game\Res\Audio 文件夹下
+<ul>
+<li>可根据 AudioControllerMain 上的第一大类对文件夹进行分类；</li>
+</ul>
+</li>
+<li>配置处理：打开 AudioControllerMain 预制件进行音效相关的配置处理；</li>
+<li>代码调用：
+<ul>
+<li>背景音乐：<code>AudioController.PlayMusic();</code></li>
+<li>音效音乐：<code>AudioController.Play();</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://assetstore.unity.com/packages/tools/audio/audio-toolkit-2647">Audio Toolkit</a></li>
+<li><a href="https://assetstore.unity.com/packages/tools/audio/audio-toolkit-free-version-2679">Audio Toolkit Free Version</a></li>
+<li><a href="https://unity.clockstone.com/assetStore-audioToolkit.html">Audio Toolkit Introduction</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-02-20 19:40:18 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.02_audiotoolkit/">https://spirite12.github.io/post/25/25.02_audiotoolkit/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          <a href="/tags/unity-plugin/">Unity-Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.0115_addressable/">
+            <span class="next-text nav-default">Frame Addressable</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

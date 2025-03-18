@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Wed, 18 Dec 2024 19:40:16 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity-plugin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Feb 2025 19:40:18 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/unity-plugin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Audio Toolkit 音效插件</title>
+      <link>https://spirite12.github.io/post/25/25.02_audiotoolkit/</link>
+      <pubDate>Thu, 20 Feb 2025 19:40:18 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/25/25.02_audiotoolkit/</guid>
+      <description>前言 在音效领域内，常用的音效插件有：FMOD Studio、Criware、Wwise、Audio Toolkit； 使用 ChatGPT 对这几款音效插件进行了</description>
+    </item>
+    
     <item>
       <title>UniTask 异步、等待集成</title>
       <link>https://spirite12.github.io/post/24/24.12_unitask/</link>
@@ -123,6 +132,15 @@
       
       <guid>https://spirite12.github.io/post/23/23.02_localization1/</guid>
       <description>前言 本文主要介绍 Localization 、Lingguo 这两款插件对 Unity 多语言本地化的处理方式； 本地化模块方案 一、Localization 功能学习整理 Unity所需</description>
+    </item>
+    
+    <item>
+      <title>Rotate 旋转知识</title>
+      <link>https://spirite12.github.io/post/22/22.12_rotate/</link>
+      <pubDate>Tue, 13 Dec 2022 19:40:06 +1000</pubDate>
+      
+      <guid>https://spirite12.github.io/post/22/22.12_rotate/</guid>
+      <description>前言 前段日子在公司开发一个功能时候，用到了旋转相关的知识，虽然知识面不是很大，不过在开发功能中还是遇到了不少的问题，所以觉得还是整理下以防后</description>
     </item>
     
     <item>
