@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CsvHelper .Net库 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="介绍 CSVHelper 用于读写 CSV 文件的 .NET 库，速度极快、灵活且易于使用。 下载 打开文档网站： CsvHelper Doc，点击 Download 下载按钮； 跳转到下载网址后，依次选择：Version" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.03_csvhelper/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CsvHelper .Net库" />
+<meta property="og:description" content="介绍 CSVHelper 用于读写 CSV 文件的 .NET 库，速度极快、灵活且易于使用。 下载 打开文档网站： CsvHelper Doc，点击 Download 下载按钮； 跳转到下载网址后，依次选择：Version" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.03_csvhelper/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-03-12T19:40:19+08:00" />
+<meta property="article:modified_time" content="2025-03-12T19:40:19+08:00" />
+
+<meta itemprop="name" content="CsvHelper .Net库">
+<meta itemprop="description" content="介绍 CSVHelper 用于读写 CSV 文件的 .NET 库，速度极快、灵活且易于使用。 下载 打开文档网站： CsvHelper Doc，点击 Download 下载按钮； 跳转到下载网址后，依次选择：Version"><meta itemprop="datePublished" content="2025-03-12T19:40:19+08:00" />
+<meta itemprop="dateModified" content="2025-03-12T19:40:19+08:00" />
+<meta itemprop="wordCount" content="2086">
+<meta itemprop="keywords" content="Unity-Plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CsvHelper .Net库"/>
+<meta name="twitter:description" content="介绍 CSVHelper 用于读写 CSV 文件的 .NET 库，速度极快、灵活且易于使用。 下载 打开文档网站： CsvHelper Doc，点击 Download 下载按钮； 跳转到下载网址后，依次选择：Version"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CsvHelper .Net库</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-03-12 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍"><strong>介绍</strong></a></li>
+    <li><a href="#下载"><strong>下载</strong></a></li>
+    <li><a href="#测试用例"><strong>测试用例</strong></a>
+      <ul>
+        <li><a href="#工程准备">工程准备</a></li>
+        <li><a href="#写入文件">写入文件</a></li>
+        <li><a href="#读取文件">读取文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#内容记录"><strong>内容记录</strong></a></li>
+    <li><a href="#问题记录"><strong>问题记录</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="介绍"><strong>介绍</strong></h1>
+<p>CSVHelper 用于读写 CSV 文件的 .NET 库，速度极快、灵活且易于使用。</p>
+<h1 id="下载"><strong>下载</strong></h1>
+<ul>
+<li>
+<p>打开文档网站： <a href="https://joshclose.github.io/CsvHelper/">CsvHelper Doc</a>，点击 Download 下载按钮；</p>
+</li>
+<li>
+<p>跳转到下载网址后，依次选择：Versions 栏目 -&gt; 自己所需的版本 -&gt; 点击 Download package</p>
+<p><img src="/Images/25.03_CsvHelper/CsvHelper_1.png" alt="CsvHelper_1"></p>
+</li>
+<li>
+<p>下载文件好后，将 <code>.nupkg</code> 后缀名更改成  <code>.zip</code>，并解压；</p>
+</li>
+<li>
+<p>打开文件夹下 lib -&gt; netstandard2.1 -&gt; 找到 CsvHelper.dll ，并放入 Unity 项目工程；</p>
+<ul>
+<li>请根据实际情况选择 lib 文件夹下，对应环境的文件夹内容；</li>
+</ul>
+</li>
+</ul>
+<h1 id="测试用例"><strong>测试用例</strong></h1>
+<h2 id="工程准备">工程准备</h2>
+<ol>
+<li>打开一个新工程，建立一个新场景；</li>
+<li>导入 CsvHelper 插件；</li>
+<li>新建名为 Test.cs 的脚本，并挂载在场景物体上；</li>
+<li>新建个 Test.csv 的 csv 文件，并放在工程内；</li>
+</ol>
+<p><img src="/Images/25.03_CsvHelper/CsvHelper_2.png" alt="CsvHelper_2"></p>
+<h2 id="写入文件">写入文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WriteCsvFile</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">WriteCsvFile</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 申明写入的数据</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">recordList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">CsvTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">Id</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;测试1&#34;</span><span class="p">,</span> <span class="n">IsTrue</span> <span class="p">=</span> <span class="k">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="k">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">Id</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;测试2&#34;</span><span class="p">,</span> <span class="n">IsTrue</span> <span class="p">=</span> <span class="k">false</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">path</span> <span class="p">=</span> <span class="s">&#34;Assets/Csv/Test.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">writer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamWriter</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">csv</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CsvWriter</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">csv</span><span class="p">.</span><span class="n">WriteRecords</span><span class="p">(</span><span class="n">recordList</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">writer</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">$&#34;CSV 写入完成: {path}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">    <span class="c1">// 定义写入的数据结构</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">class</span> <span class="nc">CsvTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTrue</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>StreamWriter ：第二个参数是：是否是覆盖（false）还是追加（true）形式；</li>
+<li>StreamWriter ：第三个参数是：编码格式，防止乱码；</li>
+</ul>
+<h2 id="读取文件">读取文件</h2>
+<ul>
+<li>
+<p>在 Test.csv 文件内填写一些测试数据；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Id,Name,IsTrue
+</span></span><span class="line"><span class="cl">1,测试1,TRUE
+</span></span><span class="line"><span class="cl">2,测试2,FALSE
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在 Test.cs 代码内添加加载 Test.csv 的脚本；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Test</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ReadCsvFile</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">ReadCsvFile</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="s">&#34;Assets/Csv/Test.csv&#34;</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">csv</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CsvReader</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">records</span> <span class="p">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">GetRecords</span><span class="p">&lt;</span><span class="n">CsvTest</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="k">record</span> <span class="nc">in</span> <span class="n">records</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">Id</span> <span class="p">+</span> <span class="s">&#34;-&#34;</span> <span class="p">+</span> <span class="n">record</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&#34;-&#34;</span> <span class="p">+</span> <span class="n">record</span><span class="p">.</span><span class="n">IsTrue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">class</span> <span class="nc">CsvTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTrue</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>输出结果：</p>
+<p><img src="/Images/25.03_CsvHelper/CsvHelper_4.png" alt="CsvHelper_4"></p>
+</li>
+<li>
+<p>CsvTest 类名和 Test.csv 表格内的字段名需一致；否则会报错无法加载到实例；若需要解决这个问题，则有以下处理方式：</p>
+<ol>
+<li>
+<p>新增 CsvConfiguration 配置类，使用 PrepareHeaderForMatch 处理类字段与表格字段的匹配规则；</p>
+<ul>
+<li>查看更多 CsvConfiguration 配置类字段，请查看 <strong>内容记录</strong> 菜单栏；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">void</span> <span class="n">ReadCsvFile</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="s">&#34;Assets/Csv/Test.csv&#34;</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CsvConfiguration</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PrepareHeaderForMatch</span> <span class="p">=</span> <span class="n">args</span> <span class="p">=&gt;</span> <span class="n">args</span><span class="p">.</span><span class="n">Header</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">using</span> <span class="nn">var</span> <span class="n">csv</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CsvReader</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">records</span> <span class="p">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">GetRecords</span><span class="p">&lt;</span><span class="n">CsvTest</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="k">record</span> <span class="nc">in</span> <span class="n">records</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">id</span> <span class="p">+</span> <span class="s">&#34;-&#34;</span> <span class="p">+</span> <span class="n">record</span><span class="p">.</span><span class="n">name</span> <span class="p">+</span> <span class="s">&#34;-&#34;</span> <span class="p">+</span> <span class="n">record</span><span class="p">.</span><span class="n">isTrue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">class</span> <span class="nc">CsvTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">int</span> <span class="n">id</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">bool</span> <span class="n">isTrue</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对类字段进行属性定义，使得类字段与表格字段进行匹配；</p>
+<ul>
+<li>查看更多其他属性定义，请查看 <strong>内容记录</strong> 菜单栏；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">class</span> <span class="nc">CsvTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Name(&#34;Id&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">id</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Name(&#34;Name&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Name(&#34;IsTrue&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">bool</span> <span class="n">isTrue</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用 <a href="https://joshclose.github.io/CsvHelper/examples/configuration/class-maps/">类映射</a> 进行匹配；申明额外一个Map类对应当前申明的类，并注册到csv类内；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">void</span> <span class="n">ReadCsvFile</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="nn">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="s">&#34;Assets/Csv/Test.csv&#34;</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">csv</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CsvReader</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">csv</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">RegisterClassMap</span><span class="p">&lt;</span><span class="n">CsvTestMap</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">records</span> <span class="p">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">GetRecords</span><span class="p">&lt;</span><span class="n">CsvTest</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="k">record</span> <span class="nc">in</span> <span class="n">records</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">Id1</span> <span class="p">+</span> <span class="s">&#34;-&#34;</span> <span class="p">+</span> <span class="n">record</span><span class="p">.</span><span class="n">Name1</span> <span class="p">+</span> <span class="s">&#34;-&#34;</span> <span class="p">+</span> <span class="n">record</span><span class="p">.</span><span class="n">IsTrue1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">CsvTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">Id1</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name1</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTrue1</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">sealed</span> <span class="k">class</span> <span class="nc">CsvTestMap</span> <span class="p">:</span> <span class="n">ClassMap</span><span class="p">&lt;</span><span class="n">CsvTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">CsvTestMap</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Map</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">Id1</span><span class="p">).</span><span class="n">Name</span><span class="p">(</span><span class="s">&#34;Id&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Map</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">Name1</span><span class="p">).</span><span class="n">Name</span><span class="p">(</span><span class="s">&#34;Name&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Map</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">IsTrue1</span><span class="p">).</span><span class="n">Name</span><span class="p">(</span><span class="s">&#34;IsTrue&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+</ul>
+<h1 id="内容记录"><strong>内容记录</strong></h1>
+<ul>
+<li>
+<p><strong>类属性定义说明：</strong><a href="https://joshclose.github.io/CsvHelper/examples/configuration/attributes/">链接</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[Delimiter(&quot;|&quot;)]</td>
+<td style="text-align:center">指定该类在读写 CSV 时使用的分隔符；（csv文件默认以 , 分割）</td>
+</tr>
+<tr>
+<td style="text-align:center">[CultureInfo(&ldquo;de-DE&rdquo;)]</td>
+<td style="text-align:center">指定使用的文化区域（德语/德国），影响数字、小数点、日期等格式。例如：德国格式小数用逗号：<code>3,14</code> ，英文格式小数用点：<code>3.14</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>类字段属性定义字段说明：</strong><a href="https://joshclose.github.io/CsvHelper/examples/configuration/attributes/">链接</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[Name(&ldquo;Identifier&rdquo;)]</td>
+<td style="text-align:center">指定 CSV 文件中该列的标题名</td>
+</tr>
+<tr>
+<td style="text-align:center">[Index(1)]</td>
+<td style="text-align:center">如果没有标题行，指定 CSV 中该列的列索引位置（从 0 开始）</td>
+</tr>
+<tr>
+<td style="text-align:center">[CultureInfo(&ldquo;de-DE&rdquo;)]</td>
+<td style="text-align:center">只对该属性单独指定文化格式（覆盖类级的设置）</td>
+</tr>
+<tr>
+<td style="text-align:center">[BooleanTrueValues(&ldquo;yes&rdquo;)]</td>
+<td style="text-align:center">定义布尔类型 True 在 CSV 中的表示方式；<br />[BooleanTrueValues(&ldquo;yes&rdquo;, &ldquo;1&rdquo;, &ldquo;true&rdquo;)] ：可设置多值</td>
+</tr>
+<tr>
+<td style="text-align:center">[BooleanFalseValues(&ldquo;no&rdquo;)]</td>
+<td style="text-align:center">定义布尔类型 False 在 CSV 中的表示方式；<br />[BooleanFalseValues(&ldquo;no&rdquo;, &ldquo;0&rdquo;, &ldquo;false&rdquo;)] ：可设置多值</td>
+</tr>
+<tr>
+<td style="text-align:center">[Constant(&ldquo;bar&rdquo;)]</td>
+<td style="text-align:center">如果 CSV 中没有该列，这个属性会始终被赋值为固定常量 <code>&quot;bar&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">[Optional]</td>
+<td style="text-align:center">该列是可选列，如果 CSV 文件中没有这一列，解析时不会报错</td>
+</tr>
+<tr>
+<td style="text-align:center">[Ignore]</td>
+<td style="text-align:center">在 CSV 读写时忽略该属性，不会参与序列化（写出）或反序列化（读取）</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>CsvConfiguration 类字段说明：</strong></p>
+<ol>
+<li>基础输入输出设置</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Delimiter</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">指定该类在读写 CSV 时使用的分隔符</td>
+</tr>
+<tr>
+<td style="text-align:center">HasHeaderRecord</td>
+<td style="text-align:center">bool</td>
+<td style="text-align:center">是否有表头行（第一行是列名），默认True</td>
+</tr>
+<tr>
+<td style="text-align:center">TrimOptions</td>
+<td style="text-align:center"><code>TrimOptions</code> 枚举</td>
+<td style="text-align:center">是否去掉空格。可设为 <code>Trim</code>、<code>None</code>、<code>InsideQuotes</code></td>
+</tr>
+<tr>
+<td style="text-align:center">IgnoreBlankLines</td>
+<td style="text-align:center">bool</td>
+<td style="text-align:center">是否忽略空行，默认True</td>
+</tr>
+<tr>
+<td style="text-align:center">AllowComments</td>
+<td style="text-align:center">bool</td>
+<td style="text-align:center">是否允许注释行（以 <code>Comment</code> 开头）</td>
+</tr>
+<tr>
+<td style="text-align:center">Comment</td>
+<td style="text-align:center">char</td>
+<td style="text-align:center">注释标识符，默认 <code>#</code>。例如：<code># 这是注释</code>。</td>
+</tr>
+<tr>
+<td style="text-align:center">BadDataFound</td>
+<td style="text-align:center">Action<BadDataFoundArgs></td>
+<td style="text-align:center">发现格式错误时的回调，可自定义忽略或记录。</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>文化与格式</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>CultureInfo</strong></td>
+<td style="text-align:center"><code>CultureInfo</code></td>
+<td style="text-align:center">控制数字、小数点、日期等解析规则。默认 <code>CultureInfo.InvariantCulture</code>。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>DetectColumnCountChanges</strong></td>
+<td style="text-align:center"><code>bool</code></td>
+<td style="text-align:center">是否检测每行列数变化，默认 <code>false</code>。开启后列数不一致会抛错。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>ShouldQuote</strong></td>
+<td style="text-align:center"><code>Func&lt;string, WritingContext, bool&gt;</code></td>
+<td style="text-align:center">控制哪些值需要用引号包裹。可自定义逻辑。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Quote</strong></td>
+<td style="text-align:center"><code>char</code></td>
+<td style="text-align:center">引号字符，默认 <code>&quot;</code>。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>QuoteAllFields</strong></td>
+<td style="text-align:center"><code>bool</code></td>
+<td style="text-align:center">是否强制所有字段都加引号。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Escape</strong></td>
+<td style="text-align:center"><code>char</code></td>
+<td style="text-align:center">转义字符，默认 <code>&quot;</code>（同 Quote）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Encoding</strong></td>
+<td style="text-align:center"><code>Encoding</code></td>
+<td style="text-align:center">设置文件编码，例如 <code>Encoding.UTF8</code>。</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>映射与类型控制</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>MissingFieldFound</strong></td>
+<td style="text-align:center"><code>Action&lt;ReadingContext&gt;</code></td>
+<td style="text-align:center">当 CSV 少了某字段时的回调，默认抛异常，可设置为 <code>null</code> 忽略。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>HeaderValidated</strong></td>
+<td style="text-align:center"><code>Action&lt;HeaderValidatedArgs&gt;</code></td>
+<td style="text-align:center">校验标题行时触发，可禁用验证。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>PrepareHeaderForMatch</strong></td>
+<td style="text-align:center"><code>Func&lt;string, int, string&gt;</code></td>
+<td style="text-align:center">自定义列名匹配逻辑（如忽略大小写或空格）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>IgnoreReferences</strong></td>
+<td style="text-align:center"><code>bool</code></td>
+<td style="text-align:center">忽略引用类型属性（即导航属性，不自动展开）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>IgnoreQuotes</strong></td>
+<td style="text-align:center"><code>bool</code></td>
+<td style="text-align:center">是否忽略引号的语义。默认为 <code>false</code>，一般不要改。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Mode</strong></td>
+<td style="text-align:center"><code>CsvMode</code> 枚举</td>
+<td style="text-align:center">控制兼容性模式，例如 <code>CsvMode.NoEscape</code>、<code>CsvMode.RFC4180</code>（默认）</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>性能与解析控制</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>BufferSize</strong></td>
+<td style="text-align:center"><code>int</code></td>
+<td style="text-align:center">读取缓冲区大小，默认 4096。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>NewLine</strong></td>
+<td style="text-align:center"><code>string</code></td>
+<td style="text-align:center">写入时换行符，默认环境行结尾（Windows 为 <code>\r\n</code>）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>ShouldSkipRecord</strong></td>
+<td style="text-align:center"><code>Func&lt;string[], ReadingContext, bool&gt;</code></td>
+<td style="text-align:center">自定义跳过哪些行的逻辑。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>SanitizeForInjection</strong></td>
+<td style="text-align:center"><code>bool</code></td>
+<td style="text-align:center">防止 Excel 公式注入（比如以 <code>=</code> 开头的字段），默认 <code>false</code>。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>DetectDelimiter</strong></td>
+<td style="text-align:center"><code>bool</code></td>
+<td style="text-align:center">自动检测分隔符。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h1 id="问题记录"><strong>问题记录</strong></h1>
+<ul>
+<li>
+<p>Q：执行代码时，出现 CsvHelper.dll 加载失败，则说明当前导入的 dll 环境不对，请换个 dll 环境导入；（下载 -&gt; 步骤最后一条）</p>
+<p><img src="/Images/25.03_CsvHelper/CsvHelper_3.png" alt="CsvHelper_3"></p>
+</li>
+</ul>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://github.com/JoshClose/CsvHelper">CsvHelper Github</a></li>
+<li><a href="https://joshclose.github.io/CsvHelper/">CsvHelper Doc</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/csvhelper">CsvHelper Stack Overflow</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-03-12 19:40:19 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.03_csvhelper/">https://spirite12.github.io/post/25/25.03_csvhelper/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">Unity-Plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.02_audiotoolkit/">
+            <span class="next-text nav-default">Audio Toolkit 音效插件</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
