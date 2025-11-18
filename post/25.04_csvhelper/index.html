@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Frame CsvHelper - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="文档记录 在查看本文档之前，需了解 CsvHelper 相关的知识； 本文多语言相关内容请看后续文章查看； 若想了解相关知识，可查看如下文档： CsvHelper .Net库 项目接入 项目" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25.04_csvhelper/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Frame CsvHelper" />
+<meta property="og:description" content="文档记录 在查看本文档之前，需了解 CsvHelper 相关的知识； 本文多语言相关内容请看后续文章查看； 若想了解相关知识，可查看如下文档： CsvHelper .Net库 项目接入 项目" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25.04_csvhelper/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-04-15T19:40:20+08:00" />
+<meta property="article:modified_time" content="2025-04-28T19:40:21+08:00" />
+
+<meta itemprop="name" content="Frame CsvHelper">
+<meta itemprop="description" content="文档记录 在查看本文档之前，需了解 CsvHelper 相关的知识； 本文多语言相关内容请看后续文章查看； 若想了解相关知识，可查看如下文档： CsvHelper .Net库 项目接入 项目"><meta itemprop="datePublished" content="2025-04-15T19:40:20+08:00" />
+<meta itemprop="dateModified" content="2025-04-28T19:40:21+08:00" />
+<meta itemprop="wordCount" content="3402">
+<meta itemprop="keywords" content="Frame-Work," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Frame CsvHelper"/>
+<meta name="twitter:description" content="文档记录 在查看本文档之前，需了解 CsvHelper 相关的知识； 本文多语言相关内容请看后续文章查看； 若想了解相关知识，可查看如下文档： CsvHelper .Net库 项目接入 项目"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Frame CsvHelper</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-04-15 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#文档记录"><strong>文档记录</strong></a></li>
+    <li><a href="#项目接入"><strong>项目接入</strong></a></li>
+    <li><a href="#功能构思"><strong>功能构思</strong></a></li>
+    <li><a href="#工程介绍"><strong>工程介绍</strong></a></li>
+    <li><a href="#菜单栏工具"><strong>菜单栏工具</strong></a></li>
+    <li><a href="#表工具"><strong>表工具</strong></a>
+      <ul>
+        <li><a href="#通用逻辑">通用逻辑</a></li>
+        <li><a href="#默认表">默认表</a></li>
+        <li><a href="#常量表">常量表</a></li>
+        <li><a href="#枚举表">枚举表</a></li>
+        <li><a href="#问题记录">问题记录</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="文档记录"><strong>文档记录</strong></h1>
+<ul>
+<li>
+<p>在查看本文档之前，需了解 CsvHelper 相关的知识；</p>
+</li>
+<li>
+<p>本文多语言相关内容请看后续文章查看；</p>
+</li>
+</ul>
+<p>若想了解相关知识，可查看如下文档：</p>
+<ul>
+<li><a href="https://spirite12.github.io/post/25/25.03_csvhelper/">CsvHelper .Net库</a></li>
+</ul>
+<h1 id="项目接入"><strong>项目接入</strong></h1>
+<ul>
+<li>项目工程：<a href="https://github.com/Spirite12/unity.dcFrame">链接</a></li>
+</ul>
+<h1 id="功能构思"><strong>功能构思</strong></h1>
+<ul>
+<li>在客户端的表逻辑里；表逻辑 = 表数据 + 表对应封装函数；</li>
+<li>表数据 ：存放在 CSV 内，每个表内容 = 表字段 + 字段数据；
+<ul>
+<li>由策划配表，客户端通过 CsvHelper 读取表内数据；</li>
+</ul>
+</li>
+<li>表函数 ：客户端需要对不同的表定义对应的类，并封装相关通用函数；
+<ul>
+<li>出于不同表封装的函数大体一致的情况下，想出来将表类的通用函数通过配置文件生成，而表特有的函数，则是由开发人员单独写；这样减少开发人员写通用函数的时间；</li>
+</ul>
+</li>
+</ul>
+<h1 id="工程介绍"><strong>工程介绍</strong></h1>
+<ul>
+<li>Assets
+<ul>
+<li>DCFrame
+<ul>
+<li>Editor -&gt; Modules -&gt; Table
+<ul>
+<li>TableEditor：分析配表规则数据，并生成表对应的类通用函数代码；</li>
+<li>TableRulesEditor：用于加载UI显示类，并记录表规则数据；</li>
+<li>TableRulesTypeXXX：XXX对应的是表规则类型对应的写入和UI显示代码；</li>
+<li>ITableType：接口类，定义TableRulesTypeXXX相关所需的函数；</li>
+</ul>
+</li>
+<li>Modules -&gt; Table
+<ul>
+<li>ScientificToLongConvert：对科学计数法的处理；</li>
+<li>TableBase：表基类；</li>
+<li>TableBaseSingle：表单例基类；</li>
+<li>TableRules：表规则数据定义；</li>
+</ul>
+</li>
+<li>Utility
+<ul>
+<li>TableUtil：表常量和工具类；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Game
+<ul>
+<li>Table : 存放配表数据的文件夹；</li>
+<li>Settings -&gt; Table
+<ul>
+<li>TableRules : 配表规则通用数据存放；</li>
+</ul>
+</li>
+<li>Scripts
+<ul>
+<li>Table ：生成的表通用函数存在的文件夹；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="菜单栏工具"><strong>菜单栏工具</strong></h1>
+<ul>
+<li>
+<p>菜单栏 -&gt; 导表按钮：读取表配置<code>TableRules</code>数据，并依次生成表类代码；</p>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_1.png" alt="CsvHelper_1"></p>
+</li>
+</ul>
+<h1 id="表工具"><strong>表工具</strong></h1>
+<p>表规则工具名：TableRules</p>
+<h2 id="通用逻辑">通用逻辑</h2>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_2.png" alt="CsvHelper_2"></p>
+<ul>
+<li>
+<p><strong>提示说明</strong>：介绍工具内部分按钮的效果；</p>
+</li>
+<li>
+<p><strong>查、增、删表</strong>：对输入字符串的表进行一系列的操作；</p>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_6.gif" alt="CsvHelper_6"></p>
+</li>
+<li>
+<p><strong>删除无用表</strong>：遍历表列表内的表规则数据，查找是否有对应的配表，无则删除；</p>
+</li>
+<li>
+<p><strong>删除表配置</strong>：删除当前选择的表配置；</p>
+</li>
+<li>
+<p><strong>打开表代码、CSV</strong>：打开当前选择的表代码或者表 CSV;</p>
+</li>
+<li>
+<p><strong>保存表数据</strong>：将当前更改的数据保存；</p>
+</li>
+<li>
+<p><strong>刷新表数据</strong>：重新进行读取CSV代码的操作；</p>
+<ul>
+<li>例：当开发人员开着此窗口，并对CSV进行更改时候，需要点击刷新表配置；</li>
+</ul>
+</li>
+<li>
+<p><strong>一键导表</strong>：与上方菜单栏的导表按钮功能一致；</p>
+</li>
+<li>
+<p><strong>表列表</strong>：列举出当前所有的表规则数据名；</p>
+</li>
+<li>
+<p><strong>表类型</strong>：目前支持到处：默认表、常量表、枚举表；介绍如下；</p>
+</li>
+</ul>
+<h2 id="默认表">默认表</h2>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_3.png" alt="CsvHelper_3"></p>
+<ol>
+<li>
+<p><strong>说明</strong>：定义当前表为默认表，导出为表对应的类和相关便捷函数；</p>
+</li>
+<li>
+<p><strong>数据类型</strong>：代码会根据配表自动识别当前字段的数据类型，也可手动更改；</p>
+<ul>
+<li>支持的数据类型：<code>TableUtil.EnumFieldType</code></li>
+</ul>
+</li>
+<li>
+<p><strong>本地化</strong>：勾选则是说明当前字段文本需要识别成多语言进行处理；</p>
+</li>
+<li>
+<p><strong>最大值</strong>：获取当前字段表数据内的最大值；</p>
+<ul>
+<li>
+<p>字段说明：</p>
+<ul>
+<li>提前获取最大值变量，这样就不需要每次读取函数遍历了；</li>
+<li>只获取可以对比的数据类型；<code>TableUtil.EnumFieldType</code></li>
+</ul>
+</li>
+<li>
+<p>效果演示：</p>
+<ul>
+<li>
+<p>当前表格数据为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Id,Name,IsTure,LongValue
+</span></span><span class="line"><span class="cl">1,测试1,TRUE,123456
+</span></span><span class="line"><span class="cl">2,测试2,FALSE,`1234570000000
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>TableRules勾选 Id 字段获取最大值：</p>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_7.png" alt="CsvHelper_7"></p>
+</li>
+<li>
+<p>代码输出如下：（只列举重点代码）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTestClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTure</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">LongValue</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTest</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">MaxId</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableTest.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">cacheDic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>生成查找数据函数</strong>：根据勾选的内容生产对应的字段查找函数</p>
+<ol>
+<li>
+<p><strong>工具演示</strong>：</p>
+<ul>
+<li>支持：新增、删除、单 or 多 key 函数生成；</li>
+</ul>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_8.gif" alt="CsvHelper_8"></p>
+</li>
+<li>
+<p><strong>单Key</strong>：生成以当前所选字段为参数的查找表函数；</p>
+<ul>
+<li>
+<p>以上方 Id 字段为例，生成代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTestClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTure</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">LongValue</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTest</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="cp">#region 查表</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="n">TableTestClass</span> <span class="n">GetConfigById</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">showTips</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">keyDicId</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="n">keyDicId</span><span class="p">[</span><span class="n">id</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">showTips</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">$&#34;查找表：{CsvPath} 失败, id：{id}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">TableTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">keyDicId</span> <span class="p">=</span> <span class="n">LoadTableDic</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">Id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableTest.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">cacheDic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">keyDicId</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>多Key</strong>：生成以多个所选字段为参数的查找表函数；</p>
+<ul>
+<li>
+<p>以上方 Name 字段为例，生成代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTestClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTure</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">LongValue</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTest</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cp">#region 查表</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="n">TableTestClass</span> <span class="n">GetConfigByName</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">showTips</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">keyDicName</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">id</span><span class="p">)))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="n">keyDicName</span><span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">id</span><span class="p">)];</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">showTips</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">$&#34;查找表：{CsvPath} 失败, Name：{name}, Id：{id}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">TableTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">keyDicName</span> <span class="p">=</span> <span class="n">LoadTableDic</span><span class="p">&lt;(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">),</span> <span class="n">TableTestClass</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">Id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableTest.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">cacheDic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">),</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">keyDicName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>多key列表</strong>：循环生成从单个直至所选多个字段为参数的查找表函数；</p>
+<ul>
+<li>
+<p>以上方 IsTrue 字段为例，生成代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTestClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTure</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="kt">int</span> <span class="n">LongValue</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTest</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cp">#region 查表</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">GetConfigByIsTure</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isTure</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">showTips</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">keyDicIsTure1</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">isTure</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="n">keyDicIsTure1</span><span class="p">[</span><span class="n">isTure</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">showTips</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">$&#34;查找表：{CsvPath} 失败, IsTure：{isTure}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">GetConfigByIsTure</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isTure</span><span class="p">,</span> <span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">showTips</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">keyDicIsTure2</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">((</span><span class="n">isTure</span><span class="p">,</span> <span class="n">id</span><span class="p">)))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="n">keyDicIsTure2</span><span class="p">[(</span><span class="n">isTure</span><span class="p">,</span> <span class="n">id</span><span class="p">)];</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">showTips</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">$&#34;查找表：{CsvPath} 失败, IsTure：{isTure}, Id：{id}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="n">TableTestClass</span> <span class="n">GetConfigByIsTure</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isTure</span><span class="p">,</span> <span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">showTips</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">keyDicIsTure</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">((</span><span class="n">isTure</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="n">keyDicIsTure</span><span class="p">[(</span><span class="n">isTure</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)];</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">showTips</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">$&#34;查找表：{CsvPath} 失败, IsTure：{isTure}, Id：{id}, Name：{name}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">TableTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">keyDicIsTure1</span> <span class="p">=</span> <span class="n">LoadTableDicList</span><span class="p">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">IsTure</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="n">keyDicIsTure2</span> <span class="p">=</span> <span class="n">LoadTableDicList</span><span class="p">&lt;(</span><span class="kt">bool</span><span class="p">,</span> <span class="kt">int</span><span class="p">),</span> <span class="n">TableTestClass</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">IsTure</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">Id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">          <span class="n">keyDicIsTure</span> <span class="p">=</span> <span class="n">LoadTableDic</span><span class="p">&lt;(</span><span class="kt">bool</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">),</span> <span class="n">TableTestClass</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">IsTure</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableTest.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">cacheDic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">TableTestClass</span><span class="p">&gt;&gt;</span> <span class="n">keyDicIsTure1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;(</span><span class="kt">bool</span><span class="p">,</span> <span class="kt">int</span><span class="p">),</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">TableTestClass</span><span class="p">&gt;&gt;</span> <span class="n">keyDicIsTure2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;(</span><span class="kt">bool</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">),</span> <span class="n">TableTestClass</span><span class="p">&gt;</span> <span class="n">keyDicIsTure</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="常量表">常量表</h2>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_5.png" alt="CsvHelper_5"></p>
+<ul>
+<li>
+<p><strong>说明</strong>：定义当前表为常量表，导出为表常量类；</p>
+</li>
+<li>
+<p><strong>表字段要求</strong>：Id,Sign,Value,Desc</p>
+<ul>
+<li>
+<p>表格示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Id,Sign,Value,Desc
+</span></span><span class="line"><span class="cl">1,Sign1,1,描述1
+</span></span><span class="line"><span class="cl">2,Sign2,2,描述2
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>代码生成</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableConst</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableConst</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// 1 描述1</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">Sign1</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// 2 描述2</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">Sign2</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableConst.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="枚举表">枚举表</h2>
+<p><img src="/Images/25.04_CsvHelper/CsvHelper_4.png" alt="CsvHelper_4"></p>
+<ul>
+<li>
+<p><strong>说明</strong>：定义当前表为枚举表，导出为表枚举类；类中包含枚举已经对应的是否多语言的字典数据；</p>
+</li>
+<li>
+<p><strong>枚举列表</strong>：列出当前表中存在的枚举信息</p>
+</li>
+<li>
+<p><strong>本地化</strong>：是否需要对枚举值进行读取对应的文本，并做本地化处理；</p>
+</li>
+<li>
+<p><strong>表字段要求</strong>：Id,EnumSign,EnumName,Value,ValueSign,ValueName</p>
+<ul>
+<li>
+<p>表格示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Id,EnumSign,EnumName,Value,ValueSign,ValueName
+</span></span><span class="line"><span class="cl">1,EnumSign1,枚举标识1,1,ValueSign1,枚举值1
+</span></span><span class="line"><span class="cl">2,EnumSign1,枚举标识1,2,ValueSign2,枚举值2
+</span></span><span class="line"><span class="cl">3,EnumSign2,枚举标识2,1,ValueSign1,枚举值1
+</span></span><span class="line"><span class="cl">4,EnumSign2,枚举标识2,2,ValueSign2,枚举值2
+</span></span><span class="line"><span class="cl">5,EnumSign2,枚举标识2,3,ValueSign3,枚举值3
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>代码生成</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableEnum</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableEnum</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// 枚举标识1</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="k">enum</span> <span class="n">Sign1Enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// 枚举值1</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">ValueSign1</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// 枚举值2</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">ValueSign2</span> <span class="p">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Sign1Enum</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">Sign1Dic</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">          [Sign1Enum.ValueSign1]</span> <span class="p">=</span> <span class="s">&#34;枚举值1&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"><span class="na">          [Sign1Enum.ValueSign2]</span> <span class="p">=</span> <span class="s">&#34;枚举值2&#34;</span>
+</span></span><span class="line"><span class="cl">       <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// 枚举标识2</span>
+</span></span><span class="line"><span class="cl">       <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="k">public</span> <span class="k">enum</span> <span class="n">Sign2Enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// 枚举值1</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">ValueSign1</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// 枚举值2</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">ValueSign2</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// 枚举值3</span>
+</span></span><span class="line"><span class="cl">          <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">ValueSign3</span> <span class="p">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableEnum.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="问题记录">问题记录</h2>
+<ul>
+<li>
+<p>Csv 表格文件内的科学计数法问题整合：</p>
+<ul>
+<li>
+<p><strong>问题</strong>：当你把数字（特别是较大的数或带较多小数的浮点数）写入 <code>.csv</code> 文件后，用 <strong>Excel</strong> 打开时，就会变成科学计数法，导致解析的时候会缺少一些精确度；</p>
+<table>
+<thead>
+<tr>
+<th>原本写入的值</th>
+<th>Excel 显示结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1234567890123</td>
+<td>1.23457E+12</td>
+</tr>
+<tr>
+<td>0.0000000123</td>
+<td>1.23E-08</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>原因</strong>：CSV 文件本身是纯文本，Excel 打开 CSV 时，会自动根据内容推断类型，如果数字太大，就显示成科学计数法；</p>
+</li>
+<li>
+<p><strong>解决</strong>：</p>
+<ol>
+<li>在 Csv 内需要显示科学计数法的数字前面加标识符，如： <code>'</code> (<code>TableUtil.ScientificSign</code>)前缀来避免科学计数，以至于识别成字符串；
+<ul>
+<li>项目内目前使用的是这个办法解决；</li>
+</ul>
+</li>
+<li>先打开 Excel，在通过 Excel 打开此 Csv 文件，然后打开的时候会出现向导，在向导内填写当前字段对应的类型是文本即可；</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://github.com/JoshClose/CsvHelper">CsvHelper Github</a></li>
+<li><a href="https://joshclose.github.io/CsvHelper/">CsvHelper Doc</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/csvhelper">CsvHelper Stack Overflow</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-04-15 19:40:20 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2025-04-28 19:40:21 &#43;0800
+        
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25.04_csvhelper/">https://spirite12.github.io/post/25.04_csvhelper/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.03_csvhelper/">
+            <span class="next-text nav-default">CsvHelper .Net库</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
