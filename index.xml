@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Wed, 21 May 2025 19:40:21 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Jun 2025 19:40:22 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
       <link>https://spirite12.github.io/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>https://spirite12.github.io/about/</guid>
       <description>地点：福建 职业：游戏开发 游戏：Demo 工程：DC、DCFrame 技能：Unity、C#、Lua 工作：2019.1 - 至今 邮箱：spirit12</description>
+    </item>
+    
+    <item>
+      <title>Frame Localization（二）</title>
+      <link>https://spirite12.github.io/post/25/25.06_localization/</link>
+      <pubDate>Sun, 15 Jun 2025 19:40:22 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/25/25.06_localization/</guid>
+      <description>文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 本文续接上一个文档： Frame Localization（一） 项目接入 项</description>
     </item>
     
     <item>

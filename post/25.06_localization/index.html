@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Frame Localization（二） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 本文续接上一个文档： Frame Localization（一） 项目接入 项" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25.06_localization/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Frame Localization（二）" />
+<meta property="og:description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 本文续接上一个文档： Frame Localization（一） 项目接入 项" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25.06_localization/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-06-15T19:40:22+08:00" />
+<meta property="article:modified_time" content="2025-06-15T19:40:22+08:00" />
+
+<meta itemprop="name" content="Frame Localization（二）">
+<meta itemprop="description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 本文续接上一个文档： Frame Localization（一） 项目接入 项"><meta itemprop="datePublished" content="2025-06-15T19:40:22+08:00" />
+<meta itemprop="dateModified" content="2025-06-15T19:40:22+08:00" />
+<meta itemprop="wordCount" content="1290">
+<meta itemprop="keywords" content="Frame-Work," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Frame Localization（二）"/>
+<meta name="twitter:description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 本文续接上一个文档： Frame Localization（一） 项目接入 项"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Frame Localization（二）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-06-15 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#文档记录"><strong>文档记录</strong></a></li>
+    <li><a href="#项目接入"><strong>项目接入</strong></a></li>
+    <li><a href="#资源本地化"><strong>资源本地化</strong></a>
+      <ul>
+        <li><a href="#资源类型">资源类型</a></li>
+        <li><a href="#image-本地化">Image 本地化</a></li>
+        <li><a href="#创建资源">创建资源</a></li>
+        <li><a href="#导表工具">导表工具</a></li>
+        <li><a href="#生成本地化">生成本地化</a></li>
+        <li><a href="#代码调用">代码调用</a></li>
+        <li><a href="#预制件调用">预制件调用</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="文档记录"><strong>文档记录</strong></h1>
+<ul>
+<li>阅读本文档之前，建议先了解 Localization 相关基础知识：
+<ul>
+<li><a href="https://spirite12.github.io/post/23/23.02_localization1/">Localization 本地化（一）</a></li>
+<li><a href="https://spirite12.github.io/post/23/23.03_localization2/">Localization 本地化（二）</a></li>
+</ul>
+</li>
+<li>本文续接上一个文档：
+<ul>
+<li><a href="https://spirite12.github.io/post/25/25.05_localization/">Frame Localization（一）</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="项目接入"><strong>项目接入</strong></h1>
+<ul>
+<li>项目工程：<a href="https://github.com/Spirite12/unity.dcFrame">链接</a></li>
+</ul>
+<h1 id="资源本地化"><strong>资源本地化</strong></h1>
+<h2 id="资源类型">资源类型</h2>
+<ul>
+<li>
+<p>对应的配置代码为 <code>Localize.AssetTableNameDic</code>，可以根据需要自行扩展支持的资源类型。</p>
+<ul>
+<li>Key ：支持的资源类型；</li>
+<li>Value：资源本地化的文件夹名称，以及本地化资源表名称；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 资源加载的映射</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">System</span><span class="p">.</span><span class="n">Type</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">AssetTableNameDic</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">GameObject</span><span class="p">),</span> <span class="s">&#34;Prefab&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">RawImage</span><span class="p">),</span> <span class="s">&#34;RawImage&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Sprite</span><span class="p">),</span> <span class="s">&#34;Sprite&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Texture</span><span class="p">),</span> <span class="s">&#34;Texture&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">AudioClip</span><span class="p">),</span> <span class="s">&#34;AudioClip&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Font</span><span class="p">),</span> <span class="s">&#34;Font&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="k">typeof</span><span class="p">(</span><span class="n">TMP_FontAsset</span><span class="p">),</span> <span class="s">&#34;TMPFont&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>资源本地化的代码为：<code>Localize.LoadAsset</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">		<span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 加载 资源 本地化</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">async</span> <span class="n">UniTask</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">LoadAsset</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">key</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">AssetTableNameDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">tableName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;未为类型 {typeof(T)} 配置本地化表名&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">handle</span> <span class="p">=</span> <span class="n">LocalizationSettings</span><span class="p">.</span><span class="n">AssetDatabase</span><span class="p">.</span><span class="n">GetLocalizedAssetAsync</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">tableName</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">handle</span><span class="p">.</span><span class="n">Task</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">handle</span><span class="p">.</span><span class="n">Status</span> <span class="p">==</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">handle</span><span class="p">.</span><span class="n">Result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;加载本地化资源失败: {key} ({typeof(T)})&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="image-本地化">Image 本地化</h2>
+<p>下面以 Image 资源为例介绍本地化流程，其他资源类型的处理步骤基本一致。</p>
+<p>项目工程：<a href="https://github.com/Spirite12/unity.dcFrame">链接</a></p>
+<h2 id="创建资源">创建资源</h2>
+<ol>
+<li>找到  <code>Game\Localize</code> 文件夹，并在其文件夹下创建名为 <code> Sprite</code> 的文件夹；</li>
+<li>在 <code>Sprite</code> 文件夹下，创建 <code>Zh-CN</code> （存放中文资源）和 <code>En</code> （存放英文资源）
+<ul>
+<li>找到 <code>Game\Settings\UIManager\Icon</code> 下的2个贴图资源文件；<code>PrefabRoot</code> 和 <code>PrefabVariable</code>；</li>
+<li>以下以这两个资源作为本地化示例。</li>
+</ul>
+</li>
+<li>把 <code>PrefabRoot</code> 复制粘贴到 <code>Zh-CN</code>底下，把 <code>PrefabVariable</code> 复制粘贴到 <code>En</code> 底下；更改 <code>PrefabVariable</code> 重命名为 <code>PrefabRoot</code>；并在 Inspector 面板中为这两个资源勾选 <code>Addressable</code>。</li>
+</ol>
+<h2 id="导表工具">导表工具</h2>
+<ul>
+<li>菜单栏：Tools -&gt; 资源项 -&gt; 本地化资源生成：</li>
+<li>规则工具：LocalizeRules -&gt; 本地化资源生成：</li>
+<li>本地化资源生成规则：
+<ul>
+<li>遍历 <code>Game\Localize</code> 目录下除 <code>Text</code> 以外的所有文件夹；
+<ul>
+<li>假如遍历到 <code>Sprite</code> 文件夹，则在当前  <code>Sprite</code>  文件夹内的 <code>Table</code> 文件夹下创建名为 <code>Sprite</code> 和 <code>Sprite Shared Data</code>  的 localization 资源数据；
+<ul>
+<li>在  <code>Sprite</code> 文件夹下，如果存在本地化语言文件夹名；则在当前文件夹下的 <code>Table</code> 文件夹下创建当前本地化资源对应语言的 localization 资源数据，如：<code>Sprite_zh-CN</code>；</li>
+<li>遍历本地化语言文件夹下的资源，将每个资源名称作为 Key，并将资源作为对应语言的数据存入相应的本地化资源表中。</li>
+<li>具体事例如下介绍。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="生成本地化">生成本地化</h2>
+<ol>
+<li>
+<p>根据导表工具这一栏，点击本地化资源生成；</p>
+</li>
+<li>
+<p>可见在 <code>Game\Localize\Sprite\Table</code> 文件夹下，生成了对应的本地化资源；</p>
+<p><img src="/Images/25.05_Localization/Localization_1.png" alt="Localization_1"></p>
+</li>
+<li>
+<p>打开 <code>Game\Localize\Sprite\Table\Sprite.asset</code> 可见绑定了相关的本地化资源数据；</p>
+<ul>
+<li>Sprite_en：存放了英文的资源数据</li>
+<li>Sprite_zh-CN：存放了中文的资源数据</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_2.png" alt="Localization_2"></p>
+</li>
+</ol>
+<h2 id="代码调用">代码调用</h2>
+<ol>
+<li>
+<p>在 <code>MainGame</code>内添加如下代码去加载资源；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">MainGame</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainGame</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">async</span> <span class="n">UniTask</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">TestLocalize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">async</span> <span class="n">UniTask</span> <span class="n">TestLocalize</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">sprite</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Localize</span><span class="p">.</span><span class="n">LoadAsset</span><span class="p">&lt;</span><span class="n">Sprite</span><span class="p">&gt;(</span><span class="s">&#34;PrefabRoot&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">sprite</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">sprite</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行游戏后查看输出日志：<code>PrefabRoot</code> 说明代码已经成功加载对应的本地化资源。</p>
+</li>
+</ol>
+<h2 id="预制件调用">预制件调用</h2>
+<ol>
+<li>
+<p>在场景中创建一个带有 <code>Image</code> 组件的游戏对象。</p>
+</li>
+<li>
+<p>点击组件右上角的三个点，选择 <code>Localize</code> 或 <code>AddLocalize</code>。</p>
+<p><img src="/Images/25.05_Localization/Localization_3.png" alt="Localization_3"></p>
+</li>
+<li>
+<p>选择 <code>Localize</code>，系统会自动添加 <code>Localize Sprite Event</code> 组件，并绑定 <code>Image.sprite</code> 赋值函数；</p>
+<p><img src="/Images/25.05_Localization/Localization_4.png" alt="Localization_4"></p>
+</li>
+<li>
+<p>选择<code>AddLocalize</code>，该工具除了执行 <code>Localize</code> 操作外，还会查找<code>Sprite</code> 本地化资源内，与 <code>Image</code> 的资源名一致的Key，并自动赋值到 <code>TableEntryReference</code> 中。</p>
+<p><img src="/Images/25.05_Localization/Localization_5.png" alt="Localization_5"></p>
+</li>
+<li>
+<p>运行游戏并切换语言后，即可看到不同语言对应的本地化资源被加载。</p>
+</li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.localization@1.3/manual/index.html">官方文档</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-06-15 19:40:22 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25.06_localization/">https://spirite12.github.io/post/25.06_localization/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.05_localization/">
+            <span class="next-text nav-default">Frame Localization（一）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
