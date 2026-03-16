@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Frame Localization（一） - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 项目接入 项目工程：链接 系统设计 本地化内容主要包括：文本本地化 与" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.05_localization/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Frame Localization（一）" />
+<meta property="og:description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 项目接入 项目工程：链接 系统设计 本地化内容主要包括：文本本地化 与" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.05_localization/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-05-21T19:40:21+08:00" />
+<meta property="article:modified_time" content="2025-05-21T19:40:21+08:00" />
+
+<meta itemprop="name" content="Frame Localization（一）">
+<meta itemprop="description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 项目接入 项目工程：链接 系统设计 本地化内容主要包括：文本本地化 与"><meta itemprop="datePublished" content="2025-05-21T19:40:21+08:00" />
+<meta itemprop="dateModified" content="2025-05-21T19:40:21+08:00" />
+<meta itemprop="wordCount" content="3545">
+<meta itemprop="keywords" content="Frame-Work," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Frame Localization（一）"/>
+<meta name="twitter:description" content="文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 项目接入 项目工程：链接 系统设计 本地化内容主要包括：文本本地化 与"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Frame Localization（一）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-05-21 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#文档记录"><strong>文档记录</strong></a></li>
+    <li><a href="#项目接入"><strong>项目接入</strong></a></li>
+    <li><a href="#系统设计"><strong>系统设计</strong></a></li>
+    <li><a href="#工程结构"><strong>工程结构</strong></a></li>
+    <li><a href="#文本本地化"><strong>文本本地化</strong></a>
+      <ul>
+        <li><a href="#表类型">表类型</a></li>
+        <li><a href="#默认表-default">默认表 Default</a></li>
+        <li><a href="#枚举表-enum">枚举表 Enum</a></li>
+        <li><a href="#文本表-string">文本表 String</a></li>
+        <li><a href="#常量表-const">常量表 Const</a></li>
+        <li><a href="#导表工具">导表工具</a></li>
+        <li><a href="#预制件工具">预制件工具</a></li>
+      </ul>
+    </li>
+    <li><a href="#资源本地化"><strong>资源本地化</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="文档记录"><strong>文档记录</strong></h1>
+<ul>
+<li>阅读本文档之前，建议先了解 Localization 相关基础知识：
+<ul>
+<li><a href="https://spirite12.github.io/post/23/23.02_localization1/">Localization 本地化（一）</a></li>
+<li><a href="https://spirite12.github.io/post/23/23.03_localization2/">Localization 本地化（二）</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="项目接入"><strong>项目接入</strong></h1>
+<ul>
+<li>项目工程：<a href="https://github.com/Spirite12/unity.dcFrame">链接</a></li>
+</ul>
+<h1 id="系统设计"><strong>系统设计</strong></h1>
+<p><img src="/Images/25.05_Localization/Localization_1.png" alt="Localization_1"></p>
+<ul>
+<li>本地化内容主要包括：文本本地化 与 资源本地化。</li>
+<li>文本本地化：
+<ul>
+<li>文本本地化主要包含三类来源：1）预制体文本；2）代码文本；3）表数据文本
+<ul>
+<li>预制体上文本、代码文本：统一在 文本表 内处理；</li>
+<li>表文本：统一在 默认表 与 枚举表 内处理；</li>
+</ul>
+</li>
+<li>文本本地化规则遵守：TableRules</li>
+</ul>
+</li>
+<li>资源本地化：
+<ul>
+<li>资源本地化：用于处理不同类型资源的本地化加载。</li>
+<li>资源本地化规则由 <code>LocalizeRules</code> 进行统一管理。</li>
+</ul>
+</li>
+</ul>
+<h1 id="工程结构"><strong>工程结构</strong></h1>
+<p><img src="/Images/25.05_Localization/Localization_2.png" alt="Localization_2"></p>
+<h1 id="文本本地化"><strong>文本本地化</strong></h1>
+<h2 id="表类型">表类型</h2>
+<ul>
+<li>
+<p>对应枚举：<code>TableUtil.EnumTableType</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">enum</span> <span class="n">EnumTableType</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;默认表&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Default</span> <span class="p">=</span> <span class="m">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;常量表&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Const</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;枚举表&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Enum</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;文本表&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>本地化模块划分：</p>
+<ul>
+<li>默认表、枚举表：处理所有<strong>表字段</strong>需要的本地化；</li>
+<li>文本表：处理<strong>预制体上文本</strong>、<strong>代码内的文本</strong>；</li>
+<li>常量表：不需要处理本地化；</li>
+</ul>
+</li>
+<li>
+<p>除了默认表，其他三个表都有严格遵守的表字段；</p>
+<ul>
+<li>具体表字段由： TableRulesTypeXXX 内查找 TableXXXClass 类 可见；
+<ul>
+<li>XXX：为枚举值的命名；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="默认表-default">默认表 Default</h2>
+<p>作用：根据表字段是否需要本地化来生成对应的本地化表代码；</p>
+<ol>
+<li>
+<p>项目工程：<a href="https://github.com/Spirite12/unity.dcFrame">链接</a></p>
+<ul>
+<li>克隆项目，并打开项目</li>
+</ul>
+</li>
+<li>
+<p>创建英文本地化资源：</p>
+<ul>
+<li>找到工程路径：Game\Settings \Localize
+<ul>
+<li>LocalizeRules：规则工具</li>
+<li>Localization Settings：本地化配置数据</li>
+<li>Chinese (Simplified) (zh-CN)：中文本地化包</li>
+</ul>
+</li>
+<li>文件夹内只有中文包，点击 Localization Settings，点击 Locale Generator；</li>
+<li>在 Locale Generactor 窗口内找到 Enghlish（en），点击生成；生成位置就在当前文件夹下；</li>
+<li>此时可以看到生成 English (en)  英文包，Localization Settings也关联了英文；</li>
+</ul>
+</li>
+<li>
+<p>生成本地化数据：</p>
+<ul>
+<li>
+<p>查找 Game\Table\TableTest.csv</p>
+<ul>
+<li>查看表内容，可知 Name 字段需要进行本地化处理；</li>
+<li>根据实际项目情况可删除，表都放在这个文件夹下；</li>
+</ul>
+</li>
+<li>
+<p>找到 Game\Settings\Table\TableRules</p>
+<ul>
+<li>相关规则说明详见：<a href="https://spirite12.github.io/post/25.04_csvhelper/">Frame CsvHelper</a></li>
+</ul>
+</li>
+<li>
+<p>在新增表的输入框内填写：<code>TableTest</code>，点击“新增表”后，将生成当前表的配置项。</p>
+</li>
+<li>
+<p>勾选字段Name的本地化设置，并选择本地化的 key 为Id；</p>
+</li>
+<li>
+<p>在最下面添加ID，点击 + 号；</p>
+<p><img src="/Images/25.05_Localization/Localization_3.png" alt="Localization_3"></p>
+</li>
+<li>
+<p>点击「一键导表」或「导出当前表」按钮。等待代码编译；</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Localization资源：</p>
+<ul>
+<li>
+<p>在 Game\Localize\Text：系统会自动生成对应的本地化数据。：</p>
+<ul>
+<li>Table：存放 表对应的本地化数据 和 Shared Data 数据</li>
+<li>ZH-CN：存放中文的所有本地化表数据</li>
+<li>En：存放英文的所有本地化表数据</li>
+<li>如果有其他语言，则接着生成对应本地化的文件夹</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_4.png" alt="Localization_4"></p>
+</li>
+<li>
+<p>打开 TableTest 的 TableEditor，可以看到生成了相关key对应的本地化文本</p>
+<ul>
+<li>Key 的生成规则为：A.B
+<ul>
+<li>A：在 TableRules 表里，勾选了本地化的字段名；</li>
+<li>B：在本地化的Key选择的字段的表实际值；为了保证 Key 唯一，通常使用 Id 作为标识。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_5.png" alt="Localization_5"></p>
+</li>
+<li>
+<p>在英文栏目里，针对 Name.1 填写 <strong>Test1</strong>，针对 Name.2 填写 <strong>Test2</strong>；</p>
+</li>
+</ul>
+</li>
+<li>
+<p>表代码：</p>
+<ul>
+<li>
+<p>在 Game\Scripts\Table：自动生成 TableTest.cs 文件（根据表名生成）</p>
+</li>
+<li>
+<p>打开脚本可以看到，Name 字段已经自动接入本地化获取函数。</p>
+<ul>
+<li>传参Key 的生成规则为：A.B.C
+<ul>
+<li>A：表名，也是本地化数据名</li>
+<li>B：勾选本地化的字段名</li>
+<li>C：本地化的key所选的字段的值；一般都是Id对应的行数值，为了唯一；</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTestField</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">=&gt;</span> <span class="n">Localize</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="s">&#34;TableTest.Name.&#34;</span> <span class="p">+</span> <span class="n">Id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span> <span class="kt">bool</span> <span class="n">IsTure</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableTest</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableTest</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">TableTestField</span> <span class="n">GetConfigById</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">showTips</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">keyDicId</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="n">id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">keyDicId</span><span class="p">[</span><span class="n">id</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">showTips</span><span class="p">)</span> <span class="p">{</span>	
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">$&#34;查找表：{CsvPath} 失败, id：{id}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">TableTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">keyDicId</span> <span class="p">=</span> <span class="n">LoadTableDic</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">TableTestField</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">Id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableTest.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">TableTestField</span><span class="p">&gt;</span> <span class="n">cacheDic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">TableTestField</span><span class="p">&gt;</span> <span class="n">keyDicId</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>功能测试：</p>
+<ul>
+<li>
+<p>打开 MainGame 添加如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">MainGame</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainGame</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">......</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TestLocalize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">TestLocalize</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">name</span> <span class="p">=</span> <span class="n">TableTest</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="n">GetConfigById</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">Name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行并查看输出</p>
+<ul>
+<li>中文环境下输出：测试表1，与表中的文本一致。</li>
+<li>英文环境下输出：Test1，和表内对应的文本一致；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="枚举表-enum">枚举表 Enum</h2>
+<ul>
+<li>作用：用来记录需要枚举本地化文本的表；</li>
+</ul>
+<ol>
+<li>
+<p>新增文本表：</p>
+<ul>
+<li>新增名为：<code>TableEnum</code> 的表，并在表内填写 <code>TableEnumClass</code> 类上所需字段与表数据；以下为示例表数据：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Id,EnumSign,EnumName,Value,ValueSign,ValueName
+</span></span><span class="line"><span class="cl">1,ColorType,颜色标识,1,Yellow,黄色
+</span></span><span class="line"><span class="cl">2,ColorType,颜色标识,2,Red,红色
+</span></span><span class="line"><span class="cl">3,SizeType,尺寸标识,1,Big,大
+</span></span><span class="line"><span class="cl">4,SizeType,尺寸标识,2,Small,小
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>生成本地化数据：</p>
+<ul>
+<li>找到 Game\Settings\Table\TableRules</li>
+<li>在新增表的输入框内填写：<code>TableEnumClass </code>，并点击新增表，会出现当前表的配置数据；</li>
+<li>更改表类型为：枚举表</li>
+<li>找到枚举为 <code>ColorType</code> 的勾选本地化，而 <code>SizeType</code> 不勾选本地化；</li>
+<li>点击 一键导表 或者 导当前表</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_6.png" alt="Localization_6"></p>
+</li>
+<li>
+<p>Localization资源：</p>
+<ul>
+<li>
+<p>在 Game\Localize\Text：系统会自动生成对应的本地化数据。（与默认表一致内容）</p>
+<p><img src="/Images/25.05_Localization/Localization_7.png" alt="Localization_7"></p>
+</li>
+<li>
+<p>打开 <code>TableEnum</code> 的 TableEditor，可以看到生成了相关key对应的本地化文本</p>
+<ul>
+<li>Key 的生成规则为：A.B
+<ul>
+<li>A：在 TableRules 表里，勾选了本地化的枚举名；</li>
+<li>B：枚举值的名；</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_8.png" alt="Localization_8"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>表代码：</p>
+<ul>
+<li>
+<p>在 Game\Scripts\Table：自动生成 TableEnum.cs 文件（根据表名生成）</p>
+</li>
+<li>
+<p>打开脚本可以看到，被勾选的枚举项会自动接入本地化获取函数。</p>
+<ul>
+<li>传参Key 的生成规则为：A.B.C
+<ul>
+<li>A：表名，也是本地化数据名</li>
+<li>B：勾选本地化的枚举名</li>
+<li>C：枚举值对应的名</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableEnum</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableEnum</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 颜色标识</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">enum</span> <span class="n">ColorType</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 黄色</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Yellow</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 红色</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Red</span> <span class="p">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;</span> <span class="n">ColorTypeDic</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">            [ColorType.Yellow]</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Localize</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="s">&#34;TableEnum.ColorType.Yellow&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="na">            [ColorType.Red]</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Localize</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="s">&#34;TableEnum.ColorType.Red&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 尺寸标识</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">enum</span> <span class="n">SizeType</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 大</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Big</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 小</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Small</span> <span class="p">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableEnum.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>功能测试：</p>
+<ul>
+<li>
+<p>打开 MainGame 添加如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">MainGame</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainGame</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">......</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TestLocalize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">TestLocalize</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">name</span> <span class="p">=</span> <span class="n">TableEnum</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="n">ColorTypeDic</span><span class="p">[</span><span class="n">TableEnum</span><span class="p">.</span><span class="n">ColorType</span><span class="p">.</span><span class="n">Yellow</span><span class="p">]();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行并查看输出</p>
+<ul>
+<li>中文环境下输出：黄色，和表内对应的文本一致；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="文本表-string">文本表 String</h2>
+<p>作用：用于记录需要单独管理的本地化文本。</p>
+<ol>
+<li>
+<p>新增文本表：</p>
+<ul>
+<li>新增名为：TableString 的表，并在表内填写 TableStringClass 类上所需字段与表数据；</li>
+<li>根据表字段定义可知：<code>String</code> 字段需要进行本地化处理。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Sign,String
+</span></span><span class="line"><span class="cl">Test1,测试文本1
+</span></span><span class="line"><span class="cl">Test2,测试文本2
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>生成本地化数据：</p>
+<ul>
+<li>找到 Game\Settings\Table\TableRules</li>
+<li>在新增表的输入框内填写：<code>TableString</code>，并点击新增表，会出现当前表的配置数据；</li>
+<li>更改表类型为：文本表</li>
+<li>点击 一键导表 或者 导当前表</li>
+</ul>
+</li>
+<li>
+<p>Localization资源：</p>
+<ul>
+<li>
+<p>在 Game\Localize\Text：系统会自动生成对应的本地化数据。（与默认表一致内容）</p>
+<p><img src="/Images/25.05_Localization/Localization_9.png" alt="Localization_9"></p>
+</li>
+<li>
+<p>打开 <code>TableString</code> 的 TableEditor，可以看到生成了相关key对应的本地化文本</p>
+<ul>
+<li>key的规则是：对应表内的 Sign 字段名；</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_10.png" alt="Localization_10"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>表代码：</p>
+<ul>
+<li>
+<p>在 Game\Scripts\Table：自动生成 TableString.cs 文件（根据表名生成）</p>
+</li>
+<li>
+<p>打开脚本能看到文本都被自动调用的本地化函数；</p>
+<ul>
+<li>传参Key 的生成规则为：A.B
+<ul>
+<li>A：表名，也是本地化数据名</li>
+<li>B：Sign 字段名</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game.Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">TableString</span> <span class="p">:</span> <span class="n">TableBaseSingle</span><span class="p">&lt;</span><span class="n">TableString</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 测试文本1</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">string</span> <span class="n">Test1</span> <span class="p">=</span> <span class="n">Localize</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="s">&#34;TableString.Test1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 测试文本2</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="kt">string</span> <span class="n">Test2</span> <span class="p">=</span> <span class="n">Localize</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="s">&#34;TableString.Test2&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">protected</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">CsvPath</span> <span class="p">=&gt;</span> <span class="s">&#34;Assets/Game/Table/TableString.csv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>功能测试：</p>
+<ul>
+<li>
+<p>打开 MainGame 添加如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">MainGame</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainGame</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">......</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TestLocalize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">TestLocalize</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">name</span> <span class="p">=</span> <span class="n">TableString</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="n">Test1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行并查看输出</p>
+<ul>
+<li>中文环境下输出：测试文本1，和表内对应的文本一致；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>预制体测试：</p>
+<ul>
+<li>
+<p>介绍：预制体上，则通过 <code>Localize String Event</code> 组件来填写对应 key 来处理本地化文本；</p>
+</li>
+<li>
+<p>在某个物体节点上添加 Text 文本，并添加 <code>Localize String Event</code> 组件；</p>
+<ul>
+<li>可在 Text 组件右上角点击三个点，选择 Localize，快速添加；</li>
+<li>或者选择工程内的 Add Localize ，更快速的适配添加；（工具栏介绍）</li>
+</ul>
+</li>
+<li>
+<p>运行游戏后，可以看到 Text 组件已自动赋值对应文本：测试文本1</p>
+<ul>
+<li>也可以切换为英文环境，但由于未填写英文文本；所以会默认提示文本：
+<ul>
+<li><code>No translation found for 'Test1' in TableString</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/Images/25.05_Localization/Localization_11.png" alt="Localization_11"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="常量表-const">常量表 Const</h2>
+<ul>
+<li>作用：用来记录常量值的表；值为 Int 类型；</li>
+<li>不做本地化文本处理；</li>
+</ul>
+<h2 id="导表工具">导表工具</h2>
+<ul>
+<li>菜单栏：Tools -&gt; 资源项 -&gt; 一键导表：</li>
+<li>规则工具：TableRules -&gt; 一键导表：</li>
+<li>规则工具：LocalizeRules -&gt; 本地化表生成：
+<ul>
+<li>以上功能均根据 <code>Game\TableRules</code> 中的配置规则生成对应的本地化数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="预制件工具">预制件工具</h2>
+<p>下面介绍 <code>Localize String Event</code> 组件的快捷添加方式。</p>
+<p><img src="/Images/25.05_Localization/Localization_12.png" alt="Localization_12"></p>
+<ul>
+<li>
+<p>Localization 在 Text 组件中提供了快捷添加功能，并自动绑定 <code>Text.text</code> 属性。</p>
+<p><img src="/Images/25.05_Localization/Localization_13.png" alt="Localization_13"></p>
+</li>
+<li>
+<p>工程内添加 <code>Add Localize</code>，从而可以自动同步绑定 <code>String Reference</code> 的值。</p>
+<ul>
+<li>
+<p>在 Text 组件的文本内添加 TableString 本地化数据内的 key，如：Test1，并添加 <code>Add Localize</code>，系统会自动绑定 <code>String Reference</code> 的值为 TableString/Test1，并更改 Text 为当前本地化的中文文本：测试文本1</p>
+<p><img src="/Images/25.05_Localization/Localization_14.gif" alt="Localization_14"></p>
+</li>
+<li>
+<p>如果需要添加其他本地化数据内的key，则需填写：LocalizeName.Key</p>
+<ul>
+<li>LocalizeName：是本地化收集的数据名；</li>
+<li>Key：当前数据内的Key</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="资源本地化"><strong>资源本地化</strong></h1>
+<p>请查看下一个文档</p>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.localization@1.3/manual/index.html">官方文档</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-05-21 19:40:21 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.05_localization/">https://spirite12.github.io/post/25/25.05_localization/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.04_csvhelper/">
+            <span class="next-text nav-default">Frame CsvHelper</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

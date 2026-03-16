@@ -7,13 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Tue, 15 Apr 2025 19:40:20 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/frame-work/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 May 2025 19:40:21 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/frame-work/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Frame Localization（一）</title>
+      <link>https://spirite12.github.io/post/25/25.05_localization/</link>
+      <pubDate>Wed, 21 May 2025 19:40:21 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/25/25.05_localization/</guid>
+      <description>文档记录 阅读本文档之前，建议先了解 Localization 相关基础知识： Localization 本地化（一） Localization 本地化（二） 项目接入 项目工程：链接 系统设计 本地化内容主要包括：文本本地化 与</description>
+    </item>
+    
     <item>
       <title>Frame CsvHelper</title>
-      <link>https://spirite12.github.io/post/25.04_csvhelper/</link>
+      <link>https://spirite12.github.io/post/25/25.04_csvhelper/</link>
       <pubDate>Tue, 15 Apr 2025 19:40:20 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/post/25.04_csvhelper/</guid>
+      <guid>https://spirite12.github.io/post/25/25.04_csvhelper/</guid>
       <description>文档记录 在查看本文档之前，需了解 CsvHelper 相关的知识； 本文多语言相关内容请看后续文章查看； 若想了解相关知识，可查看如下文档： CsvHelper .Net库 项目接入 项目</description>
     </item>
     
