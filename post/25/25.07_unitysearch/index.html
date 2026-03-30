@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Search 搜索 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="本项目使用的 Unity 的版本是：2021.3.6f1c1 窗口说明 打开方式 快捷键：Ctrl &#43; K 菜单栏：Edit -&amp;gt; Search All&amp;hellip; Project栏： 引擎右上角的放大" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.07_unitysearch/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Search 搜索" />
+<meta property="og:description" content="本项目使用的 Unity 的版本是：2021.3.6f1c1 窗口说明 打开方式 快捷键：Ctrl &#43; K 菜单栏：Edit -&gt; Search All&hellip; Project栏： 引擎右上角的放大" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.07_unitysearch/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-07-11T19:40:24+08:00" />
+<meta property="article:modified_time" content="2025-07-11T19:40:24+08:00" />
+
+<meta itemprop="name" content="Search 搜索">
+<meta itemprop="description" content="本项目使用的 Unity 的版本是：2021.3.6f1c1 窗口说明 打开方式 快捷键：Ctrl &#43; K 菜单栏：Edit -&gt; Search All&hellip; Project栏： 引擎右上角的放大"><meta itemprop="datePublished" content="2025-07-11T19:40:24+08:00" />
+<meta itemprop="dateModified" content="2025-07-11T19:40:24+08:00" />
+<meta itemprop="wordCount" content="735">
+<meta itemprop="keywords" content="unity," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Search 搜索"/>
+<meta name="twitter:description" content="本项目使用的 Unity 的版本是：2021.3.6f1c1 窗口说明 打开方式 快捷键：Ctrl &#43; K 菜单栏：Edit -&gt; Search All&hellip; Project栏： 引擎右上角的放大"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Search 搜索</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-07-11 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#窗口说明"><strong>窗口说明</strong></a>
+      <ul>
+        <li><a href="#打开方式">打开方式</a></li>
+        <li><a href="#窗口">窗口</a></li>
+      </ul>
+    </li>
+    <li><a href="#搜索条件"><strong>搜索条件</strong></a></li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本项目使用的 Unity 的版本是：2021.3.6f1c1</p>
+<h1 id="窗口说明"><strong>窗口说明</strong></h1>
+<h2 id="打开方式">打开方式</h2>
+<ul>
+<li>
+<p>快捷键：Ctrl + K</p>
+</li>
+<li>
+<p>菜单栏：Edit -&gt; Search All&hellip;</p>
+</li>
+<li>
+<p>Project栏：</p>
+<p><img src="/Images/25.07_UnitySearch/UnitySearch_1.png" alt="Search"></p>
+</li>
+<li>
+<p>引擎右上角的放大镜：</p>
+<p><img src="/Images/25.07_UnitySearch/UnitySearch_2.png" alt="Search"></p>
+</li>
+</ul>
+<h2 id="窗口">窗口</h2>
+<ol>
+<li>
+<p>打开窗口的时候会显示如下内容，可以在输入框内打 <code>?</code> 来寻求一系列的指引；</p>
+<p><img src="/Images/25.07_UnitySearch/UnitySearch_4.png" alt="Search"></p>
+</li>
+<li>
+<p>这里引用 <code>Unity Manual</code> 下的一张图；</p>
+<p><img src="/Images/25.07_UnitySearch/UnitySearch_3.jpeg" alt="Search"></p>
+<ul>
+<li>A：搜索框，输入一些想要查找的资源；有关具体的搜索方法，可以参考 <code>搜索条件</code>；</li>
+<li>B：保存搜索条件，若想保存本次搜索的条件文本，以便后续重复使用，则可以点击 <code>User</code> 或者 <code>Project</code> 旁边的保存按钮；
+<ul>
+<li>User：保存在本地；仅仅自己可见；</li>
+<li>Project：保存一份资源在工程内，可以上传到Git，供项目内成员使用；</li>
+</ul>
+</li>
+<li>C：搜索结果，根据搜索框筛选出匹配中的资源；点击可以定位在工程中的位置；</li>
+<li>D：分类标签，根据搜索的结果，对资源进行归类；</li>
+<li>E：检视面板，允许您查看和更改项目属性、打开、重新导入或删除搜索项，或复制路径；</li>
+<li>F：显示偏好，更改资源显示和排布方式；</li>
+</ul>
+</li>
+</ol>
+<h1 id="搜索条件"><strong>搜索条件</strong></h1>
+<ul>
+<li>
+<p><code>p:</code>：从 Project 视图内搜索；</p>
+</li>
+<li>
+<p><code>=</code> ：在 Calculator 内搜索；</p>
+</li>
+<li>
+<p><code>-</code>：排除条件搜索；</p>
+</li>
+<li>
+<p><code>find:</code>：从文件内搜索；</p>
+</li>
+<li>
+<p><code>h:</code> or <code>t:</code>：从 Hierarchy 内搜索；</p>
+</li>
+<li>
+<p><code>#</code>：从静态API内搜索；</p>
+</li>
+<li>
+<p><code>m:</code>：从 菜单栏 内搜索；</p>
+</li>
+<li>
+<p><code>pkg:</code>：从 资源包 内搜索；</p>
+</li>
+<li>
+<p><code>at:</code>：从 Asset Table 内搜索；</p>
+</li>
+<li>
+<p><code>st:</code>：从 String Table 内搜索；</p>
+</li>
+<li>
+<p><code>set:</code>：从 配置 内搜索；</p>
+</li>
+<li>
+<p><code>store:</code>：从 资源商店 内搜索；</p>
+</li>
+<li>
+<p><code>log:</code>：从 Los 内搜索；</p>
+</li>
+<li>
+<p><code>adb:</code>：从 Asset Database 内搜索；</p>
+</li>
+<li>
+<p><code>t:</code>：根据类型名搜索；</p>
+<ul>
+<li><code>t:Prefab</code> → 预制体</li>
+<li><code>t:Texture</code> → 贴图（Texture2D 等）</li>
+<li><code>t:Material</code> → 材质</li>
+</ul>
+</li>
+<li>
+<p><code>l:</code>：根据标签名搜索；</p>
+<ul>
+<li>在 Inspector 里给资源加 Label</li>
+</ul>
+</li>
+<li>
+<p><code>Assets/路径关键词</code>：在路径下搜索资源；</p>
+<ul>
+<li><code>t:Prefab Assets/UI</code>：只查 UI 目录下的预制体</li>
+</ul>
+</li>
+<li>
+<p><code>*.XXX</code>：扩展名搜索</p>
+<ul>
+<li><code>*.png</code>、<code>*.fbx</code> 、<code>*.mat</code></li>
+</ul>
+</li>
+<li>
+<p><code>size&gt;1000</code>：搜索大于1kb的资源</p>
+</li>
+<li>
+<p>组合搜索举例：</p>
+<ul>
+<li><code>t:script Assets/DCFrame -Assets/DCFrame/Editor</code>
+<ul>
+<li>在  <code>Assets/DCFrame</code> 文件夹下底下搜索脚本，需排除 <code>Assets/DCFrame/Editor</code> 文件夹；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://docs.unity3d.com/2021.3/Documentation/Manual/search-overview.html">Unity Search Doc</a></li>
+<li><a href="https://docs.unity3d.com/2021.3/Documentation/Manual/search-usage.html">Unity Search Usage Doc</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-07-11 19:40:24 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.07_unitysearch/">https://spirite12.github.io/post/25/25.07_unitysearch/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity/">unity</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.06_localization/">
+            <span class="next-text nav-default">Frame Localization（二）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
