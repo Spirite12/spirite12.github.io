@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Frame 代码优化之Codex - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="说明 这次借助 Codex 对当前工程做了一轮整理与修复； Codex 是什么： 它可以直接读工程代码、定位引用关系、批量修改脚本、补测试，再把结果整理成可追踪的变更。" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.08_opcodex/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Frame 代码优化之Codex" />
+<meta property="og:description" content="说明 这次借助 Codex 对当前工程做了一轮整理与修复； Codex 是什么： 它可以直接读工程代码、定位引用关系、批量修改脚本、补测试，再把结果整理成可追踪的变更。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.08_opcodex/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-08-12T19:40:24+08:00" />
+<meta property="article:modified_time" content="2025-08-12T19:40:24+08:00" />
+
+<meta itemprop="name" content="Frame 代码优化之Codex">
+<meta itemprop="description" content="说明 这次借助 Codex 对当前工程做了一轮整理与修复； Codex 是什么： 它可以直接读工程代码、定位引用关系、批量修改脚本、补测试，再把结果整理成可追踪的变更。"><meta itemprop="datePublished" content="2025-08-12T19:40:24+08:00" />
+<meta itemprop="dateModified" content="2025-08-12T19:40:24+08:00" />
+<meta itemprop="wordCount" content="4116">
+<meta itemprop="keywords" content="Frame-Work,AI," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Frame 代码优化之Codex"/>
+<meta name="twitter:description" content="说明 这次借助 Codex 对当前工程做了一轮整理与修复； Codex 是什么： 它可以直接读工程代码、定位引用关系、批量修改脚本、补测试，再把结果整理成可追踪的变更。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Frame 代码优化之Codex</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-08-12 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#说明"><strong>说明</strong></a></li>
+    <li><a href="#枚举命名"><strong>枚举命名</strong></a></li>
+    <li><a href="#测试用例"><strong>测试用例</strong></a></li>
+    <li><a href="#bug-修复"><strong>Bug 修复</strong></a>
+      <ul>
+        <li><a href="#eventmgr">EventMgr</a></li>
+        <li><a href="#redtip">RedTip</a></li>
+        <li><a href="#fileutil-和-asset">FileUtil 和 Asset</a></li>
+      </ul>
+    </li>
+    <li><a href="#优化处理"><strong>优化处理</strong></a>
+      <ul>
+        <li><a href="#textfilter">TextFilter</a></li>
+        <li><a href="#addressable">Addressable</a></li>
+      </ul>
+    </li>
+    <li><a href="#问题记录"><strong>问题记录</strong></a>
+      <ul>
+        <li><a href="#中文注释乱码">中文注释乱码</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结"><strong>总结</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="说明"><strong>说明</strong></h1>
+<p>这次借助 <code>Codex</code> 对当前工程做了一轮整理与修复；</p>
+<ul>
+<li><code>Codex</code> 是什么：
+<ul>
+<li>它可以直接读工程代码、定位引用关系、批量修改脚本、补测试，再把结果整理成可追踪的变更。</li>
+<li>这次我用它来分析 <code>DCFrame</code> 和 <code>Game/Scripts</code> 里的自研脚本，第三方插件代码没有动。</li>
+</ul>
+</li>
+<li>本次分析消耗：
+<ul>
+<li>总计消耗了大约 <code>10%</code> 的额度；</li>
+<li>使用的模型是 <code>GPT-5.3-Codex</code>。</li>
+</ul>
+</li>
+<li>这次对工程做的整体优化：
+<ul>
+<li>统一了自定义枚举命名，去掉了 <code>Enum</code> 前缀，使得后续代码读起来更直观。</li>
+<li>基于 <code>Version.md</code> 里记录过的功能模块，补充了测试用例。</li>
+<li>修了一批容易引发后续问题的实现点，例如：事件派发、缓存初始化、文本过滤、路径拼接和红点 key 解析。</li>
+<li>顺手把一些边界条件补齐，让这些模块在异常输入下更稳一点。</li>
+</ul>
+</li>
+</ul>
+<h1 id="枚举命名"><strong>枚举命名</strong></h1>
+<p>由于 C# 里 <code>Enum</code> 本身已经是一个明确的类型概念，再在枚举名里重复 <code>Enum</code> 会显得有些冗余，因此本次把工程内自研脚本里所有 <code>EnumXXXX</code> 风格的枚举统一去前缀，改成更短的命名方式；</p>
+<ul>
+<li>调整目标：
+<ul>
+<li><code>EnumTableType</code> -&gt; <code>TableType</code></li>
+<li><code>EnumKeyType</code> -&gt; <code>KeyType</code></li>
+<li><code>EnumFieldType</code> -&gt; <code>FieldType</code></li>
+<li><code>EnumSaveType</code> -&gt; <code>SaveType</code></li>
+<li><code>EnumPrefixPath</code> -&gt; <code>PrefixPath</code></li>
+<li><code>EnumLocaleCode</code> -&gt; <code>LocaleCode</code></li>
+<li><code>EnumPopEnum</code> -&gt; <code>PopEnum</code></li>
+</ul>
+</li>
+<li>效果：
+<ul>
+<li>枚举名更符合当前代码风格；</li>
+<li>配合编辑器工具和表规则代码时，阅读成本更低；</li>
+<li>相关引用也一起更新，避免“类型名改了但调用没改”的断层。</li>
+</ul>
+</li>
+</ul>
+<h1 id="测试用例"><strong>测试用例</strong></h1>
+<p>这次给核心模块添加了一组测试，并按 <code>Version.md</code> 里的版本记录做了分组，用于验证并排查潜在问题；</p>
+<ol>
+<li>
+<p>测试用例工程目录：</p>
+<p><img src="/Images/25.08_OpCodeX/OpCodeX_2.png" alt="CodeX"></p>
+</li>
+<li>
+<p>测试用例通过截图：</p>
+<p><img src="/Images/25.08_OpCodeX/OpCodeX_1.png" alt="CodeX"></p>
+</li>
+<li>
+<p>测试用例代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reflection</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame.Utility</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">NUnit.Framework</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">DCFrame.Tests.Editor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">VersionedTestBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [SetUp]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">BaseSetUp</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventMgr</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CacheMgr</span><span class="p">.</span><span class="n">ClearAllCacheBase</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ResetTextFilterRoot</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">ResetTextFilterRoot</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">FieldInfo</span> <span class="n">rootField</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">TextFilter</span><span class="p">).</span><span class="n">GetField</span><span class="p">(</span><span class="s">&#34;Root&#34;</span><span class="p">,</span> <span class="n">BindingFlags</span><span class="p">.</span><span class="n">NonPublic</span> <span class="p">|</span> <span class="n">BindingFlags</span><span class="p">.</span><span class="n">Static</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">TextTrieNode</span> <span class="n">root</span> <span class="p">=</span> <span class="p">(</span><span class="n">TextTrieNode</span><span class="p">)</span><span class="n">rootField</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="k">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">root</span><span class="p">.</span><span class="n">Children</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">root</span><span class="p">.</span><span class="n">IsWord</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [TestFixture]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;0.1.0&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">V0_1_0_AddressableTests</span> <span class="p">:</span> <span class="n">VersionedTestBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">Asset_GetPrefabPath_UsesForwardSlashAndPrefabExtension</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetPrefabPath</span><span class="p">(</span><span class="s">&#34;AudioToolkit/AudioControllerMain&#34;</span><span class="p">,</span> <span class="n">Asset</span><span class="p">.</span><span class="n">PrefixPath</span><span class="p">.</span><span class="n">Settings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;Assets/Game/Settings/AudioToolkit/AudioControllerMain.prefab&#34;</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsFalse</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&#34;\\&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">Asset_GetTxtPath_AndAssetPath_AreBuiltCorrectly</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">txtPath</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetTxtPath</span><span class="p">(</span><span class="s">&#34;Table/TableRules&#34;</span><span class="p">,</span> <span class="n">Asset</span><span class="p">.</span><span class="n">PrefixPath</span><span class="p">.</span><span class="n">Settings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">assetPath</span> <span class="p">=</span> <span class="n">Asset</span><span class="p">.</span><span class="n">GetAssetPath</span><span class="p">(</span><span class="s">&#34;Table/TableRules&#34;</span><span class="p">,</span> <span class="n">Asset</span><span class="p">.</span><span class="n">PrefixPath</span><span class="p">.</span><span class="n">Settings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;Assets/Game/Settings/Table/TableRules.txt&#34;</span><span class="p">,</span> <span class="n">txtPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;Assets/Game/Settings/Table/TableRules.asset&#34;</span><span class="p">,</span> <span class="n">assetPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [TestFixture]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;0.3.0&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">V0_3_0_EventAndRedTipTests</span> <span class="p">:</span> <span class="n">VersionedTestBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">EventMgr_RemoveListenerDuringDispatch_DoesNotThrow</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">callCount</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Action</span> <span class="n">callbackA</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">callbackA</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">callCount</span><span class="p">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventMgr</span><span class="p">.</span><span class="n">RemoveListener</span><span class="p">(</span><span class="s">&#34;evt&#34;</span><span class="p">,</span> <span class="n">callbackA</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Action</span> <span class="n">callbackB</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">callCount</span><span class="p">++;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">EventMgr</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(</span><span class="s">&#34;evt&#34;</span><span class="p">,</span> <span class="n">callbackA</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventMgr</span><span class="p">.</span><span class="n">AddListener</span><span class="p">(</span><span class="s">&#34;evt&#34;</span><span class="p">,</span> <span class="n">callbackB</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">DoesNotThrow</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">EventMgr</span><span class="p">.</span><span class="n">DispatchEvent</span><span class="p">(</span><span class="s">&#34;evt&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">callCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">EventMgr_DispatchWithFourParameters_InvokesCorrectly</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">l</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">s</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">bool</span> <span class="n">b</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">EventMgr</span><span class="p">.</span><span class="n">AddListener</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">long</span><span class="p">,</span> <span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;(</span><span class="s">&#34;evt4&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">l</span> <span class="p">=</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="p">=</span> <span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span> <span class="p">=</span> <span class="n">e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="n">EventMgr</span><span class="p">.</span><span class="n">DispatchEvent</span><span class="p">(</span><span class="s">&#34;evt4&#34;</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">20L</span><span class="p">,</span> <span class="s">&#34;ok&#34;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">20L</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;ok&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsTrue</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">RedTipMgr_KeyParse_SupportsNameWithUnderscore</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">key</span> <span class="p">=</span> <span class="n">RedTipMgr</span><span class="p">.</span><span class="n">GetKey</span><span class="p">(</span><span class="s">&#34;Quest_Main&#34;</span><span class="p">,</span> <span class="m">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;Quest_Main&#34;</span><span class="p">,</span> <span class="n">RedTipMgr</span><span class="p">.</span><span class="n">GetNameByKey</span><span class="p">(</span><span class="n">key</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="n">RedTipMgr</span><span class="p">.</span><span class="n">GetIdByKey</span><span class="p">(</span><span class="n">key</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">RedTipMgr_KeyParse_InvalidKey_ReturnsSafeDefault</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;NoSeparator&#34;</span><span class="p">,</span> <span class="n">RedTipMgr</span><span class="p">.</span><span class="n">GetNameByKey</span><span class="p">(</span><span class="s">&#34;NoSeparator&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">RedTipMgr</span><span class="p">.</span><span class="n">GetIdByKey</span><span class="p">(</span><span class="s">&#34;NoSeparator&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">RedTipMgr</span><span class="p">.</span><span class="n">GetIdByKey</span><span class="p">(</span><span class="s">&#34;Name_InvalidId&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [TestFixture]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;0.4.0&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">V0_4_0_TextFilterAndCacheTests</span> <span class="p">:</span> <span class="n">VersionedTestBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [SetUp]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">InitCacheContext</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CacheMgr</span><span class="p">.</span><span class="n">GameInit</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="s">&#34;Player001&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="s">&#34;S001&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="s">&#34;Account001&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">TextFilter_NullAndEmptyInput_AreHandledSafely</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">DoesNotThrow</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">TextFilter</span><span class="p">.</span><span class="n">AddWord</span><span class="p">(</span><span class="k">null</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">DoesNotThrow</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">TextFilter</span><span class="p">.</span><span class="n">AddWord</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsFalse</span><span class="p">(</span><span class="n">TextFilter</span><span class="p">.</span><span class="n">ContainsWord</span><span class="p">(</span><span class="k">null</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsFalse</span><span class="p">(</span><span class="n">TextFilter</span><span class="p">.</span><span class="n">ContainsWord</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsFalse</span><span class="p">(</span><span class="n">TextFilter</span><span class="p">.</span><span class="n">ContainsFilterWords</span><span class="p">(</span><span class="k">null</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsFalse</span><span class="p">(</span><span class="n">TextFilter</span><span class="p">.</span><span class="n">ContainsFilterWords</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span> <span class="n">TextFilter</span><span class="p">.</span><span class="n">ReplaceFilterWords</span><span class="p">(</span><span class="k">null</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span> <span class="n">TextFilter</span><span class="p">.</span><span class="n">ReplaceFilterWords</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">TextFilter_Replace_UsesLongestMatch</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">TextFilter</span><span class="p">.</span><span class="n">AddWord</span><span class="p">(</span><span class="s">&#34;ab&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">TextFilter</span><span class="p">.</span><span class="n">AddWord</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">IsTrue</span><span class="p">(</span><span class="n">TextFilter</span><span class="p">.</span><span class="n">ContainsFilterWords</span><span class="p">(</span><span class="s">&#34;zabcx&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;z***x&#34;</span><span class="p">,</span> <span class="n">TextFilter</span><span class="p">.</span><span class="n">ReplaceFilterWords</span><span class="p">(</span><span class="s">&#34;zabcx&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;z**x&#34;</span><span class="p">,</span> <span class="n">TextFilter</span><span class="p">.</span><span class="n">ReplaceFilterWords</span><span class="p">(</span><span class="s">&#34;zabx&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">CacheBase_GetSavePath_ContainsPlayerIdPrefix</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">cache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DummyCacheA</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">StringAssert</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&#34;Record\\Cache\\Player001\\DummyCacheA.txt&#34;</span><span class="p">,</span> <span class="n">cache</span><span class="p">.</span><span class="n">PublicSavePath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">FileUtil_ReadFile_WithFullPath_ReadsCorrectly</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">tempPath</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="n">GetTempPath</span><span class="p">(),</span> <span class="s">$&#34;dcframe_test_{Guid.NewGuid():N}.txt&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">File</span><span class="p">.</span><span class="n">WriteAllText</span><span class="p">(</span><span class="n">tempPath</span><span class="p">,</span> <span class="s">&#34;hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">string</span> <span class="n">read</span> <span class="p">=</span> <span class="n">FileUtil</span><span class="p">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="n">tempPath</span><span class="p">,</span> <span class="n">isEncrypt</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span> <span class="n">isFullPath</span><span class="p">:</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="n">read</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">tempPath</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">File</span><span class="p">.</span><span class="n">Delete</span><span class="p">(</span><span class="n">tempPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">class</span> <span class="nc">DummyCacheA</span> <span class="p">:</span> <span class="n">CacheBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="kt">string</span> <span class="n">PublicSavePath</span> <span class="p">=&gt;</span> <span class="n">GetSavePath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [TestFixture]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;0.5.0&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">V0_5_0_TableAndLocalizationTests</span> <span class="p">:</span> <span class="n">VersionedTestBase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">TableUtil_GetEnumFieldType_CoversCoreCases</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">Int</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetEnumFieldType</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">Long</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetEnumFieldType</span><span class="p">(</span><span class="kt">long</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">.</span><span class="n">ToString</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">Float</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetEnumFieldType</span><span class="p">(</span><span class="s">&#34;1.25&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">Bool</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetEnumFieldType</span><span class="p">(</span><span class="s">&#34;true&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">String</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetEnumFieldType</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">String</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetEnumFieldType</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">TableUtil_PathHelpers_ReturnExpectedPath</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;Assets/Game/Table/User.csv&#34;</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetFilePath</span><span class="p">(</span><span class="s">&#34;User&#34;</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;\\&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;Assets/Game/Scripts/Table/User.cs&#34;</span><span class="p">,</span> <span class="n">TableUtil</span><span class="p">.</span><span class="n">GetScriptPath</span><span class="p">(</span><span class="s">&#34;User&#34;</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;\\&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">LocalizeConst_LocaleCodeDictionary_IsStable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;zh-CN&#34;</span><span class="p">,</span> <span class="n">LocalizeConst</span><span class="p">.</span><span class="n">LocaleCodeDic</span><span class="p">[</span><span class="n">LocalizeConst</span><span class="p">.</span><span class="n">LocaleCode</span><span class="p">.</span><span class="n">ZhCN</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="s">&#34;en&#34;</span><span class="p">,</span> <span class="n">LocalizeConst</span><span class="p">.</span><span class="n">LocaleCodeDic</span><span class="p">[</span><span class="n">LocalizeConst</span><span class="p">.</span><span class="n">LocaleCode</span><span class="p">.</span><span class="n">EN</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Test]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">CommonUtil_GetEnumDescriptions_ForTableType</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">list</span> <span class="p">=</span> <span class="n">CommonUtil</span><span class="p">.</span><span class="n">GetEnumDescriptions</span><span class="p">&lt;</span><span class="n">TableUtil</span><span class="p">.</span><span class="n">TableType</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CollectionAssert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="s">&#34;默认表&#34;</span><span class="p">,</span> <span class="s">&#34;常量表&#34;</span><span class="p">,</span> <span class="s">&#34;枚举表&#34;</span><span class="p">,</span> <span class="s">&#34;文本表&#34;</span> <span class="p">},</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>测试用例说明：</p>
+<ul>
+<li><code>0.1.0</code>：
+<ul>
+<li>主要覆盖 Addressable 路径拼接行为。</li>
+<li>重点确认资源路径后缀、目录前缀和分隔符统一。</li>
+</ul>
+</li>
+<li><code>0.3.0</code>：
+<ul>
+<li>主要覆盖 <code>EventMgr</code> 和 <code>RedTip</code>。</li>
+<li>重点验证事件派发、监听移除、红点 key 解析等行为。</li>
+</ul>
+</li>
+<li><code>0.4.0</code>：
+<ul>
+<li>主要覆盖 <code>TextFilter</code> 和 <code>Cache</code>。</li>
+<li>重点验证敏感词匹配、最长匹配策略、缓存路径生成等行为。</li>
+</ul>
+</li>
+<li><code>0.5.0</code>：
+<ul>
+<li>主要覆盖 <code>Table</code> 和 <code>Localization</code>。</li>
+<li>重点验证表字段类型推断、表路径、语言映射和枚举描述输出。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="bug-修复"><strong>Bug 修复</strong></h1>
+<p>Codex 根据这些模块的实际表现，修复了一系列潜在问题；</p>
+<h2 id="eventmgr">EventMgr</h2>
+<p>原来的实现里，事件派发时如果回调内部又增删监听，容易碰到遍历期间修改集合的问题。</p>
+<ul>
+<li>
+<p>修复前：</p>
+<ul>
+<li>
+<p>事件派发时直接遍历原始监听列表；</p>
+</li>
+<li>
+<p>回调里如果移除监听，容易影响当前遍历过程；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 事件触发（不需要参数的）</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="k">value</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">)?.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>修复初版：</p>
+<ul>
+<li>
+<p>为了绕开这个问题，CodeX 一开始用了 <code>ToArray()</code> 快照，但是这会产生 GC；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 事件触发（不需要参数的）</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">eventDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="k">value</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">callbacks</span> <span class="p">=</span> <span class="k">value</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="n">Delegate</span> <span class="n">callback</span> <span class="k">in</span> <span class="n">callbacks</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">)?.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>修复终版：</p>
+<ul>
+<li>
+<p>改成临时 <code>List&lt;Delegate&gt;</code> 快照池；</p>
+</li>
+<li>
+<p>派发前 <code>Clear + AddRange</code>；</p>
+</li>
+<li>
+<p>派发结束后归还池；</p>
+</li>
+<li>
+<p>这样既能避免遍历期间修改集合，也能减少分配。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 事件触发（不需要参数的）</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">DispatchEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">callbacks</span> <span class="p">=</span> <span class="n">SnapshotCallbacks</span><span class="p">(</span><span class="n">eventName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">callbacks</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">callbacks</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Delegate</span> <span class="n">callback</span> <span class="p">=</span> <span class="n">callbacks</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">callback</span> <span class="k">as</span> <span class="n">Action</span><span class="p">)?.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ReleaseSnapshotList</span><span class="p">(</span><span class="n">callbacks</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">SnapshotCallbacks</span><span class="p">(</span><span class="kt">string</span> <span class="n">eventName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">eventDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">eventName</span><span class="p">,</span> <span class="k">out</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="k">value</span><span class="p">)</span> <span class="p">||</span> <span class="k">value</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">tempList</span> <span class="p">=</span> <span class="n">GetSnapshotList</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tempList</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">tempList</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">GetSnapshotList</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dispatchSnapshotPool</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">list</span> <span class="p">=</span> <span class="n">dispatchSnapshotPool</span><span class="p">.</span><span class="n">Pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;(</span><span class="n">SnapshotInitCapacity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">ReleaseSnapshotList</span><span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">list</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">Capacity</span> <span class="p">&gt;</span> <span class="n">MaxSnapshotCapacity</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">list</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;(</span><span class="n">SnapshotInitCapacity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">dispatchSnapshotPool</span><span class="p">.</span><span class="n">Push</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;&gt;</span> <span class="n">eventDic</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 快照池</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Stack</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Delegate</span><span class="p">&gt;&gt;</span> <span class="n">dispatchSnapshotPool</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 快照初始容量</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">SnapshotInitCapacity</span> <span class="p">=</span> <span class="m">64</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 最大快照容量</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">MaxSnapshotCapacity</span> <span class="p">=</span> <span class="m">256</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>思路总结：</p>
+<ul>
+<li>核心目标是“安全派发 + 尽量低 GC”。</li>
+<li>这个方案比一开始的方案和每次 <code>ToArray()</code> 都更适合高频事件。</li>
+<li>后续如果事件量继续增长，也方便继续扩展成更完整的对象池策略。</li>
+</ul>
+</li>
+</ul>
+<h2 id="redtip">RedTip</h2>
+<p>红点 key 的解析方式也补强了一下。</p>
+<ul>
+<li>
+<p>修复前：</p>
+<ul>
+<li>通过简单分割解析 key；</li>
+<li>当红点名称里带下划线时，容易解析错。</li>
+</ul>
+</li>
+<li>
+<p>修复后：</p>
+<ul>
+<li>改为从最后一个下划线处分割；</li>
+<li>名称里包含下划线也能正确解析。</li>
+</ul>
+<p><img src="/Images/25.08_OpCodeX/OpCodeX_4.png" alt="CodeX"></p>
+</li>
+</ul>
+<h2 id="fileutil-和-asset">FileUtil 和 Asset</h2>
+<p>这两个是工程里很常见的基础工具，Codex 顺手把路径行为统一了一下。</p>
+<ul>
+<li><code>FileUtil.ReadFile</code>：
+<ul>
+<li>只有在不是全路径时才会再次拼接路径；</li>
+<li>避免全路径读取时被二次拼接。</li>
+</ul>
+</li>
+<li><code>Asset.GetPath</code>：
+<ul>
+<li>路径统一转成 <code>/</code>；</li>
+<li>更适合 Unity 里资源地址的习惯写法。</li>
+</ul>
+</li>
+</ul>
+<h1 id="优化处理"><strong>优化处理</strong></h1>
+<h2 id="textfilter">TextFilter</h2>
+<p><img src="/Images/25.08_OpCodeX/OpCodeX_5.png" alt="CodeX"></p>
+<ul>
+<li>屏蔽词库从单文件结构，拆成了“全局词库 + 地区词库”的方式：
+<ul>
+<li><code>TextFilter_global.txt</code></li>
+<li><code>TextFilter_zh-CN.txt</code></li>
+</ul>
+</li>
+<li>这样拆的目的，是把所有地区通用的词和某个地区特有的词分开维护。</li>
+<li>运行时初始化逻辑也做了调整：
+<ul>
+<li>固定先加载全局词库；</li>
+<li>再根据 <code>LocalizationSettings.SelectedLocale</code> 或默认地区加载当前语言词库；</li>
+<li>重复初始化前会先清空 Trie，避免旧数据残留；</li>
+<li>空行和以 <code>#</code> 开头的注释行会自动跳过。</li>
+</ul>
+</li>
+<li>对应下来，这次 <code>TextFilter</code> 的改动不只是换文件名，而是把它正式接入到了本地化地区的上下文里。</li>
+</ul>
+<h2 id="addressable">Addressable</h2>
+<ul>
+<li>
+<p><code>Asset.LoadAsset</code> 从原来的弱类型加载，改成了泛型 <code>LoadAsset&lt;T&gt;</code>。</p>
+<ul>
+<li>这样调用方不需要再手动做类型转换；</li>
+<li><code>MainGame</code>、<code>UIBase</code> 这些地方也能直接拿到目标类型。</li>
+</ul>
+</li>
+<li>
+<p>Addressable 资源管理新增了两层处理：</p>
+<ul>
+<li><strong>加载中去重</strong>：如果同一地址正在加载，会复用已有加载句柄，不会重复发起请求；</li>
+<li><strong>引用计数 + 延迟释放</strong>：资源不再用完立刻释放，而是记录引用次数，在 <code>FixedUpdate()</code> 里做延迟回收。</li>
+</ul>
+</li>
+<li>
+<p>路径辅助函数也做了统一：</p>
+<ul>
+<li><code>EnumPrefixPath</code> 改成了 <code>PrefixPath</code>；</li>
+<li>新增统一的 <code>GetPath()</code>；</li>
+<li>所有路径最后都规范成 <code>/</code>，避免 Windows 反斜杠混入 Addressable 地址。</li>
+</ul>
+</li>
+<li>
+<p>UI 侧也顺手补了一层配合：</p>
+<ul>
+<li><code>UIBase</code> 会记录自己加载过的资源地址，并在卸载时调用 <code>Asset.Release()</code>；</li>
+<li><code>UIMgr</code> 对缺少 <code>UIOrder</code> 组件的节点加了保护，避免排序阶段直接报错。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.AddressableAssets</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.ResourceManagement.AsyncOperations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Object</span> <span class="p">=</span> <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">DCFrame</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">Asset</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 根据地址加载资源</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">async</span> <span class="n">UniTask</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">LoadAsset</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">address</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获取是否已经加载到</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">AssetDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">assetRef</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">assetRef</span><span class="p">.</span><span class="n">count</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">assetRef</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">assetRef</span><span class="p">.</span><span class="n">releaseTime</span> <span class="p">=</span> <span class="p">-</span><span class="m">1f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">assetRef</span><span class="p">.</span><span class="n">handle</span><span class="p">.</span><span class="n">Result</span> <span class="k">as</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获取是否正在加载中</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">LoadingDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">loadingRef</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">loadingRef</span><span class="p">.</span><span class="n">count</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">loadingRef</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">loadingRef</span><span class="p">.</span><span class="n">handle</span><span class="p">.</span><span class="n">Task</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">loadingRef</span><span class="p">.</span><span class="n">handle</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;加载资源失败，地址是: {address}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(!</span><span class="n">AssetDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">loadedAssetRef</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">GetAssetRef</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">loadingRef</span><span class="p">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">loadingRef</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">LoadingDic</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">loadedAssetRef</span> <span class="p">=</span> <span class="n">AssetDic</span><span class="p">[</span><span class="n">address</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">loadedAssetRef</span><span class="p">.</span><span class="n">handle</span><span class="p">.</span><span class="n">Result</span> <span class="k">as</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 加载一个新的</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">handle</span> <span class="p">=</span> <span class="n">Addressables</span><span class="p">.</span><span class="n">LoadAssetAsync</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">address</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">pendingRef</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LoadingRef</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">handle</span> <span class="p">=</span> <span class="n">handle</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">count</span> <span class="p">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">            <span class="n">LoadingDic</span><span class="p">[</span><span class="n">address</span><span class="p">]</span> <span class="p">=</span> <span class="n">pendingRef</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">handle</span><span class="p">.</span><span class="n">Task</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">LoadingDic</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">handle</span><span class="p">.</span><span class="n">Status</span> <span class="p">!=</span> <span class="n">AsyncOperationStatus</span><span class="p">.</span><span class="n">Succeeded</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;加载资源失败，地址是: {address}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">GetAssetRef</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">pendingRef</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">handle</span><span class="p">.</span><span class="n">Result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取一个实例</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">GetAssetRef</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">,</span> <span class="n">AsyncOperationHandle</span> <span class="n">handle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">AssetDic</span><span class="p">[</span><span class="n">address</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AssetRef</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">handle</span> <span class="p">=</span> <span class="n">handle</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">count</span> <span class="p">=</span> <span class="n">count</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">releaseTime</span> <span class="p">=</span> <span class="n">count</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">?</span> <span class="p">-</span><span class="m">1f</span> <span class="p">:</span> <span class="n">Time</span><span class="p">.</span><span class="n">realtimeSinceStartup</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 根据地址卸载资源</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Release</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">AssetDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">assetRef</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&#34;未找到资源: {address}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">assetRef</span><span class="p">.</span><span class="n">count</span><span class="p">--;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">assetRef</span><span class="p">.</span><span class="n">count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">assetRef</span><span class="p">.</span><span class="n">count</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">assetRef</span><span class="p">.</span><span class="n">releaseTime</span> <span class="p">=</span> <span class="n">Time</span><span class="p">.</span><span class="n">realtimeSinceStartup</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 释放计时处理</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">FixedUpdate</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">AssetDic</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">now</span> <span class="p">=</span> <span class="n">Time</span><span class="p">.</span><span class="n">realtimeSinceStartup</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">removeList</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">kv</span> <span class="k">in</span> <span class="n">AssetDic</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">var</span> <span class="n">assetRef</span> <span class="p">=</span> <span class="n">kv</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">assetRef</span><span class="p">.</span><span class="n">count</span> <span class="p">!=</span> <span class="m">0</span> <span class="p">||</span> <span class="n">assetRef</span><span class="p">.</span><span class="n">releaseTime</span> <span class="p">&lt;</span> <span class="m">0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">now</span> <span class="p">-</span> <span class="n">assetRef</span><span class="p">.</span><span class="n">releaseTime</span> <span class="p">&gt;=</span> <span class="n">ReleaseDelay</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Addressables</span><span class="p">.</span><span class="n">Release</span><span class="p">(</span><span class="n">assetRef</span><span class="p">.</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">removeList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">kv</span><span class="p">.</span><span class="n">Key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">removeList</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">AssetDic</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">removeList</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cp">#region 加载前缀和函数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 项目前缀地址</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">enum</span> <span class="n">PrefixPath</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Single</span> <span class="p">=</span> <span class="m">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">GamePrefab</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Settings</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ScriptTemplates</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 前缀与地址的映射</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">PrefixPath</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">PrefixPathDic</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">Single</span><span class="p">,</span> <span class="s">&#34;Assets/Simple/&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">GamePrefab</span><span class="p">,</span> <span class="s">&#34;Assets/Game/Prefabs/&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">Settings</span><span class="p">,</span> <span class="s">&#34;Assets/Game/Settings/&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">ScriptTemplates</span><span class="p">,</span> <span class="s">&#34;Tools/ScriptTemplates/&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取资源加载地址</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetPath</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">,</span> <span class="n">PrefixPath</span> <span class="n">enumPrefix</span> <span class="p">=</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">GamePrefab</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">PrefixPathDic</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">enumPrefix</span><span class="p">,</span> <span class="k">out</span> <span class="kt">string</span> <span class="n">prefixPath</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;暂未支持当前前缀枚举： {enumPrefix}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">prefixPath</span><span class="p">,</span> <span class="n">path</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;\\&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取贴图加载地址</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetSpritePath</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">,</span> <span class="n">PrefixPath</span> <span class="n">enumPrefix</span> <span class="p">=</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">GamePrefab</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">GetPath</span><span class="p">(</span><span class="n">path</span> <span class="p">+</span> <span class="s">&#34;.png&#34;</span><span class="p">,</span> <span class="n">enumPrefix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取文本加载地址</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetTxtPath</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">,</span> <span class="n">PrefixPath</span> <span class="n">enumPrefix</span> <span class="p">=</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">GamePrefab</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">GetPath</span><span class="p">(</span><span class="n">path</span> <span class="p">+</span> <span class="s">&#34;.txt&#34;</span><span class="p">,</span> <span class="n">enumPrefix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取预制件加载地址</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetPrefabPath</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">,</span> <span class="n">PrefixPath</span> <span class="n">enumPrefix</span> <span class="p">=</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">GamePrefab</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">GetPath</span><span class="p">(</span><span class="n">path</span> <span class="p">+</span> <span class="s">&#34;.prefab&#34;</span><span class="p">,</span> <span class="n">enumPrefix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 获取资源加载地址</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">GetAssetPath</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">,</span> <span class="n">PrefixPath</span> <span class="n">enumPrefix</span> <span class="p">=</span> <span class="n">PrefixPath</span><span class="p">.</span><span class="n">GamePrefab</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">GetPath</span><span class="p">(</span><span class="n">path</span> <span class="p">+</span> <span class="s">&#34;.asset&#34;</span><span class="p">,</span> <span class="n">enumPrefix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">#</span><span class="n">endregion</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 资源计数</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">AssetRef</span><span class="p">&gt;</span> <span class="n">AssetDic</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">LoadingRef</span><span class="p">&gt;</span> <span class="n">LoadingDic</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">removeList</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 资源释放时间</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">const</span> <span class="kt">float</span> <span class="n">ReleaseDelay</span> <span class="p">=</span> <span class="m">60f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 资源引用类</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">class</span> <span class="nc">AssetRef</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 资源句柄</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="n">AsyncOperationHandle</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 引用次数</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// 释放时间</span>
+</span></span><span class="line"><span class="cl">            <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="kt">float</span> <span class="n">releaseTime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// 正在加载中的资源引用</span>
+</span></span><span class="line"><span class="cl">        <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">class</span> <span class="nc">LoadingRef</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="n">AsyncOperationHandle</span> <span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="问题记录"><strong>问题记录</strong></h1>
+<h2 id="中文注释乱码">中文注释乱码</h2>
+<ol>
+<li>
+<p>这次修改过程中，Codex 曾经把工程里一部分中文注释写坏过，导致出现乱码。</p>
+<ul>
+<li>
+<p>问题表现：</p>
+<ul>
+<li>中文注释显示异常。</li>
+</ul>
+</li>
+<li>
+<p>处理方式：</p>
+<ul>
+<li>先把我这轮改动回退；</li>
+<li>再用明确的 <code>UTF-8</code> 方式重新写入；</li>
+<li>重新确认中文注释已经恢复。</li>
+</ul>
+</li>
+<li>
+<p>说明：</p>
+<ul>
+<li>后续如果再批量改中文脚本，我会继续保持 UTF-8 写入，避免再次出现类似情况。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="总结"><strong>总结</strong></h1>
+<ul>
+<li>在需求明确的情况下，比如删除 <code>Enum</code> 前缀，Codex 能够比较准确地完成目标，执行效果也比较稳定。</li>
+<li>在需求相对模糊的情况下，比如“找出潜在的 bug 并修复”，Codex 通常会优先从判空、边界条件和异常路径入手，同时也能覆盖一些潜在的隐性问题，例如 EventMgr 这类事件派发场景。</li>
+<li>在编写测试用例时，Codex 偶尔会因为没有完全贴合现有代码实现而产生少量冗余测试，但整体来说，大部分测试用例都能够正常通过，并且对核心功能有较好的回归保障。</li>
+<li>在权限处理方面，当需要读取超出当前文件夹范围的内容时，系统会主动提示是否授权，这种权限保护机制比较合理，也比较安全。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-08-12 19:40:24 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.08_opcodex/">https://spirite12.github.io/post/25/25.08_opcodex/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          <a href="/tags/ai/">AI</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/25/25.09_coreskill/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Frame Core Skill 技能</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/25/25.07_unitysearch/">
+            <span class="next-text nav-default">Search 搜索</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

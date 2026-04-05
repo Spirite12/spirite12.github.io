@@ -8,35 +8,77 @@
   </url>
   
   <url>
+    <loc>https://spirite12.github.io/tags/ai/</loc>
+    <lastmod>2025-09-18T18:12:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/categories/ai/</loc>
+    <lastmod>2025-09-18T18:12:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://spirite12.github.io/categories/</loc>
-    <lastmod>2025-07-11T19:40:24+08:00</lastmod>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/</loc>
-    <lastmod>2025-07-11T19:40:24+08:00</lastmod>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/25/25.09_coreskill/</loc>
+    <lastmod>2025-09-18T18:12:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/tags/frame-work/</loc>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/post/</loc>
-    <lastmod>2025-07-11T19:40:24+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://spirite12.github.io/post/25/25.07_unitysearch/</loc>
-    <lastmod>2025-07-11T19:40:24+08:00</lastmod>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://spirite12.github.io/tags/</loc>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/25/25.08_opcodex/</loc>
+    <lastmod>2025-08-12T19:40:24+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/categories/unity/</loc>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://spirite12.github.io/post/25/25.07_unitysearch/</loc>
     <lastmod>2025-07-11T19:40:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -50,21 +92,7 @@
   </url>
   
   <url>
-    <loc>https://spirite12.github.io/categories/unity/</loc>
-    <lastmod>2025-07-11T19:40:24+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://spirite12.github.io/post/25/25.06_localization/</loc>
-    <lastmod>2025-06-15T19:40:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://spirite12.github.io/tags/frame-work/</loc>
     <lastmod>2025-06-15T19:40:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -79,7 +107,7 @@
   
   <url>
     <loc>https://spirite12.github.io/post/25/25.04_csvhelper/</loc>
-    <lastmod>2025-04-28T19:40:21+08:00</lastmod>
+    <lastmod>2026-04-05T17:40:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

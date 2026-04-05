@@ -7,22 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>DC</copyright>
-    <lastBuildDate>Fri, 11 Jul 2025 19:40:24 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Sep 2025 18:12:20 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Unity</title>
-      <link>https://spirite12.github.io/tags/unity/</link>
-      <pubDate>Fri, 11 Jul 2025 19:40:24 +0800</pubDate>
+      <title>AI</title>
+      <link>https://spirite12.github.io/tags/ai/</link>
+      <pubDate>Thu, 18 Sep 2025 18:12:20 +0800</pubDate>
       
-      <guid>https://spirite12.github.io/tags/unity/</guid>
+      <guid>https://spirite12.github.io/tags/ai/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Frame Work</title>
       <link>https://spirite12.github.io/tags/frame-work/</link>
-      <pubDate>Sun, 15 Jun 2025 19:40:22 +0800</pubDate>
+      <pubDate>Thu, 18 Sep 2025 18:12:20 +0800</pubDate>
       
       <guid>https://spirite12.github.io/tags/frame-work/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unity</title>
+      <link>https://spirite12.github.io/tags/unity/</link>
+      <pubDate>Fri, 11 Jul 2025 19:40:24 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/tags/unity/</guid>
       <description></description>
     </item>
     

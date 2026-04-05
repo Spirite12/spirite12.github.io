@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI on DC Blog</title>
+    <link>https://spirite12.github.io/tags/ai/</link>
+    <description>Recent content in AI on DC Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>DC</copyright>
+    <lastBuildDate>Thu, 18 Sep 2025 18:12:20 +0800</lastBuildDate><atom:link href="https://spirite12.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Frame Core Skill 技能</title>
+      <link>https://spirite12.github.io/post/25/25.09_coreskill/</link>
+      <pubDate>Thu, 18 Sep 2025 18:12:20 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/25/25.09_coreskill/</guid>
+      <description>文档记录 这篇文章记录 Codex Skill 在当前 Unity 工程里的落地方式； 本文重点是 Core Skill 这一层基础 Skill，以及如何把 Table 和 Localization 的接入流程串起来； Codex Skill 简介 Codex Skill 可以理解</description>
+    </item>
+    
+    <item>
+      <title>Frame 代码优化之Codex</title>
+      <link>https://spirite12.github.io/post/25/25.08_opcodex/</link>
+      <pubDate>Tue, 12 Aug 2025 19:40:24 +0800</pubDate>
+      
+      <guid>https://spirite12.github.io/post/25/25.08_opcodex/</guid>
+      <description>说明 这次借助 Codex 对当前工程做了一轮整理与修复； Codex 是什么： 它可以直接读工程代码、定位引用关系、批量修改脚本、补测试，再把结果整理成可追踪的变更。</description>
+    </item>
+    
+  </channel>
+</rss>

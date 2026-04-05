@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Frame Core Skill 技能 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="文档记录 这篇文章记录 Codex Skill 在当前 Unity 工程里的落地方式； 本文重点是 Core Skill 这一层基础 Skill，以及如何把 Table 和 Localization 的接入流程串起来； Codex Skill 简介 Codex Skill 可以理解" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.09_coreskill/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Frame Core Skill 技能" />
+<meta property="og:description" content="文档记录 这篇文章记录 Codex Skill 在当前 Unity 工程里的落地方式； 本文重点是 Core Skill 这一层基础 Skill，以及如何把 Table 和 Localization 的接入流程串起来； Codex Skill 简介 Codex Skill 可以理解" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.09_coreskill/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-09-18T18:12:20+08:00" />
+<meta property="article:modified_time" content="2025-09-18T18:12:20+08:00" />
+
+<meta itemprop="name" content="Frame Core Skill 技能">
+<meta itemprop="description" content="文档记录 这篇文章记录 Codex Skill 在当前 Unity 工程里的落地方式； 本文重点是 Core Skill 这一层基础 Skill，以及如何把 Table 和 Localization 的接入流程串起来； Codex Skill 简介 Codex Skill 可以理解"><meta itemprop="datePublished" content="2025-09-18T18:12:20+08:00" />
+<meta itemprop="dateModified" content="2025-09-18T18:12:20+08:00" />
+<meta itemprop="wordCount" content="856">
+<meta itemprop="keywords" content="Frame-Work,AI," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Frame Core Skill 技能"/>
+<meta name="twitter:description" content="文档记录 这篇文章记录 Codex Skill 在当前 Unity 工程里的落地方式； 本文重点是 Core Skill 这一层基础 Skill，以及如何把 Table 和 Localization 的接入流程串起来； Codex Skill 简介 Codex Skill 可以理解"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Frame Core Skill 技能</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-09-18 </span>
+        <div class="post-category">
+            <a href="/categories/ai/"> AI </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#文档记录"><strong>文档记录</strong></a></li>
+    <li><a href="#codex-skill-简介"><strong>Codex Skill 简介</strong></a></li>
+    <li><a href="#core-skill-的作用"><strong>Core Skill 的作用</strong></a>
+      <ul>
+        <li><a href="#目录划分">目录划分</a></li>
+        <li><a href="#这样划分的目的">这样划分的目的</a></li>
+      </ul>
+    </li>
+    <li><a href="#表功能验证"><strong>表功能验证</strong></a></li>
+    <li><a href="#总结"><strong>总结</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="文档记录"><strong>文档记录</strong></h1>
+<ul>
+<li>这篇文章记录 <code>Codex Skill</code> 在当前 Unity 工程里的落地方式；</li>
+<li>本文重点是 <code>Core Skill</code> 这一层基础 Skill，以及如何把 <code>Table</code> 和 <code>Localization</code> 的接入流程串起来；</li>
+</ul>
+<h1 id="codex-skill-简介"><strong>Codex Skill 简介</strong></h1>
+<ul>
+<li><code>Codex Skill</code> 可以理解为“给 AI 准备的工程使用说明书 + 执行入口”。</li>
+<li>它不直接替代项目代码，而是把下面这些内容沉淀成稳定约束：
+<ul>
+<li>工程目录应该怎么读；</li>
+<li>哪些目录可以改，哪些目录只读；</li>
+<li>某类需求应该从哪个模块入口进入；</li>
+<li>哪些自动化脚本可以直接执行。</li>
+</ul>
+</li>
+<li>这样做的目的，是让 AI 在多轮协作里不需要每次都重新摸索工程结构，也能减少越界改动和重复分析。</li>
+</ul>
+<h1 id="core-skill-的作用"><strong>Core Skill 的作用</strong></h1>
+<ul>
+<li><code>Core Skill</code> 是当前工程里最基础的一层 Skill。</li>
+<li>它的目标不是解决单一功能，而是先帮助 AI 建立“进入工程之前的最小共识”。</li>
+<li>在功能开发的时候，AI 可以读取此 Skill 然后进行一系列的游戏或者框架开发；</li>
+</ul>
+<h2 id="目录划分">目录划分</h2>
+<ul>
+<li><code>.agents/skills/core/SKILL.md</code>
+<ul>
+<li>入口规范，定义使用顺序、硬性约束、业务约束和完成定义。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/references/project-map.md</code>
+<ul>
+<li>工程总目录和读写边界。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/references/framework.md</code>
+<ul>
+<li>框架层模块入口。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/references/table.md</code>
+<ul>
+<li>表系统、导表规则、生成代码和查表接入顺序。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/references/localization.md</code>
+<ul>
+<li>文本本地化、资源本地化、目录规则和执行顺序。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/references/ui.md</code>
+<ul>
+<li>UI 与 各个模块的联动方式。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/scripts/run_unity_task.py</code>
+<ul>
+<li>Unity 命令行自动化入口，支持 <code>table</code>、<code>localize</code>、<code>init-localize</code> 等任务。</li>
+</ul>
+</li>
+<li><code>.agents/skills/core/agents/openai.yaml</code>
+<ul>
+<li>提供给 Skill 体系的辅助配置入口。</li>
+</ul>
+</li>
+</ul>
+<h2 id="这样划分的目的">这样划分的目的</h2>
+<ul>
+<li><code>SKILL.md</code> 负责定规则，不塞过多实现细节。</li>
+<li><code>references</code> 负责按模块拆知识，避免一个大文档越写越杂。</li>
+<li><code>scripts</code> 负责把可重复执行的 Unity Editor 操作脚本化，减少口头步骤和人工遗漏。</li>
+<li>渐进式的披露，使得AI 处理新需求时可以先定位模块，再跳到对应说明，不需要一次性把所有工程细节都读完，减少token的消耗；</li>
+</ul>
+<h1 id="表功能验证"><strong>表功能验证</strong></h1>
+<ul>
+<li>
+<p>在 Codex 页面内告诉以下内容；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">现在有张表需求，以下是表内容
+</span></span><span class="line"><span class="cl">表明是：TableMain
+</span></span><span class="line"><span class="cl">表字段有，Id-Id，Name-名称，Value-值 
+</span></span><span class="line"><span class="cl">生成表配置数据，代码、和本地化数据
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>codex 跟着我的问题给了一下的答复</p>
+<ul>
+<li>
+<p>问题1：codex 目前没有处理本地化</p>
+<ul>
+<li>需要让AI处理</li>
+</ul>
+</li>
+<li>
+<p>问题2：Value-值 ，判断成 string 了</p>
+<ul>
+<li>这个看来需要提前告诉</li>
+</ul>
+<p><img src="/Images/25.09_CoreSkill/CoreSkill_1.png" alt="CoreSkill"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>再次进行一轮答复后</p>
+<p><img src="/Images/25.09_CoreSkill/CoreSkill_2.png" alt="CoreSkill"></p>
+</li>
+<li>
+<p>最后成功把表和本地化实现出来了</p>
+<p><img src="/Images/25.09_CoreSkill/CoreSkill_3.png" alt="CoreSkill"></p>
+</li>
+</ul>
+<h1 id="总结"><strong>总结</strong></h1>
+<ul>
+<li><code>Codex Skill</code> 解决的是 AI 如何更稳定地进入工程，并帮助开发功能；
+<ul>
+<li>以表处理和本地化为示例，AI成功处理且无需开发者参与；</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-09-18 18:12:20 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.09_coreskill/">https://spirite12.github.io/post/25/25.09_coreskill/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/frame-work/">Frame-Work</a>
+          <a href="/tags/ai/">AI</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.08_opcodex/">
+            <span class="next-text nav-default">Frame 代码优化之Codex</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
