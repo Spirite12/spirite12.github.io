@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Timer 计时器 - DC Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DC" /><meta name="description" content="Timer 仓库地址：UnityTimer 简要说明：在 Unity3D 中承担计时器的操作。 安装 下载压缩包： 前往：Release 下载最新版本的压缩包，本文下载的是 1.1.0 版" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://spirite12.github.io/post/25/25.10_timer/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.3e7c353e69709693f583e767e6d989859e1add45ba97814cf7990d5fb3943622.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Timer 计时器" />
+<meta property="og:description" content="Timer 仓库地址：UnityTimer 简要说明：在 Unity3D 中承担计时器的操作。 安装 下载压缩包： 前往：Release 下载最新版本的压缩包，本文下载的是 1.1.0 版" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://spirite12.github.io/post/25/25.10_timer/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-10-05T19:42:24+08:00" />
+<meta property="article:modified_time" content="2025-10-05T19:42:24+08:00" />
+
+<meta itemprop="name" content="Timer 计时器">
+<meta itemprop="description" content="Timer 仓库地址：UnityTimer 简要说明：在 Unity3D 中承担计时器的操作。 安装 下载压缩包： 前往：Release 下载最新版本的压缩包，本文下载的是 1.1.0 版"><meta itemprop="datePublished" content="2025-10-05T19:42:24+08:00" />
+<meta itemprop="dateModified" content="2025-10-05T19:42:24+08:00" />
+<meta itemprop="wordCount" content="1557">
+<meta itemprop="keywords" content="unity-plugin," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Timer 计时器"/>
+<meta name="twitter:description" content="Timer 仓库地址：UnityTimer 简要说明：在 Unity3D 中承担计时器的操作。 安装 下载压缩包： 前往：Release 下载最新版本的压缩包，本文下载的是 1.1.0 版"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DC</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DC</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Timer 计时器</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-10-05 </span>
+        <div class="post-category">
+            <a href="/categories/unity/"> unity </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#timer">Timer</a>
+      <ul>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#工程准备">工程准备</a></li>
+        <li><a href="#代码验证">代码验证</a></li>
+      </ul>
+    </li>
+    <li><a href="#相关链接"><strong>相关链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="timer">Timer</h1>
+<ul>
+<li>仓库地址：<a href="https://github.com/akbiggs/UnityTimer">UnityTimer</a></li>
+<li>简要说明：在 Unity3D 中承担计时器的操作。</li>
+</ul>
+<h2 id="安装">安装</h2>
+<ol>
+<li>
+<p>下载压缩包：</p>
+<ul>
+<li>
+<p>前往：<a href="https://github.com/akbiggs/UnityTimer/releases">Release</a></p>
+</li>
+<li>
+<p>下载最新版本的压缩包，本文下载的是 1.1.0 版本；</p>
+<p><img src="/Images/25.10_Timer/Timer_1.png" alt="Timer"></p>
+</li>
+<li>
+<p>解压压缩包，并放入工程的 <code>Plugins</code> 文件夹下，即可使用；</p>
+<p><img src="/Images/25.10_Timer/Timer_2.png" alt="Timer"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Package 导入：</p>
+<ul>
+<li>
+<p>打开 Unity -&gt; 菜单栏 -&gt; Window -&gt; Package Manager</p>
+</li>
+<li>
+<p>选择导入 Url；</p>
+<p><img src="/Images/25.10_Timer/Timer_3.png" alt="Timer"></p>
+</li>
+<li>
+<p>输入：https://github.com/akbiggs/UnityTimer.git，然后点击Add，等待安装完成；</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="工程准备">工程准备</h2>
+<ul>
+<li>
+<p>打开 <a href="https://github.com/Spirite12/unity.dc">unity.dc</a> 工程， 创建个名为：TimerSimple 的文件夹；</p>
+</li>
+<li>
+<p>在文件夹下创建一个名为：<code>TimerTest</code> 继承至 <code>MonoBehaviour</code> 的脚本；</p>
+</li>
+<li>
+<p>在文件夹下创建一个空的预制件，上面挂载 <code>TimerTest</code>的脚本；</p>
+</li>
+<li>
+<p>打开 <code>MainGame</code>的脚本，改成如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cysharp.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">DCFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Game</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">class</span> <span class="nc">MainGame</span> <span class="p">:</span> <span class="n">MonoSingleton</span><span class="p">&lt;</span><span class="n">MainGame</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">async</span> <span class="n">UniTask</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;创建预制件&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">go</span> <span class="p">=</span> <span class="k">await</span> <span class="n">LoadAsset</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;(</span><span class="n">TimerPrefabPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">go</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prefabTimer</span> <span class="p">=</span> <span class="n">Instantiate</span><span class="p">(</span><span class="n">go</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">D</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;销毁预制件&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Destroy</span><span class="p">(</span><span class="n">prefabTimer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ReleaseAsset</span><span class="p">(</span><span class="n">TimerPrefabPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="n">GameObject</span> <span class="n">prefabTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">TimerPrefabPath</span> <span class="p">=</span> <span class="s">&#34;Assets/TimerSimple/GameObject.prefab&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行游戏，可以看到创建了个空的预制件，控制台输出 <code>创建预制件</code> 文本，点击键盘上的 <code>D</code> 按键，控制台输出 <code>销毁预制件</code>；此时，工程准备流程已完成；</p>
+</li>
+</ul>
+<h2 id="代码验证">代码验证</h2>
+<ol>
+<li>
+<p>单次计时器：延迟2秒输出文本的计时器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>循环计时器：每间隔2秒输出文本的计时器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span> <span class="p">},</span> <span class="n">isLooped</span><span class="p">:</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>取消计时器：按下 <code>A</code> 键，取消当前计时器，使得无法输出文本；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="n">timer1</span> <span class="p">=</span> <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;取消计时器&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Timer</span><span class="p">.</span><span class="n">Cancel</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Timer</span> <span class="n">timer1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>计时器挂载销毁：</p>
+<ul>
+<li>
+<p>运行游戏，在1秒的时候按键 <code>D</code> 销毁物体，发现在过1秒的时候，输出了。那这是不合理的，说明计时器还在跑；处理方案是：</p>
+<ol>
+<li>
+<p>添加 <code>autoDestroyOwner</code>，验证可以注销到计时器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="n">timer1</span> <span class="p">=</span> <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);},</span> <span class="n">autoDestroyOwner</span><span class="p">:</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;取消计时器&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Timer</span><span class="p">.</span><span class="n">Cancel</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Timer</span> <span class="n">timer1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用 <code>AttachTimer</code> 来打到上面传参的做法，具体可以看代码实现；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="k">this</span><span class="p">.</span><span class="n">AttachTimer</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;取消计时器&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Timer</span><span class="p">.</span><span class="n">Cancel</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Timer</span> <span class="n">timer1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>暂停与恢复：</p>
+<ul>
+<li>结论：计时器延迟2秒输出，在1秒的时候暂停，时间已计时1秒，在2秒后恢复；则剩下一秒就是在3秒后打印输出；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="n">timer1</span> <span class="p">=</span> <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">             <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;暂停时间: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Timer</span><span class="p">.</span><span class="n">Pause</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">             <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;恢复时间: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">Timer</span><span class="p">.</span><span class="n">Resume</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">             <span class="p">});</span>
+</span></span><span class="line"><span class="cl">         <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;取消计时器&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Timer</span><span class="p">.</span><span class="n">Cancel</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Timer</span> <span class="n">timer1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/Images/25.10_Timer/Timer_4.png" alt="Timer"></p>
+</li>
+<li>
+<p>在未完成的情况下进行；每帧计时器处理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;开始计时: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">         <span class="n">timer1</span> <span class="p">=</span> <span class="n">Timer</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span> <span class="s">&#34;延迟2秒输出: &#34;</span> <span class="p">+</span> <span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);},</span> <span class="p">(</span><span class="n">x</span><span class="p">)=&gt;</span> <span class="p">{</span> <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">time</span><span class="p">);});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">A</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;取消计时器&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Timer</span><span class="p">.</span><span class="n">Cancel</span><span class="p">(</span><span class="n">timer1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Timer</span> <span class="n">timer1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对所有计时器的操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">Timer</span><span class="p">.</span><span class="n">PauseAllRegisteredTimers</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Timer</span><span class="p">.</span><span class="n">CancelAllRegisteredTimers</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Timer</span><span class="p">.</span><span class="n">ResumeAllRegisteredTimers</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="相关链接"><strong>相关链接</strong></h1>
+<ul>
+<li><a href="https://github.com/akbiggs/UnityTimer">UnityTimer</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">
+      <a href="https://spirite12.github.io/">DC</a>
+    </span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">初次发布</span>
+    <span class="item-content">
+      2025-10-05 19:42:24 &#43;0800
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">永久链接</span>
+    <span class="item-content">
+        <a href="https://spirite12.github.io/post/25/25.10_timer/">https://spirite12.github.io/post/25/25.10_timer/</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a></span>
+  </p>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/unity-plugin/">unity-plugin</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/25/25.09_coreskill/">
+            <span class="next-text nav-default">Frame Core Skill 技能</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:spirit12@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Spirite12" class="iconfont icon-github" title="github"></a>
+  <a href="https://spirite12.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>DC</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
